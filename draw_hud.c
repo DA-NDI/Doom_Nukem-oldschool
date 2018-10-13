@@ -1,0 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_hud.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/26 16:49:39 by avolgin           #+#    #+#             */
+/*   Updated: 2018/09/26 17:15:51 by avolgin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <wolf3d.h>
+
+void		ft_hud_init(t_wolf *holder)
+{
+	t_hud *hud;
+
+	hud = (t_hud*)malloc(sizeof(t_hud));
+	holder->hud = hud;
+	hud->hud[0] = load_tex(RENDER, "./resourses/hearts0.png");
+	hud->hud[1] = load_tex(RENDER, "./resourses/hearts1.png");
+	hud->hud[2] = load_tex(RENDER, "./resourses/hearts2.png");
+	hud->hud[3] = load_tex(RENDER, "./resourses/hearts3.png");
+	hud->hud[4] = load_tex(RENDER, "./resourses/hearts4.png");
+	hud->hud[5] = load_tex(RENDER, "./resourses/hp.png");
+	hud->hud[6] = load_tex(RENDER, "./resourses/shield.png");
+	hud->hud[7] = load_tex(RENDER, "./resourses/rockets.png");
+	hud->hud[8] = load_tex(RENDER, "./resourses/ammo.png");
+	hud->hud[9] = load_tex(RENDER, "./resourses/jetpack.png");
+	hud->lives = 4;
+	hud->hp = 100;
+	hud->shield = 0;
+	hud->rockets = 5;
+	hud->ammo = 4;
+	hud->jetpack = 1000;
+}
+
+void		draw_hud_icons(t_wolf *holder)
+{
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[holder->hud->lives], \
+			NULL, &(SDL_Rect){WIDTH / 2 - 48, 5, 96, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[5], \
+			NULL, &(SDL_Rect){10, HEIGHT - 25, 20, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[6], \
+			NULL, &(SDL_Rect){100, HEIGHT - 25, 20, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[7], \
+			NULL, &(SDL_Rect){WIDTH - 120, HEIGHT - 25, 20, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[8], \
+			NULL, &(SDL_Rect){WIDTH - 50, HEIGHT - 25, 20, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[9], \
+			NULL, &(SDL_Rect){WIDTH - 170, HEIGHT - 25, 20, 18});
+}
+
+void		draw_hud_text(t_wolf *holder)
+{
+	char	*hp;
+	char	*shield;
+	char	*rockets;
+	char	*ammo;
+	char 	*jetpack;
+
+	hp = ft_itoa(holder->hud->hp);
+	shield = ft_itoa(holder->hud->shield);
+	rockets = ft_itoa(holder->hud->rockets);
+	ammo = ft_itoa(holder->hud->ammo);
+	jetpack = ft_itoa(holder->hud->jetpack);
+	draw_text(holder, "Lives:", WIDTH / 2 - 80, 10);
+	draw_text(holder, hp, 45, HEIGHT - 22);
+	draw_text(holder, shield, 125, HEIGHT - 22);
+	draw_text(holder, rockets, WIDTH - 125, HEIGHT - 22);
+	draw_text(holder, ammo, WIDTH - 65, HEIGHT - 22);
+	draw_text(holder, jetpack, WIDTH - 185, HEIGHT - 22);
+	free(hp);
+	free(shield);
+	free(rockets);
+	free(ammo);
+	free(jetpack);
+}
+
+void		draw_hud(t_wolf *holder)
+{
+	draw_hud_icons(holder);
+	draw_hud_text(holder);
+}
