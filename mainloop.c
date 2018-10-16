@@ -109,6 +109,9 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 	check_teleport(holder, camera);
 	azaporoz_action(holder, camera);
 	azaporoz_rotate(holder, camera, 0);
+
+//	holder->updown = (holder->updown < 1000 || holder->updown < -1000) ? HEIGHT / 2 - holder->event.motion.y + holder->start_point - holder->height_map[(int)P_Y][(int)P_X] : 0;
+
 	ft_check_advanced_move(holder, keystate);
 	while (SDL_PollEvent(&holder->event))
 	{

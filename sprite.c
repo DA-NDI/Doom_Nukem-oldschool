@@ -105,7 +105,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
 		if (TRANSFORM_Y > 0 && START_X > 0 && START_X < WIDTH && \
 				TRANSFORM_Y < holder->sprite->zbuffer[START_X])
 		{
-			i = START_Y - 1 + holder->updown;
+			i = START_Y - 1 + holder->updown + holder->extra_updown;
 			while (++i < END_Y)
 			{
 tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_updown)) * 64 / sprite_height;

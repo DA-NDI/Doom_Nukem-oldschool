@@ -86,6 +86,7 @@ void	ft_check_getup(t_wolf *holder, const Uint8 *keystate)
 }
 void	ft_check_advanced_move(t_wolf *holder, const Uint8 *keystate)
 {
+
 	ft_check_jump(holder, keystate);
 	ft_check_fly(holder, keystate);
 	ft_check_sit(holder, keystate);

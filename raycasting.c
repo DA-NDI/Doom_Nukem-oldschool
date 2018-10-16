@@ -97,7 +97,7 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 			color = alter_color_fixed(color, (int)((float)camera->perp_wall_dist * 256) / 10);
 		if (camera->side == 1 && tex_n != 6)
 			color = ((color & 0xfefefe) >> 1) | 0xFF000000;
-		color = (tex_n == 0) ? color << 1 >> 1 : color;
+		color = (tex_n == 0 ) ? color << 1 >> 1 : color;
 		color >>= (CHECK_SIDE_0 && tex_n == 6) ? 1 : 0;
 		color |= (CHECK_SIDE_3 && tex_n == 6) ? 0xFF00F00F : 0;
 		color |= (CHECK_SIDE_2 && tex_n == 6) ? 0xFFF00000 : 0;
@@ -129,8 +129,8 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 		else
 			camera->wall_x = P_X + camera->perp_wall_dist * camera->ray_dir_x;
 		camera->wall_x -= floor((camera->wall_x));
-		draw_walls(holder, camera, buffer, x);
 		holder->sprite->zbuffer[x] = camera->perp_wall_dist;
+		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
 	}
 }
@@ -142,9 +142,9 @@ void			ft_raycasting(t_wolf *holder, int x)
 
 	while (holder->running)
 	{
-		printf("staart_point = %d\n", holder->start_point);
 		holder->frame_start = SDL_GetTicks();
 		holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
+		holder->current_height = (holder->current_height > 300) ? 300 : holder->current_height;
 		raycasting_loop(holder, holder->camera, -1, buffer);
 //		printf("current_height = %d\n", holder->current_height);
 		ft_draw_sprites(holder, holder->camera, buffer);

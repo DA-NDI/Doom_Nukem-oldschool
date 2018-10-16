@@ -38,14 +38,15 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->rot_speed = -0.04;
 	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
 		ft_print_error("Unable to load font");
-	camera->texture[0] = load_image("./resourses/fence_wire2.png");
-	camera->texture[1] = load_image("./resourses/portal.png");
-	camera->texture[2] = load_image("./resourses/wall_wire_blue.png");
-	camera->texture[3] = load_image("./resourses/brick_lblue1.png");
-	camera->texture[4] = load_image("./resourses/floor_wire_violet.png");
-	camera->texture[5] = load_image("./resourses/arcade.png");
-	camera->texture[6] = load_image("./textures/fury_poster.png");
-	camera->texture[7] = load_image("./resourses/brick_pink2.png");
+	camera->texture[0] = load_image("./texture/fence_wire2.png");
+	camera->texture[1] = load_image("./texture/portal.png");
+	camera->texture[2] = load_image("./texture/wall_wire_blue.png");
+	camera->texture[3] = load_image("./texture/brick_lblue1.png");
+	camera->texture[4] = load_image("./texture/floor_wire_violet.png");
+	camera->texture[5] = load_image("./texture/wall_texture9.png");
+	camera->texture[6] = load_image("./texture/fury_poster.png");
+	camera->texture[7] = load_image("./texture/brick_pink2.png");
+	camera->texture[8] = load_image("./texture/wall_texture11.png");
 	camera->dstelept = load_chunk("resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);

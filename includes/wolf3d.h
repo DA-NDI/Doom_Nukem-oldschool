@@ -139,7 +139,7 @@ typedef struct		s_keys
 
 typedef struct		s_camera
 {
-	SDL_Surface		*texture[11];
+	SDL_Surface		*texture[12];
 	SDL_Texture		*skybox_tex[5];
 	TTF_Font		*font;
 	Mix_Chunk		*dstelept;

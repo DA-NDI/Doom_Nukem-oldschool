@@ -30,7 +30,7 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2' &&\
 				map[i][j] != '\0' && map[i][j] != '3' && map[i][j] != 'P' &&\
 				map[i][j] != '4' && map[i][j] != '5' && map[i][j] != 'A' &&
-				map[i][j] != '7' && map[i][j] != '8')
+				map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9')
 				return (1);
 		}
 		if (j != width && (map[i][0] != '\0' || map[i][j] != '\0'))
@@ -102,7 +102,7 @@ int 	**ft_create_height_map(int fd)
 	i = 0;
 	while (get_next_line(fd, &buff) == 1)
 	{
-		if (ft_strlen(buff) > 50 || i >= 50)
+		if (ft_strlen(buff) > 100 || i >= 100)
 		{
 			free(buff);
 			ft_print_error("map is too big!");
@@ -119,6 +119,7 @@ int 	**ft_create_height_map(int fd)
 		while (splitted[++a])
 		{
 			height_map[i][a] = ft_atoi(splitted[a]);
+			height_map[i][a] = (height_map[i][a] > 300) ? 300 : height_map[i][a];
 			free(splitted[a]);
 		}
 		free(splitted);
@@ -146,7 +147,7 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 		ft_print_error("Failed to open map file");
 	while (get_next_line(fd, &buff) == 1 && ft_strstr(buff, "Height map:") == NULL)
 	{
-		if (ft_strlen(buff) > 50 || i >= 50)
+		if (ft_strlen(buff) > 100 || i >= 100)
 		{
 			free(buff);
 			ft_print_error("map is too big!");
