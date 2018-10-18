@@ -12,6 +12,8 @@
 
 #include <wolf3d.h>
 
+#include <wolf3d.h>
+
 void	start_enemy(t_wolf *holder, t_sprite *sprite)
 {
 	static int shoots = 0;
@@ -29,25 +31,46 @@ void	load_sprite_arcade(t_wolf *holder)
 	holder->sprite = sprite;
 	holder->sprite->is_alive = 0;
 	sprite->tex_sprite[0] = NULL;
-	sprite->arr_sprite[0][0] = load_image("resourses/arcade.png");
-	sprite->arr_sprite[0][1] = load_image("resourses/arcade1.png");
-	sprite->arr_sprite[0][2] = load_image("resourses/arcade2.png");
-	sprite->arr_sprite[0][3] = load_image("resourses/arcade3.png");
-	sprite->arr_sprite[0][4] = load_image("resourses/arcade4.png");
-	sprite->arr_sprite[0][5] = load_image("resourses/arcade_end1.png");
-	sprite->arr_sprite[0][6] = load_image("resourses/arcade_end2.png");
-	sprite->arr_sprite[0][7] = load_image("resourses/arcade_end3.png");
-	sprite->arr_sprite[0][8] = load_image("resourses/arcade_end4.png");
-	sprite->arr_sprite[0][9] = load_image("resourses/arcade4.png");
-	sprite->arr_sprite[0][10] = load_image("resourses/arcade4_b1.png");
-	sprite->arr_sprite[0][11] = load_image("resourses/arcade4_b2.png");
-	sprite->arr_sprite[1][0] = load_image("resourses/arcade.png");
-	sprite->arr_sprite[1][1] = load_image("resourses/arcade1_g.png");
-	sprite->arr_sprite[1][2] = load_image("resourses/arcade2_g.png");
-	sprite->arr_sprite[1][3] = load_image("resourses/arcade3_g.png");
-	sprite->arr_sprite[1][4] = load_image("resourses/arcade4_g.png");
+	sprite->arr_sprite[0][0] = load_image("sprites/arcade.png");
+	sprite->arr_sprite[0][1] = load_image("sprites/arcade1.png");
+	sprite->arr_sprite[0][2] = load_image("sprites/arcade2.png");
+	sprite->arr_sprite[0][3] = load_image("sprites/arcade3.png");
+	sprite->arr_sprite[0][4] = load_image("sprites/arcade4.png");
+	sprite->arr_sprite[0][5] = load_image("sprites/arcade_end1.png");
+	sprite->arr_sprite[0][6] = load_image("sprites/arcade_end2.png");
+	sprite->arr_sprite[0][7] = load_image("sprites/arcade_end3.png");
+	sprite->arr_sprite[0][8] = load_image("sprites/arcade_end4.png");
+	sprite->arr_sprite[0][9] = load_image("sprites/arcade4.png");
+	sprite->arr_sprite[0][10] = load_image("sprites/arcade4_b1.png");
+	sprite->arr_sprite[0][11] = load_image("sprites/arcade4_b2.png");
+	sprite->arr_sprite[1][0] = load_image("sprites/arcade.png");
+	sprite->arr_sprite[1][1] = load_image("sprites/arcade1_g.png");
+	sprite->arr_sprite[1][2] = load_image("sprites/arcade2_g.png");
+	sprite->arr_sprite[1][3] = load_image("sprites/arcade3_g.png");
+	sprite->arr_sprite[1][4] = load_image("sprites/arcade4_g.png");
 	sprite->is_sprite = get_sprite_coordinates(holder, 'A');
 	start_enemy(holder, sprite);
+}
+
+void	load_sprite_bullet(t_wolf *holder)
+{
+	t_sprite	*bullet;
+
+	bullet = (t_sprite*)malloc(sizeof(t_sprite));
+	holder->bullet = bulet;
+	holder->bullet->is_alive = 0;
+	bullet->tex_sprite[0] = NULL;
+	bullet->arr_sprite[0][0] = load_image("resourses/pistole_bullet.png");
+	// bullet->arr_sprite[0][1] = load_image("sprites/arcade1.png");
+	// bullet->arr_sprite[0][2] = load_image("sprites/arcade2.png");
+	// bullet->arr_sprite[0][3] = load_image("sprites/arcade3.png");
+	// bullet->arr_sprite[0][4] = load_image("sprites/arcade4.png");
+	// bullet->arr_sprite[1][0] = load_image("sprites/arcade.png");
+	// bullet->arr_sprite[1][1] = load_image("sprites/arcade1_g.png");
+	// bullet->arr_sprite[1][2] = load_image("sprites/arcade2_g.png");
+	// bullet->arr_sprite[1][3] = load_image("sprites/arcade3_g.png");
+	// bullet->arr_sprite[1][4] = load_image("sprites/arcade4_g.png");
+	bullet->is_sprite = 0;
 }
 
 void	ft_start_screen(t_wolf *holder)

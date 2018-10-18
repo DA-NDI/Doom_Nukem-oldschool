@@ -28,11 +28,12 @@ void		ft_hud_init(t_wolf *holder)
 	hud->hud[7] = load_tex(RENDER, "./resourses/rockets.png");
 	hud->hud[8] = load_tex(RENDER, "./resourses/ammo.png");
 	hud->hud[9] = load_tex(RENDER, "./resourses/jetpack.png");
+	hud->hud[10] = load_tex(RENDER, "./resourses/gun_pointer.png");
 	hud->lives = 4;
 	hud->hp = 100;
 	hud->shield = 0;
 	hud->rockets = 5;
-	hud->ammo = 4;
+	hud->ammo = 25;
 	hud->jetpack = 1000;
 }
 
@@ -50,6 +51,8 @@ void		draw_hud_icons(t_wolf *holder)
 			NULL, &(SDL_Rect){WIDTH - 50, HEIGHT - 25, 20, 18});
 	SDL_RenderCopy(holder->renderer, holder->hud->hud[9], \
 			NULL, &(SDL_Rect){WIDTH - 170, HEIGHT - 25, 20, 18});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[10], \
+			NULL, &(SDL_Rect){WIDTH / 2 - 32, HEIGHT / 2 - 32 , 64, 64});
 }
 
 void		draw_hud_text(t_wolf *holder)

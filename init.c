@@ -47,6 +47,8 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->texture[6] = load_image("./texture/fury_poster.png");
 	camera->texture[7] = load_image("./texture/brick_pink2.png");
 	camera->texture[8] = load_image("./texture/wall_texture11.png");
+	camera->texture[9] = load_image("./texture/doom_ceiling.png");
+	camera->texture[10] = load_image("./texture/tron.png");
 	camera->dstelept = load_chunk("resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);

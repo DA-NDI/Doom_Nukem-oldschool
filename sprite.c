@@ -52,6 +52,7 @@ void	burning_boss(t_wolf *holder, t_sprite *sprite, int *end_frame)
 
 void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 {
+	printf("hey!\n");
 	static int end_frame = 5;
 
 	if (end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
@@ -67,13 +68,13 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	}
 	if ((sprite->x != P_X || sprite->y != P_Y) && holder->sprite->is_alive)
 	{
-		if ((int)X < (int)P_X && MAP[(int)(X + 0.1)][(int)Y] == '0')
+		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + 0.1)] == '0')
 			sprite->x += holder->sprite->speed;
-		else if ((int)X > (int)P_X && MAP[(int)(X - 0.1)][(int)Y] == '0')
+		else if ((int)X > (int)P_X && MAP[(int)Y][(int)(X - 0.1)] == '0')
 			sprite->x -= holder->sprite->speed;
-		else if ((int)Y > (int)P_Y && MAP[(int)X][(int)(Y - 0.1)] == '0')
+		else if ((int)Y > (int)P_Y && MAP[(int)(Y - 0.1)][(int)X] == '0')
 			sprite->y -= holder->sprite->speed;
-		else if ((int)Y < (int)P_Y && MAP[(int)X][(int)(Y + 0.1)] == '0')
+		else if ((int)Y < (int)P_Y && MAP[(int)(Y + 0.1)][(int)X] == '0')
 			sprite->y += holder->sprite->speed;
 	}
 	burning_boss(holder, sprite, &end_frame);

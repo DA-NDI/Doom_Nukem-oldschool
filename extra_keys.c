@@ -75,6 +75,7 @@ void		ft_check_click(t_wolf *holder)
 {
 	float		v_x;
 	float		v_y;
+	float 		angle;
 
 	if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
 		&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
@@ -87,18 +88,24 @@ void		ft_check_click(t_wolf *holder)
 		v_x = holder->sprite->x - holder->player_x;
 		v_y = holder->sprite->y - holder->player_y;
 		holder->sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
-		IS_SPRITE = (SHOOTS == 5 || !IS_ARC) ? 0 : 1;
+		IS_SPRITE = (SHOOTS >= 5 || !IS_ARC) ? 0 : 1;
 		if (SHOOTS >= 5)
-			restart_enemy(holder);
-		if (abs((int)(fabsf(v_x / holder->DIR_X)) - \
-	(int)(fabsf(v_y / holder->DIR_Y))) <= 3 && SHOOTS < 6 && IS_ARC)
 		{
+			restart_enemy(holder);
+			return;
+		}
+		angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x + v_y * v_y) * sqrt(holder->DIR_X * holder->DIR_X + holder->DIR_Y * holder->DIR_Y))) * 57.325;
+		printf("angle = %f\n", angle);
+		if (angle < 5 && SHOOTS < 5 && IS_ARC)
+		{
+			SHOOTS += (G == 0) ? 1 : 2;
+			SHOOTS += (G == 1) ? 2 : 0;
+			printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
 			if (SHOOTS < 5)
 			{
 				ARCADE_TEX = holder->sprite->arr_sprite[H][SHOOTS];
 			}
-			SHOOTS += (G == 0) ? 1 : 2;
-			SHOOTS += (G == 1) ? 2 : 0;
+
 		}
 	}
 }

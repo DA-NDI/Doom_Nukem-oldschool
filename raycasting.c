@@ -62,7 +62,10 @@ void			check_hit(t_camera *camera, t_wolf *holder)
 	else
 		camera->perp_wall_dist = (camera->map_y - P_Y + \
 							((1 - camera->step_y) >> 1)) / camera->ray_dir_y;
-	holder->wall_height = holder->height_map[camera->map_y][camera->map_x];
+	holder->wall_height = (camera->map_y > 0 && camera->map_x > 0) ? holder->height_map[camera->map_y - 1][camera->map_x - 1] : \
+		holder->height_map[0][0];
+	holder->wall_height = (camera->map_y > 0 && camera->map_x == 0) ? holder->height_map[camera->map_y - 1][0] : \
+		holder->height_map[0][camera->map_x - 1];		
 
 }
 
@@ -76,7 +79,11 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 
 
 //	holder->updown = (hodler->current_height == )
-//	printf("holder->wall_height = %d\n", holder->wall_height);
+	if (x == 500)
+	{
+//		printf("camera->map_x = %d, camera->map_y = %d\n", camera->map_x, camera->map_y);
+//		printf("holder->wall_height == %d\n", holder->height_map[camera->map_y][camera->map_x]);
+	}
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + holder->extra_updown - holder->wall_height; //y0
 	camera->draw_start = HEIGHT / 2 - (LINE_H >> 1) + holder->updown + holder->extra_updown - holder->wall_height;	//y1	
@@ -101,6 +108,7 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 		color >>= (CHECK_SIDE_0 && tex_n == 6) ? 1 : 0;
 		color |= (CHECK_SIDE_3 && tex_n == 6) ? 0xFF00F00F : 0;
 		color |= (CHECK_SIDE_2 && tex_n == 6) ? 0xFFF00000 : 0;
+
 		buffer[camera->draw_start][x] = color;
 	}
 }
@@ -111,7 +119,6 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 
 	while (++x < holder->width)
 	{
-
 		camera->camera_x = (float)((x << 1) / (float)(holder->width) - 1);
 		camera->ray_dir_x = DIR_X + PLANE_X * camera->camera_x;
 		camera->ray_dir_y = DIR_Y + camera->plane_y * camera->camera_x;

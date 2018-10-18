@@ -108,7 +108,7 @@ typedef struct		s_mouse
 
 typedef struct		s_hud
 {
-	SDL_Texture		*hud[10];
+	SDL_Texture		*hud[11];
 	int				hp;
 	int				ammo;
 	int				lives;
