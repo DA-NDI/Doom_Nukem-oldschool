@@ -178,25 +178,23 @@ typedef struct		s_camera
 
 typedef struct		s_sprite
 {
-	SDL_Surface		*tex_sprite[3];
-	SDL_Surface		*arr_sprite[2][12];
-	SDL_Surface		*arr_sprite_g[9];
+	SDL_Surface		*arr_sprite[2][9];
+	SDL_Surface		*tex_sprite[1];
 	float			x;
 	float			y;
-	float			zbuffer[1024];
+	float			transform_y;
+	float			orig_x;
+	float			orig_y;
+	float			speed;
 	int				is_alive;
-	int				is_sprite;
+	int				is_sprite:1;
 	int				texture;
 	int				draw_start_x;
 	int				draw_start_y;
 	int				draw_end_x;
 	int				draw_end_y;
-	float			transform_y;
 	int				sprite_width;
-	float			orig_x;
-	float			orig_y;
-	float			speed;
-	int				sprite_found;
+	int				sprite_found:1;
 }					t_sprite;
 
 typedef struct		s_weapon
@@ -231,6 +229,7 @@ typedef struct		s_wolf
 	int				running: 1;
 	int				shooting: 1;
 	int				jumping: 1;
+	float			zbuffer[1024];
 	char			**map;
 	int 			**height_map;
 	SDL_Window		*window;

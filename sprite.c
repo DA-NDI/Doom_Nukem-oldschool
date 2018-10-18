@@ -40,14 +40,14 @@ void	restart_enemy(t_wolf *holder)
 
 void	burning_boss(t_wolf *holder, t_sprite *sprite, int *end_frame)
 {
-	static int i = 9;
+	static int i = 5;
 
 	if (IS_SPRITE && !sprite->is_alive && *end_frame == 5)
 	{
-		ARCADE_TEX = holder->sprite->arr_sprite[0][i];
+		ARCADE_TEX = holder->sprite->arr_sprite[1][i];
 		i++;
 	}
-	i = (i == 12) ? 9 : i;
+	i = (i == 8) ? 5 : i;
 }
 
 void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
@@ -104,7 +104,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
 		tex_x = (int)(256 * (START_X - (-SPRITE_W / 2 + sprite_screen_x)) \
 				* 64 / SPRITE_W) / 256;
 		if (TRANSFORM_Y > 0 && START_X > 0 && START_X < WIDTH && \
-				TRANSFORM_Y < holder->sprite->zbuffer[START_X])
+				TRANSFORM_Y < holder->zbuffer[START_X])
 		{
 			i = START_Y - 1 + holder->updown + holder->extra_updown;
 			while (++i < END_Y)
@@ -118,33 +118,33 @@ tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_up
 	}
 }
 
-void sort_sprites(int* order, double* dist, int amount)
-{
-	int gap;
-	int swapped;
+// void sort_sprites(int* order, double* dist, int amount)
+// {
+// 	int gap;
+// 	int swapped;
 
-	gap = amount;
-	swapped = 0;
- 	while(gap > 1 || swapped)
-	{
-    //shrink factor 1.3
-		gap = (gap * 10) / 13;
-		if(gap == 9 || gap == 10)
-			gap = 11;
-    	if (gap < 1) gap = 1;
-    		swapped = 0;
-    	for(int i = 0; i < amount - gap; i++)
-    	{
-			int j = i + gap;
-			if(dist[i] < dist[j])
-      		{
-      			std::swap(dist[i], dist[j]);
-				std::swap(order[i], order[j]);
-				swapped = 1;
-      		}
-    	}
-	}
-}
+// 	gap = amount;
+// 	swapped = 0;
+//  	while(gap > 1 || swapped)
+// 	{
+//     //shrink factor 1.3
+// 		gap = (gap * 10) / 13;
+// 		if(gap == 9 || gap == 10)
+// 			gap = 11;
+//     	if (gap < 1) gap = 1;
+//     		swapped = 0;
+//     	for(int i = 0; i < amount - gap; i++)
+//     	{
+// 			int j = i + gap;
+// 			if(dist[i] < dist[j])
+//       		{
+//       			std::swap(dist[i], dist[j]);
+// 				std::swap(order[i], order[j]);
+// 				swapped = 1;
+//       		}
+//     	}
+// 	}
+// }
 
 void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int buffer[][holder->width])
 {
