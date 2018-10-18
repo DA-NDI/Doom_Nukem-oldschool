@@ -118,6 +118,40 @@ tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_up
 	}
 }
 
+void sort_sprites(int* order, double* dist, int amount)
+{
+	int gap;
+	int swapped;
+
+	gap = amount;
+	swapped = 0;
+ 	while(gap > 1 || swapped)
+	{
+    //shrink factor 1.3
+		gap = (gap * 10) / 13;
+		if(gap == 9 || gap == 10)
+			gap = 11;
+    	if (gap < 1) gap = 1;
+    		swapped = 0;
+    	for(int i = 0; i < amount - gap; i++)
+    	{
+			int j = i + gap;
+			if(dist[i] < dist[j])
+      		{
+      			std::swap(dist[i], dist[j]);
+				std::swap(order[i], order[j]);
+				swapped = 1;
+      		}
+    	}
+	}
+}
+
+void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int buffer[][holder->width])
+{
+	int sprite_order[MAXSPRITES];
+	float sprite_dist[MAXSPRITES];
+}
+
 void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
 						unsigned int buffer[][holder->width])
 {

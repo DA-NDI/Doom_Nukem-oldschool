@@ -66,7 +66,7 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 			ft_close(holder);
 	}
 	if (keystate[SDL_SCANCODE_G])
-		holder->shadows = !holder->shadows;	
+		holder->shadows = !holder->shadows;
 	ft_check_weapons(holder, keystate);
 	ft_check_skybox(holder, keystate);
 }

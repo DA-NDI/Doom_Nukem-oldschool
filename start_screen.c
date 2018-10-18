@@ -57,7 +57,7 @@ void	load_sprite_bullet(t_wolf *holder)
 	t_sprite	*bullet;
 
 	bullet = (t_sprite*)malloc(sizeof(t_sprite));
-	holder->bullet = bulet;
+	holder->bullet = bullet;
 	holder->bullet->is_alive = 0;
 	bullet->tex_sprite[0] = NULL;
 	bullet->arr_sprite[0][0] = load_image("resourses/pistole_bullet.png");

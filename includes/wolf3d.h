@@ -89,6 +89,7 @@
 # define V_LEN(x, y) sqrt(x * x + y * y)
 # define V_X_NORM(x, y) (x / V_LEN(x, y))
 # define V_Y_NORM(x, y) (y / V_LEN(x, y))
+# define MAXSPRITES 20
 
 enum				e_adv
 {
@@ -244,6 +245,7 @@ typedef struct		s_wolf
 	t_weapon		*weapon[4];
 	t_start			*start;
 	t_sprite		*sprite;
+	t_sprite		*bullet;
 	t_hud			*hud;
 	unsigned int	fps;
 	unsigned int	frame_delay;
