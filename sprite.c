@@ -12,39 +12,38 @@
 
 #include <wolf3d.h>
 #define SPRITE holder->sprite
-#define SPRITE_X (holder->sprite->x - P_X)
-#define SPRITE_Y (holder->sprite->y - P_Y)
-#define START_X (holder->sprite->draw_start_x)
-#define START_Y (holder->sprite->draw_start_y)
-#define END_X (holder->sprite->draw_end_x)
-#define END_Y (holder->sprite->draw_end_y)
-#define TRANSFORM_Y (holder->sprite->transform_y)
-#define SPRITE_W (holder->sprite->sprite_width)
+#define SPRITE_X sprite->x - P_X
+#define SPRITE_Y sprite->y - P_Y
+#define START_X  sprite->draw_start_x
+#define START_Y  sprite->draw_start_y
+#define END_X sprite->draw_end_x
+#define END_Y sprite->draw_end_y
+#define TRANSFORM_Y sprite->transform_y
+#define SPRITE_W sprite->sprite_width
 #define X sprite->x
 #define Y sprite->y
 #define DIST_X (abs((int)X - (int)P_X))
 #define DIST_Y (abs((int)Y - (int)P_Y))
-#define IS_SPRITE holder->sprite->is_sprite
 
-void	restart_enemy(t_wolf *holder)
+void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
 	holder->frags++;
 	SHOOTS = 0;
-	IS_SPRITE = 1;
-	holder->sprite->x = holder->sprite->orig_x;
-	holder->sprite->y = holder->sprite->orig_y;
-	holder->sprite->is_alive = 1;
-	holder->sprite->speed = holder->sprite->speed + 0.1;
-	ARCADE_TEX = holder->sprite->arr_sprite[0][0];
+	sprite->is_sprite = 1;
+	sprite->x = sprite->orig_x;
+	sprite->y = sprite->orig_y;
+	sprite->is_alive = 1;
+	sprite->speed = sprite->speed + 0.1;
+	sprite->tex_sprite[0] = sprite->arr_sprite[0][0];
 }
 
-void	burning_boss(t_wolf *holder, t_sprite *sprite, int *end_frame)
+void	burning_boss(t_sprite *sprite, int *end_frame)
 {
 	static int i = 5;
 
 	if (IS_SPRITE && !sprite->is_alive && *end_frame == 5)
 	{
-		ARCADE_TEX = holder->sprite->arr_sprite[1][i];
+		ARCADE_TEX = sprite->arr_sprite[1][i];
 		i++;
 	}
 	i = (i == 8) ? 5 : i;
@@ -62,22 +61,22 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	}
 	if (DIST_X <= 1 && DIST_Y <= 1 && end_frame < 9 && IS_SPRITE)
 	{
-		ARCADE_TEX = holder->sprite->arr_sprite[0][end_frame];
+		ARCADE_TEX = sprite->arr_sprite[0][end_frame];
 		end_frame++;
 		sprite->is_alive = (end_frame == 8) ? 0 : 1;
 	}
-	if ((sprite->x != P_X || sprite->y != P_Y) && holder->sprite->is_alive)
+	if ((sprite->x != P_X || sprite->y != P_Y) && sprite->is_alive)
 	{
 		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + 0.1)] == '0')
-			sprite->x += holder->sprite->speed;
+			sprite->x += sprite->speed;
 		else if ((int)X > (int)P_X && MAP[(int)Y][(int)(X - 0.1)] == '0')
-			sprite->x -= holder->sprite->speed;
+			sprite->x -= sprite->speed;
 		else if ((int)Y > (int)P_Y && MAP[(int)(Y - 0.1)][(int)X] == '0')
-			sprite->y -= holder->sprite->speed;
+			sprite->y -= sprite->speed;
 		else if ((int)Y < (int)P_Y && MAP[(int)(Y + 0.1)][(int)X] == '0')
-			sprite->y += holder->sprite->speed;
+			sprite->y += sprite->speed;
 	}
-	burning_boss(holder, sprite, &end_frame);
+	burning_boss(sprite, &end_frame);
 }
 
 /*
@@ -89,7 +88,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 */
 
 void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
-						int sprite_height, int sprite_screen_x)
+						int sprite_height, int sprite_screen_x, t_sprite *sprite)
 {
 	int				tex_x;
 	int				tex_y;
@@ -99,7 +98,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
 	START_X--;
 	END_Y += holder->updown + holder->extra_updown;
 	END_Y = (END_Y > 768) ? 768 : END_Y;
-	while (++START_X < END_X && (holder->sprite->is_alive || IS_SPRITE))
+	while (++START_X < END_X && (sprite->is_alive || IS_SPRITE))
 	{
 		tex_x = (int)(256 * (START_X - (-SPRITE_W / 2 + sprite_screen_x)) \
 				* 64 / SPRITE_W) / 256;
@@ -110,7 +109,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
 			while (++i < END_Y)
 			{
 tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_updown)) * 64 / sprite_height;
-				color = get_pixel(holder->sprite->tex_sprite[0], tex_x, tex_y);
+				color = get_pixel(sprite->tex_sprite[0], tex_x, tex_y);
 				if (color != 0)
 					buffer[i][START_X] = color;
 			}
@@ -153,7 +152,7 @@ void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int buffer[][hol
 }
 
 void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-						unsigned int buffer[][holder->width])
+						unsigned int buffer[][holder->width], t_sprite *sprite)
 {
 	float	inv_det;
 	float	transform_x;
@@ -179,5 +178,5 @@ void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
 	END_X = SPRITE_W / 2 + sprite_screen_x;
 	if (END_X >= WIDTH)
 		END_X = WIDTH - 1;
-	ft_sprite_loop(holder, buffer, sprite_height, sprite_screen_x);
+	ft_sprite_loop(holder, buffer, sprite_height, sprite_screen_x, sprite);
 }

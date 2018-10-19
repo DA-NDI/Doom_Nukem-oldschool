@@ -154,9 +154,9 @@ void			ft_raycasting(t_wolf *holder, int x)
 		holder->current_height = (holder->current_height > 300) ? 300 : holder->current_height;
 		raycasting_loop(holder, holder->camera, -1, buffer);
 //		printf("current_height = %d\n", holder->current_height);
-		ft_draw_sprites(holder, holder->camera, buffer);
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 		if ((++i % 16) == 0)
-			ft_move_boss(holder, holder->sprite);
+			ft_move_boss(holder, holder->sprite[0]);
 		if (!holder->pause && !holder->starting)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);

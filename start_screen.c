@@ -20,7 +20,7 @@ void	start_enemy(t_wolf *holder, t_sprite *sprite)
 
 	holder->shoots = &shoots;
 	ARCADE_TEX = sprite->arr_sprite[0][0];
-	holder->sprite->speed = 0.1;
+	sprite->speed = 0.1;
 }
 
 void	load_sprite_arcade(t_wolf *holder)
@@ -28,8 +28,8 @@ void	load_sprite_arcade(t_wolf *holder)
 	t_sprite	*sprite;
 
 	sprite = (t_sprite*)malloc(sizeof(t_sprite));
-	holder->sprite = sprite;
-	holder->sprite->is_alive = 0;
+	holder->sprite[0] = sprite;
+	holder->sprite[0]->is_alive = 0;
 	sprite->tex_sprite[0] = NULL;
 	sprite->arr_sprite[0][0] = load_image("sprites/arcade.png");
 	sprite->arr_sprite[0][1] = load_image("sprites/arcade1.png");
@@ -48,7 +48,7 @@ void	load_sprite_arcade(t_wolf *holder)
 	sprite->arr_sprite[1][5] = load_image("sprites/arcade4.png");
 	sprite->arr_sprite[1][6] = load_image("sprites/arcade4_b1.png");
 	sprite->arr_sprite[1][7] = load_image("sprites/arcade4_b2.png");
-	sprite->is_sprite = get_sprite_coordinates(holder, 'A');
+	sprite->is_sprite = get_sprite_coordinates(holder, 'A', 0);
 	printf("sizeof sprite text = %lu\n", sizeof(*sprite));
 	start_enemy(holder, sprite);
 }

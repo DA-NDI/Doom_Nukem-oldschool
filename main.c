@@ -53,6 +53,7 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->extra_updown = 0;
 	holder->shadows = 0;
 	holder->state = 0;
+	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*));
 	return (holder);
 }
 

@@ -69,10 +69,10 @@
 # define FIXED_F(x) (((float)(x)) / 256)
 # define FIX_MULT(x, y) ((x)*(y) >> 8)
 # define FIX_DIV(x, y) (((x)<< 8) / (y))
-# define IS_SPRITE holder->sprite->is_sprite
+# define IS_SPRITE sprite->is_sprite
 # define SHOOTS (*(holder->shoots))
-# define ARCADE_TEX holder->sprite->tex_sprite[0]
-# define IS_ARC holder->sprite->sprite_found
+# define ARCADE_TEX sprite->tex_sprite[0]
+# define IS_ARC sprite->sprite_found
 # define DR_START camera->draw_start
 # define MOUSE_Y (holder->height >> 1) - holder->keys.y
 # define CHECK_DOWN_X MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP)]
@@ -243,7 +243,7 @@ typedef struct		s_wolf
 	t_camera		*camera;
 	t_weapon		*weapon[4];
 	t_start			*start;
-	t_sprite		*sprite;
+	t_sprite		**sprite;
 	t_sprite		*bullet;
 	t_hud			*hud;
 	unsigned int	fps;
@@ -303,13 +303,13 @@ void				draw_floor(t_wolf *holder, t_camera *camera, \
 		unsigned int buffer[][holder->width], unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-	unsigned int buffer[][holder->width]);
-int					get_sprite_coordinates(t_wolf *holder, char c);
+	unsigned int buffer[][holder->width], t_sprite *sprite);
+int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
-void				ft_check_click(t_wolf *holder);
+void				ft_check_click(t_wolf *holder, t_sprite *sprite);
 void				start_game(t_wolf *holder);
 void				init_weapon_grenade(t_weapon *weapon, t_wolf *holder);
-void				restart_enemy(t_wolf *holder);
+void				restart_enemy(t_wolf *holder, t_sprite *sprite);
 void				init_weapon_demon(t_weapon *weapon, t_wolf *holder);
 void				init_weapon_shotgun(t_weapon *weapon, t_wolf *holder);
 void				draw_score(t_wolf *holder);

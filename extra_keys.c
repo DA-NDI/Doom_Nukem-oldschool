@@ -71,7 +71,7 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 	ft_check_skybox(holder, keystate);
 }
 
-void		ft_check_click(t_wolf *holder)
+void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 {
 	float		v_x;
 	float		v_y;
@@ -85,13 +85,13 @@ void		ft_check_click(t_wolf *holder)
 		holder->shooting = 1;
 		Mix_PlayChannel(-1, holder->weapon[G]->pistol_shoot, 0);
 		holder->weapon[G]->frame = 0;
-		v_x = holder->sprite->x - holder->player_x;
-		v_y = holder->sprite->y - holder->player_y;
-		holder->sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
+		v_x = sprite->x - holder->player_x;
+		v_y = sprite->y - holder->player_y;
+		sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
 		IS_SPRITE = (SHOOTS >= 5 || !IS_ARC) ? 0 : 1;
 		if (SHOOTS >= 5)
 		{
-			restart_enemy(holder);
+			restart_enemy(holder, sprite);
 			return;
 		}
 		angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x + v_y * v_y) * sqrt(holder->DIR_X * holder->DIR_X + holder->DIR_Y * holder->DIR_Y))) * 57.325;
@@ -103,7 +103,7 @@ void		ft_check_click(t_wolf *holder)
 			printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
 			if (SHOOTS < 5)
 			{
-				ARCADE_TEX = holder->sprite->arr_sprite[H][SHOOTS];
+				ARCADE_TEX = sprite->arr_sprite[H][SHOOTS];
 			}
 
 		}

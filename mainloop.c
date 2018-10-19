@@ -130,6 +130,6 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 			ft_check_pause(holder, keystate);
 		}
 		if (holder->event.type == SDL_MOUSEBUTTONDOWN)
-			ft_check_click(holder);
+			ft_check_click(holder, holder->sprite[0]);
 	}
 }
