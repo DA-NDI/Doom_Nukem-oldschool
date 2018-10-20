@@ -35,7 +35,7 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->map_y = 0;
 	camera->is_hit = 0;
 	camera->move_speed = 0.04;
-	camera->rot_speed = -0.04;
+	camera->rot_speed = -0.08;
 	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
 		ft_print_error("Unable to load font");
 	camera->texture[0] = load_image("./texture/fence_wire2.png");

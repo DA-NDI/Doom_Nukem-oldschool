@@ -12,8 +12,8 @@
 
 #include <wolf3d.h>
 #define SPRITE sprite
-#define SPRITE_X sprite->x - P_X
-#define SPRITE_Y sprite->y - P_Y
+#define SPRITE_X (sprite->x - P_X)
+#define SPRITE_Y (sprite->y - P_Y)
 #define START_X  sprite->draw_start_x
 #define START_Y  sprite->draw_start_y
 #define END_X sprite->draw_end_x
@@ -56,9 +56,12 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 
 	if (end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
 	{
-		SDL_Delay(5000);
-		printf("close in sprite\n");
-		ft_close(holder);
+		get_player_coordinates(holder);
+		restart_enemy(holder, sprite);
+		holder->hud->lives -= 1;
+//		SDL_Delay(5000);
+//		printf("close in sprite\n");
+//		ft_close(holder);
 	}
 	if (DIST_X <= 1 && DIST_Y <= 1 && end_frame < 9 && IS_SPRITE)
 	{
@@ -107,6 +110,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[holder->height][holder->
 				TRANSFORM_Y < holder->zbuffer[START_X])
 		{
 			i = START_Y - 1 + holder->updown + holder->extra_updown;
+			i = (i >= 0) ? i : 0;
 			while (++i < END_Y)
 			{
 tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_updown)) * 64 / sprite_height;
