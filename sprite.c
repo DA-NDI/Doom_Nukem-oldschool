@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <wolf3d.h>
-#define SPRITE holder->sprite
+#define SPRITE sprite
 #define SPRITE_X sprite->x - P_X
 #define SPRITE_Y sprite->y - P_Y
 #define START_X  sprite->draw_start_x
