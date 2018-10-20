@@ -32,6 +32,8 @@ void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 		holder->keys.d = 1;
 	if (key == SDLK_LSHIFT)
 		MOV_SP = 0.16;
+	if (key == SDLK_RETURN)
+		holder->keys.enter = 1;
 	if (key == SDLK_LCTRL && holder->advanced == normal)
 	{
 		holder->keys.lctrl = 1;
@@ -68,6 +70,8 @@ void	azaporoz_keys_up(t_wolf *holder, t_camera *camera, int key)
 		holder->keys.a = 0;
 	if (key == SDLK_d)
 		holder->keys.d = 0;
+	if (key == SDLK_RETURN)
+		holder->keys.enter = 0;
 	if (key == SDLK_LSHIFT)
 		MOV_SP = 0.07;
 	if (key == SDLK_LCTRL)
@@ -109,6 +113,7 @@ void	azaporoz_action(t_wolf *holder, t_camera *camera)
 			P_X += DIR_X * MOV_SP;
 		if (CHECK_UP_Y == '0' || CHECK_UP_Y == 'P')
 			P_Y += DIR_Y * MOV_SP;
+	
 	}
 	if (holder->keys.down || holder->keys.s)
 	{

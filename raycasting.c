@@ -70,7 +70,7 @@ void			check_hit(t_camera *camera, t_wolf *holder)
 }
 
 void			draw_walls(t_wolf *holder, t_camera *camera, \
-					unsigned int buffer[][holder->width], unsigned int x)
+					unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
 	int				tex_n;
 	int				tex_x;
@@ -114,7 +114,7 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 }
 
 void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
-								unsigned int buffer[][holder->width])
+								unsigned int buffer[holder->height][holder->width])
 {
 
 	while (++x < holder->width)
@@ -144,7 +144,12 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 
 void			ft_raycasting(t_wolf *holder, int x)
 {
-	unsigned int	buffer[holder->height][holder->width];
+	static unsigned int	buffer[768][1024];
+
+//	buffer = (unsigned int **)malloc(sizeof(unsigned int *) * holder->height);
+
+//	for (int i = 0; i < holder->height + 1; i++)
+//		buffer[i] = (unsigned int *)malloc(sizeof(unsigned int) * holder->width);
 	static int		i = 0;
 
 	while (holder->running)
@@ -154,13 +159,22 @@ void			ft_raycasting(t_wolf *holder, int x)
 		holder->current_height = (holder->current_height > 300) ? 300 : holder->current_height;
 		raycasting_loop(holder, holder->camera, -1, buffer);
 //		printf("current_height = %d\n", holder->current_height);
+		printf("1\n");
 		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
+		printf("2\n");
 		if ((++i % 16) == 0)
+		{
+		printf("3\n");
 			ft_move_boss(holder, holder->sprite[0]);
-		if (!holder->pause && !holder->starting)
+		}
+		printf("4\n");
+		if (!holder->pause && !holder->starting && holder->running)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);
 			x = -1;
+//			for (int i = 0; i < holder->height; i++)
+//				for (int a = 0;  a < holder->width; a++)
+//					buffer[i][a] = 0;
 			while (++x < holder->height)
 				ft_zero_fill(buffer[x], holder->width);
 			SDL_RenderClear(holder->renderer);
@@ -173,4 +187,7 @@ void			ft_raycasting(t_wolf *holder, int x)
 		}
 		ft_close_loop(holder, holder->camera);
 	}
+//	for (int i = 0; i < holder->height; i++)
+//		free(buffer[i]);
+//	free(buffer);
 }

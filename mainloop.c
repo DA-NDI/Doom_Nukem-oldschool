@@ -69,7 +69,9 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 	holder->keys.xrel = holder->event.motion.xrel;
 //	holder->keys.y = holder->event.motion.y;
 //	holder->keys.x = holder->event.motion.x;
+	printf("holder->updown before = %d start_point = %d, holder->event.motion.y = %d\n", holder->updown, holder->start_point, holder->event.motion.y);
 	holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
+	printf("holder->updown after = %d\n", holder->updown);
 	if (holder->keys.xrel > 0)
 	{
 		old = DIR_X;
@@ -92,6 +94,28 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 
 void		check_teleport(t_wolf *holder, t_camera *camera)
 {
+	if (CHECK_UP_X_PLUS2 == ':' && holder->keys.enter)
+	{
+		holder->shadows = 0;
+		CHECK_UP_X_PLUS2 = ';';
+		printf("CLICK!\n");
+	}
+	else if (CHECK_UP_X_PLUS2 == ';' && holder->keys.enter)
+	{
+		holder->shadows = 1;
+		CHECK_UP_X_PLUS2 = ':';
+	}
+	else if (CHECK_UP_X_MINUS2 == ':' && holder->keys.enter)
+	{
+		holder->shadows = 0;
+		CHECK_UP_X_MINUS2 = ';';
+	}
+	else if (CHECK_UP_X_MINUS2 == ';' && holder->keys.enter)
+	{
+		holder->shadows = 1;
+		CHECK_UP_X_MINUS2 = ':';		
+	}
+	holder->keys.enter = 0;
 	if (holder->keys.up || holder->keys.w)
 	{
 		if (CHECK_UP_X == '2' && CHECK_UP_X_PLUS2 == '0')
@@ -100,6 +124,7 @@ void		check_teleport(t_wolf *holder, t_camera *camera)
 			Mix_PlayChannel(-1, camera->dstelept, 0);
 		}
 	}
+
 }
 
 void		ft_close_loop(t_wolf *holder, t_camera *camera)
@@ -116,7 +141,10 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 	while (SDL_PollEvent(&holder->event))
 	{
 		if (holder->event.type == SDL_QUIT || C_Q)
+		{
+			printf("CLOSE in polevent\n");
 			ft_close(holder);
+		}
 		if (holder->event.type == SDL_MOUSEMOTION)
 			mouse_move(holder, camera, 0);
 		if (holder->event.type == SDL_KEYDOWN)

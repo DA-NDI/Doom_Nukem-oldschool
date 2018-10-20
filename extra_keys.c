@@ -63,7 +63,10 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 			holder->starting = 0;
 		}
 		else
+		{
+			printf("close in return ! \n");
 			ft_close(holder);
+		}
 	}
 	if (keystate[SDL_SCANCODE_G])
 		holder->shadows = !holder->shadows;

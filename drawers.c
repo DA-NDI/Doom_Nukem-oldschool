@@ -132,7 +132,7 @@ if (coefficient > 1)
 }
 
 void			draw_floor_simple(t_wolf *holder, \
-unsigned int buffer[][holder->width], unsigned int x)
+unsigned int **buffer, unsigned int x)
 {
 	int		i;
 	float	current_dist;
@@ -199,7 +199,7 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))))
 
 
 void			draw_floor1(t_wolf *holder, \
-unsigned int buffer[][holder->width], unsigned int x)
+unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
 	int		i;
 	float	current_dist;
@@ -250,7 +250,7 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown - h
 }
 
 void			draw_floor(t_wolf *holder, t_camera *camera, \
-					unsigned int buffer[][holder->width], unsigned int x)
+					unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
 	if (camera->side == 0 && camera->ray_dir_x > 0)
 	{

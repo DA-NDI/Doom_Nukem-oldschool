@@ -57,6 +57,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	if (end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
 	{
 		SDL_Delay(5000);
+		printf("close in sprite\n");
 		ft_close(holder);
 	}
 	if (DIST_X <= 1 && DIST_Y <= 1 && end_frame < 9 && IS_SPRITE)
@@ -87,7 +88,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 **4) ZBuffer, with perpendicular distance
 */
 
-void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[][holder->width], \
+void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[holder->height][holder->width], \
 						int sprite_height, int sprite_screen_x, t_sprite *sprite)
 {
 	int				tex_x;
@@ -145,14 +146,14 @@ tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_up
 // 	}
 // }
 
-void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int buffer[][holder->width])
+void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int **buffer)
 {
 	int sprite_order[MAXSPRITES];
 	float sprite_dist[MAXSPRITES];
 }
 
 void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-						unsigned int buffer[][holder->width], t_sprite *sprite)
+						unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
 {
 	float	inv_det;
 	float	transform_x;

@@ -43,12 +43,14 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->texture[2] = load_image("./texture/wall_wire_blue.png");
 	camera->texture[3] = load_image("./texture/brick_lblue1.png");
 	camera->texture[4] = load_image("./texture/floor_wire_violet.png");
-	camera->texture[5] = load_image("./texture/wall_texture9.png");
+	camera->texture[5] = load_image("./texture/light_on.png");
 	camera->texture[6] = load_image("./texture/fury_poster.png");
 	camera->texture[7] = load_image("./texture/brick_pink2.png");
 	camera->texture[8] = load_image("./texture/wall_texture11.png");
-	camera->texture[9] = load_image("./texture/doom_ceiling.png");
-	camera->texture[10] = load_image("./texture/tron.png");
+	camera->texture[9] = load_image("./texture/light_on.png");
+	camera->texture[10] = load_image("./texture/light_off.png");
+	camera->texture[11] = load_image("./texture/chess.png");
+	camera->texture[12] = load_image("./texture/tron.png");
 	camera->dstelept = load_chunk("resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);

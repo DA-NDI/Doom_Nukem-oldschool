@@ -82,6 +82,7 @@
 # define CHECK_RIGHT_Y MAP[(int)(P_Y - DIR_X * MOV_SP)][(int)(P_X)]
 # define CHECK_DOWN_Y MAP[(int)(P_Y - DIR_Y * MOV_SP)][(int)(P_X)]
 # define CHECK_UP_X_PLUS2 MAP[(int)(P_Y)][(int)(P_X + DIR_X * MOV_SP) + 2]
+# define CHECK_UP_X_MINUS2 MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP) - 2]
 # define CHECK_UP_X MAP[(int)(P_Y)][(int)(P_X + DIR_X * MOV_SP)]
 # define CHECK_UP_Y MAP[(int)(P_Y + DIR_Y * MOV_SP)][(int)(P_X)]
 # define PLANE_Y camera->plane_y
@@ -136,11 +137,12 @@ typedef struct		s_keys
 	int				y;
 	int				f;
 	int				lctrl;
+	int 			enter;
 }					t_keys;
 
 typedef struct		s_camera
 {
-	SDL_Surface		*texture[12];
+	SDL_Surface		*texture[13];
 	SDL_Texture		*skybox_tex[5];
 	TTF_Font		*font;
 	Mix_Chunk		*dstelept;
@@ -300,10 +302,10 @@ Mix_Chunk			*load_chunk(char *path);
 void				ft_check_extra_keys(t_wolf *holder, \
 					const Uint8 *keystate);
 void				draw_floor(t_wolf *holder, t_camera *camera, \
-		unsigned int buffer[][holder->width], unsigned int x);
+		unsigned int buffer[holder->height][holder->width], unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-	unsigned int buffer[][holder->width], t_sprite *sprite);
+	unsigned int buffer[holder->height][holder->width], t_sprite *sprite);
 int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
 void				ft_check_click(t_wolf *holder, t_sprite *sprite);

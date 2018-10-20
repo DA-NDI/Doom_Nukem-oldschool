@@ -14,6 +14,7 @@
 
 void		ft_close(t_wolf *holder)
 {
+	printf("CLOSED!\n");
 	Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
 	Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
 	holder->weapon[0]->pistol_shoot = NULL;

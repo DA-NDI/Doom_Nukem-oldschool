@@ -30,7 +30,7 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2' &&\
 				map[i][j] != '\0' && map[i][j] != '3' && map[i][j] != 'P' &&\
 				map[i][j] != '4' && map[i][j] != '5' && map[i][j] != 'A' &&
-				map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9')
+				map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9' && map[i][j] != '6' && map[i][j] != ':' && map[i][j] != ';')
 				return (1);
 		}
 		if (j != width && (map[i][0] != '\0' || map[i][j] != '\0'))
@@ -47,16 +47,16 @@ int		check_boundaries(char **map, int height)
 	i = 0;
 	j = 0;
 	while (map[i][j] && map[height - 1][j])
-		if (map[i][j] != '1' || map[height - 1][j++] != '1')
+		if ((map[i][j] != '1' || map[height - 1][j++] != '1') && (map[i][j] != ':' || map[height - 1][j++] != ':'))
 			return (1);
 	j = 0;
 	while (++i < height)
 	{
-		if (map[i][j] != '1')
+		if (map[i][j] != '1' && map[i][j] != ':')
 			return (1);
 		while (map[i][j++])
 			;
-		if (map[i][j - 2] != '1')
+		if (map[i][j - 2] != '1' && map[i][j - 2] != ':')
 			return (1);
 		j = 0;
 	}
