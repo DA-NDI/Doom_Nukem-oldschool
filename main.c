@@ -75,7 +75,7 @@ int			main(int argc, char **argv)
 {
 	static t_wolf	holder[1];
 
-	if (argc != 2 || !argv[1])
+	if (argc != 2 || !argv[1] || system("tar -xvzf package.tar") != 0)
 		ft_print_error("Usage: ./doom-nukem <map>");
 	holder->map = ft_create_map(argv, holder);
 	ft_verify_map(holder->map, holder);
