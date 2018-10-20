@@ -61,35 +61,39 @@ void		ft_check_other(t_wolf *holder, const Uint8 *keystate)
 	}
 }
 
+
+		// DIR_X += DIR_X * cos(holder->keys.xrel/ 100);
+		// DIR_Y = DIR_Y * cos(holder->keys.xrel/ 100);
+		// old_plane_x = PLANE_X;
+		// PLANE_X = PLANE_X * cos(holder->keys.xrel/ 100);
+		// PLANE_Y = PLANE_Y * cos(holder->keys.xrel/ 100);
+
+
 void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 {
 	float old_plane_x;
 
-//	holder->keys.yrel = holder->event.motion.yrel;
 	holder->keys.xrel = holder->event.motion.xrel;
+	holder->keys.yrel = holder->event.motion.yrel;
 //	holder->keys.y = holder->event.motion.y;
 //	holder->keys.x = holder->event.motion.x;
 	printf("holder->updown before = %d start_point = %d, holder->event.motion.y = %d\n", holder->updown, holder->start_point, holder->event.motion.y);
-	holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
+	// holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
+	holder->updown -= holder->keys.yrel;// + holder->start_point;
 	printf("holder->updown after = %d\n", holder->updown);
-	if (holder->keys.xrel > 0)
-	{
+
+		// old = DIR_X;
+		// DIR_X = DIR_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - DIR_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);
+		// DIR_Y = old * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0) + DIR_Y * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0);
+		// old_plane_x = PLANE_X;
+		// PLANE_X = PLANE_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - PLANE_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);
+		// PLANE_Y = old_plane_x * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0) + PLANE_Y * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0);
 		old = DIR_X;
-		DIR_X = DIR_X * cos(ROT_SPEED) - DIR_Y * sin(ROT_SPEED);
-		DIR_Y = old * sin(ROT_SPEED) + DIR_Y * cos(ROT_SPEED);
+		DIR_X = DIR_X * cos(holder->keys.xrel / 100.0 * -0.3) - DIR_Y * sin(holder->keys.xrel / 100.0 * -0.3);
+		DIR_Y = old * sin(holder->keys.xrel / 100.0 * -0.3) + DIR_Y * cos(holder->keys.xrel / 100.0 * -0.3);
 		old_plane_x = PLANE_X;
-		PLANE_X = PLANE_X * cos(ROT_SPEED) - PLANE_Y * sin(ROT_SPEED);
-		PLANE_Y = old_plane_x * sin(ROT_SPEED) + PLANE_Y * cos(ROT_SPEED);
-	}
-	if (holder->keys.xrel < 0)
-	{
-		old = DIR_X;
-		DIR_X = DIR_X * cos(-ROT_SPEED) - DIR_Y * sin(-ROT_SPEED);
-		DIR_Y = old * sin(-ROT_SPEED) + DIR_Y * cos(-ROT_SPEED);
-		old_plane_x = PLANE_X;
-		PLANE_X = PLANE_X * cos(-ROT_SPEED) - PLANE_Y * sin(-ROT_SPEED);
-		PLANE_Y = old_plane_x * sin(-ROT_SPEED) + PLANE_Y * cos(-ROT_SPEED);
-	}
+		PLANE_X = PLANE_X * cos(holder->keys.xrel / 100.0 * -0.3) - PLANE_Y * sin(holder->keys.xrel / 100.0 * -0.3);
+		PLANE_Y = old_plane_x * sin(holder->keys.xrel / 100.0 * -0.3) + PLANE_Y * cos(holder->keys.xrel / 100.0 * -0.3);
 }
 
 void		check_teleport(t_wolf *holder, t_camera *camera)
