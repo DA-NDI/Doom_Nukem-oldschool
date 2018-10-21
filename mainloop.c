@@ -77,10 +77,8 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 	holder->keys.yrel = holder->event.motion.yrel;
 //	holder->keys.y = holder->event.motion.y;
 //	holder->keys.x = holder->event.motion.x;
-	printf("holder->updown before = %d start_point = %d, holder->event.motion.y = %d\n", holder->updown, holder->start_point, holder->event.motion.y);
 	// holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
 	holder->updown -= holder->keys.yrel;// + holder->start_point;
-	printf("holder->updown after = %d\n", holder->updown);
 
 		// old = DIR_X;
 		// DIR_X = DIR_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - DIR_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);

@@ -83,6 +83,35 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	burning_boss(sprite, &end_frame);
 }
 
+void	ft_move_bullet(t_wolf *holder, t_sprite *sprite)
+{
+	static float direction[2] = {0, 0};
+	static int frames = 0;
+	static int gun = 0;
+
+	if (!sprite->is_alive)
+	{
+		direction[1] = holder->DIR_X;
+		direction[0] = holder->DIR_Y;
+		sprite->x = P_X + direction[1];
+		sprite->y = P_Y + direction[0];
+		gun = G;
+	}
+	else if(sprite->is_alive)
+	{
+		sprite->x += direction[1];
+		sprite->y += direction[0];
+		sprite->tex_sprite[0] = sprite->arr_sprite[gun][frames++];
+	}
+	if (frames == 3)
+		frames = 0;
+	if (MAP[(int)sprite->y][(int)sprite->x] != '0')
+	{
+		MAP[(int)sprite->y][(int)sprite->x] = '5';
+		sprite->is_alive = 0;
+	}
+}
+
 /*
 **Condition ifs in sprite_loop
 **1) it's in front of camera plane so you don't see things behind you
@@ -98,14 +127,60 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[holder->height][holder->
 	int				tex_y;
 	unsigned int	color;
 	int				i;
+	int w;
+float angle;
 
+
+	w = sprite->tex_sprite[0]->w;
+//	SDL_QueryTexture(sprite->tex_sprite[0], NULL, NULL, &w, NULL);
 	START_X--;
 	END_Y += holder->updown + holder->extra_updown;
 	END_Y = (END_Y > 768) ? 768 : END_Y;
+	 if (sprite->texture == 1)
+	 {
+	 	angle = roundf(atan2(sprite->y - P_Y, sprite->x - P_X) * (180 / 3.1415926));
+	 	if (angle <= -135 && angle > -157.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][0]; 
+	 	if (angle <= -112.5 && angle > -135)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][1]; 
+	 	else if (angle <= -90 && angle > -112.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][2]; 
+	 	else if (angle <= -67.5 && angle > -90)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][3]; 
+	 	else if (angle < -45 && angle > -67.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][4]; 
+		else if (angle < -22.5 && angle > -45)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][5]; 
+	 	else if (angle <= -0 && angle > -22.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][6]; 
+	 	else if (angle >= 0 && angle < 22.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][7]; 
+	 	else if (angle >= 22.5 && angle < 45)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][8]; 
+	 	else if (angle >= 45 && angle < 67.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][9]; 
+	 	else if (angle >= 67.5 && angle < 90)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][10]; 
+	 	else if (angle >= 90 && angle < 112.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][11]; 
+	 	else if (angle >= 112.5 && angle < 135)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][12]; 
+	 	else if (angle >= 135 && angle < 157.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][13]; 
+	 	else if (angle >= 157.5 && angle <= 180)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][14]; 
+	 	else if (angle >= -180 && angle <= -157.5)
+			sprite->tex_sprite[0] = sprite->arr_sprite[0][15]; 
+//	 	printf("atan2 of dx dy = %f\n", atan2(sprite->y - P_Y, sprite->x - P_X) * (180 / 3.1415926));
+	// 	if (holder->DIR_X >= 0 && holder->DIR_X <= 1 && holder->DIR_Y <= -1 )
+
+	 }
+
+//printf("get pixel in draw_sprite\n");
 	while (++START_X < END_X && (sprite->is_alive || IS_SPRITE))
 	{
 		tex_x = (int)(256 * (START_X - (-SPRITE_W / 2 + sprite_screen_x)) \
-				* 64 / SPRITE_W) / 256;
+				* w / SPRITE_W) / 256;
 		if (TRANSFORM_Y > 0 && START_X > 0 && START_X < WIDTH && \
 				TRANSFORM_Y < holder->zbuffer[START_X])
 		{
@@ -113,7 +188,7 @@ void	ft_sprite_loop(t_wolf *holder, unsigned int buffer[holder->height][holder->
 			i = (i >= 0) ? i : 0;
 			while (++i < END_Y)
 			{
-tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_updown)) * 64 / sprite_height;
+tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_updown)) * w / sprite_height;
 				color = get_pixel(sprite->tex_sprite[0], tex_x, tex_y);
 				if (color != 0)
 					buffer[i][START_X] = color;
@@ -164,19 +239,24 @@ void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
 	int		sprite_screen_x;
 	int		sprite_height;
 
+float udiv = 1;
+float vdiv = 1;
+//float vmove = 0;
+
 	inv_det = 1.0 / (PLANE_X * DIR_Y - DIR_X * camera->plane_y);
 	transform_x = inv_det * (DIR_Y * SPRITE_X - DIR_X * SPRITE_Y);
-	TRANSFORM_Y = inv_det * (-camera->plane_y * SPRITE_X + \
-					PLANE_X * SPRITE_Y);
+	TRANSFORM_Y = inv_det * (-camera->plane_y * SPRITE_X + PLANE_X * SPRITE_Y);
+//int vmovescreen = (int)(vmove / TRANSFORM_Y);
 	sprite_screen_x = (int)((WIDTH / 2) * (1 + transform_x / TRANSFORM_Y));
-	sprite_height = abs((int)(HEIGHT / (TRANSFORM_Y)));
-	START_Y = -sprite_height / 2 + HEIGHT / 2;
+	sprite_height = (abs((int)(HEIGHT / (TRANSFORM_Y)))) * vdiv;
+	START_Y = -sprite_height / 2 + HEIGHT / 2;// + vmovescreen;
+	printf("START_Y = %d\n", START_Y);
 	if (START_Y < 0)
 		START_Y = 0;
-	END_Y = sprite_height / 2 + HEIGHT / 2;
+	END_Y = sprite_height / 2 + HEIGHT / 2;// + vmovescreen;
 	if (END_Y >= HEIGHT)
 		END_Y = HEIGHT - 1;
-	SPRITE_W = abs((int)(HEIGHT / (TRANSFORM_Y)));
+	SPRITE_W = (abs((int)(HEIGHT / (TRANSFORM_Y)))) * udiv;
 	START_X = -SPRITE_W / 2 + sprite_screen_x;
 	if (START_X < 0)
 		START_X = 0;

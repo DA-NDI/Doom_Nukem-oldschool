@@ -180,7 +180,7 @@ typedef struct		s_camera
 
 typedef struct		s_sprite
 {
-	SDL_Surface		*arr_sprite[2][9];
+	SDL_Surface		*arr_sprite[2][16];
 	SDL_Surface		*tex_sprite[1];
 	float			x;
 	float			y;
@@ -320,6 +320,7 @@ void				azaporoz_keys_down(t_wolf *holder, t_camera *camera, \
 								int key);
 void				azaporoz_keys_up(t_wolf *holder, t_camera *camera, \
 								int key);
+void	ft_move_bullet(t_wolf *holder, t_sprite *sprite);
 void				azaporoz_action(t_wolf *holder, t_camera *camera);
 void				azaporoz_rotate(t_wolf *holder, t_camera *camera, \
 									float old);

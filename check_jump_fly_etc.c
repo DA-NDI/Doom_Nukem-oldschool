@@ -17,11 +17,11 @@ void	ft_check_jump(t_wolf *holder, const Uint8 *keystate)
 	if (holder->advanced == jumping)
 	{
 		holder->adv_frames++;
-		if (holder->adv_frames < 20)
-			holder->extra_updown += 2;
-		else if (holder->adv_frames >= 20)
-			holder->extra_updown -= 2;
-		if (holder->adv_frames == 40)
+		if (holder->adv_frames < 15)
+			holder->extra_updown += 8;
+		else if (holder->adv_frames >= 15)
+			holder->extra_updown -= 8;
+		if (holder->adv_frames == 30)
 		{
 			holder->adv_frames = 0;
 			holder->advanced = normal;

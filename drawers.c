@@ -212,6 +212,7 @@ float new_wall_height = holder->wall_height;
 //	i = holder->camera->draw_end;
 	holder->state = 0;
 //	printf("draw_start = %d, draw_end = %d\n", holder->camera->draw_start, holder->camera->draw_end);
+//	printf("get pixel in draw_floor\n");
 	for (int i = holder->height - 1; i > holder->camera->draw_end; i--)
 	{
 //		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT - 2 * (holder->updown + holder->extra_updown));

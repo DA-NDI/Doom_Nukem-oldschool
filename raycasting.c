@@ -91,9 +91,10 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 //	printf("camera->draw_end = %d, camera->draw_start = %d\n", camera->draw_end, camera->draw_start);
 	if (camera->draw_end >= holder->height)
 		camera->draw_end = holder->height - 1;
-	tex_n = (MAP_CELL != 'P') ? MAP_CELL - '1' : 0;
+	tex_n = (MAP_CELL != 'P' &&	 MAP_CELL != 'C') ? MAP_CELL - '1' : 0;
 	tex_x = (int)(camera->wall_x * 64);
 	tex_x = (CHECK_SIDE_0 || CHECK_SIDE_1) ? 64 - tex_x - 1 : tex_x;
+//	printf("get pixel in draw_wall\n");
 	while (++camera->draw_start < camera->draw_end)
 	{
 		tex_y = (DR_START - HEIGHT / 2  + LINE_H / 2 - holder->updown - holder->extra_updown + holder->wall_height) * 64 / LINE_H;
@@ -159,15 +160,16 @@ void			ft_raycasting(t_wolf *holder, int x)
 		holder->current_height = (holder->current_height > 300) ? 300 : holder->current_height;
 		raycasting_loop(holder, holder->camera, -1, buffer);
 //		printf("current_height = %d\n", holder->current_height);
-		printf("1\n");
 		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
-		printf("2\n");
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[1]);
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[2]);
 		if ((++i % 16) == 0)
 		{
-		printf("3\n");
+//printf("DIR_X = %f, DIR_Y = %f\n", holder->DIR_X, holder->DIR_Y);
 			ft_move_boss(holder, holder->sprite[0]);
 		}
-		printf("4\n");
+		if ((i % 4) == 0)
+			ft_move_bullet(holder, holder->sprite[1]);
 		if (!holder->pause && !holder->starting && holder->running)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);
