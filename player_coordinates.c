@@ -30,7 +30,7 @@ void	get_player_coordinates(t_wolf *holder)
 				holder->player_x = (j == 1) ? 1.5 : j + 0.5;
 				holder->player_y = (i == 1) ? 1.5 : i + 0.5;
 				holder->current_height = holder->height_map[i][j];
-//				holder->map[i][j] = '0';
+				holder->map[i][j] = '0';
 				is_player++;
 			}
 		}

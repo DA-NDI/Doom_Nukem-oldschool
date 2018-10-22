@@ -90,7 +90,10 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 	camera->draw_start = (camera->draw_start < 0) ? 0 : camera->draw_start;
 //	printf("camera->draw_end = %d, camera->draw_start = %d\n", camera->draw_end, camera->draw_start);
 	if (camera->draw_end >= holder->height)
+	{
+		camera->floor = camera->draw_end;
 		camera->draw_end = holder->height - 1;
+	}
 	tex_n = (MAP_CELL != 'P' &&	 MAP_CELL != 'C') ? MAP_CELL - '1' : 0;
 	tex_x = (int)(camera->wall_x * 64);
 	tex_x = (CHECK_SIDE_0 || CHECK_SIDE_1) ? 64 - tex_x - 1 : tex_x;

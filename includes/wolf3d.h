@@ -175,7 +175,8 @@ typedef struct		s_camera
 	int				draw_end;
 	int				draw_start;
 	int				line_height;
-	int			intensity;
+	int				intensity;
+	int				floor;
 }					t_camera;
 
 typedef struct		s_sprite

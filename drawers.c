@@ -198,6 +198,67 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))))
 // }
 
 
+
+void			draw_floor2(t_wolf *holder, \
+unsigned int buffer[holder->height][holder->width], unsigned int x)
+{
+	int		i;
+	float	current_dist;
+	float	weight;
+	float	current_floor_x;
+	float	current_floor_y;
+	int 	tmp;
+
+// static int d = 0;
+	// holder->state = 0;
+	// printf("%d\n", holder->updown);
+	// printf("H::%d\n", holder->height);
+	// printf("ANS::%d\n", holder->height - 1 + holder->updown);
+
+
+	if (x == 500)
+	{
+		// printf("H::%d\n", holder->camera->draw_end);
+		printf("[floor][%d]\n", holder->camera->floor);
+	}
+	// 	printf("500:::%d\n",  holder->camera->draw_end);
+	// if (x == 1000)
+	// 	printf("1000:::%d\n",  holder->camera->draw_end);
+	tmp = holder->camera->draw_end;
+	if (tmp == 767)
+		tmp = holder->camera->floor;
+	for (int i = holder->height + abs(holder->updown) + abs(holder->extra_updown); i > tmp - holder->updown - holder->extra_updown; i--)
+	// for (int i = holder->camera->draw_end - holder->updown; i < holder->height + abs(holder->updown); i++)
+	{
+							current_dist = ((float)HEIGHT) / (2 * i - HEIGHT);
+//		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height),	\
+//INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))));
+							weight = current_dist / PERP_DIST_WALL;
+							current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
+							current_floor_x = (fabsf(current_floor_x) < 1) ? 1 : current_floor_x;
+							current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
+							if (current_floor_x <= 0 || current_floor_y < 0)
+								continue;
+//		current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
+		int var = HEIGHT - i + (holder->updown  + holder->extra_updown);
+		if (var < HEIGHT && var > 0)
+		{
+		buffer[var][x] = get_pixel(holder->camera->texture[4], \
+							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+		// buffer[var][x] = 4278190335;
+
+		if (holder->shadows) //Faster! 40 vs 45 fps. But not always?
+			buffer[var][x] = alter_color_fixed(buffer[var][x], (int)((float)current_dist * 256) / 10);
+		}
+//		if (holder->shadows)
+//			buffer[i][x] = alter_color(buffer[i][x], current_dist / 10);
+	}
+}
+
+
+
+
+
 void			draw_floor1(t_wolf *holder, \
 unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
@@ -212,7 +273,6 @@ float new_wall_height = holder->wall_height;
 //	i = holder->camera->draw_end;
 	holder->state = 0;
 //	printf("draw_start = %d, draw_end = %d\n", holder->camera->draw_start, holder->camera->draw_end);
-//	printf("get pixel in draw_floor\n");
 	for (int i = holder->height - 1; i > holder->camera->draw_end; i--)
 	{
 //		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT - 2 * (holder->updown + holder->extra_updown));
@@ -224,19 +284,23 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown - h
 		current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
 		if (current_floor_x <= 0 || current_floor_y < 0)
 			continue;
-//		current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
-		holder->wall_height = (holder->height_map[(int)current_floor_y - 1][(int)current_floor_x - 1] > 300) ? 300 / current_dist \
-		: holder->height_map[(int)current_floor_y - 1][(int)current_floor_x - 1] / current_dist;
+		// current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
+		current_floor_y = (current_floor_y > 8) ? 8 : current_floor_y;
+		holder->wall_height = (holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] > 300) ? 300 / current_dist \
+		: holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] / current_dist;
 		old_wall_height = new_wall_height;
-		new_wall_height = holder->height_map[(int)current_floor_y - 1][(int)current_floor_x - 1];
+		new_wall_height = holder->height_map[(int)current_floor_y][(int)current_floor_x - 1];
 		if (old_wall_height != new_wall_height)
 			holder->state = !holder->state;
 		if (!holder->state)
 		{
 		buffer[i][x] = get_pixel(holder->camera->texture[4], \
 							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-//		buffer[HEIGHT - i][x] = get_pixel(holder->camera->texture[4], \
-//							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+		// int var = HEIGHT - i + holder->updown + holder->extra_updown;
+		// int var = HEIGHT - i - holder->updown;
+		// if (var < HEIGHT && var > 0)
+		// buffer[var][x] = get_pixel(holder->camera->texture[4], \
+							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
 		}
 		else
 		{
@@ -276,4 +340,5 @@ void			draw_floor(t_wolf *holder, t_camera *camera, \
 	if (camera->draw_end < 0)
 		camera->draw_end = holder->height;
  	draw_floor1(holder, buffer, x);
+ 	// draw_floor2(holder, buffer, x);
 }
