@@ -79,6 +79,7 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 //	holder->keys.x = holder->event.motion.x;
 	// holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
 	holder->updown -= holder->keys.yrel;// + holder->start_point;
+	holder->updown = (holder->updown < -350) ? -350 : holder->updown;
 
 		// old = DIR_X;
 		// DIR_X = DIR_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - DIR_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);

@@ -239,8 +239,8 @@ void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
 	int		sprite_screen_x;
 	int		sprite_height;
 
-float udiv = 1;
-float vdiv = 1;
+float udiv = 0.5;
+float vdiv = 0.5;
 //float vmove = 0;
 
 	inv_det = 1.0 / (PLANE_X * DIR_Y - DIR_X * camera->plane_y);
@@ -250,7 +250,6 @@ float vdiv = 1;
 	sprite_screen_x = (int)((WIDTH / 2) * (1 + transform_x / TRANSFORM_Y));
 	sprite_height = (abs((int)(HEIGHT / (TRANSFORM_Y)))) * vdiv;
 	START_Y = -sprite_height / 2 + HEIGHT / 2;// + vmovescreen;
-	printf("START_Y = %d\n", START_Y);
 	if (START_Y < 0)
 		START_Y = 0;
 	END_Y = sprite_height / 2 + HEIGHT / 2;// + vmovescreen;

@@ -49,7 +49,6 @@ void	load_sprite_arcade(t_wolf *holder)
 	sprite->arr_sprite[1][6] = load_image("sprites/arcade4_b1.png");
 	sprite->arr_sprite[1][7] = load_image("sprites/arcade4_b2.png");
 	sprite->is_sprite = get_sprite_coordinates(holder, 'A', 0);
-	printf("sizeof sprite text = %lu\n", sizeof(*sprite));
 	start_enemy(holder, sprite);
 }
 
