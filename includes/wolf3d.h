@@ -92,6 +92,8 @@
 # define V_Y_NORM(x, y) (y / V_LEN(x, y))
 # define MAXSPRITES 20
 
+#define POLY_H camera->line_poly_height
+
 enum				e_adv
 {
 	jumping,
@@ -107,6 +109,14 @@ typedef struct		s_mouse
 	int				x;
 	int				y;
 }					t_mouse;
+
+typedef struct		s_lines
+{
+	int 			x1;
+	int 			y1;
+	int 			x2;
+	int 			y2;
+}					t_lines;
 
 typedef struct		s_hud
 {
@@ -166,6 +176,8 @@ typedef struct		s_camera
 	float			move_speed;
 	float			rot_speed;
 	float			wall_x;
+	float			wall_xx;
+	float			wall_yy;
 	int				step_x;
 	int				step_y;
 	int				is_hit;
@@ -175,6 +187,7 @@ typedef struct		s_camera
 	int				draw_end;
 	int				draw_start;
 	int				line_height;
+	int				line_poly_height;
 	int				intensity;
 	int				floor;
 }					t_camera;
@@ -272,6 +285,7 @@ typedef struct		s_wolf
 	int 			current_height;
 	int 			wall_height;
 	unsigned int 	state:1;
+t_lines				line[3];
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -332,4 +346,5 @@ void				ft_hud_init(t_wolf *holder);
 void				ft_check_advanced_move(t_wolf *hold, const Uint8 *keystat);
 unsigned int alter_color(unsigned int color, float coefficient);
 unsigned int alter_color_fixed(unsigned int color, int coefficient);
+void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->width], int x);
 #endif

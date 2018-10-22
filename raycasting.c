@@ -78,12 +78,6 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 	unsigned int	color;
 
 
-//	holder->updown = (hodler->current_height == )
-	if (x == 500)
-	{
-//		printf("camera->map_x = %d, camera->map_y = %d\n", camera->map_x, camera->map_y);
-//		printf("holder->wall_height == %d\n", holder->height_map[camera->map_y][camera->map_x]);
-	}
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + holder->extra_updown - holder->wall_height; //y0
 	camera->draw_start = HEIGHT / 2 - (LINE_H >> 1) + holder->updown + holder->extra_updown - holder->wall_height;	//y1	
@@ -139,10 +133,13 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 			camera->wall_x = P_Y + camera->perp_wall_dist * camera->ray_dir_y;
 		else
 			camera->wall_x = P_X + camera->perp_wall_dist * camera->ray_dir_x;
+		camera->wall_xx =  P_Y + camera->perp_wall_dist * camera->ray_dir_y;
+		camera->wall_yy =  P_X + camera->perp_wall_dist * camera->ray_dir_y;
 		camera->wall_x -= floor((camera->wall_x));
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
+		draw_lines(holder, buffer, x);
 	}
 }
 

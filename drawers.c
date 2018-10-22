@@ -216,11 +216,11 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 	// printf("ANS::%d\n", holder->height - 1 + holder->updown);
 
 
-	if (x == 500)
-	{
+	// if (x == 500)
+	// {
 		// printf("H::%d\n", holder->camera->draw_end);
-		printf("[floor][%d]\n", holder->camera->floor);
-	}
+		// printf("[floor][%d]\n", holder->camera->floor);
+	// }
 	// 	printf("500:::%d\n",  holder->camera->draw_end);
 	// if (x == 1000)
 	// 	printf("1000:::%d\n",  holder->camera->draw_end);

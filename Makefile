@@ -29,7 +29,8 @@ SRC_WOLF =./init.c \
 	drawers_extra.c \
 	keys_azaporoz.c \
 	draw_hud.c \
-	check_jump_fly_etc.c
+	check_jump_fly_etc.c \
+	line_azap.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 

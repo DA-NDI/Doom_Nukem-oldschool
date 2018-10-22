@@ -65,6 +65,21 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->shadows = 0;
 	holder->state = 0;
 	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 10);
+
+
+	holder->line[0].x1 = 100;
+	holder->line[0].y1 = 100;
+	holder->line[0].x2 = 500;
+	holder->line[0].y2 = 100;
+	holder->line[1].x1 = 500;
+	holder->line[1].y1 = 100;
+	holder->line[1].x2 = 300;
+	holder->line[1].y2 = 300;
+	holder->line[2].x1 = 300;
+	holder->line[2].y1 = 300;
+	holder->line[2].x2 = 100;
+	holder->line[2].y2 = 100;
+
 	return (holder);
 }
 
