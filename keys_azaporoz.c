@@ -44,8 +44,6 @@ void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 		
 		holder->advanced = flying;
 		holder->start_point = holder->updown;
-		printf("^^^^^^^^^^^^^^^^^^^^^^^\n");
-		printf("holder->start_point ==%d\n, holder->lifted == %d, holder->extra_updown == %d\n", holder->start_point, holder->lifted, holder->extra_updown);
 		holder->keys.f = 1;
 	}
 	if (key == SDLK_SPACE && holder->advanced == normal)
@@ -78,10 +76,8 @@ void	azaporoz_keys_up(t_wolf *holder, t_camera *camera, int key)
 		holder->keys.lctrl = 0;
 	if (key == SDLK_f)
 	{
-		printf ("vvvvvvvvvvvvvvvvvvvvvvvvv\n");
 		holder->keys.f = 0;
 		holder->start_point = 0;
-		printf("holder->start_point ==%d\n, holder->lifted == %d, holder->extra_updown == %d\n", holder->start_point, holder->lifted, holder->extra_updown);
 //		holder->advanced = normal;
 		holder->lifted = 0;
 	}

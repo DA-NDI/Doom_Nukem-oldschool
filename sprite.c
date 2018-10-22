@@ -51,7 +51,7 @@ void	burning_boss(t_sprite *sprite, int *end_frame)
 
 void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 {
-	printf("hey!\n");
+	// printf("hey!\n");
 	static int end_frame = 5;
 
 	if (end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
@@ -156,21 +156,21 @@ float angle;
 	 	else if (angle >= 0 && angle < 22.5)
 			sprite->tex_sprite[0] = sprite->arr_sprite[0][7]; 
 	 	else if (angle >= 22.5 && angle < 45)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][8]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][0]; 
 	 	else if (angle >= 45 && angle < 67.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][9]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][1]; 
 	 	else if (angle >= 67.5 && angle < 90)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][10]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][2]; 
 	 	else if (angle >= 90 && angle < 112.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][11]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][3]; 
 	 	else if (angle >= 112.5 && angle < 135)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][12]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][4]; 
 	 	else if (angle >= 135 && angle < 157.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][13]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][5]; 
 	 	else if (angle >= 157.5 && angle <= 180)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][14]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][6]; 
 	 	else if (angle >= -180 && angle <= -157.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][15]; 
+			sprite->tex_sprite[0] = sprite->arr_sprite[1][7]; 
 //	 	printf("atan2 of dx dy = %f\n", atan2(sprite->y - P_Y, sprite->x - P_X) * (180 / 3.1415926));
 	// 	if (holder->DIR_X >= 0 && holder->DIR_X <= 1 && holder->DIR_Y <= -1 )
 

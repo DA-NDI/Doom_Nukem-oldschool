@@ -130,7 +130,7 @@ int 	**ft_create_height_map(int fd)
 	{
 		for (int y = 0; y < a; y++)
 			ft_printf(" %d", height_map[x][y]);
-		printf("\n");
+		ft_printf("\n");
 	}
 	return height_map;
 }

@@ -180,7 +180,7 @@ typedef struct		s_camera
 
 typedef struct		s_sprite
 {
-	SDL_Surface		*arr_sprite[2][16];
+	SDL_Surface		*arr_sprite[2][9];
 	SDL_Surface		*tex_sprite[1];
 	float			x;
 	float			y;

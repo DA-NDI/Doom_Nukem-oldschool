@@ -64,7 +64,7 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 		}
 		else
 		{
-			printf("close in return ! \n");
+			// printf("close in return ! \n");
 			ft_close(holder);
 		}
 	}
@@ -103,12 +103,12 @@ void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 			return;
 		}
 		angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x + v_y * v_y) * sqrt(holder->DIR_X * holder->DIR_X + holder->DIR_Y * holder->DIR_Y))) * 57.325;
-		printf("angle = %f\n", angle);
+		// printf("angle = %f\n", angle);
 		if (angle < 5 && SHOOTS < 5 && IS_ARC)
 		{
 			SHOOTS += (G == 0) ? 1 : 2;
 			SHOOTS += (G == 1) ? 2 : 0;
-			printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
+			// printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
 			if (SHOOTS < 5)
 			{
 				ARCADE_TEX = sprite->arr_sprite[H][SHOOTS];

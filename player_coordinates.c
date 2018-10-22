@@ -44,7 +44,7 @@ int		get_sprite_coordinates(t_wolf *holder, char c, int num)
 	int		i;
 	int		j;
 
-printf("char == %c\n", c);
+// printf("char == %c\n", c);
 	holder->sprite[num]->is_alive = 0;
 	holder->sprite[num]->sprite_found = 0;
 	i = -1;
@@ -55,12 +55,12 @@ printf("char == %c\n", c);
 		{
 			if (holder->map[i][j] == c)
 			{
-				printf("sprite_coord! >>>>>>>>>>>>>\n");
+				// printf("sprite_coord! >>>>>>>>>>>>>\n");
 				holder->sprite[num]->x = (j == 1) ? 1.5 : j - 0.5;
 				holder->sprite[num]->orig_x = holder->sprite[num]->x;
 				holder->sprite[num]->y = (i == 1) ? 1.5 : i - 0.5;
 				holder->sprite[num]->orig_y = holder->sprite[num]->y;
-//				holder->map[i][j] = '0';
+				holder->map[i][j] = '0';
 				holder->sprite[num]->is_alive++;
 				holder->sprite[num]->is_sprite = 1;
 				holder->sprite[num]->sprite_found = 1;

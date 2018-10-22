@@ -14,17 +14,27 @@
 
 void		ft_close(t_wolf *holder)
 {
-	printf("CLOSED!\n");
-	Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
-	Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
-	holder->weapon[0]->pistol_shoot = NULL;
-	holder->weapon[1]->pistol_shoot = NULL;
-	SDL_DestroyRenderer(holder->renderer);
-	SDL_DestroyWindow(holder->window);
+	printf("CLOSED START\n");
+	// Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
+printf("CLOSED END1\n");
+	// Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
+printf("CLOSED END2\n");
+	// holder->weapon[0]->pistol_shoot = NULL;
+printf("CLOSED END3\n");
+	// holder->weapon[1]->pistol_shoot = NULL;
+printf("CLOSED END4\n");
+	// SDL_DestroyRenderer(holder->renderer);
+printf("CLOSED END5\n");
+	// SDL_DestroyWindow(holder->window);
+printf("CLOSED END6\n");
 	holder->running = 0;
-	free(holder->start);
-	TTF_Quit();
+printf("CLOSED END7\n");
+	// free(holder->start);
+printf("CLOSED END8\n");
+	// TTF_Quit();
+printf("CLOSED END9\n");
 	SDL_Quit();
+printf("CLOSED END10\n");
 }
 
 void		ft_print_error(char *str)
@@ -54,7 +64,7 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->extra_updown = 0;
 	holder->shadows = 0;
 	holder->state = 0;
-	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*));
+	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 10);
 	return (holder);
 }
 

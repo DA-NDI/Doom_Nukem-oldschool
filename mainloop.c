@@ -75,18 +75,8 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 
 	holder->keys.xrel = holder->event.motion.xrel;
 	holder->keys.yrel = holder->event.motion.yrel;
-//	holder->keys.y = holder->event.motion.y;
-//	holder->keys.x = holder->event.motion.x;
-	// holder->updown = HEIGHT / 2 - holder->event.motion.y + holder->start_point;
-	holder->updown -= holder->keys.yrel;// + holder->start_point;
+	holder->updown -= holder->keys.yrel;
 	holder->updown = (holder->updown < -350) ? -350 : holder->updown;
-
-		// old = DIR_X;
-		// DIR_X = DIR_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - DIR_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);
-		// DIR_Y = old * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0) + DIR_Y * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0);
-		// old_plane_x = PLANE_X;
-		// PLANE_X = PLANE_X * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0) - PLANE_Y * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0);
-		// PLANE_Y = old_plane_x * sin(holder->keys.xrel * 2.0 / 100.0 * -1.0) + PLANE_Y * cos(holder->keys.xrel * 2.0 / 100.0 * -1.0);
 		old = DIR_X;
 		DIR_X = DIR_X * cos(holder->keys.xrel / 100.0 * -0.3) - DIR_Y * sin(holder->keys.xrel / 100.0 * -0.3);
 		DIR_Y = old * sin(holder->keys.xrel / 100.0 * -0.3) + DIR_Y * cos(holder->keys.xrel / 100.0 * -0.3);
@@ -101,7 +91,7 @@ void		check_teleport(t_wolf *holder, t_camera *camera)
 	{
 		holder->shadows = 0;
 		CHECK_UP_X_PLUS2 = ';';
-		printf("CLICK!\n");
+		// printf("CLICK!\n");
 	}
 	else if (CHECK_UP_X_PLUS2 == ';' && holder->keys.enter)
 	{
@@ -141,12 +131,14 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 //	holder->updown = (holder->updown < 1000 || holder->updown < -1000) ? HEIGHT / 2 - holder->event.motion.y + holder->start_point - holder->height_map[(int)P_Y][(int)P_X] : 0;
 
 	ft_check_advanced_move(holder, keystate);
-	while (SDL_PollEvent(&holder->event))
+	while (SDL_PollEvent(&(holder->event)))
 	{
 		if (holder->event.type == SDL_QUIT || C_Q)
 		{
-			printf("CLOSE in polevent\n");
 			ft_close(holder);
+			// break ;
+			system ("leaks doom-nukem");
+			exit(0);
 		}
 		if (holder->event.type == SDL_MOUSEMOTION)
 			mouse_move(holder, camera, 0);

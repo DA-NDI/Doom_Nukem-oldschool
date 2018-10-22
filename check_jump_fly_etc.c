@@ -73,7 +73,7 @@ void	ft_check_sit(t_wolf *holder, const Uint8 *keystate)
 				holder->extra_updown = 0;
 			}
 		}
-		printf("i'm crouching, holder->extra_updown == %d\n", holder->extra_updown);
+		// printf("i'm crouching, holder->extra_updown == %d\n", holder->extra_updown);
 
 	}
 }
