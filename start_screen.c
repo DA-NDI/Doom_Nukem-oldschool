@@ -18,7 +18,6 @@ void	start_enemy(t_wolf *holder, t_sprite *sprite)
 {
 	static int shoots = 0;
 
-	holder->shoots = &shoots;
 	ARCADE_TEX = sprite->arr_sprite[0][0];
 	sprite->speed = 0.1;
 }
@@ -55,6 +54,8 @@ void	load_sprite_arcade(t_wolf *holder, int num)
 	sprite->arr_sprite[1][6] = load_image("sprites/arcade4_b1.png");
 	sprite->arr_sprite[1][7] = load_image("sprites/arcade4_b2.png");
 	sprite->is_sprite = get_sprite_coordinates(holder, 'A', num);
+	sprite->end_frame = 5;
+	sprite->shoots = 0;
 	start_enemy(holder, sprite);
 }
 
@@ -120,7 +121,7 @@ void	load_sprite_car(t_wolf *holder)
 	car->arr_sprite[1][5] = load_image("sprites/car_test16-13.png");
 	car->arr_sprite[1][6] = load_image("sprites/car_test16-14.png");
 	car->arr_sprite[1][7] = load_image("sprites/car_test16-15.png");
-	
+	car->shoots = 0;
 car->x = P_X + holder->DIR_X;
 	car->y = P_Y + holder->DIR_Y;
 	car->orig_x = car->x;

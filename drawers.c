@@ -340,5 +340,5 @@ void			draw_floor(t_wolf *holder, t_camera *camera, \
 	if (camera->draw_end < 0)
 		camera->draw_end = holder->height;
  	draw_floor1(holder, buffer, x);
- 	// draw_floor2(holder, buffer, x);
+ 	draw_floor2(holder, buffer, x);
 }

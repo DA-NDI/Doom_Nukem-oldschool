@@ -70,7 +70,7 @@
 # define FIX_MULT(x, y) ((x)*(y) >> 8)
 # define FIX_DIV(x, y) (((x)<< 8) / (y))
 # define IS_SPRITE sprite->is_sprite
-# define SHOOTS (*(holder->shoots))
+# define SHOOTS (sprite->shoots)
 # define ARCADE_TEX sprite->tex_sprite[0]
 # define IS_ARC sprite->sprite_found
 # define DR_START camera->draw_start
@@ -198,6 +198,8 @@ typedef struct		s_sprite
 	int				draw_end_y;
 	int				sprite_width;
 	int				sprite_found:1;
+	int 			end_frame;
+	int 			shoots;
 }					t_sprite;
 
 typedef struct		s_weapon

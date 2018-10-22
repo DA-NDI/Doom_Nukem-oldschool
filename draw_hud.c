@@ -83,6 +83,13 @@ void		draw_hud_text(t_wolf *holder)
 
 void		draw_hud(t_wolf *holder)
 {
+	char 	*frags;
+
+	frags = ft_itoa(holder->frags);
+
 	draw_hud_icons(holder);
 	draw_hud_text(holder);
+	draw_text(holder, frags, WIDTH / 2, HEIGHT / 2);
+	free(frags);
+
 }

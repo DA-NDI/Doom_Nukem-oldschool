@@ -37,11 +37,11 @@ void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 	sprite->tex_sprite[0] = sprite->arr_sprite[0][0];
 }
 
-void	burning_boss(t_sprite *sprite, int *end_frame)
+void	burning_boss(t_sprite *sprite)
 {
 	static int i = 5;
 
-	if (IS_SPRITE && !sprite->is_alive && *end_frame == 5)
+	if (IS_SPRITE && !sprite->is_alive && sprite->end_frame == 5)
 	{
 		ARCADE_TEX = sprite->arr_sprite[1][i];
 		i++;
@@ -52,9 +52,9 @@ void	burning_boss(t_sprite *sprite, int *end_frame)
 void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 {
 	// printf("hey!\n");
-	static int end_frame = 5;
+//	static int end_frame = 5;
 
-	if (end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
+	if (sprite->end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
 	{
 		get_player_coordinates(holder);
 		restart_enemy(holder, sprite);
@@ -63,11 +63,11 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 //		printf("close in sprite\n");
 //		ft_close(holder);
 	}
-	if (DIST_X <= 1 && DIST_Y <= 1 && end_frame < 9 && IS_SPRITE)
+	if (DIST_X <= 1 && DIST_Y <= 1 && sprite->end_frame < 9 && IS_SPRITE)
 	{
-		ARCADE_TEX = sprite->arr_sprite[0][end_frame];
-		end_frame++;
-		sprite->is_alive = (end_frame == 8) ? 0 : 1;
+		ARCADE_TEX = sprite->arr_sprite[0][sprite->end_frame];
+		sprite->end_frame++;
+		sprite->is_alive = (sprite->end_frame == 8) ? 0 : 1;
 	}
 	if ((sprite->x != P_X || sprite->y != P_Y) && sprite->is_alive)
 	{
@@ -80,7 +80,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 		else if ((int)Y < (int)P_Y && MAP[(int)(Y + 0.1)][(int)X] == '0')
 			sprite->y += sprite->speed;
 	}
-	burning_boss(sprite, &end_frame);
+	burning_boss(sprite);
 }
 
 void	ft_move_bullet(t_wolf *holder, t_sprite *sprite)

@@ -80,9 +80,9 @@ void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 	float		v_y;
 	float 		angle;
 
-	if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
-		&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
-	{
+//	if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
+//		&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
+//	{
 		holder->hud->ammo -= (G != 1) ? 1 : 0;
 		holder->hud->rockets -= (G == 1) ? 1 : 0;
 		if (G == 1 || G == 0)
@@ -90,7 +90,8 @@ void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 			holder->sprite[1]->tex_sprite[0] = holder->sprite[1]->arr_sprite[G][0];
 			holder->sprite[1]->is_alive = 1;
 		}
-		holder->shooting = 1;
+printf("ONE\n");
+//		holder->shooting = 1;
 		Mix_PlayChannel(-1, holder->weapon[G]->pistol_shoot, 0);
 		holder->weapon[G]->frame = 0;
 		v_x = sprite->x - holder->player_x;
@@ -115,5 +116,5 @@ void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 			}
 
 		}
-	}
+//	}
 }

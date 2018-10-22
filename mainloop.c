@@ -153,6 +153,14 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 			ft_check_pause(holder, keystate);
 		}
 		if (holder->event.type == SDL_MOUSEBUTTONDOWN)
-			ft_check_click(holder, holder->sprite[0]);
+		{
+			if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
+				&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
+			{
+				ft_check_click(holder, holder->sprite[0]);
+				ft_check_click(holder, holder->sprite[2]);
+				holder->shooting = 1;
+			}
+		}
 	}
 }
