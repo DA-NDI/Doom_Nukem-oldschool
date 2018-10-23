@@ -12,7 +12,7 @@
 
 #include <wolf3d.h>
 
-void	draw_skybox(t_wolf *holder, SDL_Rect *dstrec, SDL_Rect *srcrec)
+void	draw_skybox_2(t_wolf *holder, SDL_Rect *dstrec, SDL_Rect *srcrec)
 {
 	srcrec->y = 0;
 	srcrec->h = 768;
