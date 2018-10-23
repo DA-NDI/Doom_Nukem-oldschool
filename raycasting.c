@@ -21,7 +21,7 @@ void	ft_check_next_level(t_wolf *holder)
 
 	tmp = -1;
 	map[1] = "./maps/map2.txt";
-	if (holder->frags >= 1)
+	if (holder->frags >= 5)
 	{
 		holder->hud->level = 2;
 		i = -1;
@@ -75,6 +75,7 @@ unsigned int buffer[holder->height][holder->width])
 	while (++a < holder->sprite_tex[2]->amount)
 		ft_draw_sprites(holder, holder->camera, buffer,\
 	holder->sprite[a + 7]);
+	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)
