@@ -52,8 +52,8 @@ init.c,137
 #define ARGB 14,912
 void	ft_skybox_init(16,951
 void	ft_camera_init_2(24,1308
-void	ft_camera_init(52,2926
-void	ft_init_image(80,3628
+void	ft_camera_init(52,2910
+void	ft_init_image(80,3604
 
 keys_azaporoz.c,157
 void	azaporoz_keys_down(15,913
@@ -65,13 +65,6 @@ void	azaporoz_rotate(81,2572
 keys_azaporoz_2.c,67
 void	azaporoz_keys_down_2(15,913
 void	azaporoz_keys_up_2(39,1438
-
-line_azap.c,153
-int get_line_intersection(15,913
-t_mouse lineLineIntersection(39,1543
-void			draw_walls_azap(75,2114
-float	ft_cos(105,2904
-void	draw_lines(114,3069
 
 loaders.c,196
 SDL_Texture	*load_tex(load_tex15,913
@@ -87,15 +80,17 @@ t_wolf		*holder_init(holder_init38,1408
 void		start_game(66,2084
 int			main(91,2685
 
-mainloop.c,241
-void		ft_check_pause(23,1076
-void		ft_check_other(49,1857
-void		mouse_move(71,2694
-void		check_button(91,3467
-void		check_mousebuttons(115,3972
-void		check_teleport(134,4443
-void		ft_check_retry(148,4740
-void		ft_close_loop(167,5173
+mainloop.c,149
+void		mouse_move(23,1076
+void		check_mousebuttons(43,1849
+void		check_teleport(62,2320
+void		ft_check_retry(76,2617
+void		ft_close_loop(95,3050
+
+mainloop_2.c,87
+void		ft_check_pause(15,913
+void		ft_check_other(41,1694
+void		check_button(63,2531
 
 play_sounds.c,25
 void	play_pistol(15,913
@@ -106,19 +101,48 @@ int		get_sprite_amount(41,1392
 void	get_sprite_coordinates_2(61,1642
 int		get_sprite_coordinates(68,1813
 
-raycasting.c,180
-void			check_ray(16,931
-void			check_hit(40,1429
-void			draw_walls(72,2418
-void			raycasting_loop(114,4232
-void 			ft_check_next_level(146,5406
-void			ft_raycasting(172,5930
+raycasting.c,121
+void	ft_check_next_level(16,931
+int		ft_raycasting_3(42,1457
+void	ft_raycasting_2(60,1774
+void	ft_raycasting(80,2388
+
+raycasting_2.c,73
+void	check_ray(15,913
+void	check_hit_2(39,1409
+void	check_hit(49,1780
+
+raycasting_loop_draw_walls.c,113
+void	draw_walls_2(16,931
+void	draw_walls(39,1791
+void	raycasting_loop_2(63,2678
+void	raycasting_loop(75,3102
 
 skybox.c,53
 void	draw_skybox_2(15,913
 void	draw_skybox(26,1172
 
-sprite.c,482
+sprite.c,467
+#define SPRITE 14,912
+#define SPRITE_X 15,934
+#define SPRITE_Y 16,969
+#define START_X 17,1004
+#define START_Y 18,1042
+#define END_X 19,1080
+#define END_Y 20,1113
+#define TRANSFORM_Y 21,1146
+#define SPRITE_W 22,1186
+#define X 23,1224
+#define Y 24,1244
+#define DIST_X 25,1264
+#define DIST_Y 26,1304
+void	ft_sprite_loop_3(36,1558
+void	ft_sprite_loop_2(56,2304
+void	ft_sprite_loop_loop(77,3081
+void	ft_sprite_loop(103,3832
+void	ft_draw_sprites(126,4451
+
+sprite_2.c,421
 #define SPRITE 14,912
 #define SPRITE_X 15,934
 #define SPRITE_Y 16,969
@@ -133,11 +157,9 @@ sprite.c,482
 #define DIST_X 25,1264
 #define DIST_Y 26,1304
 void	restart_enemy(28,1345
-void	burning_boss(42,1689
-void	ft_move_boss(55,2149
-void	ft_move_bullet(90,3304
-void	ft_sprite_loop(128,4297
-void	ft_draw_sprites(234,7660
+void	burning_boss(41,1659
+void	ft_move_boss(53,2027
+void	ft_move_bullet(82,2965
 
 start_screen.c,90
 void	reload_sprites(15,913
@@ -177,7 +199,7 @@ weapon_extra.c,64
 void	init_shotgun_tex(15,913
 void	init_weapon_shotgun(39,2402
 
-includes/wolf3d.h,2717
+includes/wolf3d.h,2715
 # define WOLF3D_H14,909
 # define DOWN 22,1056
 # define UP 23,1080
@@ -270,13 +292,13 @@ typedef struct		s_keys134,4709
 }					t_keys;153,4954
 typedef struct		s_camera155,4969
 }					t_camera;195,5733
-typedef struct 		s_sprite_tex197,5750
-} 					t_sprite_tex;201,5831
-typedef struct		s_sprite203,5853
-}					t_sprite;224,6252
-typedef struct		s_weapon226,6269
-}					t_weapon;238,6489
-typedef struct		s_start240,6506
-}					t_start;244,6582
-typedef struct		s_wolf246,6598
-}					t_wolf;299,7670
+typedef struct		s_sprite_tex197,5750
+}					t_sprite_tex;201,5830
+typedef struct		s_sprite203,5851
+}					t_sprite;224,6247
+typedef struct		s_weapon226,6264
+}					t_weapon;238,6484
+typedef struct		s_start240,6501
+}					t_start;244,6577
+typedef struct		s_wolf246,6593
+}					t_wolf;299,7663

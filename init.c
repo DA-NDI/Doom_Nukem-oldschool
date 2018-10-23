@@ -21,7 +21,7 @@ void	ft_skybox_init(t_camera *camera, t_wolf *holder)
 	camera->skybox_tex[3] = load_tex(RENDER, "./resourses/skybox_test3.jpg");
 }
 
-void	ft_camera_init_2(t_camera *camera, t_wolf *holder)
+void	ft_camera_init_2(t_camera *camera)
 {
 	camera->texture[0] = load_image("./texture/fence_wire2.png");
 	camera->texture[1] = load_image("./texture/portal.png");
@@ -66,7 +66,7 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->rot_speed = -0.06;
 	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
 		ft_print_error("Unable to load font");
-	ft_camera_init_2(camera, holder);
+	ft_camera_init_2(camera);
 	camera->dstelept = load_chunk("resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);
