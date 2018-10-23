@@ -372,7 +372,7 @@ void				load_sprite_tex_bullet(t_wolf *holder);
 void				load_sprite_tex_car(t_wolf *holder);
 
 /*
-** azaporoz:
+** azaporoz norminette:
 */
 
 t_sprite			*start_enemy(t_wolf *holder, int num);

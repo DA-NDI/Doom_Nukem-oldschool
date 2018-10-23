@@ -39,8 +39,7 @@ void	ft_check_next_level(t_wolf *holder)
 	}
 }
 
-int		ft_raycasting_3(t_wolf *holder, int i,\
-unsigned int buffer[holder->height][holder->width])
+int		ft_raycasting_3(t_wolf *holder, int i)
 {
 	int a;
 
@@ -86,7 +85,7 @@ void	ft_raycasting(t_wolf *holder, int x)
 	while (holder->running)
 	{
 		ft_raycasting_2(holder, buffer);
-		i = ft_raycasting_3(holder, i, buffer);
+		i = ft_raycasting_3(holder, i);
 		ft_check_next_level(holder);
 		if (!holder->pause && !holder->starting && holder->running)
 		{

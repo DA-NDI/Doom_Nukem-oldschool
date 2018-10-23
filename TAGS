@@ -52,8 +52,8 @@ init.c,137
 #define ARGB 14,912
 void	ft_skybox_init(16,951
 void	ft_camera_init_2(24,1308
-void	ft_camera_init(52,2926
-void	ft_init_image(80,3628
+void	ft_camera_init(52,2910
+void	ft_init_image(80,3604
 
 keys_azaporoz.c,157
 void	azaporoz_keys_down(15,913
@@ -80,12 +80,12 @@ t_wolf		*holder_init(holder_init38,1408
 void		start_game(66,2084
 int			main(91,2685
 
-mainloop.c,153
-void		mouse_move(71,2832
-void		check_mousebuttons(115,4179
-void		check_teleport(134,4650
-void		ft_check_retry(148,4947
-void		ft_close_loop(167,5380
+mainloop.c,149
+void		mouse_move(23,1076
+void		check_mousebuttons(43,1849
+void		check_teleport(62,2320
+void		ft_check_retry(76,2617
+void		ft_close_loop(95,3050
 
 mainloop_2.c,87
 void		ft_check_pause(15,913
@@ -104,8 +104,8 @@ int		get_sprite_coordinates(68,1813
 raycasting.c,121
 void	ft_check_next_level(16,931
 int		ft_raycasting_3(42,1457
-void	ft_raycasting_2(61,1827
-void	ft_raycasting(81,2441
+void	ft_raycasting_2(60,1774
+void	ft_raycasting(80,2388
 
 raycasting_2.c,73
 void	check_ray(15,913
@@ -199,7 +199,7 @@ weapon_extra.c,64
 void	init_shotgun_tex(15,913
 void	init_weapon_shotgun(39,2402
 
-includes/wolf3d.h,2717
+includes/wolf3d.h,2715
 # define WOLF3D_H14,909
 # define DOWN 22,1056
 # define UP 23,1080
@@ -292,13 +292,13 @@ typedef struct		s_keys134,4709
 }					t_keys;153,4954
 typedef struct		s_camera155,4969
 }					t_camera;195,5733
-typedef struct 		s_sprite_tex197,5750
-} 					t_sprite_tex;201,5831
-typedef struct		s_sprite203,5853
-}					t_sprite;224,6252
-typedef struct		s_weapon226,6269
-}					t_weapon;238,6489
-typedef struct		s_start240,6506
-}					t_start;244,6582
-typedef struct		s_wolf246,6598
-}					t_wolf;299,7670
+typedef struct		s_sprite_tex197,5750
+}					t_sprite_tex;201,5830
+typedef struct		s_sprite203,5851
+}					t_sprite;224,6247
+typedef struct		s_weapon226,6264
+}					t_weapon;238,6484
+typedef struct		s_start240,6501
+}					t_start;244,6577
+typedef struct		s_wolf246,6593
+}					t_wolf;299,7663
