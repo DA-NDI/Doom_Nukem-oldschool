@@ -34,7 +34,7 @@ void	ft_start_screen_2(t_wolf *holder, t_camera *camera, t_start *start)
 	load_sprite_tex_arcade(holder);
 	load_sprite_tex_bullet(holder);
 	load_sprite_tex_car(holder);
-//	load_pickupers(holder);
+	load_pickupers(holder);
 }
 
 void	ft_start_screen(t_wolf *holder)
