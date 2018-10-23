@@ -35,7 +35,8 @@ SRC_WOLF =./init.c \
 	get_pixel.c \
 	raycasting_2.c \
 	raycasting_loop_draw_walls.c \
-	sprite_2.c
+	sprite_2.c \
+	mainloop_2.c
 
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)

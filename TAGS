@@ -80,15 +80,17 @@ t_wolf		*holder_init(holder_init38,1408
 void		start_game(66,2084
 int			main(91,2685
 
-mainloop.c,241
-void		ft_check_pause(23,1076
-void		ft_check_other(49,1857
-void		mouse_move(71,2694
-void		check_button(91,3467
-void		check_mousebuttons(115,3972
-void		check_teleport(134,4443
-void		ft_check_retry(148,4740
-void		ft_close_loop(167,5173
+mainloop.c,153
+void		mouse_move(71,2832
+void		check_mousebuttons(115,4179
+void		check_teleport(134,4650
+void		ft_check_retry(148,4947
+void		ft_close_loop(167,5380
+
+mainloop_2.c,87
+void		ft_check_pause(15,913
+void		ft_check_other(41,1694
+void		check_button(63,2531
 
 play_sounds.c,25
 void	play_pistol(15,913
@@ -120,7 +122,7 @@ skybox.c,53
 void	draw_skybox_2(15,913
 void	draw_skybox(26,1172
 
-sprite.c,470
+sprite.c,467
 #define SPRITE 14,912
 #define SPRITE_X 15,934
 #define SPRITE_Y 16,969
@@ -134,11 +136,11 @@ sprite.c,470
 #define Y 24,1244
 #define DIST_X 25,1264
 #define DIST_Y 26,1304
-void	ft_sprite_loop_3(119,4079
-void	ft_sprite_loop_2(139,4825
-void	ft_sprite_loop_loop(160,5602
-void	ft_sprite_loop(186,6353
-void	ft_draw_sprites(209,6972
+void	ft_sprite_loop_3(36,1558
+void	ft_sprite_loop_2(56,2304
+void	ft_sprite_loop_loop(77,3081
+void	ft_sprite_loop(103,3832
+void	ft_draw_sprites(126,4451
 
 sprite_2.c,421
 #define SPRITE 14,912

@@ -380,4 +380,8 @@ void	draw_walls_2(t_wolf *holder, t_camera *camera, unsigned int buffer[holder->
 void	draw_walls(t_wolf *holder, t_camera *camera, unsigned int buffer[holder->height][holder->width], unsigned int x);
 void	raycasting_loop_2(t_wolf *holder, t_camera *camera, int x);
 void	raycasting_loop(t_wolf *holder, t_camera *camera, int x, unsigned int buffer[holder->height][holder->width]);
+
+void		ft_check_pause(t_wolf *holder, const Uint8 *keystate);
+void		ft_check_other(t_wolf *holder, const Uint8 *keystate);
+void		check_button(t_wolf *holder, t_camera *camera);
 #endif
