@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/24 00:14:24 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/24 00:17:37 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,8 @@ void				free_words(char **words);
 int					words_len(char **cords);
 void				tool(char *map[50], int i, int ret, char *buff);
 void				fill_map(t_tool *tool, int *height_map[50]);
-int					check_dimensions_and_symbols(char **map, int height, int width);
+int					check_dimensions_and_symbols(char **map,
+					int height, int width);
 void				check_amount(char **map, int i, int j);
 int					check_boundaries(char **map, int height);
 int					**ft_create_height_map(int fd);
