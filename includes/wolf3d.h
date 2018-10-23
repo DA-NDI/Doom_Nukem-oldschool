@@ -128,6 +128,7 @@ typedef struct		s_hud
 	int				rockets;
 	int				shield;
 	int 			jetpack;
+	int 			level;
 }					t_hud;
 
 typedef struct		s_keys
@@ -292,6 +293,7 @@ typedef struct		s_wolf
 	unsigned int 	shadows:1;
 	int 			current_height;
 	int 			wall_height;
+	int 			ceiling;
 	unsigned int 	state:1;
 t_lines				line[3];
 }					t_wolf;
@@ -356,4 +358,5 @@ unsigned int alter_color(unsigned int color, float coefficient);
 unsigned int alter_color_fixed(unsigned int color, int coefficient);
 void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->width], int x);
 int	get_sprite_amount(t_wolf *holder, char c);
+void 	reload_sprites(t_wolf *holder);
 #endif

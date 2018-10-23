@@ -35,6 +35,7 @@ void		ft_hud_init(t_wolf *holder)
 	hud->rockets = 5;
 	hud->ammo = 25;
 	hud->jetpack = 1000;
+	hud->level = 1;
 }
 
 void		draw_hud_icons(t_wolf *holder)
@@ -74,6 +75,10 @@ void		draw_hud_text(t_wolf *holder)
 	draw_text(holder, rockets, WIDTH - 125, HEIGHT - 22);
 	draw_text(holder, ammo, WIDTH - 65, HEIGHT - 22);
 	draw_text(holder, jetpack, WIDTH - 185, HEIGHT - 22);
+	free(hp);
+	hp = ft_itoa(holder->hud->level);
+	draw_text(holder, "LEVEL: ", WIDTH / 2, HEIGHT - 22);
+	draw_text(holder, hp, WIDTH / 2 + 35, HEIGHT - 22);
 	free(hp);
 	free(shield);
 	free(rockets);

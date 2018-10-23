@@ -139,7 +139,33 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
-//		draw_lines(holder, buffer, x);
+		draw_lines(holder, buffer, x);
+	}
+}
+
+void 			ft_check_next_level(t_wolf *holder)
+{
+	int 	i;
+	static char 	*map[50];
+	int tmp;
+
+	tmp = -1;
+	map[1] = "./maps/map2.txt";
+	if (holder->frags >= 1)
+	{
+		holder->hud->level = 2;
+		i = -1;
+		while (holder->map[++i])
+			free(holder->map[i]);
+		i = -1;
+		while (holder->height_map[++i])
+			free(holder->height_map[i]);
+		holder->map = ft_create_map(map, holder);
+		holder->ceiling = 0;
+		holder->frags = 0;
+		while (++tmp < holder->sprite_tex[0]->amount)
+			free(holder->sprite[tmp + 2]);
+		reload_sprites(holder);
 	}
 }
 
@@ -167,6 +193,9 @@ void			ft_raycasting(t_wolf *holder, int x)
 //		printf("before drawing\n");
 		while (++a < holder->sprite_tex[0]->amount)
 				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 2], a + 2);
+		a = -1;
+//		while (++a < holder->sprite_tex[2]->amount)
+//				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 7], a + 7);
 //		printf("after drawing\n");
 		a = -1;
 		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0], 0);
@@ -183,6 +212,7 @@ void			ft_raycasting(t_wolf *holder, int x)
 			ft_move_bullet(holder, holder->sprite[0]);
 			ft_move_bullet(holder, holder->sprite[1]);
 		}
+		ft_check_next_level(holder);
 		if (!holder->pause && !holder->starting && holder->running)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);

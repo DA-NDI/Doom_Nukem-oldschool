@@ -119,10 +119,22 @@ void	load_sprite_tex_bullet(t_wolf *holder)
 
 }
 
+void 	reload_sprites(t_wolf *holder)
+{
+	int tmp;
+
+	tmp = -1;
+	holder->sprite_tex[0]->amount = get_sprite_amount(holder, 'A');
+	while (++tmp < holder->sprite_tex[0]->amount)
+		start_arcade_sprite(holder, tmp + 2);
+}
+
 void	load_sprite_tex_car(t_wolf *holder)
 {
 	t_sprite_tex	*car;
+	int 		 	tmp;
 
+	tmp = -1;
 	car = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
 	holder->sprite_tex[2] = car;
 	car->arr_sprite[0][0] = load_image("sprites/car_test16-0.png");
@@ -141,6 +153,9 @@ void	load_sprite_tex_car(t_wolf *holder)
 	car->arr_sprite[1][5] = load_image("sprites/car_test16-13.png");
 	car->arr_sprite[1][6] = load_image("sprites/car_test16-14.png");
 	car->arr_sprite[1][7] = load_image("sprites/car_test16-15.png");
+	car->amount = get_sprite_amount(holder, 'C');
+	while (++tmp < car->amount && tmp < 3)
+		start_arcade_sprite(holder, tmp + 7);
 }
 
 
