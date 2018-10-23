@@ -155,7 +155,10 @@ void	load_sprite_tex_car(t_wolf *holder)
 	car->arr_sprite[1][7] = load_image("sprites/car_test16-15.png");
 	car->amount = get_sprite_amount(holder, 'C');
 	while (++tmp < car->amount && tmp < 3)
-		start_arcade_sprite(holder, tmp + 7);
+	{
+		printf("car started at %d\n", tmp);
+		start_car_sprite(holder, tmp + 7);
+	}
 	printf("amount CAR = %d\n", car->amount);
 
 }

@@ -139,7 +139,7 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
-		draw_lines(holder, buffer, x);
+//		draw_lines(holder, buffer, x);
 	}
 }
 
@@ -198,8 +198,6 @@ void			ft_raycasting(t_wolf *holder, int x)
 				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 7], a + 7);
 //		printf("after drawing\n");
 		a = -1;
-		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0], 0);
-		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[7], 7);
 		if ((++i % 16) == 0)
 		{
 //printf("DIR_X = %f, DIR_Y = %f\n", holder->DIR_X, holder->DIR_Y);
