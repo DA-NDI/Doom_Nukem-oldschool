@@ -151,7 +151,7 @@ unsigned int alter_color(unsigned int color, float coefficient)
 // 		if (var < HEIGHT && var > 0)
 // 		{
 // 		buffer[var][x] = get_pixel(holder->camera->texture[4], \
-// 							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+// 							FTX >> 1, FTY);
 // 		if (holder->shadows)
 // 			buffer[var][x] = alter_color_fixed(buffer[var][x], (int)((float)current_dist * 256) / 10);
 // 		}
@@ -191,7 +191,7 @@ unsigned int alter_color(unsigned int color, float coefficient)
 // 		if (!holder->state)
 // 		{
 // 		buffer[i][x] = get_pixel(holder->camera->texture[4], \
-// 							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+// 							FTX >> 1, FTY);
 // 		}
 // 		else
 // 		{

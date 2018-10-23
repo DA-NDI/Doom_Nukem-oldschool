@@ -49,8 +49,8 @@
 # define WALL_X_FL holder->camera->wall_x_f
 # define WALL_Y_FL holder->camera->wall_y_f
 # define PERP_DIST_WALL holder->camera->perp_wall_dist
-# define FLOOR_TEX_X (int)(current[1] * 64) % 64
-# define FLOOR_TEX_Y (int)(current[2] * 64) % 64
+# define FTX (int)(current[1] * 64) % 64
+# define FTY (int)(current[2] * 64) % 64
 # define CHECK_SIDE_0 (camera->side == 0 && camera->ray_dir_x > 0)
 # define CHECK_SIDE_1 (camera->side == 1 && camera->ray_dir_y < 0)
 # define CHECK_SIDE_2 (camera->side == 0 && camera->ray_dir_x < 0)

@@ -9,10 +9,12 @@ void	ft_check_advanced_move(85,2387
 draw_floor1_fixed.c,27
 void			draw_floor1(15,913
 
-draw_floor_main.c,85
+draw_floor_main.c,145
 void			draw_floor2_2(15,913
 void			draw_floor2(26,1255
-void			draw_floor1(57,2076
+void			draw_floor1_2(55,2049
+void			draw_floor1_3(66,2498
+void			draw_floor1(74,2902
 
 draw_hud.c,109
 void		ft_hud_init(15,913
@@ -205,8 +207,8 @@ includes/wolf3d.h,2733
 # define WALL_X_FL 49,2023
 # define WALL_Y_FL 50,2067
 # define PERP_DIST_WALL 51,2111
-# define FLOOR_TEX_X 52,2166
-# define FLOOR_TEX_Y 53,2215
+# define FTX 52,2166
+# define FTY 53,2215
 # define CHECK_SIDE_0 54,2264
 # define CHECK_SIDE_1 55,2331
 # define CHECK_SIDE_2 56,2398
