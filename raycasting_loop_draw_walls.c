@@ -28,7 +28,7 @@ unsigned int buffer[holder->height][holder->width], int tex[4])
 			(int)((float)camera->perp_wall_dist * 256) / 10);
 		if (camera->side == 1 && tex[0] != 6)
 			color = ((color & 0xfefefe) >> 1) | 0xFF000000;
-		color = (tex[0] == 0) ? color << 1 >> 1 : color;
+		color = (tex[0] == 0 || tex[0] == 13) ? color << 1 >> 1 : color;
 		color >>= (CHECK_SIDE_0 && tex[0] == 6) ? 1 : 0;
 		color |= (CHECK_SIDE_3 && tex[0] == 6) ? 0xFF00F00F : 0;
 		color |= (CHECK_SIDE_2 && tex[0] == 6) ? 0xFFF00000 : 0;

@@ -95,11 +95,13 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 	}
 	else if (s->is_alive && !holder->pause)
 	{
+		printf("gun is alive!!\n");
 		s->x += direction[1];
 		s->y += direction[0];
 		s->tex_sprite[0] = s->s_tex->arr_sprite[gun][frames++];
 	}
 	frames = (frames == 3) ? 0 : frames;
+	s->y = ((int)s->y < 0) ? 0 : s->y;
 	if (MAP[(int)s->y][(int)s->x] != '0' &&\
 	s->is_alive && MAP[(int)s->y][(int)s->x] <= '9')
 	{

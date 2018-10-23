@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:36:22 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 17:44:28 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/07 19:27:14 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 			if (map[i][j] == '0')
 				dot++;
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2' &&\
-	map[i][j] != '\0' && map[i][j] != '3' && map[i][j] != 'P' && map[i][j] != \
-	'4' && map[i][j] != '5' && map[i][j] != 'A' && map[i][j] != 'C' && \
-	map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9' && map[i][j] \
-	!= '6' && map[i][j] != ':' && map[i][j] != ';' && map[i][j] != 'K')
+				map[i][j] != '\0' && map[i][j] != '3' && map[i][j] != 'P' &&\
+				map[i][j] != '4' && map[i][j] != '5' && map[i][j] != 'A' && map[i][j] != 'C' && \
+				map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9' && \
+				map[i][j] != '6' && map[i][j] != ':' && map[i][j] != ';' && map[i][j] != 'K')
 				return (1);
 		}
 		if (j != width && (map[i][0] != '\0' || map[i][j] != '\0'))
@@ -40,11 +40,11 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 	return (i != height || !dot) ? 1 : 0;
 }
 
-void	check_amount(char **map, int i, int j, int hp)
+void 	check_amount(char **map, int i, int j)
 {
-	int		cars;
-	int		arcades;
-	int		ammo;
+	int 	cars;
+	int 	arcades;
+	int 	ammo;
 
 	cars = 0;
 	arcades = 0;
@@ -58,13 +58,11 @@ void	check_amount(char **map, int i, int j, int hp)
 				cars++;
 			else if (map[i][j] == 'A')
 				arcades++;
-			else if (map[i][j] == 'G')
+			else if(map[i][j] == 'G')
 				ammo++;
-			else if (map[i][j] == 'H')
-				hp++;
 		}
 	}
-	if (cars > 3 || arcades > 5 || ammo > 3 || hp > 3)
+	if (cars > 3 || arcades > 5 || ammo > 4)
 		ft_print_error("Too many sprites!");
 }
 
@@ -76,8 +74,7 @@ int		check_boundaries(char **map, int height)
 	i = 0;
 	j = 0;
 	while (map[i][j] && map[height - 1][j])
-		if ((map[i][j] != '1' || map[height - 1][j++] != '1') && \
-	(map[i][j] != ':' || map[height - 1][j++] != ':'))
+		if ((map[i][j] != '1' || map[height - 1][j++] != '1') && (map[i][j] != ':' || map[height - 1][j++] != ':'))
 			return (1);
 	j = 0;
 	while (++i < height)
@@ -120,9 +117,9 @@ void	ft_verify_map(char **map, t_wolf *holder)
 		ft_print_error("Map dimensions or allowed symbols error");
 }
 
-int		**ft_create_height_map(int fd)
+int 	**ft_create_height_map(int fd)
 {
-	char		*buff;
+	char 		*buff;
 	char		*buff_height[50];
 	static int	*height_map[50];
 	int			i;
@@ -165,49 +162,6 @@ int		**ft_create_height_map(int fd)
 	return height_map;
 }
 
-void			free_words(char **words)
-{
-	int i;
-
-	i = 0;
-	while (words[i])
-	{
-		free(words[i]);
-		i++;
-	}
-	free(words);
-	words = NULL;
-}
-
-void	skip_first_lines(int fd)
-{
-	char	*line;
-	char	**cords;
-	int		l;
-
-	if (!(get_next_line(fd, &line)))
-	{
-		free(line);
-		exit(0);
-	}
-	cords = ft_strsplit(line, ' ');
-	free(line);
-	if (!cords[0])
-	{
-		free_words(cords);
-		exit(0);
-	}
-	l = ft_atoi(cords[0]);
-	while (l--)
-	{
-		get_next_line(fd, &line);
-		free(line);
-	}
-	get_next_line(fd, &line);
-	free(line);
-	free_words(cords);
-}
-
 char	**ft_create_map(char **argv, t_wolf *holder)
 {
 	int			fd;
@@ -219,7 +173,6 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 	i = 0;
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_print_error("Failed to open map file");
-	skip_first_lines(fd);
 	while ((ret = get_next_line(fd, &buff)) == 1 && ft_strstr(buff, "Height map:") == NULL)
 	{
 		if (ft_strlen(buff) > 100 || i >= 100)
@@ -234,7 +187,7 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 //		map[i++] = buff;
 	}
 	map[i] = NULL;
-	check_amount(map, -1, 0, 0);
+	check_amount(map, -1, 0);
 	if (i == 0 || ret == -1)
 		ft_print_error("Map is empty!");
 	free (buff);
