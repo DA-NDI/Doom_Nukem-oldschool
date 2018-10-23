@@ -48,8 +48,6 @@ void	ft_start_screen(t_wolf *holder)
 	holder->weapon[3] = (t_weapon*)malloc(sizeof(t_weapon));
 	start = (t_start*)malloc(sizeof(t_start));
 	ft_start_screen_2(holder, camera, start);
-// 	start_arcade_sprite(holder, 2);
-//	start_arcade_sprite(holder, 3);
 	start_bullet_sprite(holder, 0);
 	start_bullet_sprite(holder, 1);
 	start->play_select = 1;
