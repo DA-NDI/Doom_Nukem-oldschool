@@ -373,4 +373,11 @@ void	start_car_sprite(t_wolf *holder, int num);
 
 void	draw_floor1(t_wolf *holder, unsigned int buffer[holder->height][holder->width], unsigned int x);
 void	draw_floor2(t_wolf *holder, unsigned int buffer[holder->height][holder->width], unsigned int x);
+void			check_ray(t_camera *camera, t_wolf *holder);
+void			check_hit(t_camera *camera, t_wolf *holder);
+
+void	draw_walls_2(t_wolf *holder, t_camera *camera, unsigned int buffer[holder->height][holder->width], int tex[4]);
+void	draw_walls(t_wolf *holder, t_camera *camera, unsigned int buffer[holder->height][holder->width], unsigned int x);
+void	raycasting_loop_2(t_wolf *holder, t_camera *camera, int x);
+void	raycasting_loop(t_wolf *holder, t_camera *camera, int x, unsigned int buffer[holder->height][holder->width]);
 #endif

@@ -106,13 +106,22 @@ int		get_sprite_amount(41,1392
 void	get_sprite_coordinates_2(61,1642
 int		get_sprite_coordinates(68,1813
 
-raycasting.c,180
-void			check_ray(16,931
-void			check_hit(40,1429
-void			draw_walls(72,2418
-void			raycasting_loop(114,4232
-void 			ft_check_next_level(146,5406
-void			ft_raycasting(172,5930
+raycasting.c,125
+void	ft_check_next_level(97,4125
+int		ft_raycasting_3(123,4651
+void	ft_raycasting_2(142,5021
+void	ft_raycasting(162,5649
+
+raycasting_2.c,73
+void	check_ray(15,913
+void	check_hit_2(39,1409
+void	check_hit(49,1780
+
+raycasting_loop_draw_walls.c,113
+void	draw_walls_2(16,931
+void	draw_walls(39,1791
+void	raycasting_loop_2(63,2678
+void	raycasting_loop(75,3102
 
 skybox.c,53
 void	draw_skybox_2(15,913
