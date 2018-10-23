@@ -121,7 +121,7 @@ typedef struct		s_lines
 
 typedef struct		s_hud
 {
-	SDL_Texture		*hud[11];
+	SDL_Texture		*hud[13];
 	int				hp;
 	int				ammo;
 	int				lives;
@@ -296,6 +296,8 @@ typedef struct		s_wolf
 	int				ceiling;
 	unsigned int	state:1;
 	t_lines			line[3];
+	int 			hp;
+	int 			energy;
 }					t_wolf;
 
 void				ft_print_error(char *str);

@@ -14,6 +14,7 @@
 
 void		start_pickup_sprite(t_wolf *holder, int tex, char c, int num)
 {
+	printf("c = %c, tex = %d, num = %d\n", c, tex, num);
 	t_sprite	*pickup;
 
 	pickup = start_enemy(holder, num);
@@ -31,6 +32,7 @@ void	load_sprite_tex_pickup(t_wolf *holder, int tex, char c, char *path)
 	pick = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
 	holder->sprite_tex[tex] = pick;
 	pick->amount = get_sprite_amount(holder, c);
+	printf("%c AMOUNT = %d, tex = %d\n", c, pick->amount, tex);
 	pick->arr_sprite[0][0] = load_image(path);
 	while (++tmp < pick->amount && tmp < 3)
 	{

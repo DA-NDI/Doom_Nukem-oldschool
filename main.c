@@ -57,7 +57,7 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->shadows = 0;
 	holder->state = 0;
 	holder->sprite_tex = (t_sprite_tex**)malloc(sizeof(t_sprite_tex*) * 7);
-	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 17);
+	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 22);
 	holder->retry_state = 0;
 	holder->ceiling = 1;
 	return (holder);

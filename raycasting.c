@@ -39,6 +39,79 @@ void	ft_check_next_level(t_wolf *holder)
 	}
 }
 
+void 	ft_check_pickups(t_wolf *holder)
+{
+	int a;
+
+	a = -1;
+	while (++a < holder->sprite_tex[2]->amount)
+	{
+		if (fabsf(holder->sprite[a + 7]->x - P_X) < 0.5 && \
+			fabsf(holder->sprite[a + 7]->y - P_Y) < 0.5)
+		{
+			holder->energy++;
+			holder->sprite[a + 7]->is_alive = 0;
+		}
+	}
+	a = -1;
+	while (++a < holder->sprite_tex[3]->amount)
+	{
+		if (fabsf(holder->sprite[a + 10]->x - P_X) < 1 && \
+			fabsf(holder->sprite[a + 10]->y - P_Y) < 1)
+		{
+			holder->hud->ammo++;
+			holder->sprite[a + 10]->is_alive = 0;
+		}
+	}
+	a = -1;
+	while (++a < holder->sprite_tex[4]->amount)
+	{
+		if (fabsf(holder->sprite[a + 13]->x - P_X) < 0.5 && \
+			fabsf(holder->sprite[a + 13]->y - P_Y) < 0.5)
+		{
+			holder->hp++;
+			holder->sprite[a + 13]->is_alive = 0;
+
+		}
+	}
+	a = -1;
+	while (++a < holder->sprite_tex[5]->amount)
+	{
+		if (fabsf(holder->sprite[a + 16]->x - P_X) < 0.5 && \
+			fabsf(holder->sprite[a + 16]->y - P_Y) < 0.5)
+		{
+			holder->hud->hp++;
+			holder->sprite[a + 16]->is_alive = 0;
+
+		}
+	}
+	while (++a < holder->sprite_tex[6]->amount)
+	{
+		if (fabsf(holder->sprite[a + 19]->x - P_X) < 0.5 && \
+			fabsf(holder->sprite[a + 19]->y - P_Y) < 0.5)
+		{
+			holder->hud->hp++;
+			holder->sprite[a + 19]->is_alive = 0;
+
+		}
+	}
+	// a = -1;
+	// while (++a < holder->sprite_tex[6]->amount)
+	// {
+	// 	holder->sprite[a + 19];
+	// }
+	// a = -1;
+	// while (++a < holder->sprite_tex[5]->amount)
+	// {
+	// 	holder->sprite[a + 16];
+	// }
+	// a = -1;
+	// while (++a < holder->sprite_tex[4]->amount)
+	// {
+	// 	holder->sprite[a + 13];
+	// }
+}
+
 int		ft_raycasting_3(t_wolf *holder, int i)
 {
 	int a;
@@ -76,6 +149,22 @@ unsigned int buffer[holder->height][holder->width])
 		ft_draw_sprites(holder, holder->camera, buffer,\
 	holder->sprite[a + 7]);
 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
+	a = -1;
+	while (++a < holder->sprite_tex[6]->amount && a < 3)
+		ft_draw_sprites(holder, holder->camera, buffer,\
+	holder->sprite[a + 19]);
+	a = -1;
+	while (++a < holder->sprite_tex[5]->amount && a < 3)
+		ft_draw_sprites(holder, holder->camera, buffer,\
+	holder->sprite[a + 16]);
+	a = -1;
+	while (++a < holder->sprite_tex[4]->amount && a < 3)
+		ft_draw_sprites(holder, holder->camera, buffer,\
+	holder->sprite[a + 13]);
+	a = -1;
+	while (++a < holder->sprite_tex[3]->amount && a < 3)
+		ft_draw_sprites(holder, holder->camera, buffer,\
+	holder->sprite[a + 10]);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)
@@ -86,6 +175,7 @@ void	ft_raycasting(t_wolf *holder, int x)
 	while (holder->running)
 	{
 		ft_raycasting_2(holder, buffer);
+		ft_check_pickups(holder);
 		i = ft_raycasting_3(holder, i);
 		ft_check_next_level(holder);
 		if (!holder->pause && !holder->starting && holder->running)

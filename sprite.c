@@ -131,6 +131,8 @@ unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
 	int		spr_int[2];
 	float	div[2];
 
+	if (!sprite->is_alive)
+		return ;
 	div[0] = 1;
 	div[1] = 1;
 	inv_det = 1.0 / (PLANE_X * DIR_Y - DIR_X * camera->plane_y);
