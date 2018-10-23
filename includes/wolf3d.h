@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 17:45:59 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 21:06:43 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <SDL_ttf.h>
 # include <SDL_mixer.h>
+# include <pthread.h>
 
 # define DOWN SDLK_DOWN
 # define UP SDLK_UP
@@ -121,7 +122,7 @@ typedef struct		s_lines
 
 typedef struct		s_hud
 {
-	SDL_Texture		*hud[11];
+	SDL_Texture		*hud[13];
 	int				hp;
 	int				ammo;
 	int				lives;
@@ -150,6 +151,7 @@ typedef struct		s_keys
 	int				f;
 	int				lctrl;
 	int				enter;
+	int				t;
 }					t_keys;
 
 typedef struct		s_camera
@@ -296,6 +298,8 @@ typedef struct		s_wolf
 	int				ceiling;
 	unsigned int	state:1;
 	t_lines			line[3];
+	int				hp;
+	int				energy;
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -306,7 +310,7 @@ SDL_Surface			*ft_load_png(t_wolf *holder, char *path);
 void				ft_close(t_wolf *holder);
 char				**ft_create_map(char **argv, t_wolf *holder);
 void				ft_verify_map(char **map, t_wolf *holder);
-void				get_player_coordinates(t_wolf *holder);
+void				get_player_coordinates(t_wolf *holder, char c);
 void				ft_raycasting(t_wolf *holder, int x);
 void				ft_draw_line(int x, int y_start, int y_end, \
 								int color, t_wolf *holder);
@@ -399,6 +403,7 @@ void				raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
 void				ft_check_pause(t_wolf *holder, const Uint8 *keystate);
 void				ft_check_other(t_wolf *holder, const Uint8 *keystate);
 void				check_button(t_wolf *holder, t_camera *camera);
-void				start_pickup_sprite(t_wolf *holder, int tex, char c, int num);
+void				start_pickup_sprite(t_wolf *holder, int t, char c, int n);
 void				load_pickupers(t_wolf *holder);
+void				ft_check_pickups2(t_wolf *holder, int a);
 #endif

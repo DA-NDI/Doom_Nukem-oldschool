@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/09/26 18:09:10 by avolgin          ###   ########.fr        #
+#    Updated: 2018/10/23 21:22:19 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,8 +36,9 @@ SRC_WOLF =./init.c \
 	raycasting_2.c \
 	raycasting_loop_draw_walls.c \
 	sprite_2.c \
-	mainloop_2.c
-
+	mainloop_2.c \
+	start_screen_4_nps.c \
+	pickup.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 
@@ -68,6 +69,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJECT_WOLF)
 	make -C ./src/libft
+	make -C ./map_editor
 	@echo "\033[0;32mDoom-nukem compiled\033[0;0m"
 	@gcc -o $(NAME) $(FLAGS) $(LIBFT) $(INCLUDES_SDL2) $(INCLUDES_SDL2_IMAGE) -rpath @loader_path/src/sdl $(FRAMEWORK_SDL2) $(OBJECT_WOLF) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 
@@ -80,6 +82,7 @@ $(INCLUDES_SDL2_IMAGE) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 $(INCLUDES_SDL2_IMAGE) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 
 clean:
+	make -C ./map_editor clean
 	make -C ./src/libft clean
 	/bin/rm -f $(OBJECT_WOLF)
 	rm -f TAGS

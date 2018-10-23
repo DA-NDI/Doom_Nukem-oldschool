@@ -12,7 +12,7 @@
 
 #include <wolf3d.h>
 
-void	get_player_coordinates(t_wolf *holder)
+void	get_player_coordinates(t_wolf *holder, char c)
 {
 	int		i;
 	int		j;
@@ -25,12 +25,13 @@ void	get_player_coordinates(t_wolf *holder)
 		j = -1;
 		while (holder->map[i][++j])
 		{
-			if (holder->map[i][j] == 'P')
+			if (holder->map[i][j] - c == 0)
 			{
 				holder->player_x = (j == 1) ? 1.5 : j + 0.5;
 				holder->player_y = (i == 1) ? 1.5 : i + 0.5;
 				holder->current_height = holder->height_map[i][j];
-				is_player++;
+				holder->map[i][j] = '0';
+				is_player = (c == 'P') ? is_player + 1 : 1;
 			}
 		}
 	}

@@ -29,6 +29,8 @@ void		ft_hud_init(t_wolf *holder)
 	hud->hud[8] = load_tex(RENDER, "./resourses/ammo.png");
 	hud->hud[9] = load_tex(RENDER, "./resourses/jetpack.png");
 	hud->hud[10] = load_tex(RENDER, "./resourses/gun_pointer.png");
+	hud->hud[11] = load_tex(RENDER, "./resourses/energy.png");
+	hud->hud[12] = load_tex(RENDER, "./resourses/first_aid.png");
 	hud->lives = 4;
 	hud->hp = 100;
 	hud->shield = 0;
@@ -54,6 +56,10 @@ void		draw_hud_icons(t_wolf *holder)
 			NULL, &(SDL_Rect){WIDTH - 170, HEIGHT - 25, 20, 18});
 	SDL_RenderCopy(holder->renderer, holder->hud->hud[10], \
 			NULL, &(SDL_Rect){WIDTH / 2 - 32, HEIGHT / 2 - 32, 64, 64});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[11], \
+			NULL, &(SDL_Rect){WIDTH / 2 - 200, HEIGHT - 30, 22, 22});
+	SDL_RenderCopy(holder->renderer, holder->hud->hud[12], \
+			NULL, &(SDL_Rect){WIDTH / 2 - 250, HEIGHT - 30, 22, 22});
 }
 
 void		draw_hud_text(t_wolf *holder, char *hp)
@@ -88,13 +94,21 @@ void		draw_hud_text(t_wolf *holder, char *hp)
 void		draw_hud(t_wolf *holder)
 {
 	char	*frags;
+	char	*aid;
+	char	*energy;
 	char	*hp;
 
 	frags = ft_itoa(holder->frags);
 	hp = NULL;
+	energy = ft_itoa(holder->energy);
+	aid = ft_itoa(holder->hp);
 	draw_hud_icons(holder);
 	draw_hud_text(holder, hp);
 	draw_text(holder, "Frags: ", 180, HEIGHT - 22);
 	draw_text(holder, frags, 210, HEIGHT - 22);
+	draw_text(holder, aid, 250, HEIGHT - 22);
+	draw_text(holder, energy, 310, HEIGHT - 22);
 	free(frags);
+	free(aid);
+	free(energy);
 }

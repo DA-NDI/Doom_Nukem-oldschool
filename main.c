@@ -57,7 +57,7 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->shadows = 0;
 	holder->state = 0;
 	holder->sprite_tex = (t_sprite_tex**)malloc(sizeof(t_sprite_tex*) * 7);
-	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 17);
+	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 22);
 	holder->retry_state = 0;
 	holder->ceiling = 1;
 	return (holder);
@@ -78,11 +78,10 @@ void		start_game(t_wolf *holder)
 	holder->line[2].y1 = 300;
 	holder->line[2].x2 = 100;
 	holder->line[2].y2 = 100;
-	get_player_coordinates(holder);
+	get_player_coordinates(holder, 'P');
 	ft_init_image(holder);
 	ft_start_screen(holder);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	Mix_PauseMusic();
 	ft_hud_init(holder);
 	ft_raycasting(holder, 0);
 	system("leaks doom-nukem");

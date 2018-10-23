@@ -29,7 +29,7 @@ void		ft_check_pause(t_wolf *holder, const Uint8 *keystate)
 		else
 			SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
-	else if (holder->hud->lives <= 3)
+	else if (holder->hud->lives <= 0)
 	{
 		draw_text(holder, "RETRY? y/n", WIDTH / 2, HEIGHT / 2 - 200);
 		holder->retry_state = 1;
@@ -62,23 +62,27 @@ void		ft_check_other(t_wolf *holder, const Uint8 *keystate)
 
 void		check_button(t_wolf *holder, t_camera *camera)
 {
-	if (CHECK_UP_X_PLUS2 == ':' && holder->keys.enter)
+	if (CHECK_UP_X_PLUS2 == ':' && holder->keys.t)
 	{
+		holder->keys.t = 0;
 		holder->shadows = 0;
 		CHECK_UP_X_PLUS2 = ';';
 	}
-	else if (CHECK_UP_X_PLUS2 == ';' && holder->keys.enter)
+	else if (CHECK_UP_X_PLUS2 == ';' && holder->keys.t)
 	{
+		holder->keys.t = 0;
 		holder->shadows = 1;
 		CHECK_UP_X_PLUS2 = ':';
 	}
-	else if (CHECK_UP_X_MINUS2 == ':' && holder->keys.enter)
+	else if (CHECK_UP_X_MINUS2 == ':' && holder->keys.t)
 	{
+		holder->keys.t = 0;
 		holder->shadows = 0;
 		CHECK_UP_X_MINUS2 = ';';
 	}
-	else if (CHECK_UP_X_MINUS2 == ';' && holder->keys.enter)
+	else if (CHECK_UP_X_MINUS2 == ';' && holder->keys.t)
 	{
+		holder->keys.t = 0;
 		holder->shadows = 1;
 		CHECK_UP_X_MINUS2 = ':';
 	}

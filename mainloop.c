@@ -28,6 +28,7 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 	holder->keys.yrel = holder->event.motion.yrel;
 	holder->updown -= holder->keys.yrel;
 	holder->updown = (holder->updown < -350) ? -350 : holder->updown;
+	holder->updown = (holder->updown > 650) ? 650 : holder->updown;
 	old = DIR_X;
 	DIR_X = DIR_X * cos(holder->keys.xrel / 100.0 * -0.3) \
 		- DIR_Y * sin(holder->keys.xrel / 100.0 * -0.3);
@@ -77,11 +78,11 @@ void		ft_check_retry(t_wolf *holder, int key)
 {
 	if (key == SDLK_y && holder->retry_state)
 	{
-		holder->hud->lives = 4;
+		holder->hud->lives = 3;
 		holder->pause = 0;
 		holder->frags = 0;
 		holder->retry_state = 0;
-		get_player_coordinates(holder);
+		get_player_coordinates(holder, '0');
 	}
 	else if (key == SDLK_n && holder->retry_state)
 	{

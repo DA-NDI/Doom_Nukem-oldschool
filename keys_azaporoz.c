@@ -28,11 +28,15 @@ void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 	}
 	if (key == SDLK_SPACE && holder->advanced == normal)
 		holder->advanced = jumping;
+	if (key == SDLK_RETURN)
+		holder->keys.t = 1;
 }
 
 void	azaporoz_keys_up(t_wolf *holder, t_camera *camera, int key)
 {
 	azaporoz_keys_up_2(holder, camera, key);
+	if (key == SDLK_RETURN)
+		holder->keys.t = 0;
 	if (key == SDLK_f)
 	{
 		holder->keys.f = 0;

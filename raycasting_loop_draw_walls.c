@@ -28,7 +28,7 @@ unsigned int buffer[holder->height][holder->width], int tex[4])
 			(int)((float)camera->perp_wall_dist * 256) / 10);
 		if (camera->side == 1 && tex[0] != 6)
 			color = ((color & 0xfefefe) >> 1) | 0xFF000000;
-		color = (tex[0] == 0) ? color << 1 >> 1 : color;
+		color = (tex[0] == 0 || tex[0] == 13) ? color << 1 >> 1 : color;
 		color >>= (CHECK_SIDE_0 && tex[0] == 6) ? 1 : 0;
 		color |= (CHECK_SIDE_3 && tex[0] == 6) ? 0xFF00F00F : 0;
 		color |= (CHECK_SIDE_2 && tex[0] == 6) ? 0xFFF00000 : 0;
@@ -41,11 +41,13 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
 	int tex[4];
 
+	if (MAP_CELL == '9' && holder->hud->level == 2)
+		holder->wall_height = 100;
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + \
 	holder->extra_updown - holder->wall_height;
 	camera->draw_start = HEIGHT / 2 - (LINE_H >> 1) + holder->updown + \
-	holder->extra_updown - holder->wall_height;
+	holder->extra_updown - holder->wall_height * 4;
 	camera->draw_start = (camera->draw_start < 0) ? 0 : camera->draw_start;
 	if (camera->draw_end >= holder->height)
 	{

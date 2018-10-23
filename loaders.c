@@ -48,10 +48,10 @@ SDL_Surface	*load_image(char *path)
 {
 	SDL_Surface	*texture;
 
-	printf("path = %s\n", path);
 	texture = IMG_Load(path);
 	if (texture == NULL)
 	{
+		ft_printf("On path %s \n", path);
 		ft_print_error("Unable to load texture image!");
 	}
 	return (texture);

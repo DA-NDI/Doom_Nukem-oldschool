@@ -54,11 +54,13 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 
 void		draw_floor1_2(t_wolf *holder, float current[3], int i)
 {
-	float weight;
+	float	weight;
+	int		int_f;
 
-	current[0] = FIXED_F(FIX_DIV(INT_F(holder->height), INT_F((i << 1)\
-	- holder->height - 2 * (holder->updown + holder->extra_updown\
-	- holder->wall_height))));
+	int_f = INT_F((i << 1) - holder->height - 2 * (holder->updown + \
+		holder->extra_updown - holder->wall_height));
+	int_f = (int_f == 0) ? 1 : int_f;
+	current[0] = FIXED_F(FIX_DIV(INT_F(holder->height), int_f));
 	weight = current[0] / PERP_DIST_WALL;
 	current[1] = weight * WALL_X_FL + (1.0 - weight) * P_X;
 	current[1] = (fabsf(current[1]) < 1) ? 1 : current[1];

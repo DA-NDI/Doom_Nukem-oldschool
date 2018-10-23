@@ -75,7 +75,7 @@ void	ft_sprite_loop_2(t_sprite *sprite, float angle)
 }
 
 void	ft_sprite_loop_loop(t_wolf *holder, t_sprite *sprite,\
-unsigned int buffer[holder->height][holder->width], int spr_int_w[3])
+unsigned int buffer[holder->height][holder->width], int spr_int_w[4])
 {
 	int				tex_x;
 	int				tex_y;
@@ -92,7 +92,7 @@ unsigned int buffer[holder->height][holder->width], int spr_int_w[3])
 		while (++i < END_Y)
 		{
 			tex_y = (i - HEIGHT / 2 + spr_int_w[1] / 2 - (holder->updown +\
-			holder->extra_updown)) * spr_int_w[2] / spr_int_w[1];
+			holder->extra_updown - spr_int_w[3])) * spr_int_w[2] / spr_int_w[1];
 			color = get_pixel(sprite->tex_sprite[0], tex_x, tex_y);
 			if (color != 0)
 				buffer[i][START_X] = color;
@@ -102,9 +102,9 @@ unsigned int buffer[holder->height][holder->width], int spr_int_w[3])
 
 void	ft_sprite_loop(t_wolf *holder,\
 unsigned int buffer[holder->height][holder->width],\
-int spr_int[2], t_sprite *sprite)
+int spr_int[3], t_sprite *sprite)
 {
-	int spr_int_w[3];
+	int spr_int_w[4];
 	int w;
 
 	w = sprite->tex_sprite[0]->w;
@@ -119,6 +119,7 @@ int spr_int[2], t_sprite *sprite)
 		spr_int_w[0] = spr_int[0];
 		spr_int_w[1] = spr_int[1];
 		spr_int_w[2] = w;
+		spr_int_w[3] = spr_int[2];
 		ft_sprite_loop_loop(holder, sprite, buffer, spr_int_w);
 	}
 }
@@ -128,27 +129,27 @@ unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
 {
 	float	inv_det;
 	float	transform_x;
-	int		spr_int[2];
+	int		spr_int[3];
 	float	div[2];
 
+	if (!sprite->is_alive)
+		return ;
 	div[0] = 1;
 	div[1] = 1;
+	spr_int[2] = (int)(0.0 / TRANSFORM_Y);
 	inv_det = 1.0 / (PLANE_X * DIR_Y - DIR_X * camera->plane_y);
 	transform_x = inv_det * (DIR_Y * SPRITE_X - DIR_X * SPRITE_Y);
 	TRANSFORM_Y = inv_det * (-camera->plane_y * SPRITE_X + PLANE_X * SPRITE_Y);
 	spr_int[0] = (int)((WIDTH / 2) * (1 + transform_x / TRANSFORM_Y));
 	spr_int[1] = (abs((int)(HEIGHT / (TRANSFORM_Y)))) * div[1];
-	START_Y = -spr_int[1] / 2 + HEIGHT / 2;
-	if (START_Y < 0)
-		START_Y = 0;
-	END_Y = spr_int[1] / 2 + HEIGHT / 2;
-	if (END_Y >= HEIGHT)
-		END_Y = HEIGHT - 1;
+	START_Y = -spr_int[1] / 2 + HEIGHT / 2 + spr_int[2];
+	START_Y = (START_Y < 0) ? 0 : START_Y;
+	END_Y = spr_int[1] / 2 + HEIGHT / 2 + spr_int[2];
+	END_Y = (END_Y >= HEIGHT) ? HEIGHT - 1 : END_Y;
 	SPRITE_W = (abs((int)(HEIGHT / (TRANSFORM_Y)))) * div[0];
 	START_X = -SPRITE_W / 2 + spr_int[0];
 	START_X = (START_X < 0) ? 0 : START_X;
 	END_X = SPRITE_W / 2 + spr_int[0];
-	if (END_X >= WIDTH)
-		END_X = WIDTH - 1;
+	END_X = (END_X >= WIDTH) ? WIDTH - 1 : END_X;
 	ft_sprite_loop(holder, buffer, spr_int, sprite);
 }
