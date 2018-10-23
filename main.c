@@ -14,27 +14,18 @@
 
 void		ft_close(t_wolf *holder)
 {
-printf("CLOSED START\n");
-	 Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
-printf("CLOSED END1\n");
-	 Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
-printf("CLOSED END2\n");
-	 holder->weapon[0]->pistol_shoot = NULL;
-printf("CLOSED END3\n");
-	 holder->weapon[1]->pistol_shoot = NULL;
-printf("CLOSED END4\n");
-	 SDL_DestroyRenderer(holder->renderer);
-printf("CLOSED END5\n");
-	 SDL_DestroyWindow(holder->window);
-printf("CLOSED END6\n");
+	Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
+	Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
+	holder->weapon[0]->pistol_shoot = NULL;
+	holder->weapon[1]->pistol_shoot = NULL;
+	SDL_DestroyRenderer(holder->renderer);
+	SDL_DestroyWindow(holder->window);
 	holder->running = 0;
-printf("CLOSED END7\n");
-	 free(holder->start);
-printf("CLOSED END8\n");
-	 TTF_Quit();
-printf("CLOSED END9\n");
+	free(holder->start);
+	TTF_Quit();
 	SDL_Quit();
-printf("CLOSED END10\n");
+	system("leaks doom-nukem");
+	exit(0);
 }
 
 void		ft_print_error(char *str)
@@ -68,7 +59,12 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->sprite_tex = (t_sprite_tex**)malloc(sizeof(t_sprite_tex*) * 5);
 	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 10);
 	holder->retry_state = 0;
+	return (holder);
+}
 
+void		start_game(t_wolf *holder)
+{
+	holder_init(holder);
 	holder->line[0].x1 = 100;
 	holder->line[0].y1 = 100;
 	holder->line[0].x2 = 500;
@@ -81,13 +77,6 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->line[2].y1 = 300;
 	holder->line[2].x2 = 100;
 	holder->line[2].y2 = 100;
-
-	return (holder);
-}
-
-void		start_game(t_wolf *holder)
-{
-	holder_init(holder);
 	get_player_coordinates(holder);
 	ft_init_image(holder);
 	ft_start_screen(holder);

@@ -37,7 +37,7 @@ void		ft_check_pause(t_wolf *holder, const Uint8 *keystate)
 		else
 			SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
-	else if (holder->hud->lives <= 0)
+	else if (holder->hud->lives <= 3)
 	{
 		draw_text(holder, "RETRY? y/n", WIDTH / 2, HEIGHT / 2 - 200);
 		holder->retry_state = 1;
@@ -88,7 +88,7 @@ void		mouse_move(t_wolf *holder, t_camera *camera, float old)
 		+ PLANE_Y * cos(holder->keys.xrel / 100.0 * -0.3);
 }
 
-void		check_teleport(t_wolf *holder, t_camera *camera)
+void		check_button(t_wolf *holder, t_camera *camera)
 {
 	if (CHECK_UP_X_PLUS2 == ':' && holder->keys.enter)
 	{
@@ -110,6 +110,29 @@ void		check_teleport(t_wolf *holder, t_camera *camera)
 		holder->shadows = 1;
 		CHECK_UP_X_MINUS2 = ':';
 	}
+}
+
+void		check_mousebuttons(t_wolf *holder)
+{
+	int		i;
+
+	if (holder->event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if ((BUTTON_LEFT && !holder->starting && !holder->shooting) \
+	&& ((AMMO > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
+		{
+			i = -1;
+			holder->hud->ammo -= (G != 1) ? 1 : 0;
+			holder->hud->rockets -= (G == 1) ? 1 : 0;
+			while (++i < holder->sprite_tex[0]->amount)
+				ft_check_click(holder, holder->sprite[i + 2]);
+			holder->shooting = 1;
+		}
+	}
+}
+
+void		check_teleport(t_wolf *holder, t_camera *camera)
+{
 	holder->keys.enter = 0;
 	if (holder->keys.up || holder->keys.w)
 	{
@@ -119,6 +142,7 @@ void		check_teleport(t_wolf *holder, t_camera *camera)
 			Mix_PlayChannel(-1, camera->dstelept, 0);
 		}
 	}
+	check_button(holder, camera);
 }
 
 void		ft_check_retry(t_wolf *holder, int key)
@@ -133,6 +157,9 @@ void		ft_check_retry(t_wolf *holder, int key)
 	}
 	else if (key == SDLK_n && holder->retry_state)
 	{
+		draw_text(holder, "ASTALAVISTA, BABY!", WIDTH / 2, HEIGHT / 2 - 100);
+		SDL_RenderPresent(holder->renderer);
+		SDL_Delay(2000);
 		ft_close(holder);
 	}
 }
@@ -140,7 +167,6 @@ void		ft_check_retry(t_wolf *holder, int key)
 void		ft_close_loop(t_wolf *holder, t_camera *camera)
 {
 	const Uint8 *keystate = SDL_GetKeyboardState(NULL);
-	int			i;
 
 	check_teleport(holder, camera);
 	azaporoz_action(holder, camera);
@@ -149,11 +175,7 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 	while (SDL_PollEvent(&(holder->event)))
 	{
 		if (holder->event.type == SDL_QUIT || C_Q)
-		{
 			ft_close(holder);
-			system("leaks doom-nukem");
-			exit(0);
-		}
 		if (holder->event.type == SDL_MOUSEMOTION)
 			mouse_move(holder, camera, 0);
 		if (holder->event.type == SDL_KEYDOWN)
@@ -167,18 +189,6 @@ void		ft_close_loop(t_wolf *holder, t_camera *camera)
 			ft_check_extra_keys(holder, keystate);
 			ft_check_pause(holder, keystate);
 		}
-		if (holder->event.type == SDL_MOUSEBUTTONDOWN)
-		{
-			if ((BUTTON_LEFT && !holder->starting && !holder->shooting) \
-	&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
-			{
-				i = -1;
-				holder->hud->ammo -= (G != 1) ? 1 : 0;
-				holder->hud->rockets -= (G == 1) ? 1 : 0;
-				while (++i < holder->sprite_tex[0]->amount)
-					ft_check_click(holder, holder->sprite[i + 2]);
-				holder->shooting = 1;
-			}
-		}
+		check_mousebuttons(holder);
 	}
 }

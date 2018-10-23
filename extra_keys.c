@@ -63,10 +63,7 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 			holder->starting = 0;
 		}
 		else
-		{
-			// printf("close in return ! \n");
 			ft_close(holder);
-		}
 	}
 	if (keystate[SDL_SCANCODE_G])
 		holder->shadows = !holder->shadows;
@@ -74,47 +71,45 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 	ft_check_skybox(holder, keystate);
 }
 
+void		ft_gun_fire_on(t_wolf *holder)
+{
+	if (G == 1 || G == 0)
+	{
+		holder->sprite[0]->tex_sprite[0] = \
+		holder->sprite[0]->s_tex->arr_sprite[G][0];
+		holder->sprite[0]->is_alive = 1;
+	}
+}
+
+/*
+** 57.325 is magic number (180 / PI) for angle to multiply
+*/
+
 void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 {
 	float		v_x;
 	float		v_y;
-	float 		angle;
+	float		angle;
 
-//	if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
-//		&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
-//	{
-		
-		if (G == 1 || G == 0)
-		{
-			holder->sprite[0]->tex_sprite[0] = holder->sprite[0]->s_tex->arr_sprite[G][0];
-			holder->sprite[0]->is_alive = 1;
-		}
-//		holder->shooting = 1;
-		Mix_PlayChannel(-1, holder->weapon[G]->pistol_shoot, 0);
-		holder->weapon[G]->frame = 0;
-		v_x = sprite->x - holder->player_x;
-		v_y = sprite->y - holder->player_y;
-		sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
-		printf("IS_SPRITE = %d, SHOOTS = %d, IS_ARC = %d\n", IS_SPRITE, SHOOTS, IS_ARC);
-		IS_SPRITE = (SHOOTS > 5 || !IS_ARC) ? 0 : 1;
-
-		angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x + v_y * v_y) * sqrt(holder->DIR_X * holder->DIR_X + holder->DIR_Y * holder->DIR_Y))) * 57.325;
-		// printf("angle = %f\n", angle);
-		if (angle < 5 && SHOOTS <= 5 && IS_ARC)
-		{
-			SHOOTS += (G == 0) ? 1 : 2;
-			SHOOTS += (G == 1) ? 2 : 0;
-			 printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
-			if (SHOOTS < 5)
-			{
-				sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[H][SHOOTS];
-			}
-
-		}
-		if (SHOOTS > 5)
-		{
-			restart_enemy(holder, sprite);
-			return;
-		}
-//	}
+	ft_gun_fire_on(holder);
+	Mix_PlayChannel(-1, holder->weapon[G]->pistol_shoot, 0);
+	holder->weapon[G]->frame = 0;
+	v_x = sprite->x - holder->player_x;
+	v_y = sprite->y - holder->player_y;
+	sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
+	IS_SPRITE = (SHOOTS > 5 || !IS_ARC) ? 0 : 1;
+	angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x \
+	+ v_y * v_y) * sqrt(pow(holder->DIR_X, 2) + pow(holder->DIR_Y, 2))));
+	if (angle < 0.0872 && SHOOTS <= 5 && IS_ARC)
+	{
+		SHOOTS += (G == 0) ? 1 : 2;
+		SHOOTS += (G == 1) ? 2 : 0;
+		if (SHOOTS < 5)
+			sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[H][SHOOTS];
+	}
+	if (SHOOTS > 5)
+	{
+		restart_enemy(holder, sprite);
+		return ;
+	}
 }
