@@ -12,9 +12,8 @@
 
 #include <wolf3d.h>
 
-void		start_pickup_sprite(t_wolf *holder, int tex, char c, int num)
+void	start_pickup_sprite(t_wolf *holder, int tex, char c, int num)
 {
-	printf("c = %c, tex = %d, num = %d\n", c, tex, num);
 	t_sprite	*pickup;
 
 	pickup = start_enemy(holder, num);

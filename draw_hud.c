@@ -95,8 +95,8 @@ void		draw_hud(t_wolf *holder)
 {
 	char	*frags;
 	char	*aid;
-	char 	*energy;
-	char 	*hp;
+	char	*energy;
+	char	*hp;
 
 	frags = ft_itoa(holder->frags);
 	hp = NULL;

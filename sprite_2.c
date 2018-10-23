@@ -82,8 +82,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 {
 	static float	direction[2] = {0, 0};
-	static int		frames = 0;
-	static int		gun = 0;
+	static int		fr_gun[2] = {0, 0};
 
 	if (!s->is_alive)
 	{
@@ -91,16 +90,15 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 		direction[0] = holder->DIR_Y;
 		s->x = P_X + direction[1];
 		s->y = P_Y + direction[0];
-		gun = G;
+		fr_gun[1] = G;
 	}
 	else if (s->is_alive && !holder->pause)
 	{
-		printf("gun is alive!!\n");
 		s->x += direction[1];
 		s->y += direction[0];
-		s->tex_sprite[0] = s->s_tex->arr_sprite[gun][frames++];
+		s->tex_sprite[0] = s->s_tex->arr_sprite[fr_gun[1]][fr_gun[0]++];
 	}
-	frames = (frames == 3) ? 0 : frames;
+	fr_gun[0] = (fr_gun[0] == 3) ? 0 : fr_gun[0];
 	s->y = ((int)s->y < 0) ? 0 : s->y;
 	if (MAP[(int)s->y][(int)s->x] != '0' &&\
 	s->is_alive && MAP[(int)s->y][(int)s->x] <= '9')

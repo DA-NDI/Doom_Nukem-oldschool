@@ -12,6 +12,12 @@
 
 #include <wolf3d.h>
 #include <math.h>
+#define CAR holder->sprite[a + 2]
+#define AMO holder->sprite[a + 10]
+#define PEPS holder->sprite[a + 16]
+#define KOLA holder->sprite[a + 19]
+#define POT holder->sprite[a + 13]
+#define ARC holder->sprite[a + 7]
 
 void	ft_check_next_level(t_wolf *holder)
 {
@@ -21,7 +27,7 @@ void	ft_check_next_level(t_wolf *holder)
 
 	tmp = -1;
 	map[1] = "./maps/map2.txt";
-	if (holder->frags >= 5)
+	if (holder->frags >= 1)
 	{
 		holder->hud->level = 2;
 		i = -1;
@@ -39,7 +45,7 @@ void	ft_check_next_level(t_wolf *holder)
 	}
 }
 
-void 	ft_check_pickups(t_wolf *holder)
+void	ft_check_pickups(t_wolf *holder)
 {
 	int a;
 
@@ -63,53 +69,7 @@ void 	ft_check_pickups(t_wolf *holder)
 			holder->sprite[a + 10]->is_alive = 0;
 		}
 	}
-	a = -1;
-	while (++a < holder->sprite_tex[4]->amount)
-	{
-		if (fabsf(holder->sprite[a + 13]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 13]->y - P_Y) < 0.5)
-		{
-			holder->hp++;
-			holder->sprite[a + 13]->is_alive = 0;
-
-		}
-	}
-	a = -1;
-	while (++a < holder->sprite_tex[5]->amount)
-	{
-		if (fabsf(holder->sprite[a + 16]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 16]->y - P_Y) < 0.5)
-		{
-			holder->hud->hp++;
-			holder->sprite[a + 16]->is_alive = 0;
-
-		}
-	}
-	while (++a < holder->sprite_tex[6]->amount)
-	{
-		if (fabsf(holder->sprite[a + 19]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 19]->y - P_Y) < 0.5)
-		{
-			holder->hud->hp++;
-			holder->sprite[a + 19]->is_alive = 0;
-
-		}
-	}
-	// a = -1;
-	// while (++a < holder->sprite_tex[6]->amount)
-	// {
-	// 	holder->sprite[a + 19];
-	// }
-	// a = -1;
-	// while (++a < holder->sprite_tex[5]->amount)
-	// {
-	// 	holder->sprite[a + 16];
-	// }
-	// a = -1;
-	// while (++a < holder->sprite_tex[4]->amount)
-	// {
-	// 	holder->sprite[a + 13];
-	// }
+	ft_check_pickups2(holder, -1);
 }
 
 int		ft_raycasting_3(t_wolf *holder, int i)
@@ -122,7 +82,7 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 		while (++a < holder->sprite_tex[0]->amount)
 			ft_move_boss(holder, holder->sprite[a + 2]);
 	}
-	if ((i % 4) == 0)
+	if ((i % 2) == 0)
 	{
 		ft_move_bullet(holder, holder->sprite[0]);
 		ft_move_bullet(holder, holder->sprite[1]);
@@ -138,33 +98,26 @@ unsigned int buffer[holder->height][holder->width])
 	a = -1;
 	holder->frame_start = SDL_GetTicks();
 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
-	holder->current_height = (holder->current_height > 300) ?\
-	300 : holder->current_height;
+	holder->current_height = (holder->current_height > 300) ? 0 : 0;
 	raycasting_loop(holder, holder->camera, -1, buffer);
 	while (++a < holder->sprite_tex[0]->amount)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 2]);
+		ft_draw_sprites(holder, holder->camera, buffer, CAR);
 	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 7]);
+		ft_draw_sprites(holder, holder->camera, buffer, ARC);
 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 	a = -1;
 	while (++a < holder->sprite_tex[6]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 19]);
+		ft_draw_sprites(holder, holder->camera, buffer, KOLA);
 	a = -1;
 	while (++a < holder->sprite_tex[5]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 16]);
+		ft_draw_sprites(holder, holder->camera, buffer, PEPS);
 	a = -1;
 	while (++a < holder->sprite_tex[4]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 13]);
+		ft_draw_sprites(holder, holder->camera, buffer, POT);
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 10]);
+		ft_draw_sprites(holder, holder->camera, buffer, AMO);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)

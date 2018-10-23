@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 17:45:59 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 21:06:43 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ typedef struct		s_keys
 	int				f;
 	int				lctrl;
 	int				enter;
-	int 			t;
+	int				t;
 }					t_keys;
 
 typedef struct		s_camera
@@ -297,8 +297,8 @@ typedef struct		s_wolf
 	int				ceiling;
 	unsigned int	state:1;
 	t_lines			line[3];
-	int 			hp;
-	int 			energy;
+	int				hp;
+	int				energy;
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -402,6 +402,7 @@ void				raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
 void				ft_check_pause(t_wolf *holder, const Uint8 *keystate);
 void				ft_check_other(t_wolf *holder, const Uint8 *keystate);
 void				check_button(t_wolf *holder, t_camera *camera);
-void				start_pickup_sprite(t_wolf *holder, int tex, char c, int num);
+void				start_pickup_sprite(t_wolf *holder, int t, char c, int n);
 void				load_pickupers(t_wolf *holder);
+void				ft_check_pickups2(t_wolf *holder, int a);
 #endif
