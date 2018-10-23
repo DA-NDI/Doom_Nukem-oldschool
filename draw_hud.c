@@ -89,7 +89,8 @@ void		draw_hud(t_wolf *holder)
 
 	draw_hud_icons(holder);
 	draw_hud_text(holder);
-	draw_text(holder, frags, WIDTH / 2, HEIGHT / 2);
+	draw_text(holder, "Frags: ", 180, HEIGHT - 22);
+	draw_text(holder, frags, 210, HEIGHT - 22);
 	free(frags);
 
 }
