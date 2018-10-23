@@ -30,12 +30,12 @@ SRC_WOLF =./init.c \
 	keys_azaporoz.c \
 	draw_hud.c \
 	check_jump_fly_etc.c \
-	line_azap.c \
 	keys_azaporoz_2.c start_screen_2.c start_screen_3_nps.c \
 	draw_floor_main.c \
 	get_pixel.c \
 	raycasting_2.c \
-	raycasting_loop_draw_walls.c
+	raycasting_loop_draw_walls.c \
+	sprite_2.c
 
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)

@@ -71,11 +71,11 @@ unsigned int buffer[holder->height][holder->width])
 	raycasting_loop(holder, holder->camera, -1, buffer);
 	while (++a < holder->sprite_tex[0]->amount)
 		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 2], a + 2);
+	holder->sprite[a + 2]);
 	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
 		ft_draw_sprites(holder, holder->camera, buffer,\
-	holder->sprite[a + 7], a + 7);
+	holder->sprite[a + 7]);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)

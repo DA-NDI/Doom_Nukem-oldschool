@@ -66,13 +66,6 @@ keys_azaporoz_2.c,67
 void	azaporoz_keys_down_2(15,913
 void	azaporoz_keys_up_2(39,1438
 
-line_azap.c,153
-int get_line_intersection(15,913
-t_mouse lineLineIntersection(39,1543
-void			draw_walls_azap(75,2114
-float	ft_cos(105,2904
-void	draw_lines(114,3069
-
 loaders.c,196
 SDL_Texture	*load_tex(load_tex15,913
 void		apply_texture(37,1392
@@ -106,11 +99,11 @@ int		get_sprite_amount(41,1392
 void	get_sprite_coordinates_2(61,1642
 int		get_sprite_coordinates(68,1813
 
-raycasting.c,125
-void	ft_check_next_level(97,4125
-int		ft_raycasting_3(123,4651
-void	ft_raycasting_2(142,5021
-void	ft_raycasting(162,5649
+raycasting.c,121
+void	ft_check_next_level(16,931
+int		ft_raycasting_3(42,1457
+void	ft_raycasting_2(61,1827
+void	ft_raycasting(81,2441
 
 raycasting_2.c,73
 void	check_ray(15,913
@@ -127,7 +120,27 @@ skybox.c,53
 void	draw_skybox_2(15,913
 void	draw_skybox(26,1172
 
-sprite.c,482
+sprite.c,470
+#define SPRITE 14,912
+#define SPRITE_X 15,934
+#define SPRITE_Y 16,969
+#define START_X 17,1004
+#define START_Y 18,1042
+#define END_X 19,1080
+#define END_Y 20,1113
+#define TRANSFORM_Y 21,1146
+#define SPRITE_W 22,1186
+#define X 23,1224
+#define Y 24,1244
+#define DIST_X 25,1264
+#define DIST_Y 26,1304
+void	ft_sprite_loop_3(119,4079
+void	ft_sprite_loop_2(139,4825
+void	ft_sprite_loop_loop(160,5602
+void	ft_sprite_loop(186,6353
+void	ft_draw_sprites(209,6972
+
+sprite_2.c,421
 #define SPRITE 14,912
 #define SPRITE_X 15,934
 #define SPRITE_Y 16,969
@@ -142,11 +155,9 @@ sprite.c,482
 #define DIST_X 25,1264
 #define DIST_Y 26,1304
 void	restart_enemy(28,1345
-void	burning_boss(42,1689
-void	ft_move_boss(55,2149
-void	ft_move_bullet(90,3304
-void	ft_sprite_loop(128,4297
-void	ft_draw_sprites(234,7660
+void	burning_boss(41,1659
+void	ft_move_boss(53,2027
+void	ft_move_bullet(82,2965
 
 start_screen.c,90
 void	reload_sprites(15,913

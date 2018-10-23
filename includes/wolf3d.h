@@ -332,7 +332,7 @@ void				draw_floor(t_wolf *holder, t_camera *camera, \
 		unsigned int buffer[holder->height][holder->width], unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-	unsigned int buffer[holder->height][holder->width], t_sprite *sprite, int num);
+	unsigned int buffer[holder->height][holder->width], t_sprite *sprite);
 int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
 void				ft_check_click(t_wolf *holder, t_sprite *sprite);
