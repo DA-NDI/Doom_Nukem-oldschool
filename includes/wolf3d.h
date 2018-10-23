@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 23:09:42 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/24 00:14:24 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include <SDL_ttf.h>
 # include <SDL_mixer.h>
-# include <pthread.h>
 
 # define DOWN SDLK_DOWN
 # define UP SDLK_UP
@@ -415,4 +414,17 @@ void				check_button(t_wolf *holder, t_camera *camera);
 void				start_pickup_sprite(t_wolf *holder, int t, char c, int n);
 void				load_pickupers(t_wolf *holder);
 void				ft_check_pickups2(t_wolf *holder, int a);
+/*
+** azulbukh norminette:
+*/
+void				free_words(char **words);
+int					words_len(char **cords);
+void				tool(char *map[50], int i, int ret, char *buff);
+void				fill_map(t_tool *tool, int *height_map[50]);
+int					check_dimensions_and_symbols(char **map, int height, int width);
+void				check_amount(char **map, int i, int j);
+int					check_boundaries(char **map, int height);
+int					**ft_create_height_map(int fd);
+void				skip_first_line(int fd);
+
 #endif
