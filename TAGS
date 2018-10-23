@@ -9,22 +9,24 @@ void	ft_check_advanced_move(85,2387
 draw_floor1_fixed.c,27
 void			draw_floor1(15,913
 
+draw_floor_main.c,85
+void			draw_floor2_2(15,913
+void			draw_floor2(26,1255
+void			draw_floor1(55,2049
+
 draw_hud.c,109
 void		ft_hud_init(15,913
 void		draw_hud_icons(41,1806
 void		draw_hud_text(59,2646
 void		draw_hud(88,3473
 
-drawers.c,279
+drawers.c,185
 unsigned int	get_pixel(15,913
 void			draw_fps(33,1258
 void			draw_text(60,1954
 unsigned int alter_color_fixed(76,2419
-unsigned int alter_color(110,3180
-void			draw_floor_simple(134,3636
-void			draw_floor2(202,6210
-void			draw_floor1(248,7847
-void			draw_floor(303,10114
+unsigned int alter_color(104,2961
+void			draw_floor(206,6331
 
 drawers_extra.c,26
 void			draw_score(15,913
@@ -204,73 +206,73 @@ includes/wolf3d.h,2733
 # define WALL_Y_FL 50,2067
 # define PERP_DIST_WALL 51,2111
 # define FLOOR_TEX_X 52,2166
-# define FLOOR_TEX_Y 53,2220
-# define CHECK_SIDE_0 54,2274
-# define CHECK_SIDE_1 55,2341
-# define CHECK_SIDE_2 56,2408
-# define CHECK_SIDE_3 57,2475
-# define MAP_CELL 58,2542
-# define FPS 59,2594
-# define TEX_NUM 60,2631
-# define RENDER 61,2667
-# define G 62,2700
-# define H 63,2723
-# define PIC 64,2748
-# define FIXED_POINT_ONE 65,2784
-# define INT_F(66,2818
-# define FLOAT_F(67,2847
-# define FIXED_I(68,2890
-# define FIXED_F(69,2921
-# define FIX_MULT(70,2962
-# define FIX_DIV(71,3001
-# define IS_SPRITE 72,3042
-# define SHOOTS 73,3079
-# define CURR_TEX 74,3112
-# define IS_ARC 75,3152
-# define DR_START 76,3189
-# define MOUSE_Y 77,3226
-# define CHECK_DOWN_X 78,3282
-# define CHECK_LEFT_X 79,3349
-# define CHECK_RIGHT_X 80,3416
-# define CHECK_LEFT_Y 81,3484
-# define CHECK_RIGHT_Y 82,3551
-# define CHECK_DOWN_Y 83,3619
-# define CHECK_UP_X_PLUS2 84,3686
-# define CHECK_UP_X_MINUS2 85,3761
-# define CHECK_UP_X 86,3837
-# define CHECK_UP_Y 87,3902
-# define PLANE_Y 88,3967
-# define ROUND(89,4000
-# define V_LEN(90,4040
-# define V_X_NORM(91,4081
-# define V_Y_NORM(92,4123
-# define MAXSPRITES 93,4165
-# define BUTTON_LEFT 94,4188
-# define AMMO 95,4258
-# define POLY_H 96,4290
-enum				e_adv98,4332
-	jumping,100,4348
-	flying,101,4358
-	crouch,102,4367
-	normal103,4376
-typedef int			t_intfix;106,4388
-typedef struct		s_mouse108,4413
-}					t_mouse;112,4461
-typedef struct		s_lines114,4477
-}					t_lines;120,4551
-typedef struct		s_hud122,4567
-}					t_hud;132,4721
-typedef struct		s_keys134,4735
-}					t_keys;153,4980
-typedef struct		s_camera155,4995
-}					t_camera;195,5759
-typedef struct 		s_sprite_tex197,5776
-} 					t_sprite_tex;201,5857
-typedef struct		s_sprite203,5879
-}					t_sprite;224,6278
-typedef struct		s_weapon226,6295
-}					t_weapon;238,6515
-typedef struct		s_start240,6532
-}					t_start;244,6608
-typedef struct		s_wolf246,6624
-}					t_wolf;299,7696
+# define FLOOR_TEX_Y 53,2215
+# define CHECK_SIDE_0 54,2264
+# define CHECK_SIDE_1 55,2331
+# define CHECK_SIDE_2 56,2398
+# define CHECK_SIDE_3 57,2465
+# define MAP_CELL 58,2532
+# define FPS 59,2584
+# define TEX_NUM 60,2621
+# define RENDER 61,2657
+# define G 62,2690
+# define H 63,2713
+# define PIC 64,2738
+# define FIXED_POINT_ONE 65,2774
+# define INT_F(66,2808
+# define FLOAT_F(67,2837
+# define FIXED_I(68,2880
+# define FIXED_F(69,2911
+# define FIX_MULT(70,2952
+# define FIX_DIV(71,2991
+# define IS_SPRITE 72,3032
+# define SHOOTS 73,3069
+# define CURR_TEX 74,3102
+# define IS_ARC 75,3142
+# define DR_START 76,3179
+# define MOUSE_Y 77,3216
+# define CHECK_DOWN_X 78,3272
+# define CHECK_LEFT_X 79,3339
+# define CHECK_RIGHT_X 80,3406
+# define CHECK_LEFT_Y 81,3474
+# define CHECK_RIGHT_Y 82,3541
+# define CHECK_DOWN_Y 83,3609
+# define CHECK_UP_X_PLUS2 84,3676
+# define CHECK_UP_X_MINUS2 85,3751
+# define CHECK_UP_X 86,3827
+# define CHECK_UP_Y 87,3892
+# define PLANE_Y 88,3957
+# define ROUND(89,3990
+# define V_LEN(90,4030
+# define V_X_NORM(91,4071
+# define V_Y_NORM(92,4113
+# define MAXSPRITES 93,4155
+# define BUTTON_LEFT 94,4178
+# define AMMO 95,4248
+# define POLY_H 96,4280
+enum				e_adv98,4322
+	jumping,100,4338
+	flying,101,4348
+	crouch,102,4357
+	normal103,4366
+typedef int			t_intfix;106,4378
+typedef struct		s_mouse108,4403
+}					t_mouse;112,4451
+typedef struct		s_lines114,4467
+}					t_lines;120,4541
+typedef struct		s_hud122,4557
+}					t_hud;132,4711
+typedef struct		s_keys134,4725
+}					t_keys;153,4970
+typedef struct		s_camera155,4985
+}					t_camera;195,5749
+typedef struct 		s_sprite_tex197,5766
+} 					t_sprite_tex;201,5847
+typedef struct		s_sprite203,5869
+}					t_sprite;224,6268
+typedef struct		s_weapon226,6285
+}					t_weapon;238,6505
+typedef struct		s_start240,6522
+}					t_start;244,6598
+typedef struct		s_wolf246,6614
+}					t_wolf;299,7686

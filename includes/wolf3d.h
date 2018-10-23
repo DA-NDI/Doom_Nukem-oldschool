@@ -49,8 +49,8 @@
 # define WALL_X_FL holder->camera->wall_x_f
 # define WALL_Y_FL holder->camera->wall_y_f
 # define PERP_DIST_WALL holder->camera->perp_wall_dist
-# define FLOOR_TEX_X (int)(current_floor_x * 64) % 64
-# define FLOOR_TEX_Y (int)(current_floor_y * 64) % 64
+# define FLOOR_TEX_X (int)(current[1] * 64) % 64
+# define FLOOR_TEX_Y (int)(current[2] * 64) % 64
 # define CHECK_SIDE_0 (camera->side == 0 && camera->ray_dir_x > 0)
 # define CHECK_SIDE_1 (camera->side == 1 && camera->ray_dir_y < 0)
 # define CHECK_SIDE_2 (camera->side == 0 && camera->ray_dir_x < 0)
@@ -370,4 +370,7 @@ t_sprite	*start_enemy(t_wolf *holder, int num);
 void	start_arcade_sprite(t_wolf *holder, int num);
 void	start_bullet_sprite(t_wolf *holder, int num);
 void	start_car_sprite(t_wolf *holder, int num);
+
+void	draw_floor1(t_wolf *holder, unsigned int buffer[holder->height][holder->width], unsigned int x);
+void	draw_floor2(t_wolf *holder, unsigned int buffer[holder->height][holder->width], unsigned int x);
 #endif

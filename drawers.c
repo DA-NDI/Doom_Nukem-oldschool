@@ -80,20 +80,14 @@ unsigned int alter_color_fixed(unsigned int color, int coefficient)
 	unsigned int b;
 	unsigned int ret;
 
-//printf("coefficient = %d\n", coefficient);
 	if (coefficient > 256)
 		return (0xff000000);
 	r = INT_F((color >> 16) & 0xff);
 	g = INT_F((color >> 8) & 0xff);
 	b = INT_F(color & 0xff);
-//	printf("r before == %d\n", r);
-//	printf("coefficient == %f\n", coefficient);
 	r = r - (FIX_MULT(r, coefficient));
 	g = g - (FIX_MULT(g, coefficient));
 	b = b - (FIX_MULT(b, coefficient));
-//	printf("r after == %d\n", r);
-//	g = g - (g * coefficient);
-//	b = b - (b * coefficient);
 	r = FIXED_I(r);
 	g = FIXED_I(g);
 	b = FIXED_I(b);
@@ -114,9 +108,8 @@ unsigned int alter_color(unsigned int color, float coefficient)
 	unsigned char b;
 	unsigned int ret;
 
-//printf("coefficient = %d\n", coefficient);
-if (coefficient > 1)
-	return (0xff000000);
+	if (coefficient > 1)
+		return (0xff000000);
 	r = color >> 16;
 	g = color >> 8;
 	b = color;
@@ -131,32 +124,42 @@ if (coefficient > 1)
 	return (ret | 0xFF000000);
 }
 
-void			draw_floor_simple(t_wolf *holder, \
-unsigned int **buffer, unsigned int x)
-{
-	int		i;
-	float	current_dist;
-	float	weight;
-	float	current_floor_x;
-	float	current_floor_y;
+// void			draw_floor2(t_wolf *holder, \
+// unsigned int buffer[holder->height][holder->width], unsigned int x)
+// {
+// 	int		i;
+// 	float	current_dist;
+// 	float	weight;
+// 	float	current_floor_x;
+// 	float	current_floor_y;
+// 	int 	tmp;
 
-	i = holder->camera->draw_end;
-	while (++i < holder->height)
-	{
-		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height), \
-INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))));
-		weight = current_dist / PERP_DIST_WALL;
-		current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
-		current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
-		buffer[i][x] = get_pixel(holder->camera->texture[4], \
-							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-		if (holder->shadows) //Faster! 40 vs 45 fps. But not always?
-			buffer[i][x] = alter_color_fixed(buffer[i][x], (int)((float)current_dist * 256) / 10);
-	}
-}
+// 	tmp = holder->camera->draw_end;
+// 	if (tmp == 767)
+// 		tmp = holder->camera->floor;
+// 	i = holder->height + abs(holder->updown) + abs(holder->extra_updown) + 1;
+// 	while (--i > tmp - holder->updown - holder->extra_updown)
+// 	{
+// 		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT);
+// 		weight = current_dist / PERP_DIST_WALL;
+// 		current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
+// 		current_floor_x = (fabsf(current_floor_x) < 1) ? 1 : current_floor_x;
+// 		current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
+// 		if (current_floor_x <= 0 || current_floor_y < 0)
+// 			continue;
+// 		int var = HEIGHT - i + (holder->updown  + holder->extra_updown);
+// 		if (var < HEIGHT && var > 0)
+// 		{
+// 		buffer[var][x] = get_pixel(holder->camera->texture[4], \
+// 							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+// 		if (holder->shadows)
+// 			buffer[var][x] = alter_color_fixed(buffer[var][x], (int)((float)current_dist * 256) / 10);
+// 		}
+// 	}
+// }
 
-// void			draw_floor_simple(t_wolf *holder, \
-// unsigned int buffer[][holder->width], unsigned int x)
+// void			draw_floor1(t_wolf *holder, \
+// unsigned int buffer[holder->height][holder->width], unsigned int x)
 // {
 // 	int		i;
 // 	float	current_dist;
@@ -164,141 +167,41 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))))
 // 	float	current_floor_x;
 // 	float	current_floor_y;
 
-// 	i = holder->camera->draw_end;
+// float old_wall_height;
+// float new_wall_height = holder->wall_height;
+// 	i = holder->height;
 // 	holder->state = 0;
-// //	printf("draw_start = %d, draw_end = %d\n", holder->camera->draw_start, holder->camera->draw_end);
-// 	while (++i < holder->camera->draw_end)
+// 	while (--i > holder->camera->draw_end)
 // 	{
-		
-// //		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT - 2 * (holder->updown + holder->extra_updown));
 // 		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height),	\
-// INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))));
+// INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown - holder->wall_height))));
 // 		weight = current_dist / PERP_DIST_WALL;
 // 		current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
 // 		current_floor_x = (fabsf(current_floor_x) < 1) ? 1 : current_floor_x;
 // 		current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
-// 		current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
-// //		old_wall_height = new_wall_height;
-// //		new_wall_height = holder->height_map[(int)current_floor_y][(int)current_floor_x - 1];
-// //		if (old_wall_height != new_wall_height)
-// //			holder->state = !holder->state;
-// //		if (new_wall_height >= holder->current_height && !holder->state)
+// 		if (current_floor_x <= 0 || current_floor_y < 0)
+// 			continue;
+// 		current_floor_y = (current_floor_y > 8) ? 8 : current_floor_y;
+// 		holder->wall_height = (holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] > 300) ? 300 / current_dist \
+// 		: holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] / current_dist;
+// 		old_wall_height = new_wall_height;
+// 		new_wall_height = holder->height_map[(int)current_floor_y][(int)current_floor_x - 1];
+// 		if (old_wall_height != new_wall_height)
+// 			holder->state = !holder->state;
+// 		if (!holder->state)
+// 		{
 // 		buffer[i][x] = get_pixel(holder->camera->texture[4], \
 // 							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-// //		else
-// //		{
-// //			holder->state = !holder->state;
-// //			buffer[i][x] = -1677721;
-// //		}
-// 		if (holder->shadows) //Faster! 40 vs 45 fps. But not always?
+// 		}
+// 		else
+// 		{
+// 			holder->state = !holder->state;
+// 			buffer[i][x] = -1677721;
+// 		}
+// 		if (holder->shadows)
 // 			buffer[i][x] = alter_color_fixed(buffer[i][x], (int)((float)current_dist * 256) / 10);
-// //		if (holder->shadows)
-// //			buffer[i][x] = alter_color(buffer[i][x], current_dist / 10);
 // 	}
 // }
-
-
-
-void			draw_floor2(t_wolf *holder, \
-unsigned int buffer[holder->height][holder->width], unsigned int x)
-{
-	int		i;
-	float	current_dist;
-	float	weight;
-	float	current_floor_x;
-	float	current_floor_y;
-	int 	tmp;
-
-	tmp = holder->camera->draw_end;
-	if (tmp == 767)
-		tmp = holder->camera->floor;
-	i = holder->height + abs(holder->updown) + abs(holder->extra_updown) + 1;
-	while (--i > tmp - holder->updown - holder->extra_updown)
-	// for (int i = holder->camera->draw_end - holder->updown; i < holder->height + abs(holder->updown); i++)
-	{
-							current_dist = ((float)HEIGHT) / (2 * i - HEIGHT);
-//		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height),	\
-//INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown))));
-							weight = current_dist / PERP_DIST_WALL;
-							current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
-							current_floor_x = (fabsf(current_floor_x) < 1) ? 1 : current_floor_x;
-							current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
-							if (current_floor_x <= 0 || current_floor_y < 0)
-								continue;
-//		current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
-		int var = HEIGHT - i + (holder->updown  + holder->extra_updown);
-		if (var < HEIGHT && var > 0)
-		{
-		buffer[var][x] = get_pixel(holder->camera->texture[4], \
-							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-		// buffer[var][x] = 4278190335;
-
-		if (holder->shadows) //Faster! 40 vs 45 fps. But not always?
-			buffer[var][x] = alter_color_fixed(buffer[var][x], (int)((float)current_dist * 256) / 10);
-		}
-//		if (holder->shadows)
-//			buffer[i][x] = alter_color(buffer[i][x], current_dist / 10);
-	}
-}
-
-
-
-
-
-void			draw_floor1(t_wolf *holder, \
-unsigned int buffer[holder->height][holder->width], unsigned int x)
-{
-	int		i;
-	float	current_dist;
-	float	weight;
-	float	current_floor_x;
-	float	current_floor_y;
-
-float old_wall_height;
-float new_wall_height = holder->wall_height;
-	i = holder->height;
-	holder->state = 0;
-//	printf("draw_start = %d, draw_end = %d\n", holder->camera->draw_start, holder->camera->draw_end);
-	while (--i > holder->camera->draw_end)
-	{
-//		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT - 2 * (holder->updown + holder->extra_updown));
-		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height),	\
-INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown - holder->wall_height))));
-		weight = current_dist / PERP_DIST_WALL;
-		current_floor_x = weight * WALL_X_FL + (1.0 - weight) * P_X;
-		current_floor_x = (fabsf(current_floor_x) < 1) ? 1 : current_floor_x;
-		current_floor_y = weight * WALL_Y_FL + (1.0 - weight) * P_Y;
-		if (current_floor_x <= 0 || current_floor_y < 0)
-			continue;
-		// current_floor_y = (current_floor_y < 0) ? 0 : current_floor_y;
-		current_floor_y = (current_floor_y > 8) ? 8 : current_floor_y;
-		holder->wall_height = (holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] > 300) ? 300 / current_dist \
-		: holder->height_map[(int)current_floor_y][(int)current_floor_x - 1] / current_dist;
-		old_wall_height = new_wall_height;
-		new_wall_height = holder->height_map[(int)current_floor_y][(int)current_floor_x - 1];
-		if (old_wall_height != new_wall_height)
-			holder->state = !holder->state;
-		if (!holder->state)
-		{
-		buffer[i][x] = get_pixel(holder->camera->texture[4], \
-							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-		// int var = HEIGHT - i + holder->updown + holder->extra_updown;
-		// int var = HEIGHT - i - holder->updown;
-		// if (var < HEIGHT && var > 0)
-		// buffer[var][x] = get_pixel(holder->camera->texture[4], \
-//							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
-		}
-		else
-		{
-			holder->state = !holder->state;
-			buffer[i][x] = -1677721;
-		}
-		if (holder->shadows) //Faster! 40 vs 45 fps. But not always?
-			buffer[i][x] = alter_color_fixed(buffer[i][x], (int)((float)current_dist * 256) / 10);
-//		if (holder->shadows)
-//			buffer[i][x] = alter_color(buffer[i][x], current_dist / 10);
-	}
-}
 
 void			draw_floor(t_wolf *holder, t_camera *camera, \
 					unsigned int buffer[holder->height][holder->width], unsigned int x)
