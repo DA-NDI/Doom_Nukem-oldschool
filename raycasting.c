@@ -194,8 +194,8 @@ void			ft_raycasting(t_wolf *holder, int x)
 		while (++a < holder->sprite_tex[0]->amount)
 				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 2], a + 2);
 		a = -1;
-//		while (++a < holder->sprite_tex[2]->amount)
-//				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 7], a + 7);
+		while (++a < holder->sprite_tex[2]->amount)
+				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 7], a + 7);
 //		printf("after drawing\n");
 		a = -1;
 		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0], 0);

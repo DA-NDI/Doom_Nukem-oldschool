@@ -156,6 +156,8 @@ void	load_sprite_tex_car(t_wolf *holder)
 	car->amount = get_sprite_amount(holder, 'C');
 	while (++tmp < car->amount && tmp < 3)
 		start_arcade_sprite(holder, tmp + 7);
+	printf("amount CAR = %d\n", car->amount);
+
 }
 
 
@@ -185,7 +187,6 @@ void	ft_start_screen(t_wolf *holder)
 //	start_arcade_sprite(holder, 3);
  	start_bullet_sprite(holder, 0);
  	start_bullet_sprite(holder, 1);
- 	start_car_sprite(holder, 7);
 
 	start->play_select = 1;
 	start->start_screen = load_tex(RENDER, "textures/init_screen_1024.jpg");

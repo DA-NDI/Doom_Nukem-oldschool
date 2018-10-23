@@ -39,6 +39,32 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 	return (i != height || !dot) ? 1 : 0;
 }
 
+void 	check_amount(char **map, int i, int j)
+{
+	int 	cars;
+	int 	arcades;
+	int 	ammo;
+
+	cars = 0;
+	arcades = 0;
+	ammo = 0;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'C')
+				cars++;
+			else if (map[i][j] == 'A')
+				arcades++;
+			else if(map[i][j] == 'G')
+				ammo++;
+		}
+	}
+	if (cars > 3 || arcades > 5 || ammo > 4)
+		ft_print_error("Too many sprites!");
+}
+
 int		check_boundaries(char **map, int height)
 {
 	int		i;
@@ -160,6 +186,7 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 //		map[i++] = buff;
 	}
 	map[i] = NULL;
+	check_amount(map, -1, 0);
 	if (i == 0 || ret == -1)
 		ft_print_error("Map is empty!");
 	free (buff);
