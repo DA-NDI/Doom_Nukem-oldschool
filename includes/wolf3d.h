@@ -361,4 +361,13 @@ int	get_sprite_amount(t_wolf *holder, char c);
 void 	reload_sprites(t_wolf *holder);
 void	azaporoz_keys_down_2(t_wolf *holder, t_camera *camera, int key);
 void	azaporoz_keys_up_2(t_wolf *holder, t_camera *camera, int key);
+void	load_sprite_tex_arcade(t_wolf *holder);
+void	load_sprite_tex_bullet(t_wolf *holder);
+void	load_sprite_tex_car(t_wolf *holder);
+
+
+t_sprite	*start_enemy(t_wolf *holder, int num);
+void	start_arcade_sprite(t_wolf *holder, int num);
+void	start_bullet_sprite(t_wolf *holder, int num);
+void	start_car_sprite(t_wolf *holder, int num);
 #endif

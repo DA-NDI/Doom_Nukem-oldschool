@@ -133,16 +133,23 @@ void	ft_move_bullet(90,3304
 void	ft_sprite_loop(128,4297
 void	ft_draw_sprites(234,7660
 
-start_screen.c,316
-t_sprite	*start_enemy(start_enemy17,934
-void 	start_arcade_sprite(34,1245
-void 	start_bullet_sprite(46,1582
-void 	start_car_sprite(61,1976
-void	load_sprite_tex_arcade(72,2261
-void	load_sprite_tex_bullet(104,3719
-void 	reload_sprites(122,4449
-void	load_sprite_tex_car(132,4665
-void	ft_start_screen(167,6098
+start_screen.c,90
+void	reload_sprites(15,913
+void	ft_start_screen_2(25,1128
+void	ft_start_screen(39,1571
+
+start_screen_2.c,182
+void	load_sprite_tex_arcade_2(15,913
+void	load_sprite_tex_arcade(36,2069
+void	load_sprite_tex_bullet(50,2411
+void	load_sprite_tex_car_2(66,3139
+void	load_sprite_tex_car(86,4236
+
+start_screen_3_nps.c,144
+t_sprite	*start_enemy(start_enemy15,913
+void		start_arcade_sprite(30,1222
+void		start_bullet_sprite(42,1558
+void		start_car_sprite(57,1951
 
 validate.c,233
 int		check_dimensions_and_symbols(15,913
