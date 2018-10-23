@@ -12,7 +12,7 @@
 
 #include <wolf3d.h>
 
-void	ft_check_jump(t_wolf *holder, const Uint8 *keystate)
+void	ft_check_jump(t_wolf *holder)
 {
 	if (holder->advanced == jumping)
 	{
@@ -32,7 +32,7 @@ void	ft_check_jump(t_wolf *holder, const Uint8 *keystate)
 //		holder->jumping = 1;
 }
 
-void	ft_check_fly(t_wolf *holder, const Uint8 *keystate)
+void	ft_check_fly(t_wolf *holder)
 {
 	if (holder->advanced == flying && holder->keys.f == 1 && holder->hud->jetpack > 0)
 	{
@@ -54,7 +54,7 @@ holder->start_point = %d, holder->extra_updown == %d\n", holder->lifted, holder-
 	if (abs(holder->extra_updown) > 1000)
 		holder->extra_updown = 0;
 }
-void	ft_check_sit(t_wolf *holder, const Uint8 *keystate)
+void	ft_check_sit(t_wolf *holder)
 {
 	if (holder->advanced == crouch)
 	{
@@ -87,8 +87,8 @@ void	ft_check_getup(t_wolf *holder, const Uint8 *keystate)
 void	ft_check_advanced_move(t_wolf *holder, const Uint8 *keystate)
 {
 
-	ft_check_jump(holder, keystate);
-	ft_check_fly(holder, keystate);
-	ft_check_sit(holder, keystate);
+	ft_check_jump(holder);
+	ft_check_fly(holder);
+	ft_check_sit(holder);
 	ft_check_getup(holder, keystate);
 }

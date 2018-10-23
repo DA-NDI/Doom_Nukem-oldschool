@@ -209,25 +209,11 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 	float	current_floor_y;
 	int 	tmp;
 
-// static int d = 0;
-	// holder->state = 0;
-	// printf("%d\n", holder->updown);
-	// printf("H::%d\n", holder->height);
-	// printf("ANS::%d\n", holder->height - 1 + holder->updown);
-
-
-	// if (x == 500)
-	// {
-		// printf("H::%d\n", holder->camera->draw_end);
-		// printf("[floor][%d]\n", holder->camera->floor);
-	// }
-	// 	printf("500:::%d\n",  holder->camera->draw_end);
-	// if (x == 1000)
-	// 	printf("1000:::%d\n",  holder->camera->draw_end);
 	tmp = holder->camera->draw_end;
 	if (tmp == 767)
 		tmp = holder->camera->floor;
-	for (int i = holder->height + abs(holder->updown) + abs(holder->extra_updown); i > tmp - holder->updown - holder->extra_updown; i--)
+	i = holder->height + abs(holder->updown) + abs(holder->extra_updown) + 1;
+	while (--i > tmp - holder->updown - holder->extra_updown)
 	// for (int i = holder->camera->draw_end - holder->updown; i < holder->height + abs(holder->updown); i++)
 	{
 							current_dist = ((float)HEIGHT) / (2 * i - HEIGHT);
@@ -270,10 +256,10 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 
 float old_wall_height;
 float new_wall_height = holder->wall_height;
-//	i = holder->camera->draw_end;
+	i = holder->height;
 	holder->state = 0;
 //	printf("draw_start = %d, draw_end = %d\n", holder->camera->draw_start, holder->camera->draw_end);
-	for (int i = holder->height - 1; i > holder->camera->draw_end; i--)
+	while (--i > holder->camera->draw_end)
 	{
 //		current_dist = ((float)HEIGHT) / (2 * i - HEIGHT - 2 * (holder->updown + holder->extra_updown));
 		current_dist = FIXED_F(FIX_DIV(INT_F(holder->height),	\
@@ -300,7 +286,7 @@ INT_F((i << 1) - holder->height - 2 * (holder->updown + holder->extra_updown - h
 		// int var = HEIGHT - i - holder->updown;
 		// if (var < HEIGHT && var > 0)
 		// buffer[var][x] = get_pixel(holder->camera->texture[4], \
-							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
+//							FLOOR_TEX_X >> 1, FLOOR_TEX_Y);
 		}
 		else
 		{
@@ -340,5 +326,5 @@ void			draw_floor(t_wolf *holder, t_camera *camera, \
 	if (camera->draw_end < 0)
 		camera->draw_end = holder->height;
  	draw_floor1(holder, buffer, x);
- 	draw_floor2(holder, buffer, x);
+// 	draw_floor2(holder, buffer, x);
 }

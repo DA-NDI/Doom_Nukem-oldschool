@@ -75,9 +75,6 @@ t_mouse lineLineIntersection(t_lines a, t_lines b)
 void			draw_walls_azap(t_wolf *holder, t_camera *camera, \
 					unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
-	int				tex_n;
-	int				tex_x;
-	int				tex_y;
 	unsigned int	color;
 	float flooor;
 
@@ -91,11 +88,10 @@ void			draw_walls_azap(t_wolf *holder, t_camera *camera, \
 	}
 	while (++draw_start < draw_end)
 	{
-		tex_y = (draw_start - HEIGHT / 2  + POLY_H / 2 - holder->updown - holder->extra_updown) * 64 / POLY_H;
-		color = 4343523423;
+		color = 4278190335;
 		if (holder->shadows)
 			color = alter_color_fixed(color, (int)((float)camera->perp_wall_dist * 256) / 10);
-		if (camera->side == 1 && tex_n != 6)
+		if (camera->side == 1)
 			color = ((color & 0xfefefe) >> 1) | 0xFF000000;
 		buffer[(int)draw_start][x] = color;
 	}
@@ -109,6 +105,7 @@ void			draw_walls_azap(t_wolf *holder, t_camera *camera, \
 float	ft_cos(float angle)
 {
 	printf("ANGLE::%f\n", angle);
+	printf("cos ret = %f\n", (cos((angle * 2 * M_PI) / 360)));
 	return (cos((angle * 2 * M_PI) / 360));
 }
 
@@ -130,12 +127,13 @@ void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->widt
 	i = 0;
 	while (i < 3)
 	{
-		if (get_line_intersection(P_X, P_Y, holder->camera->wall_xx, holder->camera->wall_yy, holder->line[i].x1, holder->line[i].y1, holder->line[i].x2, holder->line[i].y2, NULL, NULL))
+		if (get_line_intersection(P_X * 64, P_Y * 64, holder->camera->wall_xx, holder->camera->wall_yy, holder->line[i].x1, holder->line[i].y1, holder->line[i].x2, holder->line[i].y2, NULL, NULL))
 		{
 			res = lineLineIntersection(main_line, holder->line[i]);
 			// height = (camera->map_x - P_X + \ ((1 - camera->step_x) >> 1)) / camera->ray_dir_x;
 			// (((int)sqrt(powf(win->gg.p_x - win->l_p.x, 2) + powf(win->gg.p_y - win->l_p.y, 2))) * ft_cos(win->gg.angle - angle));
 			height = (((int)sqrt(powf(P_X - res.x, 2) + powf(P_Y - res.y, 2))) * ft_cos(atan2(holder->DIR_X, holder->DIR_Y) * (180 / 3.1415926)));
+			holder->POLY_H = 100;
 			draw_walls_azap(holder, holder->camera, buffer, x);
 		}
 		i++;

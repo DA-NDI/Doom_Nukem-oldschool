@@ -88,7 +88,7 @@ void			draw_walls(t_wolf *holder, t_camera *camera, \
 		camera->floor = camera->draw_end;
 		camera->draw_end = holder->height - 1;
 	}
-	tex_n = (MAP_CELL != 'P' &&	 MAP_CELL != 'C') ? MAP_CELL - '1' : 0;
+	tex_n = (MAP_CELL != 'P' &&	 MAP_CELL != 'C' && MAP_CELL != 'A') ? MAP_CELL - '1' : 0;
 	tex_x = (int)(camera->wall_x * 64);
 	tex_x = (CHECK_SIDE_0 || CHECK_SIDE_1) ? 64 - tex_x - 1 : tex_x;
 //	printf("get pixel in draw_wall\n");
@@ -139,37 +139,50 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
-		draw_lines(holder, buffer, x);
+//		draw_lines(holder, buffer, x);
 	}
 }
 
 void			ft_raycasting(t_wolf *holder, int x)
 {
 	static unsigned int	buffer[768][1024];
-
-//	buffer = (unsigned int **)malloc(sizeof(unsigned int *) * holder->height);
-
-//	for (int i = 0; i < holder->height + 1; i++)
-//		buffer[i] = (unsigned int *)malloc(sizeof(unsigned int) * holder->width);
 	static int		i = 0;
+	int a;
 
 	while (holder->running)
 	{
+		// if (holder->hud->lives <= 3)
+		// {
+		// 	draw_text(holder, "RETRY? y/n", WIDTH / 2, HEIGHT / 2 - 200);
+		// 	SDL_RenderPresent(holder->renderer);
+		// 	holder->pause = 1;
+		// 	holder->retry_state = 1;
+		// }
+		a = -1;
+//		printf("start of raycasting\n");
 		holder->frame_start = SDL_GetTicks();
 		holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
 		holder->current_height = (holder->current_height > 300) ? 300 : holder->current_height;
 		raycasting_loop(holder, holder->camera, -1, buffer);
-//		printf("current_height = %d\n", holder->current_height);
-		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
-		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[1]);
-		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[2]);
+//		printf("before drawing\n");
+		while (++a < holder->sprite_tex[0]->amount)
+				ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[a + 2], a + 2);
+//		printf("after drawing\n");
+		a = -1;
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0], 0);
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[7], 7);
 		if ((++i % 16) == 0)
 		{
 //printf("DIR_X = %f, DIR_Y = %f\n", holder->DIR_X, holder->DIR_Y);
-			ft_move_boss(holder, holder->sprite[0]);
+			while (++a < holder->sprite_tex[0]->amount)
+				ft_move_boss(holder, holder->sprite[a + 2]);
 		}
 		if ((i % 4) == 0)
+		{
+//			printf("before moving\n");
+			ft_move_bullet(holder, holder->sprite[0]);
 			ft_move_bullet(holder, holder->sprite[1]);
+		}
 		if (!holder->pause && !holder->starting && holder->running)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);

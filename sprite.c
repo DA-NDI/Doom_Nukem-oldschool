@@ -27,6 +27,7 @@
 
 void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
+	printf("enemy restarted\n");
 	holder->frags++;
 	SHOOTS = 0;
 	sprite->is_sprite = 1;
@@ -34,28 +35,30 @@ void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 	sprite->y = sprite->orig_y;
 	sprite->is_alive = 1;
 	sprite->speed = sprite->speed + 0.1;
-	sprite->tex_sprite[0] = sprite->arr_sprite[0][0];
+	sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[0][0];
+	sprite->end_frame = 5;
 }
 
 void	burning_boss(t_sprite *sprite)
 {
-	static int i = 5;
-
-	if (IS_SPRITE && !sprite->is_alive && sprite->end_frame == 5)
+	printf("sprite->end_frame = %d sprite->shoots = %d\n", sprite->end_frame, sprite->shoots);
+	if (IS_SPRITE && !sprite->is_alive && sprite->end_frame >= 5)
 	{
-		ARCADE_TEX = sprite->arr_sprite[1][i];
-		i++;
+		if (sprite->end_frame <= 7)
+			CURR_TEX = sprite->s_tex->arr_sprite[1][sprite->end_frame];
+		sprite->end_frame++;
 	}
-	i = (i == 8) ? 5 : i;
+	sprite->end_frame = (sprite->end_frame == 8) ? 5 : sprite->end_frame;
+	sprite->end_frame = (sprite->end_frame == 9) ? 8 : sprite->end_frame;
 }
 
 void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 {
-	// printf("hey!\n");
-//	static int end_frame = 5;
-
-	if (sprite->end_frame == 9 && DIST_X <= 3 && DIST_Y <= 3)
+	printf("started moving\n");
+	if (sprite->end_frame >= 9 && DIST_X <= 3 && DIST_Y <= 3)
 	{
+//		CURR_TEX = sprite->s_tex->arr_sprite[0][8];
+		printf("restarted\n");
 		get_player_coordinates(holder);
 		restart_enemy(holder, sprite);
 		holder->hud->lives -= 1;
@@ -65,11 +68,12 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	}
 	if (DIST_X <= 1 && DIST_Y <= 1 && sprite->end_frame < 9 && IS_SPRITE)
 	{
-		ARCADE_TEX = sprite->arr_sprite[0][sprite->end_frame];
+		CURR_TEX = sprite->s_tex->arr_sprite[0][sprite->end_frame];
+//		printf("CURR_TEX = %p\n", CURR_TEX);
 		sprite->end_frame++;
-		sprite->is_alive = (sprite->end_frame == 8) ? 0 : 1;
+		sprite->is_alive = (sprite->end_frame >= 8) ? 0 : 1;
 	}
-	if ((sprite->x != P_X || sprite->y != P_Y) && sprite->is_alive)
+	if ((sprite->x != P_X || sprite->y != P_Y) && sprite->is_alive && !holder->pause)
 	{
 		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + 0.1)] == '0')
 			sprite->x += sprite->speed;
@@ -97,15 +101,16 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *sprite)
 		sprite->y = P_Y + direction[0];
 		gun = G;
 	}
-	else if(sprite->is_alive)
+	else if(sprite->is_alive && !holder->pause)
 	{
+		printf("bullet moving\n");
 		sprite->x += direction[1];
 		sprite->y += direction[0];
-		sprite->tex_sprite[0] = sprite->arr_sprite[gun][frames++];
+		sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[gun][frames++];
 	}
 	if (frames == 3)
 		frames = 0;
-	if (MAP[(int)sprite->y][(int)sprite->x] != '0')
+	if (MAP[(int)sprite->y][(int)sprite->x] != '0' && sprite->is_alive)
 	{
 		MAP[(int)sprite->y][(int)sprite->x] = '5';
 		sprite->is_alive = 0;
@@ -136,47 +141,42 @@ float angle;
 	START_X--;
 	END_Y += holder->updown + holder->extra_updown;
 	END_Y = (END_Y > 768) ? 768 : END_Y;
-	 if (sprite->texture == 1)
+	 if (sprite->texture == 99)
 	 {
 	 	angle = roundf(atan2(sprite->y - P_Y, sprite->x - P_X) * (180 / 3.1415926));
 	 	if (angle <= -135 && angle > -157.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][0]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][0]; 
 	 	if (angle <= -112.5 && angle > -135)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][1]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][1]; 
 	 	else if (angle <= -90 && angle > -112.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][2]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][2]; 
 	 	else if (angle <= -67.5 && angle > -90)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][3]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][3];  
 	 	else if (angle < -45 && angle > -67.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][4]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][4]; 
 		else if (angle < -22.5 && angle > -45)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][5]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][5];  
 	 	else if (angle <= -0 && angle > -22.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][6]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][6];  
 	 	else if (angle >= 0 && angle < 22.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[0][7]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[0][7];  
 	 	else if (angle >= 22.5 && angle < 45)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][0]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][0];  
 	 	else if (angle >= 45 && angle < 67.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][1]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][1];  
 	 	else if (angle >= 67.5 && angle < 90)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][2]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][2];  
 	 	else if (angle >= 90 && angle < 112.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][3]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][3];  
 	 	else if (angle >= 112.5 && angle < 135)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][4]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][4];  
 	 	else if (angle >= 135 && angle < 157.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][5]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][5];  
 	 	else if (angle >= 157.5 && angle <= 180)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][6]; 
+			CURR_TEX = sprite->s_tex->arr_sprite[1][6];  
 	 	else if (angle >= -180 && angle <= -157.5)
-			sprite->tex_sprite[0] = sprite->arr_sprite[1][7]; 
-//	 	printf("atan2 of dx dy = %f\n", atan2(sprite->y - P_Y, sprite->x - P_X) * (180 / 3.1415926));
-	// 	if (holder->DIR_X >= 0 && holder->DIR_X <= 1 && holder->DIR_Y <= -1 )
-
+			CURR_TEX = sprite->s_tex->arr_sprite[1][7];  
 	 }
-
-//printf("get pixel in draw_sprite\n");
 	while (++START_X < END_X && (sprite->is_alive || IS_SPRITE))
 	{
 		tex_x = (int)(256 * (START_X - (-SPRITE_W / 2 + sprite_screen_x)) \
@@ -225,22 +225,22 @@ tex_y = (i - HEIGHT / 2 + sprite_height / 2 - (holder->updown + holder->extra_up
 // 	}
 // }
 
-void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int **buffer)
-{
-	int sprite_order[MAXSPRITES];
-	float sprite_dist[MAXSPRITES];
-}
+// void 	create_sprites(t_wolf *holder, t_camera *camera, unsigned int **buffer)
+// {
+// 	int sprite_order[MAXSPRITES];
+// 	float sprite_dist[MAXSPRITES];
+// }
 
 void	ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-						unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
+						unsigned int buffer[holder->height][holder->width], t_sprite *sprite, int num)
 {
 	float	inv_det;
 	float	transform_x;
 	int		sprite_screen_x;
 	int		sprite_height;
 
-float udiv = 0.5;
-float vdiv = 0.5;
+	float udiv = 1;
+	float vdiv = 1;
 //float vmove = 0;
 
 	inv_det = 1.0 / (PLANE_X * DIR_Y - DIR_X * camera->plane_y);

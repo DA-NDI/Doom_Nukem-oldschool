@@ -14,28 +14,69 @@
 
 #include <wolf3d.h>
 
-void	start_enemy(t_wolf *holder, t_sprite *sprite)
+t_sprite	*start_enemy(t_wolf *holder, int num)
 {
-	static int shoots = 0;
-
-	ARCADE_TEX = sprite->arr_sprite[0][0];
-	sprite->speed = 0.1;
-}
-
-void	start_car(t_wolf *holder, t_sprite *sprite)
-{
-	ARCADE_TEX = sprite->arr_sprite[0][0];
-	sprite->speed = 0.1;
-}
-
-void	load_sprite_arcade(t_wolf *holder, int num)
-{
-	t_sprite	*sprite;
+	t_sprite *sprite;
 
 	sprite = (t_sprite*)malloc(sizeof(t_sprite));
 	holder->sprite[num] = sprite;
-	holder->sprite[num]->is_alive = 0;
-	sprite->tex_sprite[0] = NULL;
+	sprite->shoots = 0;
+	sprite->speed = 0.1;
+	sprite->is_alive = 0;
+	sprite->sprite_found = 0;
+	sprite->is_sprite = 0;
+	sprite->end_frame = 0;
+
+	return (sprite);
+}
+
+
+void 	start_arcade_sprite(t_wolf *holder, int num)
+{
+	t_sprite 	*sprite;
+
+	sprite = start_enemy(holder, num);
+	sprite->is_sprite = get_sprite_coordinates(holder, 'A', num);
+	sprite->end_frame = 5;
+	sprite->s_tex = holder->sprite_tex[0];
+	holder->sprite[num] = sprite;
+	sprite->tex_sprite[0] = holder->sprite_tex[0]->arr_sprite[0][0];
+}
+
+void 	start_bullet_sprite(t_wolf *holder, int num)
+{
+	t_sprite 	*bullet;
+
+	bullet = start_enemy(holder, num);
+	bullet->s_tex = holder->sprite_tex[1];
+	bullet->x = P_X + holder->DIR_X;
+	bullet->y = P_Y + holder->DIR_Y;
+	bullet->orig_x = bullet->x;
+	bullet->orig_y = bullet->y;
+	bullet->speed = 0.5;
+	bullet->sprite_found = 1;
+	bullet->tex_sprite[0] = holder->sprite_tex[1]->arr_sprite[0][0];
+}
+
+void 	start_car_sprite(t_wolf *holder, int num)
+{
+	t_sprite  	*car;
+
+	car = start_enemy(holder, num);
+	car->s_tex = holder->sprite_tex[2];
+	car->is_sprite = get_sprite_coordinates(holder, 'C', num);
+	car->texture = 99;
+	car->tex_sprite[0] = holder->sprite_tex[2]->arr_sprite[0][0];
+}
+
+void	load_sprite_tex_arcade(t_wolf *holder)
+{
+	t_sprite_tex	*sprite;
+	int 		 	tmp;
+
+	tmp = -1;
+	sprite = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
+	holder->sprite_tex[0] = sprite;
 	sprite->arr_sprite[0][0] = load_image("sprites/arcade.png");
 	sprite->arr_sprite[0][1] = load_image("sprites/arcade1.png");
 	sprite->arr_sprite[0][2] = load_image("sprites/arcade2.png");
@@ -53,21 +94,19 @@ void	load_sprite_arcade(t_wolf *holder, int num)
 	sprite->arr_sprite[1][5] = load_image("sprites/arcade4.png");
 	sprite->arr_sprite[1][6] = load_image("sprites/arcade4_b1.png");
 	sprite->arr_sprite[1][7] = load_image("sprites/arcade4_b2.png");
-	sprite->is_sprite = get_sprite_coordinates(holder, 'A', num);
-	sprite->end_frame = 5;
-	sprite->shoots = 0;
-	start_enemy(holder, sprite);
+	sprite->amount = get_sprite_amount(holder, 'A');
+	while (++tmp < sprite->amount)
+		start_arcade_sprite(holder, tmp + 2);
+	printf("amount ARCADE = %d\n", sprite->amount);
+	
 }
 
-void	load_sprite_bullet(t_wolf *holder)
+void	load_sprite_tex_bullet(t_wolf *holder)
 {
-	t_sprite	*bullet;
+	t_sprite_tex	*bullet;
 
-	bullet = (t_sprite*)malloc(sizeof(t_sprite));
-	holder->sprite[1] = bullet;
-	bullet->is_alive = 0;
-	bullet->sprite_found = 1;
-	bullet->tex_sprite[0] = NULL;
+	bullet = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
+	holder->sprite_tex[1] = bullet;
 	bullet->arr_sprite[0][0] = load_image("resourses/pistol_bullet0.png");
 	bullet->arr_sprite[0][1] = load_image("resourses/pistol_bullet1.png");
 	bullet->arr_sprite[0][2] = load_image("resourses/pistol_bullet2.png");
@@ -76,35 +115,16 @@ void	load_sprite_bullet(t_wolf *holder)
 	bullet->arr_sprite[1][1] = load_image("resourses/bullet_fire1.png");
 	bullet->arr_sprite[1][2] = load_image("resourses/bullet_fire2.png");
 	bullet->arr_sprite[1][3] = load_image("resourses/bullet_fire3.png");
-	bullet->x = P_X + holder->DIR_X;
-	bullet->y = P_Y + holder->DIR_Y;
-	bullet->orig_x = bullet->x;
-	bullet->orig_y = bullet->y;
-	bullet->speed = 0.5;
-	bullet->is_sprite = 0;
-//	bullet->is_sprite = get_sprite_coordinates(holder, 'A', 1);
-	start_car(holder, bullet);
-	// bullet->arr_sprite[0][1] = load_image("sprites/arcade1.png");
-	// bullet->arr_sprite[0][2] = load_image("sprites/arcade2.png");
-	// bullet->arr_sprite[0][3] = load_image("sprites/arcade3.png");
-	// bullet->arr_sprite[0][4] = load_image("sprites/arcade4.png");
-	// bullet->arr_sprite[1][0] = load_image("sprites/arcade.png");
-	// bullet->arr_sprite[1][1] = load_image("sprites/arcade1_g.png");
-	// bullet->arr_sprite[1][2] = load_image("sprites/arcade2_g.png");
-	// bullet->arr_sprite[1][3] = load_image("sprites/arcade3_g.png");
-	// bullet->arr_sprite[1][4] = load_image("sprites/arcade4_g.png");
+
+
 }
 
-void	load_sprite_car(t_wolf *holder)
+void	load_sprite_tex_car(t_wolf *holder)
 {
-	t_sprite	*car;
+	t_sprite_tex	*car;
 
-	car = (t_sprite*)malloc(sizeof(t_sprite));
-	holder->sprite[2] = car;
-	car->is_alive = 0;
-	car->sprite_found = 0;
-	car->tex_sprite[0] = NULL;
-	car->texture = 1;
+	car = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
+	holder->sprite_tex[2] = car;
 	car->arr_sprite[0][0] = load_image("sprites/car_test16-0.png");
 	car->arr_sprite[0][1] = load_image("sprites/car_test16-1.png");
 	car->arr_sprite[0][2] = load_image("sprites/car_test16-2.png");
@@ -121,17 +141,6 @@ void	load_sprite_car(t_wolf *holder)
 	car->arr_sprite[1][5] = load_image("sprites/car_test16-13.png");
 	car->arr_sprite[1][6] = load_image("sprites/car_test16-14.png");
 	car->arr_sprite[1][7] = load_image("sprites/car_test16-15.png");
-	car->shoots = 0;
-car->x = P_X + holder->DIR_X;
-	car->y = P_Y + holder->DIR_Y;
-	car->orig_x = car->x;
-	car->orig_y = car->y;
-
-	car->speed = 0.5;
-	car->is_sprite = 0;
-	car->is_sprite = get_sprite_coordinates(holder, 'C', 2);
-	start_enemy(holder, car);
-
 }
 
 
@@ -153,9 +162,16 @@ void	ft_start_screen(t_wolf *holder)
 	init_weapon_shotgun(holder->weapon[3], holder);
 	holder->camera = camera;
 	holder->start = start;
-	load_sprite_arcade(holder, 0);
-	load_sprite_bullet(holder);
- 	load_sprite_arcade(holder, 2);
+
+	load_sprite_tex_arcade(holder);
+	load_sprite_tex_bullet(holder);
+ 	load_sprite_tex_car(holder);
+// 	start_arcade_sprite(holder, 2);
+//	start_arcade_sprite(holder, 3);
+ 	start_bullet_sprite(holder, 0);
+ 	start_bullet_sprite(holder, 1);
+ 	start_car_sprite(holder, 7);
+
 	start->play_select = 1;
 	start->start_screen = load_tex(RENDER, "textures/init_screen_1024.jpg");
 	SDL_RenderClear(holder->renderer);

@@ -83,38 +83,38 @@ void		ft_check_click(t_wolf *holder, t_sprite *sprite)
 //	if ((holder->event.button.button == SDL_BUTTON_LEFT && !holder->starting && !holder->shooting) \
 //		&& ((holder->hud->ammo > 0 && G != 1) || (holder->hud->rockets > 0 && G == 1)))
 //	{
-		holder->hud->ammo -= (G != 1) ? 1 : 0;
-		holder->hud->rockets -= (G == 1) ? 1 : 0;
+		
 		if (G == 1 || G == 0)
 		{
-			holder->sprite[1]->tex_sprite[0] = holder->sprite[1]->arr_sprite[G][0];
-			holder->sprite[1]->is_alive = 1;
+			holder->sprite[0]->tex_sprite[0] = holder->sprite[0]->s_tex->arr_sprite[G][0];
+			holder->sprite[0]->is_alive = 1;
 		}
-printf("ONE\n");
 //		holder->shooting = 1;
 		Mix_PlayChannel(-1, holder->weapon[G]->pistol_shoot, 0);
 		holder->weapon[G]->frame = 0;
 		v_x = sprite->x - holder->player_x;
 		v_y = sprite->y - holder->player_y;
 		sprite->is_alive = (SHOOTS >= 4 || !IS_SPRITE) ? 0 : 1;
-		IS_SPRITE = (SHOOTS >= 5 || !IS_ARC) ? 0 : 1;
-		if (SHOOTS >= 5)
-		{
-			restart_enemy(holder, sprite);
-			return;
-		}
+		printf("IS_SPRITE = %d, SHOOTS = %d, IS_ARC = %d\n", IS_SPRITE, SHOOTS, IS_ARC);
+		IS_SPRITE = (SHOOTS > 5 || !IS_ARC) ? 0 : 1;
+
 		angle = acos((v_x * holder->DIR_X + v_y * holder->DIR_Y) / (sqrt(v_x * v_x + v_y * v_y) * sqrt(holder->DIR_X * holder->DIR_X + holder->DIR_Y * holder->DIR_Y))) * 57.325;
 		// printf("angle = %f\n", angle);
-		if (angle < 5 && SHOOTS < 5 && IS_ARC)
+		if (angle < 5 && SHOOTS <= 5 && IS_ARC)
 		{
 			SHOOTS += (G == 0) ? 1 : 2;
 			SHOOTS += (G == 1) ? 2 : 0;
-			// printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
+			 printf("HITTED! SHOOTS = %d H = %d\n", SHOOTS, H);
 			if (SHOOTS < 5)
 			{
-				ARCADE_TEX = sprite->arr_sprite[H][SHOOTS];
+				sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[H][SHOOTS];
 			}
 
+		}
+		if (SHOOTS > 5)
+		{
+			restart_enemy(holder, sprite);
+			return;
 		}
 //	}
 }

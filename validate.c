@@ -141,11 +141,12 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 	char		*buff;
 	static char	*map[50];
 	int			i;
+	int 		ret;
 
 	i = 0;
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_print_error("Failed to open map file");
-	while (get_next_line(fd, &buff) == 1 && ft_strstr(buff, "Height map:") == NULL)
+	while ((ret = get_next_line(fd, &buff)) == 1 && ft_strstr(buff, "Height map:") == NULL)
 	{
 		if (ft_strlen(buff) > 100 || i >= 100)
 		{
@@ -159,9 +160,9 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 //		map[i++] = buff;
 	}
 	map[i] = NULL;
-	free (buff);
-	if (i == 0)
+	if (i == 0 || ret == -1)
 		ft_print_error("Map is empty!");
+	free (buff);
 	holder->height_map = ft_create_height_map(fd);
 	return (map);
 }

@@ -71,7 +71,7 @@
 # define FIX_DIV(x, y) (((x)<< 8) / (y))
 # define IS_SPRITE sprite->is_sprite
 # define SHOOTS (sprite->shoots)
-# define ARCADE_TEX sprite->tex_sprite[0]
+# define CURR_TEX sprite->tex_sprite[0]
 # define IS_ARC sprite->sprite_found
 # define DR_START camera->draw_start
 # define MOUSE_Y (holder->height >> 1) - holder->keys.y
@@ -91,8 +91,9 @@
 # define V_X_NORM(x, y) (x / V_LEN(x, y))
 # define V_Y_NORM(x, y) (y / V_LEN(x, y))
 # define MAXSPRITES 20
-
-#define POLY_H camera->line_poly_height
+# define BUTTON_LEFT (holder->event.button.button == SDL_BUTTON_LEFT)
+# define AMMO holder->hud->ammo
+# define POLY_H camera->line_poly_height
 
 enum				e_adv
 {
@@ -192,10 +193,16 @@ typedef struct		s_camera
 	int				floor;
 }					t_camera;
 
-typedef struct		s_sprite
+typedef struct 		s_sprite_tex
 {
 	SDL_Surface		*arr_sprite[2][9];
+	int 			amount;
+} 					t_sprite_tex;
+
+typedef struct		s_sprite
+{
 	SDL_Surface		*tex_sprite[1];
+	t_sprite_tex    *s_tex;
 	float			x;
 	float			y;
 	float			transform_y;
@@ -262,7 +269,7 @@ typedef struct		s_wolf
 	t_weapon		*weapon[4];
 	t_start			*start;
 	t_sprite		**sprite;
-	t_sprite		*bullet;
+	t_sprite_tex	**sprite_tex;
 	t_hud			*hud;
 	unsigned int	fps;
 	unsigned int	frame_delay;
@@ -281,6 +288,7 @@ typedef struct		s_wolf
 	int				adv_frames;
 	int				start_point;
 	int				lifted;
+	int 			retry_state;
 	unsigned int 	shadows:1;
 	int 			current_height;
 	int 			wall_height;
@@ -322,7 +330,7 @@ void				draw_floor(t_wolf *holder, t_camera *camera, \
 		unsigned int buffer[holder->height][holder->width], unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-	unsigned int buffer[holder->height][holder->width], t_sprite *sprite);
+	unsigned int buffer[holder->height][holder->width], t_sprite *sprite, int num);
 int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
 void				ft_check_click(t_wolf *holder, t_sprite *sprite);
@@ -347,4 +355,5 @@ void				ft_check_advanced_move(t_wolf *hold, const Uint8 *keystat);
 unsigned int alter_color(unsigned int color, float coefficient);
 unsigned int alter_color_fixed(unsigned int color, int coefficient);
 void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->width], int x);
+int	get_sprite_amount(t_wolf *holder, char c);
 #endif
