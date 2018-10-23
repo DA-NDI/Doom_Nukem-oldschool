@@ -82,7 +82,7 @@ void		start_game(t_wolf *holder)
 	ft_init_image(holder);
 	ft_start_screen(holder);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	Mix_PauseMusic(); //comment this to play music at start
+	Mix_PauseMusic();
 	ft_hud_init(holder);
 	ft_raycasting(holder, 0);
 	system("leaks doom-nukem");
@@ -92,7 +92,7 @@ int			main(int argc, char **argv)
 {
 	static t_wolf	holder[1];
 
-	if (argc != 2 || !argv[1]) //|| system("tar -xvzf package.tar") != 0)
+	if (argc != 2 || !argv[1])
 		ft_print_error("Usage: ./doom-nukem <map>");
 	holder->map = ft_create_map(argv, holder);
 	ft_verify_map(holder->map, holder);

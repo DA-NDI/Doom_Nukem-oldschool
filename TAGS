@@ -42,19 +42,23 @@ int		i_to_raw(18,950
 float	raw_to_f(23,994
 int		raw_to_i(28,1047
 
-init.c,138
+init.c,137
 #define ARGB 14,912
 void	ft_skybox_init(16,951
 void	ft_camera_init_2(24,1308
 void	ft_camera_init(52,2926
-void	ft_init_image(104,5257
+void	ft_init_image(80,3628
 
-keys_azaporoz.c,159
+keys_azaporoz.c,157
 void	azaporoz_keys_down(15,913
-void	azaporoz_keys_up(53,1808
-void	azaporoz_left_right(86,2507
-void	azaporoz_action(104,2984
-void	azaporoz_rotate(124,3474
+void	azaporoz_keys_up(33,1398
+void	azaporoz_left_right(44,1607
+void	azaporoz_action(62,2084
+void	azaporoz_rotate(81,2572
+
+keys_azaporoz_2.c,67
+void	azaporoz_keys_down_2(15,913
+void	azaporoz_keys_up_2(39,1438
 
 line_azap.c,153
 int get_line_intersection(15,913
@@ -67,15 +71,15 @@ loaders.c,196
 SDL_Texture	*load_tex(load_tex15,913
 void		apply_texture(37,1392
 SDL_Surface	*load_image(load_image47,1601
-Mix_Music	*load_music(load_music60,1824
-Mix_Chunk	*load_chunk(load_chunk69,1978
+Mix_Music	*load_music(load_music59,1791
+Mix_Chunk	*load_chunk(load_chunk68,1945
 
 main.c,141
 void		ft_close(15,913
 void		ft_print_error(31,1314
 t_wolf		*holder_init(holder_init38,1408
 void		start_game(66,2084
-int			main(91,2723
+int			main(91,2685
 
 mainloop.c,241
 void		ft_check_pause(23,1076
@@ -90,10 +94,11 @@ void		ft_close_loop(167,5173
 play_sounds.c,25
 void	play_pistol(15,913
 
-player_coordinates.c,105
+player_coordinates.c,144
 void	get_player_coordinates(15,913
-int 	get_sprite_amount(42,1423
-int		get_sprite_coordinates(62,1673
+int		get_sprite_amount(41,1392
+void	get_sprite_coordinates_2(61,1642
+int		get_sprite_coordinates(68,1813
 
 raycasting.c,180
 void			check_ray(16,931
