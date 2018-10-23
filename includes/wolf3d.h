@@ -150,6 +150,7 @@ typedef struct		s_keys
 	int				f;
 	int				lctrl;
 	int				enter;
+	int 			t;
 }					t_keys;
 
 typedef struct		s_camera
