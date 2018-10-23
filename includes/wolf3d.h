@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 21:06:43 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 23:09:42 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ enum				e_adv
 };
 
 typedef int			t_intfix;
+
+typedef struct		s_tool
+{
+	char 			*buff;
+	char			*buff_height[51];
+	int				i;
+	int				a;
+	char			**splitted;
+}					t_tool;
 
 typedef struct		s_mouse
 {
