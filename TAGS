@@ -13,7 +13,7 @@ draw_hud.c,109
 void		ft_hud_init(15,913
 void		draw_hud_icons(41,1806
 void		draw_hud_text(59,2646
-void		draw_hud(89,3488
+void		draw_hud(88,3473
 
 drawers.c,279
 unsigned int	get_pixel(15,913
@@ -42,11 +42,12 @@ int		i_to_raw(18,950
 float	raw_to_f(23,994
 int		raw_to_i(28,1047
 
-init.c,106
+init.c,138
 #define ARGB 14,912
 void	ft_skybox_init(16,951
-void	ft_camera_init(24,1308
-void	ft_init_image(75,3532
+void	ft_camera_init_2(24,1308
+void	ft_camera_init(52,2926
+void	ft_init_image(104,5257
 
 keys_azaporoz.c,159
 void	azaporoz_keys_down(15,913

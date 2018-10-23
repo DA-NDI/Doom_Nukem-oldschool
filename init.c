@@ -21,23 +21,8 @@ void	ft_skybox_init(t_camera *camera, t_wolf *holder)
 	camera->skybox_tex[3] = load_tex(RENDER, "./resourses/skybox_test3.jpg");
 }
 
-void	ft_camera_init(t_camera *camera, t_wolf *holder)
+void	ft_camera_init_2(t_camera *camera, t_wolf *holder)
 {
-	camera->dir_x = -1;
-	camera->dir_y = 0;
-	camera->plane_x = 0;
-	camera->plane_y = 0.66;
-	camera->camera_x = 0;
-	camera->camera_y = 0;
-	camera->ray_dir_x = 0;
-	camera->ray_dir_y = 0;
-	camera->map_x = 0;
-	camera->map_y = 0;
-	camera->is_hit = 0;
-	camera->move_speed = 0.04;
-	camera->rot_speed = -0.06;
-	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
-		ft_print_error("Unable to load font");
 	camera->texture[0] = load_image("./texture/fence_wire2.png");
 	camera->texture[1] = load_image("./texture/portal.png");
 	camera->texture[2] = load_image("./texture/wall_wire_blue.png");
@@ -62,6 +47,26 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->texture[21] = load_image("./texture/wall_texture11_dmg.png");
 	camera->texture[22] = load_image("./texture/light_on_dmg.png");
 	camera->texture[23] = load_image("./texture/light_off_dmg.png");
+}
+
+void	ft_camera_init(t_camera *camera, t_wolf *holder)
+{
+	camera->dir_x = -1;
+	camera->dir_y = 0;
+	camera->plane_x = 0;
+	camera->plane_y = 0.66;
+	camera->camera_x = 0;
+	camera->camera_y = 0;
+	camera->ray_dir_x = 0;
+	camera->ray_dir_y = 0;
+	camera->map_x = 0;
+	camera->map_y = 0;
+	camera->is_hit = 0;
+	camera->move_speed = 0.04;
+	camera->rot_speed = -0.06;
+	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
+		ft_print_error("Unable to load font");
+	ft_camera_init_2(camera, holder);
 	camera->dstelept = load_chunk("resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);
