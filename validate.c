@@ -6,7 +6,8 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:36:22 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 23:33:37 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 23:43:02 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 23:37:05 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +76,9 @@ int		check_boundaries(char **map, int height)
 	i = 0;
 	j = 0;
 	while (map[i][j] && map[height - 1][j])
-	{
-		if ((map[i][j] != '1' || map[height - 1][j]
-	!= '1') && (map[i][j] != ':' || map[height - 1][j] != ':'))
+		if ((map[i][j] != '1' || map[height - 1][j++]
+	!= '1') && (map[i][j] != ':' || map[height - 1][j++] != ':'))
 			return (1);
-		j++;
-	}
 	j = 0;
 	while (++i < height)
 	{
@@ -152,11 +150,9 @@ int		**ft_create_height_map(int fd)
 		}
 		tool.buff_height[tool.i++] = tool.buff;
 	}
-
 	tool.buff_height[tool.i] = NULL;
 	tool.i = -1;
 	write(1, "1", 1);
-
 	while (tool.buff_height[++tool.i])
 	{
 		height_map[tool.i] = (int*)malloc(sizeof(int)
@@ -164,7 +160,6 @@ int		**ft_create_height_map(int fd)
 		fill_map(&tool, height_map);
 	}
 	height_map[tool.i] = NULL;
-
 	return (height_map);
 }
 
@@ -206,8 +201,8 @@ void			free_words(char **words)
 
 void	skip_first_line(int fd)
 {
-	char *line;
-	char **cords;
+	char	*line;
+	char	**cords;
 	int		i;
 
 	i = 0;
@@ -255,6 +250,6 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 		fdiret[1]++;
 	}
 	tool(map, fdiret[1], fdiret[2], buff);
-	holder->height_map = ft_create_height_map(fdiret[0]);	
+	holder->height_map = ft_create_height_map(fdiret[0]);
 	return (map);
 }
