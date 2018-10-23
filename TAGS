@@ -12,7 +12,7 @@ void			draw_floor1(15,913
 draw_floor_main.c,85
 void			draw_floor2_2(15,913
 void			draw_floor2(26,1255
-void			draw_floor1(55,2049
+void			draw_floor1(57,2076
 
 draw_hud.c,109
 void		ft_hud_init(15,913

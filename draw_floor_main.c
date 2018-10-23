@@ -52,6 +52,8 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 	}
 }
 
+// void			draw_floor1_2()
+
 void			draw_floor1(t_wolf *holder, unsigned int buffer[holder->height][holder->width], unsigned int x)
 {
 	int		i;
