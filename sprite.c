@@ -110,9 +110,9 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *sprite)
 	}
 	if (frames == 3)
 		frames = 0;
-	if (MAP[(int)sprite->y][(int)sprite->x] != '0' && sprite->is_alive)
+	if (MAP[(int)sprite->y][(int)sprite->x] != '0' && sprite->is_alive && MAP[(int)sprite->y][(int)sprite->x] <= '9')
 	{
-		MAP[(int)sprite->y][(int)sprite->x] = '5';
+		MAP[(int)sprite->y][(int)sprite->x] = MAP[(int)sprite->y][(int)sprite->x] + 13;
 		sprite->is_alive = 0;
 	}
 }
