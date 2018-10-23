@@ -123,7 +123,7 @@ void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->widt
 	main_line.y1 = P_Y;
 	main_line.x2 = holder->camera->map_x;
 	main_line.y2 = holder->camera->map_y;
-
+	
 	i = 0;
 	while (i < 3)
 	{

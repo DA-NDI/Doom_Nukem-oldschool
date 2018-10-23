@@ -53,16 +53,15 @@ void		draw_hud_icons(t_wolf *holder)
 	SDL_RenderCopy(holder->renderer, holder->hud->hud[9], \
 			NULL, &(SDL_Rect){WIDTH - 170, HEIGHT - 25, 20, 18});
 	SDL_RenderCopy(holder->renderer, holder->hud->hud[10], \
-			NULL, &(SDL_Rect){WIDTH / 2 - 32, HEIGHT / 2 - 32 , 64, 64});
+			NULL, &(SDL_Rect){WIDTH / 2 - 32, HEIGHT / 2 - 32, 64, 64});
 }
 
-void		draw_hud_text(t_wolf *holder)
+void		draw_hud_text(t_wolf *holder, char *hp)
 {
-	char	*hp;
 	char	*shield;
 	char	*rockets;
 	char	*ammo;
-	char 	*jetpack;
+	char	*jetpack;
 
 	hp = ft_itoa(holder->hud->hp);
 	shield = ft_itoa(holder->hud->shield);
@@ -88,14 +87,14 @@ void		draw_hud_text(t_wolf *holder)
 
 void		draw_hud(t_wolf *holder)
 {
-	char 	*frags;
+	char	*frags;
+	char	*hp;
 
 	frags = ft_itoa(holder->frags);
-
+	hp = NULL;
 	draw_hud_icons(holder);
-	draw_hud_text(holder);
+	draw_hud_text(holder, hp);
 	draw_text(holder, "Frags: ", 180, HEIGHT - 22);
 	draw_text(holder, frags, 210, HEIGHT - 22);
 	free(frags);
-
 }

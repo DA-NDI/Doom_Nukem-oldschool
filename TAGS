@@ -1,10 +1,10 @@
 
 check_jump_fly_etc.c,147
 void	ft_check_jump(15,913
-void	ft_check_fly(35,1374
-void	ft_check_sit(57,2141
-void	ft_check_getup(80,2628
-void	ft_check_advanced_move(87,2757
+void	ft_check_fly(33,1271
+void	ft_check_sit(55,1852
+void	ft_check_getup(77,2257
+void	ft_check_advanced_move(85,2387
 
 draw_floor1_fixed.c,27
 void			draw_floor1(15,913
@@ -12,8 +12,8 @@ void			draw_floor1(15,913
 draw_hud.c,109
 void		ft_hud_init(15,913
 void		draw_hud_icons(41,1806
-void		draw_hud_text(59,2647
-void		draw_hud(89,3476
+void		draw_hud_text(59,2646
+void		draw_hud(89,3488
 
 drawers.c,279
 unsigned int	get_pixel(15,913
@@ -46,7 +46,7 @@ init.c,106
 #define ARGB 14,912
 void	ft_skybox_init(16,951
 void	ft_camera_init(24,1308
-void	ft_init_image(64,2784
+void	ft_init_image(75,3532
 
 keys_azaporoz.c,159
 void	azaporoz_keys_down(15,913
@@ -124,8 +124,8 @@ void	restart_enemy(28,1345
 void	burning_boss(42,1689
 void	ft_move_boss(55,2149
 void	ft_move_bullet(90,3304
-void	ft_sprite_loop(128,4214
-void	ft_draw_sprites(234,7577
+void	ft_sprite_loop(128,4297
+void	ft_draw_sprites(234,7660
 
 start_screen.c,316
 t_sprite	*start_enemy(start_enemy17,934

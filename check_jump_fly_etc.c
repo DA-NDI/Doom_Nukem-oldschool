@@ -27,20 +27,17 @@ void	ft_check_jump(t_wolf *holder)
 			holder->advanced = normal;
 			holder->extra_updown = 0;
 		}
-		printf ("i'm jumping, holder->extra_updown == %d\n", holder->extra_updown);
 	}
-//		holder->jumping = 1;
 }
 
 void	ft_check_fly(t_wolf *holder)
 {
-	if (holder->advanced == flying && holder->keys.f == 1 && holder->hud->jetpack > 0)
+	if (holder->advanced == flying && holder->keys.f ==\
+	1 && holder->hud->jetpack > 0)
 	{
 		holder->lifted++;
 		holder->hud->jetpack--;
 		holder->extra_updown = holder->lifted;
-		printf ("i'm flying holder->lifted = %d updown = %d	\
-holder->start_point = %d, holder->extra_updown == %d\n", holder->lifted, holder->updown, holder->start_point, holder->extra_updown);
 	}
 	if (holder->advanced == flying && holder->keys.f == 0)
 	{
@@ -54,6 +51,7 @@ holder->start_point = %d, holder->extra_updown == %d\n", holder->lifted, holder-
 	if (abs(holder->extra_updown) > 1000)
 		holder->extra_updown = 0;
 }
+
 void	ft_check_sit(t_wolf *holder)
 {
 	if (holder->advanced == crouch)
@@ -73,10 +71,9 @@ void	ft_check_sit(t_wolf *holder)
 				holder->extra_updown = 0;
 			}
 		}
-		// printf("i'm crouching, holder->extra_updown == %d\n", holder->extra_updown);
-
 	}
 }
+
 void	ft_check_getup(t_wolf *holder, const Uint8 *keystate)
 {
 	if (keystate[SDL_SCANCODE_LCTRL])
@@ -84,9 +81,9 @@ void	ft_check_getup(t_wolf *holder, const Uint8 *keystate)
 		holder->keys.y -= 100;
 	}
 }
+
 void	ft_check_advanced_move(t_wolf *holder, const Uint8 *keystate)
 {
-
 	ft_check_jump(holder);
 	ft_check_fly(holder);
 	ft_check_sit(holder);
