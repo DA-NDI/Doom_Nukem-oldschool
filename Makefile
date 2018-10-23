@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/09/26 18:09:10 by avolgin          ###   ########.fr        #
+#    Updated: 2018/10/23 14:33:11 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,8 +33,8 @@ SRC_WOLF =./init.c \
 	line_azap.c \
 	keys_azaporoz_2.c start_screen_2.c start_screen_3_nps.c \
 	draw_floor_main.c \
-	get_pixel.c
-
+	get_pixel.c \
+	start_screen_4_nps.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 
