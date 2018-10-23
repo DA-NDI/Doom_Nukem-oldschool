@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:36:22 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/07 19:27:14 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 17:44:28 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,49 @@ int		**ft_create_height_map(int fd)
 	return height_map;
 }
 
+void			free_words(char **words)
+{
+	int i;
+
+	i = 0;
+	while (words[i])
+	{
+		free(words[i]);
+		i++;
+	}
+	free(words);
+	words = NULL;
+}
+
+void	skip_first_lines(int fd)
+{
+	char	*line;
+	char	**cords;
+	int		l;
+
+	if (!(get_next_line(fd, &line)))
+	{
+		free(line);
+		exit(0);
+	}
+	cords = ft_strsplit(line, ' ');
+	free(line);
+	if (!cords[0])
+	{
+		free_words(cords);
+		exit(0);
+	}
+	l = ft_atoi(cords[0]);
+	while (l--)
+	{
+		get_next_line(fd, &line);
+		free(line);
+	}
+	get_next_line(fd, &line);
+	free(line);
+	free_words(cords);
+}
+
 char	**ft_create_map(char **argv, t_wolf *holder)
 {
 	int			fd;
@@ -176,6 +219,7 @@ char	**ft_create_map(char **argv, t_wolf *holder)
 	i = 0;
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_print_error("Failed to open map file");
+	skip_first_lines(fd);
 	while ((ret = get_next_line(fd, &buff)) == 1 && ft_strstr(buff, "Height map:") == NULL)
 	{
 		if (ft_strlen(buff) > 100 || i >= 100)
