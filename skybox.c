@@ -41,6 +41,7 @@ void	draw_skybox(t_wolf *holder, t_camera *camera)
 		srcrec.x -= (DIR_Y >= 0) ? ((atan2(DIR_Y, DIR_X) / 3.14) * 180) * \
 		(w / 360) : (360 + (atan2(DIR_Y, DIR_X) / 3.14) * 180) * (w / 360);
 	srcrec.w = (TEX_NUM != 0) ? w >> 2 : w >> 1;
+	draw_skybox_2(holder, &dstrec, &srcrec);
 	SDL_RenderCopy(RENDER, camera->skybox_tex[TEX_NUM], &srcrec, &dstrec);
 	if (TEX_NUM == 0)
 		SDL_RenderCopy(holder->renderer, camera->skybox_tex[1], NULL, &dstrec);

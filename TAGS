@@ -1,0 +1,263 @@
+
+check_jump_fly_etc.c,147
+void	ft_check_jump(15,913
+void	ft_check_fly(35,1374
+void	ft_check_sit(57,2141
+void	ft_check_getup(80,2628
+void	ft_check_advanced_move(87,2757
+
+draw_floor1_fixed.c,27
+void			draw_floor1(15,913
+
+draw_hud.c,109
+void		ft_hud_init(15,913
+void		draw_hud_icons(41,1806
+void		draw_hud_text(59,2647
+void		draw_hud(89,3476
+
+drawers.c,279
+unsigned int	get_pixel(15,913
+void			draw_fps(33,1258
+void			draw_text(60,1954
+unsigned int alter_color_fixed(76,2419
+unsigned int alter_color(110,3180
+void			draw_floor_simple(134,3636
+void			draw_floor2(202,6210
+void			draw_floor1(248,7847
+void			draw_floor(303,10114
+
+drawers_extra.c,26
+void			draw_score(15,913
+
+extra_keys.c,157
+void		ft_check_skybox(15,913
+void		ft_check_weapons(25,1150
+void		ft_check_extra_keys(49,1525
+void		ft_gun_fire_on(74,2048
+void		ft_check_click(88,2305
+
+fixed_point.c,90
+int		f_to_raw(13,892
+int		i_to_raw(18,950
+float	raw_to_f(23,994
+int		raw_to_i(28,1047
+
+init.c,106
+#define ARGB 14,912
+void	ft_skybox_init(16,951
+void	ft_camera_init(24,1308
+void	ft_init_image(64,2784
+
+keys_azaporoz.c,159
+void	azaporoz_keys_down(15,913
+void	azaporoz_keys_up(53,1808
+void	azaporoz_left_right(86,2507
+void	azaporoz_action(104,2984
+void	azaporoz_rotate(124,3474
+
+line_azap.c,153
+int get_line_intersection(15,913
+t_mouse lineLineIntersection(39,1543
+void			draw_walls_azap(75,2114
+float	ft_cos(105,2904
+void	draw_lines(114,3069
+
+loaders.c,196
+SDL_Texture	*load_tex(load_tex15,913
+void		apply_texture(37,1392
+SDL_Surface	*load_image(load_image47,1601
+Mix_Music	*load_music(load_music60,1824
+Mix_Chunk	*load_chunk(load_chunk69,1978
+
+main.c,141
+void		ft_close(15,913
+void		ft_print_error(31,1314
+t_wolf		*holder_init(holder_init38,1408
+void		start_game(66,2084
+int			main(91,2723
+
+mainloop.c,241
+void		ft_check_pause(23,1076
+void		ft_check_other(49,1857
+void		mouse_move(71,2694
+void		check_button(91,3467
+void		check_mousebuttons(115,3972
+void		check_teleport(134,4443
+void		ft_check_retry(148,4740
+void		ft_close_loop(167,5173
+
+play_sounds.c,25
+void	play_pistol(15,913
+
+player_coordinates.c,105
+void	get_player_coordinates(15,913
+int 	get_sprite_amount(42,1423
+int		get_sprite_coordinates(62,1673
+
+raycasting.c,180
+void			check_ray(16,931
+void			check_hit(40,1429
+void			draw_walls(72,2418
+void			raycasting_loop(114,4232
+void 			ft_check_next_level(146,5406
+void			ft_raycasting(172,5930
+
+skybox.c,53
+void	draw_skybox_2(15,913
+void	draw_skybox(26,1172
+
+sprite.c,482
+#define SPRITE 14,912
+#define SPRITE_X 15,934
+#define SPRITE_Y 16,969
+#define START_X 17,1004
+#define START_Y 18,1042
+#define END_X 19,1080
+#define END_Y 20,1113
+#define TRANSFORM_Y 21,1146
+#define SPRITE_W 22,1186
+#define X 23,1224
+#define Y 24,1244
+#define DIST_X 25,1264
+#define DIST_Y 26,1304
+void	restart_enemy(28,1345
+void	burning_boss(42,1689
+void	ft_move_boss(55,2149
+void	ft_move_bullet(90,3304
+void	ft_sprite_loop(128,4214
+void	ft_draw_sprites(234,7577
+
+start_screen.c,316
+t_sprite	*start_enemy(start_enemy17,934
+void 	start_arcade_sprite(34,1245
+void 	start_bullet_sprite(46,1582
+void 	start_car_sprite(61,1976
+void	load_sprite_tex_arcade(72,2261
+void	load_sprite_tex_bullet(104,3719
+void 	reload_sprites(122,4449
+void	load_sprite_tex_car(132,4665
+void	ft_start_screen(167,6098
+
+validate.c,233
+int		check_dimensions_and_symbols(15,913
+void 	check_amount(42,1614
+int		check_boundaries(68,2008
+void	ft_verify_map(94,2509
+int 	**ft_create_height_map(ft_create_height_map119,3113
+char	**ft_create_map(ft_create_map164,4027
+
+weapon.c,176
+#define WEAPON_TEX 14,912
+void	init_weapon(16,960
+void	init_greande_tex(41,2244
+void	init_weapon_grenade(62,3559
+void	init_weapon_demon(88,4805
+void	draw_weapon(124,6455
+
+weapon_extra.c,64
+void	init_shotgun_tex(15,913
+void	init_weapon_shotgun(39,2402
+
+includes/wolf3d.h,2733
+# define WOLF3D_H14,909
+# define DOWN 22,1056
+# define UP 23,1080
+# define LEFT 24,1100
+# define RIGHT 25,1124
+# define SPACE 26,1150
+# define P 27,1176
+# define MAP 28,1194
+# define P_X 29,1219
+# define P_Y 30,1249
+# define DIR_X 31,1279
+# define DIR_Y 32,1308
+# define PLANE_X 33,1337
+# define FULLSCREEN 34,1370
+# define OPENGL 35,1412
+# define C_Q 36,1446
+# define KEYDOWN 37,1516
+# define ROT_SPEED 38,1567
+# define WINDOW 39,1604
+# define MOV_SP 40,1635
+# define WHITE 41,1670
+# define LINE_H 42,1717
+# define WIDTH 43,1755
+# define HEIGHT 44,1784
+# define POINT 45,1815
+# define START_SCR 46,1890
+# define DELTA_DIST_X 47,1937
+# define DELTA_DIST_Y 48,1980
+# define WALL_X_FL 49,2023
+# define WALL_Y_FL 50,2067
+# define PERP_DIST_WALL 51,2111
+# define FLOOR_TEX_X 52,2166
+# define FLOOR_TEX_Y 53,2220
+# define CHECK_SIDE_0 54,2274
+# define CHECK_SIDE_1 55,2341
+# define CHECK_SIDE_2 56,2408
+# define CHECK_SIDE_3 57,2475
+# define MAP_CELL 58,2542
+# define FPS 59,2594
+# define TEX_NUM 60,2631
+# define RENDER 61,2667
+# define G 62,2700
+# define H 63,2723
+# define PIC 64,2748
+# define FIXED_POINT_ONE 65,2784
+# define INT_F(66,2818
+# define FLOAT_F(67,2847
+# define FIXED_I(68,2890
+# define FIXED_F(69,2921
+# define FIX_MULT(70,2962
+# define FIX_DIV(71,3001
+# define IS_SPRITE 72,3042
+# define SHOOTS 73,3079
+# define CURR_TEX 74,3112
+# define IS_ARC 75,3152
+# define DR_START 76,3189
+# define MOUSE_Y 77,3226
+# define CHECK_DOWN_X 78,3282
+# define CHECK_LEFT_X 79,3349
+# define CHECK_RIGHT_X 80,3416
+# define CHECK_LEFT_Y 81,3484
+# define CHECK_RIGHT_Y 82,3551
+# define CHECK_DOWN_Y 83,3619
+# define CHECK_UP_X_PLUS2 84,3686
+# define CHECK_UP_X_MINUS2 85,3761
+# define CHECK_UP_X 86,3837
+# define CHECK_UP_Y 87,3902
+# define PLANE_Y 88,3967
+# define ROUND(89,4000
+# define V_LEN(90,4040
+# define V_X_NORM(91,4081
+# define V_Y_NORM(92,4123
+# define MAXSPRITES 93,4165
+# define BUTTON_LEFT 94,4188
+# define AMMO 95,4258
+# define POLY_H 96,4290
+enum				e_adv98,4332
+	jumping,100,4348
+	flying,101,4358
+	crouch,102,4367
+	normal103,4376
+typedef int			t_intfix;106,4388
+typedef struct		s_mouse108,4413
+}					t_mouse;112,4461
+typedef struct		s_lines114,4477
+}					t_lines;120,4551
+typedef struct		s_hud122,4567
+}					t_hud;132,4721
+typedef struct		s_keys134,4735
+}					t_keys;153,4980
+typedef struct		s_camera155,4995
+}					t_camera;195,5759
+typedef struct 		s_sprite_tex197,5776
+} 					t_sprite_tex;201,5857
+typedef struct		s_sprite203,5879
+}					t_sprite;224,6278
+typedef struct		s_weapon226,6295
+}					t_weapon;238,6515
+typedef struct		s_start240,6532
+}					t_start;244,6608
+typedef struct		s_wolf246,6624
+}					t_wolf;299,7696
