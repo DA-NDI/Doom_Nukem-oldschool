@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:24:47 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/28 17:21:38 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/23 23:38:06 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ void		ft_close(t_wolf *holder)
 	free(holder->start);
 	TTF_Quit();
 	SDL_Quit();
-	system("leaks doom-nukem");
 	exit(0);
 }
 
 void		ft_print_error(char *str)
 {
 	ft_putendl(str);
-	system("leaks doom-nukem");
 	exit(1);
 }
 
@@ -84,14 +82,13 @@ void		start_game(t_wolf *holder)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	ft_hud_init(holder);
 	ft_raycasting(holder, 0);
-	system("leaks doom-nukem");
 }
 
 int			main(int argc, char **argv)
 {
 	static t_wolf	holder[1];
 
-	if (argc != 2 || !argv[1])
+	if (argc != 2 || !argv[1] || system("tar -xvzf package.tar"))
 		ft_print_error("Usage: ./doom-nukem <map>");
 	holder->map = ft_create_map(argv, holder);
 	ft_verify_map(holder->map, holder);
