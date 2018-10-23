@@ -139,7 +139,7 @@ void			raycasting_loop(t_wolf *holder, t_camera *camera, int x, \
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
-//		draw_lines(holder, buffer, x);
+		draw_lines(holder, buffer, x);
 	}
 }
 
