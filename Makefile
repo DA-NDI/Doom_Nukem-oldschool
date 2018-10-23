@@ -30,7 +30,8 @@ SRC_WOLF =./init.c \
 	keys_azaporoz.c \
 	draw_hud.c \
 	check_jump_fly_etc.c \
-	line_azap.c
+	line_azap.c \
+	keys_azaporoz_2.c 
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 

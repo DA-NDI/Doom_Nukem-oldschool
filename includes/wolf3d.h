@@ -359,4 +359,6 @@ unsigned int alter_color_fixed(unsigned int color, int coefficient);
 void	draw_lines(t_wolf *holder, unsigned int buffer[holder->height][holder->width], int x);
 int	get_sprite_amount(t_wolf *holder, char c);
 void 	reload_sprites(t_wolf *holder);
+void	azaporoz_keys_down_2(t_wolf *holder, t_camera *camera, int key);
+void	azaporoz_keys_up_2(t_wolf *holder, t_camera *camera, int key);
 #endif

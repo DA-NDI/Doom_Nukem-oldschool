@@ -14,26 +14,7 @@
 
 void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 {
-	if (key == SDLK_RIGHT)
-		holder->keys.right = 1;
-	if (key == SDLK_LEFT)
-		holder->keys.left = 1;
-	if (key == SDLK_UP)
-		holder->keys.up = 1;
-	if (key == SDLK_DOWN)
-		holder->keys.down = 1;
-	if (key == SDLK_w)
-		holder->keys.w = 1;
-	if (key == SDLK_s)
-		holder->keys.s = 1;
-	if (key == SDLK_a)
-		holder->keys.a = 1;
-	if (key == SDLK_d)
-		holder->keys.d = 1;
-	if (key == SDLK_LSHIFT)
-		MOV_SP = 0.16;
-	if (key == SDLK_RETURN)
-		holder->keys.enter = 1;
+	azaporoz_keys_down_2(holder, camera, key);
 	if (key == SDLK_LCTRL && holder->advanced == normal)
 	{
 		holder->keys.lctrl = 1;
@@ -41,7 +22,6 @@ void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 	}
 	if (key == SDLK_f && holder->advanced == normal && holder->updown >= 0)
 	{
-		
 		holder->advanced = flying;
 		holder->start_point = holder->updown;
 		holder->keys.f = 1;
@@ -52,33 +32,11 @@ void	azaporoz_keys_down(t_wolf *holder, t_camera *camera, int key)
 
 void	azaporoz_keys_up(t_wolf *holder, t_camera *camera, int key)
 {
-	if (key == SDLK_RIGHT)
-		holder->keys.right = 0;
-	if (key == SDLK_LEFT)
-		holder->keys.left = 0;
-	if (key == SDLK_UP)
-		holder->keys.up = 0;
-	if (key == SDLK_DOWN)
-		holder->keys.down = 0;
-	if (key == SDLK_w)
-		holder->keys.w = 0;
-	if (key == SDLK_s)
-		holder->keys.s = 0;
-	if (key == SDLK_a)
-		holder->keys.a = 0;
-	if (key == SDLK_d)
-		holder->keys.d = 0;
-	if (key == SDLK_RETURN)
-		holder->keys.enter = 0;
-	if (key == SDLK_LSHIFT)
-		MOV_SP = 0.07;
-	if (key == SDLK_LCTRL)
-		holder->keys.lctrl = 0;
+	azaporoz_keys_up_2(holder, camera, key);
 	if (key == SDLK_f)
 	{
 		holder->keys.f = 0;
 		holder->start_point = 0;
-//		holder->advanced = normal;
 		holder->lifted = 0;
 	}
 }
@@ -109,7 +67,6 @@ void	azaporoz_action(t_wolf *holder, t_camera *camera)
 			P_X += DIR_X * MOV_SP;
 		if (CHECK_UP_Y == '0' || CHECK_UP_Y == 'P')
 			P_Y += DIR_Y * MOV_SP;
-	
 	}
 	if (holder->keys.down || holder->keys.s)
 	{
