@@ -78,6 +78,7 @@ void		ft_gun_fire_on(t_wolf *holder)
 		holder->sprite[0]->tex_sprite[0] = \
 		holder->sprite[0]->s_tex->arr_sprite[G][0];
 		holder->sprite[0]->is_alive = 1;
+		holder->sprite[0]->is_sprite = 1;
 	}
 }
 

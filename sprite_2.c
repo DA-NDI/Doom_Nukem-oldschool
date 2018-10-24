@@ -24,6 +24,7 @@
 #define Y sprite->y
 #define DIST_X (abs((int)X - (int)P_X))
 #define DIST_Y (abs((int)Y - (int)P_Y))
+#define MP_CELL MAP[(int)s->y][(int)s->x]
 
 void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
@@ -33,7 +34,7 @@ void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 	sprite->x = sprite->orig_x;
 	sprite->y = sprite->orig_y;
 	sprite->is_alive = 1;
-	sprite->speed = sprite->speed + 0.1;
+	sprite->speed = sprite->speed + 0.3;
 	sprite->tex_sprite[0] = sprite->s_tex->arr_sprite[0][0];
 	sprite->end_frame = 5;
 }
@@ -100,10 +101,10 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 	}
 	fr_gun[0] = (fr_gun[0] == 3) ? 0 : fr_gun[0];
 	s->y = ((int)s->y < 0) ? 0 : s->y;
-	if (MAP[(int)s->y][(int)s->x] != '0' &&\
-	s->is_alive && MAP[(int)s->y][(int)s->x] <= '9')
+	if (MP_CELL != '0' && s->is_alive && MP_CELL <= '9')
 	{
 		MAP[(int)s->y][(int)s->x] = MAP[(int)s->y][(int)s->x] + 13;
 		s->is_alive = 0;
+		s->is_sprite = 0;
 	}
 }

@@ -22,21 +22,19 @@
 void	ft_check_next_level(t_wolf *holder)
 {
 	int				i;
-	static char		*map[50];
 	int				tmp;
 
 	tmp = -1;
-	map[1] = "./maps/map2.txt";
-	if (holder->frags >= 5)
+	if (holder->frags >= 1)
 	{
-		holder->hud->level = 2;
+		holder->hud->level++;
 		i = -1;
 		while (holder->map[++i])
 			free(holder->map[i]);
 		i = -1;
 		while (holder->height_map[++i])
 			free(holder->height_map[i]);
-		holder->map = ft_create_map(map, holder);
+		holder->map = ft_create_map("./maps/map2.txt", holder);
 		holder->ceiling = 0;
 		holder->frags = 0;
 		while (++tmp < holder->sprite_tex[0]->amount)
@@ -52,21 +50,23 @@ void	ft_check_pickups(t_wolf *holder)
 	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
 	{
-		if (fabsf(holder->sprite[a + 7]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 7]->y - P_Y) < 0.5)
+		if (fabsf(holder->sprite[a + 7]->x - P_X) < 1 && \
+			fabsf(holder->sprite[a + 7]->y - P_Y) < 1 && \
+			holder->sprite[a + 7]->is_sprite)
 		{
-			holder->energy++;
-			holder->sprite[a + 7]->is_alive = 0;
+			holder->energy += 10;
+			holder->sprite[a + 7]->is_sprite = 0;
 		}
 	}
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount)
 	{
 		if (fabsf(holder->sprite[a + 10]->x - P_X) < 1 && \
-			fabsf(holder->sprite[a + 10]->y - P_Y) < 1)
+			fabsf(holder->sprite[a + 10]->y - P_Y) < 1 && \
+			holder->sprite[a + 10]->is_sprite)
 		{
-			holder->hud->ammo++;
-			holder->sprite[a + 10]->is_alive = 0;
+			holder->hud->ammo += 5;
+			holder->sprite[a + 10]->is_sprite = 0;
 		}
 	}
 	ft_check_pickups2(holder, -1);
@@ -88,6 +88,58 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 		ft_move_bullet(holder, holder->sprite[1]);
 	}
 	return (i);
+}
+
+void 	ft_swap_i(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void 	ft_swap_f(float *a, float *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void 	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
+{
+	int 	order[30];
+	float 	dist[30];
+
+	while (++i < num)
+    {
+      order[i] = i;
+      dist[i] = ((P_X - sprites[i]->x) * (P_X - sprites[i]->x) + (P_Y - sprites[i]->y) * (P_Y - sprites[i]->y)); //sqrt not taken, unneeded
+    }
+	int gap = num;
+	int swapped = 0;
+	while(gap > 1 || swapped)
+	{
+    //shrink factor 1.3
+    	gap = (gap * 10) / 13;
+    	if(gap == 9 || gap == 10)
+    		gap = 11;
+    	if (gap < 1)
+    		gap = 1;
+    	swapped = 0;
+    	for(int i = 0; i < num - gap; i++)
+    	{
+      		int j = i + gap;
+      		if(dist[i] < dist[j])
+      		{
+        		ft_swap_f(&dist[i], &dist[j]);
+        		ft_swap_i(&order[i], &order[j]);
+        		swapped = 1;
+      		}
+    	}
+  	}
 }
 
 void	ft_raycasting_2(t_wolf *holder,\

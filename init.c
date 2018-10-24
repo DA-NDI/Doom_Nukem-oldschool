@@ -64,10 +64,10 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->is_hit = 0;
 	camera->move_speed = 0.04;
 	camera->rot_speed = -0.06;
-	if (!(camera->font = TTF_OpenFont("./src/font.ttf", 20)))
+	if (!(camera->font = TTF_OpenFont("./resourses/font.ttf", 20)))
 		ft_print_error("Unable to load font");
 	ft_camera_init_2(camera);
-	camera->dstelept = load_chunk("resourses/dstelept.wav");
+	camera->dstelept = load_chunk("./resourses/dstelept.wav");
 	camera->intensity = 1;
 	ft_skybox_init(camera, holder);
 }

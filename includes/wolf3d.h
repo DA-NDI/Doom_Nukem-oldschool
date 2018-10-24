@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/24 00:17:37 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/24 19:04:25 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@
 # define CHECK_DOWN_X MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP)]
 # define CHECK_LEFT_X MAP[(int)(P_Y)][(int)(P_X - DIR_Y * MOV_SP)]
 # define CHECK_RIGHT_X MAP[(int)(P_Y)][(int)(P_X + DIR_Y * MOV_SP)]
+# define CHECK_L_X_2 MAP[(int)(P_Y + DIR_Y * MOV_SP) + 1][(int)(P_X)]
+# define CHECK_R_X_2 MAP[(int)(P_Y + DIR_Y * MOV_SP) + 1][(int)(P_X)]
 # define CHECK_LEFT_Y MAP[(int)(P_Y + DIR_X * MOV_SP)][(int)(P_X)]
 # define CHECK_RIGHT_Y MAP[(int)(P_Y - DIR_X * MOV_SP)][(int)(P_X)]
 # define CHECK_DOWN_Y MAP[(int)(P_Y - DIR_Y * MOV_SP)][(int)(P_X)]
-# define CHECK_UP_X_PLUS2 MAP[(int)(P_Y)][(int)(P_X + DIR_X * MOV_SP) + 2]
-# define CHECK_UP_X_MINUS2 MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP) - 2]
+# define CHECK_UP_X_PLUS2 MAP[(int)(P_Y)][(int)(P_X + DIR_X * MOV_SP) + 1]
+# define CHECK_UP_X_MINUS2 MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP) - 1]
 # define CHECK_UP_X MAP[(int)(P_Y)][(int)(P_X + DIR_X * MOV_SP)]
 # define CHECK_UP_Y MAP[(int)(P_Y + DIR_Y * MOV_SP)][(int)(P_X)]
 # define PLANE_Y camera->plane_y
@@ -316,7 +318,7 @@ void				ft_close_loop(t_wolf *holder, t_camera *camera);
 SDL_Surface			*ft_load_bmp(t_wolf *holder, char *path);
 SDL_Surface			*ft_load_png(t_wolf *holder, char *path);
 void				ft_close(t_wolf *holder);
-char				**ft_create_map(char **argv, t_wolf *holder);
+char				**ft_create_map(char *path, t_wolf *holder);
 void				ft_verify_map(char **map, t_wolf *holder);
 void				get_player_coordinates(t_wolf *holder, char c);
 void				ft_raycasting(t_wolf *holder, int x);
@@ -427,5 +429,5 @@ void				check_amount(char **map, int i, int j);
 int					check_boundaries(char **map, int height);
 int					**ft_create_height_map(int fd);
 void				skip_first_line(int fd);
-
+void				ft_check_bullet_collision(t_wolf *holder, int a);
 #endif

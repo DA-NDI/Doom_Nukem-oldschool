@@ -16,11 +16,12 @@ void	ft_check_pickups3(t_wolf *holder, int a)
 {
 	while (++a < holder->sprite_tex[6]->amount)
 	{
-		if (fabsf(holder->sprite[a + 19]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 19]->y - P_Y) < 0.5)
+		if (fabsf(holder->sprite[a + 19]->x - P_X) < 1 && \
+			fabsf(holder->sprite[a + 19]->y - P_Y) < 1 && \
+			holder->sprite[a + 19]->is_sprite)
 		{
-			holder->hud->hp++;
-			holder->sprite[a + 19]->is_alive = 0;
+			holder->hud->hp += 10;
+			holder->sprite[a + 19]->is_sprite = 0;
 		}
 	}
 }
@@ -29,22 +30,25 @@ void	ft_check_pickups2(t_wolf *holder, int a)
 {
 	while (++a < holder->sprite_tex[4]->amount)
 	{
-		if (fabsf(holder->sprite[a + 13]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 13]->y - P_Y) < 0.5)
+		if (fabsf(holder->sprite[a + 13]->x - P_X) < 1 && \
+			fabsf(holder->sprite[a + 13]->y - P_Y) < 1 && \
+			holder->sprite[a + 13]->is_sprite)
 		{
 			holder->hp++;
-			holder->sprite[a + 13]->is_alive = 0;
+			holder->sprite[a + 13]->is_sprite = 0;
 		}
 	}
 	a = -1;
 	while (++a < holder->sprite_tex[5]->amount)
 	{
-		if (fabsf(holder->sprite[a + 16]->x - P_X) < 0.5 && \
-			fabsf(holder->sprite[a + 16]->y - P_Y) < 0.5)
+		if (fabsf(holder->sprite[a + 16]->x - P_X) < 1 && \
+			fabsf(holder->sprite[a + 16]->y - P_Y) < 1 && \
+			holder->sprite[a + 16]->is_sprite)
 		{
-			holder->hud->hp++;
-			holder->sprite[a + 16]->is_alive = 0;
+			holder->hud->hp += 10;
+			holder->sprite[a + 16]->is_sprite = 0;
 		}
 	}
 	ft_check_pickups3(holder, -1);
+	ft_check_bullet_collision(holder, -1);
 }

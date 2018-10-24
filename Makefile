@@ -6,7 +6,7 @@
 #    By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/10/23 23:56:56 by azulbukh         ###   ########.fr        #
+#    Updated: 2018/10/24 19:04:04 by avolgin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRC_WOLF =./init.c \
 	start_screen_4_nps.c \
 	pickup.c \
 	validate2.c \
-	validate3.c	
+	validate3.c	\
+	bullet_collision.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 
@@ -71,6 +72,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJECT_WOLF)
 	make -C ./src/libft
+	make -C ./map_editor
 	@echo "\033[0;32mDoom-nukem compiled\033[0;0m"
 	@gcc -o $(NAME) $(FLAGS) $(LIBFT) $(INCLUDES_SDL2) $(INCLUDES_SDL2_IMAGE) -rpath @loader_path/src/sdl $(FRAMEWORK_SDL2) $(OBJECT_WOLF) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 
@@ -83,11 +85,13 @@ $(INCLUDES_SDL2_IMAGE) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 $(INCLUDES_SDL2_IMAGE) $(INCLUDES_SDL2_TTF) $(INCLUDES_SDL2_MIXER)
 
 clean:
+	make -C ./map_editor
 	make -C ./src/libft clean
 	/bin/rm -f $(OBJECT_WOLF)
 	rm -f TAGS
 
 fclean: clean
+	/bin/rm -f ./map_editor/map
 	/bin/rm -f ./src/libft/libft.a
 	/bin/rm -f $(NAME)
 

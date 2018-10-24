@@ -62,28 +62,28 @@ void		ft_check_other(t_wolf *holder, const Uint8 *keystate)
 
 void		check_button(t_wolf *holder, t_camera *camera)
 {
-	if (CHECK_UP_X_PLUS2 == ':' && holder->keys.t)
+	if ((CHECK_UP_X_PLUS2 == ':' || CHECK_UP_X_PLUS2 == ';' ||\
+		CHECK_UP_X_MINUS2 == ';' || CHECK_UP_X_PLUS2 == ';' ||\
+		CHECK_L_X_2 == ';' || CHECK_L_X_2 == ':' || CHECK_R_X_2 == ';' ||\
+		CHECK_R_X_2 == ':') && holder->keys.t)
 	{
+		if (CHECK_UP_X_PLUS2 == ':')
+			CHECK_UP_X_PLUS2 = ';';
+		else if (CHECK_UP_X_PLUS2 == ';')
+			CHECK_UP_X_PLUS2 = ':';
+		else if (CHECK_UP_X_MINUS2 == ':')
+			CHECK_UP_X_MINUS2 = ';';
+		else if (CHECK_UP_X_MINUS2 == ';')
+			CHECK_UP_X_MINUS2 = ':';
+		else if (CHECK_L_X_2 == ':')
+			CHECK_L_X_2 = ';';
+		else if (CHECK_L_X_2 == ';')
+			CHECK_L_X_2 = ':';
+		else if (CHECK_R_X_2 == ':')
+			CHECK_R_X_2 = ';';
+		else if (CHECK_R_X_2 == ';')
+			CHECK_R_X_2 = ':';
 		holder->keys.t = 0;
-		holder->shadows = 0;
-		CHECK_UP_X_PLUS2 = ';';
-	}
-	else if (CHECK_UP_X_PLUS2 == ';' && holder->keys.t)
-	{
-		holder->keys.t = 0;
-		holder->shadows = 1;
-		CHECK_UP_X_PLUS2 = ':';
-	}
-	else if (CHECK_UP_X_MINUS2 == ':' && holder->keys.t)
-	{
-		holder->keys.t = 0;
-		holder->shadows = 0;
-		CHECK_UP_X_MINUS2 = ';';
-	}
-	else if (CHECK_UP_X_MINUS2 == ';' && holder->keys.t)
-	{
-		holder->keys.t = 0;
-		holder->shadows = 1;
-		CHECK_UP_X_MINUS2 = ':';
+		holder->shadows = !holder->shadows;
 	}
 }

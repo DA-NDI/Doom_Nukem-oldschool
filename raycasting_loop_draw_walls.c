@@ -43,9 +43,11 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 
 	if (MAP_CELL == '9' && holder->hud->level == 2)
 		holder->wall_height = 100;
+	if (MAP_CELL == '1' && CHECK_SIDE_0)
+		holder->wall_height = -100;
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + \
-	holder->extra_updown - holder->wall_height;
+	holder->extra_updown;
 	camera->draw_start = HEIGHT / 2 - (LINE_H >> 1) + holder->updown + \
 	holder->extra_updown - holder->wall_height * 4;
 	camera->draw_start = (camera->draw_start < 0) ? 0 : camera->draw_start;

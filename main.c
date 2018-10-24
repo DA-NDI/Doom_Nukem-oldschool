@@ -78,9 +78,9 @@ void		start_game(t_wolf *holder)
 	holder->line[2].y2 = 100;
 	get_player_coordinates(holder, 'P');
 	ft_init_image(holder);
+	ft_hud_init(holder);
 	ft_start_screen(holder);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	ft_hud_init(holder);
 	ft_raycasting(holder, 0);
 }
 
@@ -88,9 +88,10 @@ int			main(int argc, char **argv)
 {
 	static t_wolf	holder[1];
 
-	if (argc != 2 || !argv[1] || system("tar -xvzf package.tar"))
-		ft_print_error("Usage: ./doom-nukem <map>");
-	holder->map = ft_create_map(argv, holder);
+	if (argc != 2 || !argv[1] || system("tar -xzf package"))
+		ft_print_error("Usage: ./doom-nukem <map_number, 3 for custom map>");
+	if (ft_strcmp(argv[1], "1") == 0)
+		holder->map = ft_create_map("./maps/map.txt", holder);
 	ft_verify_map(holder->map, holder);
 	start_game(holder);
 	return (0);

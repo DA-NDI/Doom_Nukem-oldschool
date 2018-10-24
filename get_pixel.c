@@ -16,6 +16,8 @@ unsigned int	get_pixel(SDL_Surface *surface, int x, int y)
 {
 	unsigned int	*pixels;
 
+	y = (y < 0 || y > 767) ? 0 : y;
+	x = (x < 0 || x > 1023) ? 0 : x;
 	pixels = (unsigned int*)surface->pixels;
 	return (pixels[(y * surface->w) + x]);
 }

@@ -132,7 +132,7 @@ unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
 	int		spr_int[3];
 	float	div[2];
 
-	if (!sprite->is_alive)
+	if (!sprite->is_sprite)
 		return ;
 	div[0] = 1;
 	div[1] = 1;

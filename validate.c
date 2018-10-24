@@ -75,14 +75,14 @@ void	skip_first_line(int fd)
 	free_words(cords);
 }
 
-char	**ft_create_map(char **argv, t_wolf *holder)
+char	**ft_create_map(char *path, t_wolf *holder)
 {
 	int			fdiret[3];
 	char		*buff;
 	static char	*map[50];
 
 	fdiret[1] = 0;
-	if ((fdiret[0] = open(argv[1], O_RDONLY)) < 0)
+	if ((fdiret[0] = open(path, O_RDONLY)) < 0)
 		ft_print_error("Failed to open map file");
 	skip_first_line(fdiret[0]);
 	while ((fdiret[2] = get_next_line(fdiret[0], &buff)) == 1 &&

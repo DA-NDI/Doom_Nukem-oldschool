@@ -36,6 +36,7 @@ void		start_arcade_sprite(t_wolf *holder, int num)
 	sprite->end_frame = 5;
 	sprite->s_tex = holder->sprite_tex[0];
 	holder->sprite[num] = sprite;
+	sprite->speed += holder->hud->level * 0.1;
 	sprite->tex_sprite[0] = holder->sprite_tex[0]->arr_sprite[0][0];
 }
 
@@ -51,6 +52,7 @@ void		start_bullet_sprite(t_wolf *holder, int num)
 	bullet->orig_y = bullet->y;
 	bullet->speed = 0.5;
 	bullet->sprite_found = 1;
+	bullet->is_sprite = 0;
 	bullet->tex_sprite[0] = holder->sprite_tex[1]->arr_sprite[0][0];
 }
 
