@@ -108,11 +108,12 @@ void 	ft_swap_f(float *a, float *b)
 	*b = tmp;
 }
 
-void 	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
+int 	*ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 {
-	int 	order[30];
+	int 	*order;
 	float 	dist[30];
 
+	order = malloc(sizeof(int) * 30);
 	while (++i < num)
     {
       order[i] = i;
@@ -140,36 +141,79 @@ void 	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
       		}
     	}
   	}
+  	return(order);
 }
+
+// void	ft_raycasting_2(t_wolf *holder,\
+// unsigned int buffer[holder->height][holder->width])
+// {
+// 	int a;
+
+// 	a = -1;
+// 	holder->frame_start = SDL_GetTicks();
+// 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
+// 	holder->current_height = (holder->current_height > 300) ? 0 : 0;
+// 	raycasting_loop(holder, holder->camera, -1, buffer);
+// 	while (++a < holder->sprite_tex[0]->amount)
+// 		ft_draw_sprites(holder, holder->camera, buffer, CAR);
+// 	a = -1;
+// 	while (++a < holder->sprite_tex[2]->amount)
+// 		ft_draw_sprites(holder, holder->camera, buffer, ARC);
+// 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
+// 	a = -1;
+// 	while (++a < holder->sprite_tex[6]->amount && a < 3)
+// 		ft_draw_sprites(holder, holder->camera, buffer, KOLA);
+// 	a = -1;
+// 	while (++a < holder->sprite_tex[5]->amount && a < 3)
+// 		ft_draw_sprites(holder, holder->camera, buffer, PEPS);
+// 	a = -1;
+// 	while (++a < holder->sprite_tex[4]->amount && a < 3)
+// 		ft_draw_sprites(holder, holder->camera, buffer, POT);
+// 	a = -1;
+// 	while (++a < holder->sprite_tex[3]->amount && a < 3)
+// 		ft_draw_sprites(holder, holder->camera, buffer, AMO);
+
+// 	ft_sort_sprite(holder, sprites, -1, int num);
+// 	for (int i = 0; i < num; i++)
+// 		ft_draw_sprites(holder, holder->camera, buffer, sprites[i]);
+// }
 
 void	ft_raycasting_2(t_wolf *holder,\
 unsigned int buffer[holder->height][holder->width])
 {
 	int a;
+	t_sprite *sprites[20];
+	int num;
 
+	num = 0;
 	a = -1;
 	holder->frame_start = SDL_GetTicks();
 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
 	holder->current_height = (holder->current_height > 300) ? 0 : 0;
 	raycasting_loop(holder, holder->camera, -1, buffer);
+
 	while (++a < holder->sprite_tex[0]->amount)
-		ft_draw_sprites(holder, holder->camera, buffer, CAR);
+		sprites[num++] = CAR;
 	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
-		ft_draw_sprites(holder, holder->camera, buffer, ARC);
+		sprites[num++] = ARC;
 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 	a = -1;
 	while (++a < holder->sprite_tex[6]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer, KOLA);
+		sprites[num++] = KOLA;
 	a = -1;
 	while (++a < holder->sprite_tex[5]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer, PEPS);
+		sprites[num++] = PEPS;
 	a = -1;
 	while (++a < holder->sprite_tex[4]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer, POT);
+		sprites[num++] = POT;
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount && a < 3)
-		ft_draw_sprites(holder, holder->camera, buffer, AMO);
+		sprites[num++] = AMO;
+	int *order = ft_sort_sprite(holder, sprites, -1, num);
+	for (int i = 0; i < num; i++)
+		ft_draw_sprites(holder, holder->camera, buffer, sprites[order[i]]);
+	free (order);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)
