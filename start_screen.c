@@ -37,6 +37,13 @@ void	ft_start_screen_2(t_wolf *holder, t_camera *camera, t_start *start)
 	load_pickupers(holder);
 }
 
+void 	ft_start_screen1(t_wolf *holder)
+{
+	draw_text(holder, " > Load map", holder->width / 2 - 10, holder->height / 2);
+	draw_text(holder, "	  Create map", WIDTH / 2 - 10, HEIGHT / 2 + 15);
+	draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);	
+}
+
 void	ft_start_screen(t_wolf *holder)
 {
 	t_camera	*camera;
