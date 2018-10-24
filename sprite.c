@@ -81,7 +81,9 @@ unsigned int buffer[holder->height][holder->width], int spr_int_w[4])
 	int				tex_y;
 	int				i;
 	unsigned int	color;
+	int				coefficient;
 
+	coefficient = (int)((float)sprite->distance * 256) / 70;
 	tex_x = (int)(256 * (START_X - (-SPRITE_W / 2 + spr_int_w[0])) *\
 	spr_int_w[2] / SPRITE_W) / 256;
 	if (TRANSFORM_Y > 0 && START_X > 0 && START_X < WIDTH && TRANSFORM_Y\
@@ -94,6 +96,8 @@ unsigned int buffer[holder->height][holder->width], int spr_int_w[4])
 			tex_y = (i - HEIGHT / 2 + spr_int_w[1] / 2 - (holder->updown +\
 			holder->extra_updown - spr_int_w[3])) * spr_int_w[2] / spr_int_w[1];
 			color = get_pixel(sprite->tex_sprite[0], tex_x, tex_y);
+			if (holder->shadows && color != 0)
+				color = alter_color_fixed(color, coefficient);
 			if (color != 0)
 				buffer[i][START_X] = color;
 		}

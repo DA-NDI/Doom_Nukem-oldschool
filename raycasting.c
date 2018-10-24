@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 22:01:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/28 15:52:50 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/24 21:33:54 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,108 +90,14 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 	return (i);
 }
 
-void 	ft_swap_i(int *a, int *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void 	ft_swap_f(float *a, float *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-int 	*ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
-{
-	int 	*order;
-	float 	dist[30];
-
-	order = malloc(sizeof(int) * 30);
-	while (++i < num)
-    {
-      order[i] = i;
-      dist[i] = ((P_X - sprites[i]->x) * (P_X - sprites[i]->x) + (P_Y - sprites[i]->y) * (P_Y - sprites[i]->y)); //sqrt not taken, unneeded
-    }
-	int gap = num;
-	int swapped = 0;
-	while(gap > 1 || swapped)
-	{
-    //shrink factor 1.3
-    	gap = (gap * 10) / 13;
-    	if(gap == 9 || gap == 10)
-    		gap = 11;
-    	if (gap < 1)
-    		gap = 1;
-    	swapped = 0;
-    	for(int i = 0; i < num - gap; i++)
-    	{
-      		int j = i + gap;
-      		if(dist[i] < dist[j])
-      		{
-        		ft_swap_f(&dist[i], &dist[j]);
-        		ft_swap_i(&order[i], &order[j]);
-        		swapped = 1;
-      		}
-    	}
-  	}
-  	return(order);
-}
-
-// void	ft_raycasting_2(t_wolf *holder,\
-// unsigned int buffer[holder->height][holder->width])
-// {
-// 	int a;
-
-// 	a = -1;
-// 	holder->frame_start = SDL_GetTicks();
-// 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
-// 	holder->current_height = (holder->current_height > 300) ? 0 : 0;
-// 	raycasting_loop(holder, holder->camera, -1, buffer);
-// 	while (++a < holder->sprite_tex[0]->amount)
-// 		ft_draw_sprites(holder, holder->camera, buffer, CAR);
-// 	a = -1;
-// 	while (++a < holder->sprite_tex[2]->amount)
-// 		ft_draw_sprites(holder, holder->camera, buffer, ARC);
-// 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
-// 	a = -1;
-// 	while (++a < holder->sprite_tex[6]->amount && a < 3)
-// 		ft_draw_sprites(holder, holder->camera, buffer, KOLA);
-// 	a = -1;
-// 	while (++a < holder->sprite_tex[5]->amount && a < 3)
-// 		ft_draw_sprites(holder, holder->camera, buffer, PEPS);
-// 	a = -1;
-// 	while (++a < holder->sprite_tex[4]->amount && a < 3)
-// 		ft_draw_sprites(holder, holder->camera, buffer, POT);
-// 	a = -1;
-// 	while (++a < holder->sprite_tex[3]->amount && a < 3)
-// 		ft_draw_sprites(holder, holder->camera, buffer, AMO);
-
-// 	ft_sort_sprite(holder, sprites, -1, int num);
-// 	for (int i = 0; i < num; i++)
-// 		ft_draw_sprites(holder, holder->camera, buffer, sprites[i]);
-// }
-
 void	ft_raycasting_2(t_wolf *holder,\
-unsigned int buffer[holder->height][holder->width])
+unsigned int buffer[holder->height][holder->width], int num)
 {
-	int a;
-	t_sprite *sprites[20];
-	int num;
+	int			a;
+	t_sprite	*sprites[20];
 
-	num = 0;
 	a = -1;
-	holder->frame_start = SDL_GetTicks();
-	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
-	holder->current_height = (holder->current_height > 300) ? 0 : 0;
 	raycasting_loop(holder, holder->camera, -1, buffer);
-
 	while (++a < holder->sprite_tex[0]->amount)
 		sprites[num++] = CAR;
 	a = -1;
@@ -210,10 +116,7 @@ unsigned int buffer[holder->height][holder->width])
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount && a < 3)
 		sprites[num++] = AMO;
-	int *order = ft_sort_sprite(holder, sprites, -1, num);
-	for (int i = 0; i < num; i++)
-		ft_draw_sprites(holder, holder->camera, buffer, sprites[order[i]]);
-	free (order);
+	drawing_sorting_sprites(holder, sprites, num, buffer);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)
@@ -223,7 +126,7 @@ void	ft_raycasting(t_wolf *holder, int x)
 
 	while (holder->running)
 	{
-		ft_raycasting_2(holder, buffer);
+		ft_raycasting_2(holder, buffer, 0);
 		ft_check_pickups(holder);
 		i = ft_raycasting_3(holder, i);
 		ft_check_next_level(holder);

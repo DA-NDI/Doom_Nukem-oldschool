@@ -79,6 +79,9 @@ void	raycasting_loop_2(t_wolf *holder, t_camera *camera, int x)
 void	raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
 unsigned int buffer[holder->height][holder->width])
 {
+	holder->frame_start = SDL_GetTicks();
+	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
+	holder->current_height = (holder->current_height > 300) ? 0 : 0;
 	while (++x < holder->width)
 	{
 		raycasting_loop_2(holder, camera, x);

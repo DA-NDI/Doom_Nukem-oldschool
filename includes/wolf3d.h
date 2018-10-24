@@ -222,6 +222,7 @@ typedef struct		s_sprite
 	float			orig_x;
 	float			orig_y;
 	float			speed;
+	float			distance;
 	int				is_alive;
 	int				is_sprite:1;
 	int				texture;
@@ -430,4 +431,6 @@ int					check_boundaries(char **map, int height);
 int					**ft_create_height_map(int fd);
 void				skip_first_line(int fd);
 void				ft_check_bullet_collision(t_wolf *holder, int a);
+void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
+	int num, unsigned int buffer[holder->height][holder->width]);
 #endif
