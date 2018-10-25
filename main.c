@@ -24,12 +24,14 @@ void		ft_close(t_wolf *holder)
 	free(holder->start);
 	TTF_Quit();
 	SDL_Quit();
+	system("leaks doom-nukem");
 	exit(0);
 }
 
 void		ft_print_error(char *str)
 {
 	ft_putendl(str);
+	system("leaks doom-nukem");
 	exit(1);
 }
 
@@ -85,13 +87,16 @@ void		start_game(t_wolf *holder)
 }
 
 int			main(int argc, char **argv)
-{
+{	
 	static t_wolf	holder[1];
+	char *map_name;
 
-	if (argc != 2 || !argv[1] || system("tar -xzf package"))
-		ft_print_error("Usage: ./doom-nukem <map_number, 3 for custom map>");
-	if (ft_strcmp(argv[1], "1") == 0)
-		holder->map = ft_create_map("./maps/map.txt", holder);
+	map_name = ft_strsub("./maps/", 0, 50);
+	if (argc != 3 || !argv[1] || !argv[2] || ft_strlen(argv[2]) > 30) //|| system("tar -xzf package"))
+		ft_print_error("Usage: \
+		./doom-nukem package <map_number 1-5, or name of custom map>");
+	map_name = ft_strcat(map_name, argv[2]);
+	holder->map = ft_create_map(map_name, holder);
 	ft_verify_map(holder->map, holder);
 	start_game(holder);
 	return (0);

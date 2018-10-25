@@ -34,7 +34,10 @@ void	ft_check_next_level(t_wolf *holder)
 		i = -1;
 		while (holder->height_map[++i])
 			free(holder->height_map[i]);
-		holder->map = ft_create_map("./maps/map2.txt", holder);
+		if (holder->hud->level == 2)
+			holder->map = ft_create_map("./maps/2", holder);
+		else
+			holder->map = ft_create_map("./maps/2", holder);
 		holder->ceiling = 0;
 		holder->frags = 0;
 		while (++tmp < holder->sprite_tex[0]->amount)

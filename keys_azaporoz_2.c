@@ -33,7 +33,7 @@ void	azaporoz_keys_down_2(t_wolf *holder, t_camera *camera, int key)
 	if (key == SDLK_LSHIFT && holder->energy)
 	{
 		holder->energy--;
-		MOV_SP = 0.16;
+		MOV_SP = 0.18;
 	}
 }
 

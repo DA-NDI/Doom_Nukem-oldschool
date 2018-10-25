@@ -62,7 +62,7 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	camera->map_x = 0;
 	camera->map_y = 0;
 	camera->is_hit = 0;
-	camera->move_speed = 0.04;
+	camera->move_speed = 0.08;
 	camera->rot_speed = -0.06;
 	if (!(camera->font = TTF_OpenFont("./resourses/font.ttf", 20)))
 		ft_print_error("Unable to load font");

@@ -82,6 +82,8 @@ void		ft_check_retry(t_wolf *holder, int key)
 		holder->pause = 0;
 		holder->frags = 0;
 		holder->retry_state = 0;
+		holder->hud->ammo = 25;
+		holder->hud->rockets = 5;
 		get_player_coordinates(holder, '0');
 	}
 	else if (key == SDLK_n && holder->retry_state)
