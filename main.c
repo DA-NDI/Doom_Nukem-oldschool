@@ -63,6 +63,43 @@ t_wolf		*holder_init(t_wolf *holder)
 	return (holder);
 }
 
+t_sprites 		*ft_sort_sprites_init(void)
+{
+	t_sprites 	*s_sorted;
+
+	s_sorted = (t_sprites*)malloc(sizeof(t_sprites));
+	s_sorted->order = malloc(sizeof(int) * 25);
+	s_sorted->dist = malloc(sizeof(float) * 25);
+	s_sorted->num = 0;
+
+	return (s_sorted);
+}
+
+void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
+{
+	int			a;
+
+	a = -1;
+	while (++a < holder->sprite_tex[0]->amount && a < 3)
+		s_sorted->all_sprites[num++] = CAR;
+	a = -1;
+	while (++a < holder->sprite_tex[2]->amount && a < 5)
+		s_sorted->all_sprites[num++] = ARC;
+	a = -1;
+	while (++a < holder->sprite_tex[6]->amount && a < 3)
+		s_sorted->all_sprites[num++] = KOLA;
+	a = -1;
+	while (++a < holder->sprite_tex[5]->amount && a < 3)
+		s_sorted->all_sprites[num++] = PEPSI;
+	a = -1;
+	while (++a < holder->sprite_tex[4]->amount && a < 3)
+		s_sorted->all_sprites[num++] = POT;
+	a = -1;
+	while (++a < holder->sprite_tex[3]->amount && a < 3)
+		s_sorted->all_sprites[num++] = AMO;
+	s_sorted->num = num;
+}
+
 void		start_game(t_wolf *holder)
 {
 	holder_init(holder);
@@ -83,6 +120,8 @@ void		start_game(t_wolf *holder)
 	ft_hud_init(holder);
 	ft_start_screen(holder);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	holder->sprites = ft_sort_sprites_init();
+	ft_sort_sprites_put(holder, holder->sprites, 0);
 	ft_raycasting(holder, 0);
 }
 

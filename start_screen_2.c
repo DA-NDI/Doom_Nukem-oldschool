@@ -43,7 +43,7 @@ void	load_sprite_tex_arcade(t_wolf *holder)
 	holder->sprite_tex[0] = sprite;
 	load_sprite_tex_arcade_2(sprite);
 	sprite->amount = get_sprite_amount(holder, 'A');
-	while (++tmp < sprite->amount)
+	while (++tmp < 5)
 		start_arcade_sprite(holder, tmp + 2);
 }
 
@@ -93,7 +93,7 @@ void	load_sprite_tex_car(t_wolf *holder)
 	holder->sprite_tex[2] = car;
 	load_sprite_tex_car_2(car);
 	car->amount = get_sprite_amount(holder, 'C');
-	while (++tmp < car->amount && tmp < 3)
+	while (++tmp < 3)
 	{
 		start_car_sprite(holder, tmp + 7);
 	}

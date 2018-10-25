@@ -94,6 +94,12 @@
 # define BUTTON_LEFT (holder->event.button.button == SDL_BUTTON_LEFT)
 # define AMMO holder->hud->ammo
 # define POLY_H camera->line_poly_height
+# define CAR holder->sprite[a + 2]
+# define AMO holder->sprite[a + 10]
+# define PEPSI holder->sprite[a + 16]
+# define KOLA holder->sprite[a + 19]
+# define POT holder->sprite[a + 13]
+# define ARC holder->sprite[a + 7]
 
 enum				e_adv
 {
@@ -113,6 +119,7 @@ typedef struct		s_tool
 	int				a;
 	char			**splitted;
 }					t_tool;
+
 
 typedef struct		s_mouse
 {
@@ -234,6 +241,14 @@ typedef struct		s_sprite
 	int				shoots;
 }					t_sprite;
 
+typedef struct 		s_sorted
+{
+	t_sprite		*all_sprites[22];
+	int				*order;
+	float			*dist;
+	int      		num;
+}					t_sprites;
+
 typedef struct		s_weapon
 {
 	SDL_Texture		*texture_sshotgun[29];
@@ -283,6 +298,7 @@ typedef struct		s_wolf
 	t_sprite		**sprite;
 	t_sprite_tex	**sprite_tex;
 	t_hud			*hud;
+	t_sprites		*sprites;
 	unsigned int	fps;
 	unsigned int	frame_delay;
 	unsigned int	frame_start;
@@ -388,7 +404,7 @@ void				load_sprite_tex_car(t_wolf *holder);
 ** azaporoz norminette:
 */
 
-t_sprite			*start_enemy(t_wolf *holder, int num);
+void				start_enemy(t_wolf *holder, int num, t_sprite *sprite);
 void				start_arcade_sprite(t_wolf *holder, int num);
 void				start_bullet_sprite(t_wolf *holder, int num);
 void				start_car_sprite(t_wolf *holder, int num);
@@ -431,4 +447,6 @@ void				skip_first_line(int fd);
 void				ft_check_bullet_collision(t_wolf *holder, int a);
 void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
 	int num, unsigned int buffer[holder->height][holder->width]);
+void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num);
+
 #endif

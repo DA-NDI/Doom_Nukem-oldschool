@@ -58,38 +58,39 @@ void	ft_sort_sprite1(int gap, int num, int *order, float *dist)
 	}
 }
 
-int		*ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
+void 	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 {
-	int		*order;
-	float	*dist;
+//	int		*order;
+//	float	*dist;
 	int		gap;
 	int		swapped;
 
-	order = malloc(sizeof(int) * 30);
-	dist = malloc(sizeof(float) * 30);
+//	order = malloc(sizeof(int) * 30);
+//	dist = malloc(sizeof(float) * 30);
 	gap = num;
 	swapped = 0;
 	while (++i < num)
 	{
-		order[i] = i;
-		dist[i] = ((P_X - sprites[i]->x) * (P_X - sprites[i]->x) + (P_Y\
+		holder->sprites->order[i] = i;
+		holder->sprites->dist[i] = ((P_X - sprites[i]->x) * (P_X - sprites[i]->x) + (P_Y\
 		- sprites[i]->y) * (P_Y - sprites[i]->y));
-		sprites[i]->distance = dist[i];
+		sprites[i]->distance = holder->sprites->dist[i];
 	}
-	ft_sort_sprite1(gap, num, order, dist);
-	free(dist);
-	return (order);
+	ft_sort_sprite1(gap, num, holder->sprites->order, holder->sprites->dist);
+//	free(dist);
 }
 
 void	drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, int num, \
 unsigned int buffer[holder->height][holder->width])
 {
-	int		*order;
 	int		i;
+static int a = 0;
 
 	i = -1;
-	order = ft_sort_sprite(holder, sprites, -1, num);
+	if (a % 4 == 0)
+	ft_sort_sprite(holder, sprites, -1, num);
+	a++;
 	while (++i < num)
-		ft_draw_sprites(holder, holder->camera, buffer, sprites[order[i]]);
-	free(order);
+		ft_draw_sprites(holder, holder->camera, buffer, sprites[holder->sprites->order[i]]);
+//	free(order);
 }

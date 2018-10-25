@@ -12,11 +12,8 @@
 
 #include <wolf3d.h>
 
-t_sprite	*start_enemy(t_wolf *holder, int num)
+void 	start_enemy(t_wolf *holder, int num, t_sprite *sprite)
 {
-	t_sprite *sprite;
-
-	sprite = (t_sprite*)malloc(sizeof(t_sprite));
 	holder->sprite[num] = sprite;
 	sprite->shoots = 0;
 	sprite->speed = 0.1;
@@ -24,14 +21,14 @@ t_sprite	*start_enemy(t_wolf *holder, int num)
 	sprite->sprite_found = 0;
 	sprite->is_sprite = 0;
 	sprite->end_frame = 0;
-	return (sprite);
 }
 
 void		start_arcade_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*sprite;
 
-	sprite = start_enemy(holder, num);
+	sprite = (t_sprite*)malloc(sizeof(t_sprite));
+	start_enemy(holder, num, sprite);
 	sprite->is_sprite = get_sprite_coordinates(holder, 'A', num);
 	sprite->end_frame = 5;
 	sprite->s_tex = holder->sprite_tex[0];
@@ -44,7 +41,8 @@ void		start_bullet_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*bullet;
 
-	bullet = start_enemy(holder, num);
+	bullet = (t_sprite*)malloc(sizeof(t_sprite));
+	start_enemy(holder, num, bullet);
 	bullet->s_tex = holder->sprite_tex[1];
 	bullet->x = P_X + holder->DIR_X;
 	bullet->y = P_Y + holder->DIR_Y;
@@ -60,7 +58,8 @@ void		start_car_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*car;
 
-	car = start_enemy(holder, num);
+	car = (t_sprite*)malloc(sizeof(t_sprite));
+	start_enemy(holder, num, car);
 	car->s_tex = holder->sprite_tex[2];
 	car->is_sprite = get_sprite_coordinates(holder, 'C', num);
 	car->texture = 99;

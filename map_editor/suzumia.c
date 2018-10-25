@@ -18,7 +18,7 @@ void			create_file(char *s, t_global *global)
 
 	if (!*s)
 		exit(0);
-	w = ft_strjoin("../maps/", s);
+	w = ft_strjoin("./maps/", s);
 	global->fd = open(w, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	free(w);
 	if (!global->fd)

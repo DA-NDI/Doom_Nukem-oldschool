@@ -12,21 +12,19 @@
 
 #include <wolf3d.h>
 #include <math.h>
-#define CAR holder->sprite[a + 2]
-#define AMO holder->sprite[a + 10]
-#define PEPS holder->sprite[a + 16]
-#define KOLA holder->sprite[a + 19]
-#define POT holder->sprite[a + 13]
-#define ARC holder->sprite[a + 7]
+
 
 void	ft_check_next_level(t_wolf *holder)
 {
 	int				i;
 	int				tmp;
+int num;
 
+num = 0;
 	tmp = -1;
 	if (holder->frags >= 1)
 	{
+		printf("RELOADED!!!!!!!!!!!!!!!!!!!\n");
 		holder->hud->level++;
 		i = -1;
 		while (holder->map[++i])
@@ -40,9 +38,57 @@ void	ft_check_next_level(t_wolf *holder)
 			holder->map = ft_create_map("./maps/2", holder);
 		holder->ceiling = 0;
 		holder->frags = 0;
+
+		holder->sprite_tex[0]->amount = get_sprite_amount(holder, 'A');
 		while (++tmp < holder->sprite_tex[0]->amount)
-			free(holder->sprite[tmp + 2]);
-		reload_sprites(holder);
+		{
+			num++;
+			start_enemy(holder, tmp + 2, holder->sprite[tmp + 2]);
+			holder->sprite[tmp + 2]->is_sprite = get_sprite_coordinates(holder, 'A', tmp + 2);
+			holder->sprite[tmp + 2]->end_frame = 5;
+		}
+		tmp = -1;
+		holder->sprite_tex[2]->amount = get_sprite_amount(holder, 'C');
+		while (++tmp < holder->sprite_tex[2]->amount)
+		{
+			num++;
+			start_enemy(holder, tmp + 7, holder->sprite[tmp + 7]);
+			holder->sprite[tmp + 7]->is_sprite = get_sprite_coordinates(holder, 'C', tmp + 7);
+		}
+		tmp = -1;
+		holder->sprite_tex[3]->amount = get_sprite_amount(holder, 'G');
+		while (++tmp < holder->sprite_tex[3]->amount)
+		{
+			num++;
+			start_enemy(holder, tmp + 10, holder->sprite[tmp + 10]);
+			holder->sprite[tmp + 10]->is_sprite = get_sprite_coordinates(holder, 'G', tmp + 10);
+		}
+		tmp = -1;
+		holder->sprite_tex[4]->amount = get_sprite_amount(holder, 'H');
+		while (++tmp < holder->sprite_tex[4]->amount)
+		{
+			num++;
+			start_enemy(holder, tmp + 13, holder->sprite[tmp + 13]);
+			holder->sprite[tmp + 13]->is_sprite = get_sprite_coordinates(holder, 'H', tmp + 13);
+		}
+		tmp = -1;
+		holder->sprite_tex[5]->amount = get_sprite_amount(holder, 'S');
+		while (++tmp < holder->sprite_tex[5]->amount)
+		{
+			num++;
+			start_enemy(holder, tmp + 16, holder->sprite[tmp + 16]);
+			holder->sprite[tmp + 16]->is_sprite = get_sprite_coordinates(holder, 'S', tmp + 16);
+		}
+		tmp = -1;
+		holder->sprite_tex[6]->amount = get_sprite_amount(holder, 'K');
+		while (++tmp < holder->sprite_tex[6]->amount)
+		{
+			num++;
+			start_enemy(holder, tmp + 19, holder->sprite[tmp + 19]);
+			holder->sprite[tmp + 19]->is_sprite = get_sprite_coordinates(holder, 'K', tmp + 19);
+		}
+		ft_sort_sprites_put(holder, holder->sprites, 0);
+		
 	}
 }
 
@@ -100,26 +146,23 @@ unsigned int buffer[holder->height][holder->width], int num)
 	t_sprite	*sprites[20];
 
 	a = -1;
-	raycasting_loop(holder, holder->camera, -1, buffer);
 	while (++a < holder->sprite_tex[0]->amount)
 		sprites[num++] = CAR;
 	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
 		sprites[num++] = ARC;
-	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 	a = -1;
 	while (++a < holder->sprite_tex[6]->amount && a < 3)
 		sprites[num++] = KOLA;
 	a = -1;
 	while (++a < holder->sprite_tex[5]->amount && a < 3)
-		sprites[num++] = PEPS;
+		sprites[num++] = PEPSI;
 	a = -1;
 	while (++a < holder->sprite_tex[4]->amount && a < 3)
 		sprites[num++] = POT;
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount && a < 3)
 		sprites[num++] = AMO;
-	drawing_sorting_sprites(holder, sprites, num, buffer);
 }
 
 void	ft_raycasting(t_wolf *holder, int x)
@@ -129,6 +172,9 @@ void	ft_raycasting(t_wolf *holder, int x)
 
 	while (holder->running)
 	{
+		raycasting_loop(holder, holder->camera, -1, buffer);
+		ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
+		drawing_sorting_sprites(holder, holder->sprites->all_sprites, holder->sprites->num, buffer);
 		ft_raycasting_2(holder, buffer, 0);
 		ft_check_pickups(holder);
 		i = ft_raycasting_3(holder, i);

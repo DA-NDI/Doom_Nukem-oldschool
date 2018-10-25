@@ -103,6 +103,7 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 	s->y = ((int)s->y < 0) ? 0 : s->y;
 	if (MP_CELL != '0' && s->is_alive && MP_CELL <= '9')
 	{
+		printf("global x = %f global y = %f\n", (HEIGHT * s->x) / 12, (WIDTH * s->y) / 9);
 		MAP[(int)s->y][(int)s->x] = MAP[(int)s->y][(int)s->x] + 13;
 		s->is_alive = 0;
 		s->is_sprite = 0;
