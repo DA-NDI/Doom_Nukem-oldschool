@@ -100,7 +100,7 @@ unsigned int buffer[holder->height][holder->width])
 		camera->wall_yy = P_X + camera->perp_wall_dist * camera->ray_dir_y;
 		camera->wall_x -= floor((camera->wall_x));
 		holder->zbuffer[x] = camera->perp_wall_dist;
-		draw_walls(holder, camera, buffer, x);
 		draw_floor(holder, camera, buffer, x);
+		draw_walls(holder, camera, buffer, x);
 	}
 }

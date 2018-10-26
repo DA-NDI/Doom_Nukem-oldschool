@@ -27,6 +27,7 @@ void	ft_free_create_map(t_wolf *holder)
 		holder->map = ft_create_map("./maps/2", holder);
 	else
 		holder->map = ft_create_map("./maps/2", holder);
+	ft_verify_map(holder->map, holder);
 	get_player_coordinates(holder, 'P');
 }
 
@@ -93,8 +94,9 @@ void	ft_check_next_level(t_wolf *holder)
 
 	num = 0;
 	a = -1;
-	if (holder->frags >= 1)
+	if (holder->frags >= 5)
 	{
+		init_mode(holder, holder->start->play_select);
 		holder->sprites->num = 0;
 		ft_free_create_map(holder);
 		holder->ceiling = 0;

@@ -451,9 +451,7 @@ void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
 void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num);
 void    ft_check_next_level(t_wolf *holder);
 void    ft_check_pickups(t_wolf *holder);
-void    init_normal_mode(t_wolf *holder);
-void    init_insane_mode(t_wolf *holder);
-void    init_brutal_mode(t_wolf *holder);
+void 				init_mode(t_wolf *holder, int n);
 
 void		ft_draw_menu_2(t_wolf *holder);
 

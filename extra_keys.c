@@ -58,12 +58,7 @@ void		ft_check_enter_start(t_wolf *holder, const Uint8 *keystate)
 		}
 		else if (holder->start->play_select && holder->starting == 2)
 		{
-			if (holder->start->play_select == 2)
-				init_normal_mode(holder);
-			else if (holder->start->play_select == 3)
-				init_insane_mode(holder);
-			else
-				init_brutal_mode(holder);
+			init_mode(holder, holder->start->play_select);
 			Mix_PlayMusic(holder->music, -1);
 			holder->starting = 0;
 		}

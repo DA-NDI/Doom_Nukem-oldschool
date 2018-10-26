@@ -15,9 +15,9 @@ void	ft_check_advanced_move(85,2387
 
 check_next_level.c,128
 void	ft_free_create_map(15,913
-void	reinit_sprites_1(33,1299
-void	reinit_sprites_2(60,2081
-void	ft_check_next_level(89,2904
+void	reinit_sprites_1(34,1336
+void	reinit_sprites_2(61,2118
+void	ft_check_next_level(90,2941
 
 close_error.c,53
 void		ft_close(15,913
@@ -31,7 +31,7 @@ void		draw_floor2_2(15,913
 void		draw_floor2(26,1254
 void		draw_floor1_2(55,2031
 void		draw_floor1_3(70,2547
-void		draw_floor1(80,2956
+void		draw_floor1(80,2990
 
 draw_hud.c,109
 void		ft_hud_init(15,913
@@ -53,9 +53,9 @@ extra_keys.c,194
 void		ft_check_skybox(15,913
 void		ft_check_weapons(25,1150
 void		ft_check_enter_start(49,1525
-void		ft_check_extra_keys(75,2157
-void		ft_gun_fire_on(91,2527
-void		ft_check_click(106,2820
+void		ft_check_extra_keys(70,2024
+void		ft_gun_fire_on(86,2394
+void		ft_check_click(101,2687
 
 fixed_point.c,90
 int		f_to_raw(13,892
@@ -73,10 +73,11 @@ void	ft_camera_init_2(24,1308
 void	ft_camera_init(52,2910
 void	ft_init_image(80,3612
 
-init_mode.c,92
+init_mode.c,117
 void	init_normal_mode(15,913
 void	init_insane_mode(29,1244
 void	init_brutal_mode(43,1572
+void 	init_mode(57,1895
 
 keys_azaporoz.c,157
 void	azaporoz_keys_down(15,913
@@ -229,12 +230,16 @@ void	free_words(37,1192
 void	skip_first_line(51,1322
 char	**ft_create_map(ft_create_map78,1727
 
-validate2.c,152
+validate2.c,258
 int		check_dimensions_and_symbols(15,913
 void	check_amount(44,1704
 int		check_boundaries(70,2098
 void	ft_verify_map(97,2600
-void	fill_map(122,3204
+	j 108,2776
+	i 109,2784
+	holder->map_width map_width116,2940
+	holder->map_height map_height117,2968
+void	fill_map(128,3312
 
 validate3.c,57
 int		**ft_create_height_map(ft_create_height_map15,913

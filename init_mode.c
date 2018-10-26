@@ -53,3 +53,13 @@ void	init_brutal_mode(t_wolf *holder)
 	holder->hud->level = 1;
 	holder->hud->enemy_speed = 1;
 }
+
+void 	init_mode(t_wolf *holder, int n)
+{
+	if (n == 2)
+		init_normal_mode(holder);
+	else if (n == 4)
+		init_brutal_mode(holder);
+	else if (n == 3)
+		init_insane_mode(holder);
+}
