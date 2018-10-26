@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 13:35:12 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/23 13:35:12 by azaporoz         ###   ########.fr       */
+/*   Updated: 2018/10/26 21:56:31 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void		draw_floor1_2(t_wolf *holder, float current[3], int i)
 
 void		draw_floor1_3(t_wolf *holder, float current[3], float old_new[2])
 {
-	current[2] = (current[2] > holder->map_height) ? holder->map_height : current[2];
+	current[2] = (current[2] > holder->map_height) ? \
+		holder->map_height : current[2];
 	holder->wall_height = (holder->height_map[(int)current[2]][(int)current[1]\
 	- 1] > 300) ? 300 / current[0] : holder->height_map[(int)current[2]]\
 	[(int)current[1] - 1] / current[0];

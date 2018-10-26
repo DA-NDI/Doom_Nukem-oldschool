@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 21:19:48 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 17:11:01 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 22:09:23 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,6 @@ void		ft_check_skybox(t_wolf *holder, const Uint8 *keystate)
 		holder->skybox_num = 2;
 	if (keystate[SDL_SCANCODE_R])
 		holder->skybox_num = 3;
-}
-
-void		ft_check_weapons(t_wolf *holder, const Uint8 *keystate)
-{
-	if (keystate[SDL_SCANCODE_1])
-	{
-		holder->gun = 0;
-		holder->gun_1 = 0;
-	}
-	if (keystate[SDL_SCANCODE_2])
-	{
-		holder->gun = 1;
-		holder->gun_1 = 1;
-	}
-	if (keystate[SDL_SCANCODE_3])
-	{
-		holder->gun = 2;
-		holder->gun_1 = 0;
-	}
-	if (keystate[SDL_SCANCODE_4])
-	{
-		holder->gun = 3;
-		holder->gun_1 = 0;
-	}
 }
 
 void		ft_check_enter_start(t_wolf *holder, const Uint8 *keystate)

@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/24 19:04:25 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 22:18:32 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@
 # define POT holder->sprite[a + 13]
 # define ARC holder->sprite[a + 7]
 # define SORTED holder->sprites->all_sprites
+
 enum				e_adv
 {
 	jumping,
@@ -120,7 +121,6 @@ typedef struct		s_tool
 	char			**splitted;
 }					t_tool;
 
-
 typedef struct		s_mouse
 {
 	int				x;
@@ -138,7 +138,7 @@ typedef struct		s_lines
 typedef struct		s_hud
 {
 	SDL_Texture		*hud[13];
-	float 			enemy_speed;
+	float			enemy_speed;
 	int				hp;
 	int				ammo;
 	int				lives;
@@ -242,12 +242,12 @@ typedef struct		s_sprite
 	int				shoots;
 }					t_sprite;
 
-typedef struct 		s_sorted
+typedef struct		s_sorted
 {
 	t_sprite		*all_sprites[22];
 	int				*order;
 	float			*dist;
-	int      		num;
+	int				num;
 }					t_sprites;
 
 typedef struct		s_weapon
@@ -446,13 +446,14 @@ int					check_boundaries(char **map, int height);
 int					**ft_create_height_map(int fd);
 void				skip_first_line(int fd);
 void				ft_check_bullet_collision(t_wolf *holder, int a);
-void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
+void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites,\
 	int num, unsigned int buffer[holder->height][holder->width]);
-void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num);
-void    ft_check_next_level(t_wolf *holder);
-void    ft_check_pickups(t_wolf *holder);
-void 				init_mode(t_wolf *holder, int n);
-
-void		ft_draw_menu_2(t_wolf *holder);
+void				ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, \
+					int num);
+void				ft_check_next_level(t_wolf *holder);
+void				ft_check_pickups(t_wolf *holder);
+void				init_mode(t_wolf *holder, int n);
+void				ft_check_weapons(t_wolf *holder, const Uint8 *keystate);
+void				ft_draw_menu_2(t_wolf *holder);
 
 #endif

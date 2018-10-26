@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:06:09 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/26 17:23:10 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 22:07:57 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,86 +38,6 @@ void		ft_check_pause(t_wolf *holder, const Uint8 *keystate)
 	}
 }
 
-void		ft_draw_menu_2(t_wolf *holder)
-{
-	if (holder->starting == 2)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
-		HEIGHT / 2 + 50);
-		draw_text(holder, "	> Normal", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, "   Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		SDL_RenderPresent(holder->renderer);
-	}
-}
-
-void		ft_check_menu_2(t_wolf *holder, const Uint8 *keystate)
-{
-	if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 2 &&\
-	holder->start->play_select == 2)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
-		HEIGHT / 2 + 50);
-		draw_text(holder, "	  Normal", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, " > Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		holder->start->play_select = 3;
-		SDL_RenderPresent(holder->renderer);
-	}
-	else if (keystate[SDL_SCANCODE_UP] && holder->starting == 2)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
-		HEIGHT / 2 + 50);
-		draw_text(holder, " > Normal", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, "	  Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		holder->start->play_select = 2;
-		SDL_RenderPresent(holder->renderer);
-	}
-	else if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 2 && \
-	holder->start->play_select == 3)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
-		HEIGHT / 2 + 50);
-		draw_text(holder, "   Normal", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, "	  Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, " > Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		holder->start->play_select = 4;
-		SDL_RenderPresent(holder->renderer);
-	}
-}
-
-void		ft_check_other(t_wolf *holder, const Uint8 *keystate)
-{
-	if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 1)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, "	  Play", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, " > Quit", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		holder->start->play_select = 0;
-		SDL_RenderPresent(holder->renderer);
-	}
-	else if (keystate[SDL_SCANCODE_UP] && holder->starting == 1)
-	{
-		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
-		draw_text(holder, " > Play", WIDTH / 2 - 10, HEIGHT / 2);
-		draw_text(holder, "	  Quit", WIDTH / 2 - 10, HEIGHT / 2 + 15);
-		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
-		holder->start->play_select = 1;
-		SDL_RenderPresent(holder->renderer);
-	}
-	ft_check_menu_2(holder, keystate);
-}
-
 void		check_button(t_wolf *holder, t_camera *camera)
 {
 	if ((CHECK_L_X_2 == ';' || CHECK_L_X_2 == ':') && holder->keys.t)
@@ -128,5 +48,29 @@ void		check_button(t_wolf *holder, t_camera *camera)
 			CHECK_L_X_2 = ':';
 		holder->keys.t = 0;
 		holder->shadows = !holder->shadows;
+	}
+}
+
+void		ft_check_weapons(t_wolf *holder, const Uint8 *keystate)
+{
+	if (keystate[SDL_SCANCODE_1])
+	{
+		holder->gun = 0;
+		holder->gun_1 = 0;
+	}
+	if (keystate[SDL_SCANCODE_2])
+	{
+		holder->gun = 1;
+		holder->gun_1 = 1;
+	}
+	if (keystate[SDL_SCANCODE_3])
+	{
+		holder->gun = 2;
+		holder->gun_1 = 0;
+	}
+	if (keystate[SDL_SCANCODE_4])
+	{
+		holder->gun = 3;
+		holder->gun_1 = 0;
 	}
 }

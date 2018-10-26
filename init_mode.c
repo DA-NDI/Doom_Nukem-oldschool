@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:50:43 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 17:02:12 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 21:15:59 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_brutal_mode(t_wolf *holder)
 	holder->hud->enemy_speed = 1;
 }
 
-void 	init_mode(t_wolf *holder, int n)
+void	init_mode(t_wolf *holder, int n)
 {
 	if (n == 2)
 		init_normal_mode(holder);

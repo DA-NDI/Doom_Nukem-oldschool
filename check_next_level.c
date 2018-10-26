@@ -12,11 +12,8 @@
 
 #include <wolf3d.h>
 
-void	ft_free_create_map(t_wolf *holder)
+void	ft_free_create_map(t_wolf *holder, int i)
 {
-	int		i;
-
-	i = -1;
 	holder->hud->level++;
 	while (holder->map[++i])
 		free(holder->map[i]);
@@ -33,8 +30,10 @@ void	ft_free_create_map(t_wolf *holder)
 		holder->map = ft_create_map("./maps/5", holder);
 	else
 	{
-		draw_text(holder, "RAKAMKAFO!!! THE BEST OF THE BEST!!!"\
-			, holder->width / 2, holder->height / 2);
+		draw_text(holder, "RAKAMAKAFO!!! THE BEST OF THE BEST!!!", \
+		WIDTH / 2, HEIGHT / 2);
+		SDL_RenderPresent(holder->renderer);
+		SDL_Delay(4000);
 		ft_close(holder);
 	}
 	ft_verify_map(holder->map, holder);
@@ -108,7 +107,7 @@ void	ft_check_next_level(t_wolf *holder)
 	{
 		init_mode(holder, holder->start->play_select);
 		holder->sprites->num = 0;
-		ft_free_create_map(holder);
+		ft_free_create_map(holder, -1);
 		holder->ceiling = 0;
 		holder->frags = 0;
 		reinit_sprites_1(holder, -1, num);
