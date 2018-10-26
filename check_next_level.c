@@ -25,8 +25,12 @@ void	ft_free_create_map(t_wolf *holder)
 		free(holder->height_map[i]);
 	if (holder->hud->level == 2)
 		holder->map = ft_create_map("./maps/2", holder);
-	else
-		holder->map = ft_create_map("./maps/2", holder);
+	else if (holder->hud->level == 3)
+		holder->map = ft_create_map("./maps/3", holder);
+	else if (holder->hud->level == 4)
+		holder->map = ft_create_map("./maps/4", holder);
+	else if (holder->hud->level == 5)
+		holder->map = ft_create_map("./maps/5", holder);
 	ft_verify_map(holder->map, holder);
 	get_player_coordinates(holder, 'P');
 }
