@@ -42,9 +42,13 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 	int tex[4];
 
 	if (MAP_CELL == '9' && holder->hud->level == 2)
-		holder->wall_height = 100;
+		holder->wall_height = -50;
 	if (MAP_CELL == '1' && CHECK_SIDE_0)
 		holder->wall_height = -100;
+	if (MAP_CELL == '3')
+		holder->wall_height = -100;
+	if (MAP_CELL == '4')
+		holder->wall_height = -140;
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + \
 	holder->extra_updown;

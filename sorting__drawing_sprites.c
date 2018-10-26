@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:32:00 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/24 21:33:58 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 12:41:04 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,39 +58,37 @@ void	ft_sort_sprite1(int gap, int num, int *order, float *dist)
 	}
 }
 
-void 	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
+void	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 {
-//	int		*order;
-//	float	*dist;
 	int		gap;
 	int		swapped;
 
-//	order = malloc(sizeof(int) * 30);
-//	dist = malloc(sizeof(float) * 30);
 	gap = num;
 	swapped = 0;
 	while (++i < num)
 	{
 		holder->sprites->order[i] = i;
-		holder->sprites->dist[i] = ((P_X - sprites[i]->x) * (P_X - sprites[i]->x) + (P_Y\
+		holder->sprites->dist[i] = ((P_X - sprites[i]->x) * \
+			(P_X - sprites[i]->x) + (P_Y	\
 		- sprites[i]->y) * (P_Y - sprites[i]->y));
 		sprites[i]->distance = holder->sprites->dist[i];
 	}
 	ft_sort_sprite1(gap, num, holder->sprites->order, holder->sprites->dist);
-//	free(dist);
 }
 
 void	drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, int num, \
 unsigned int buffer[holder->height][holder->width])
 {
-	int		i;
-static int a = 0;
+	int			i;
+	static int	a = 0;
 
 	i = -1;
 	if (a % 4 == 0)
-	ft_sort_sprite(holder, sprites, -1, num);
+		ft_sort_sprite(holder, sprites, -1, num);
 	a++;
+	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 	while (++i < num)
-		ft_draw_sprites(holder, holder->camera, buffer, sprites[holder->sprites->order[i]]);
-//	free(order);
+		ft_draw_sprites(holder, holder->camera, buffer, \
+						sprites[holder->sprites->order[i]]);
+	ft_check_pickups(holder);
 }

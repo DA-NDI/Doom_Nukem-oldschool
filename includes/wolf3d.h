@@ -100,7 +100,7 @@
 # define KOLA holder->sprite[a + 19]
 # define POT holder->sprite[a + 13]
 # define ARC holder->sprite[a + 7]
-
+# define SORTED holder->sprites->all_sprites
 enum				e_adv
 {
 	jumping,
@@ -448,5 +448,7 @@ void				ft_check_bullet_collision(t_wolf *holder, int a);
 void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
 	int num, unsigned int buffer[holder->height][holder->width]);
 void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num);
+void    ft_check_next_level(t_wolf *holder);
+void    ft_check_pickups(t_wolf *holder);
 
 #endif

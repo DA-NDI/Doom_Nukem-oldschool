@@ -6,13 +6,13 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 13:22:50 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/23 13:22:50 by azaporoz         ###   ########.fr       */
+/*   Updated: 2018/10/26 13:24:15 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
 
-void 	start_enemy(t_wolf *holder, int num, t_sprite *sprite)
+void	start_enemy(t_wolf *holder, int num, t_sprite *sprite)
 {
 	holder->sprite[num] = sprite;
 	sprite->shoots = 0;
@@ -23,7 +23,7 @@ void 	start_enemy(t_wolf *holder, int num, t_sprite *sprite)
 	sprite->end_frame = 0;
 }
 
-void		start_arcade_sprite(t_wolf *holder, int num)
+void	start_arcade_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*sprite;
 
@@ -37,7 +37,7 @@ void		start_arcade_sprite(t_wolf *holder, int num)
 	sprite->tex_sprite[0] = holder->sprite_tex[0]->arr_sprite[0][0];
 }
 
-void		start_bullet_sprite(t_wolf *holder, int num)
+void	start_bullet_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*bullet;
 
@@ -54,7 +54,7 @@ void		start_bullet_sprite(t_wolf *holder, int num)
 	bullet->tex_sprite[0] = holder->sprite_tex[1]->arr_sprite[0][0];
 }
 
-void		start_car_sprite(t_wolf *holder, int num)
+void	start_car_sprite(t_wolf *holder, int num)
 {
 	t_sprite	*car;
 

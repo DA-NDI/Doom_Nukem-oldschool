@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:04:44 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 21:06:55 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 13:21:43 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,33 @@ void	ft_check_pickups2(t_wolf *holder, int a)
 	}
 	ft_check_pickups3(holder, -1);
 	ft_check_bullet_collision(holder, -1);
+}
+
+void	ft_check_pickups(t_wolf *holder)
+{
+	int a;
+
+	a = -1;
+	while (++a < holder->sprite_tex[2]->amount)
+	{
+		if (fabsf(ARC->x - P_X) < 1 && \
+			fabsf(ARC->y - P_Y) < 1 && \
+			ARC->is_sprite)
+		{
+			holder->energy += 10;
+			ARC->is_sprite = 0;
+		}
+	}
+	a = -1;
+	while (++a < holder->sprite_tex[3]->amount)
+	{
+		if (fabsf(AMO->x - P_X) < 1 && \
+			fabsf(AMO->y - P_Y) < 1 && \
+			AMO->is_sprite)
+		{
+			holder->hud->ammo += 5;
+			AMO->is_sprite = 0;
+		}
+	}
+	ft_check_pickups2(holder, -1);
 }

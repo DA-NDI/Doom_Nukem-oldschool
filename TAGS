@@ -13,6 +13,16 @@ void	ft_check_sit(55,1852
 void	ft_check_getup(77,2257
 void	ft_check_advanced_move(85,2387
 
+check_next_level.c,128
+void	ft_free_create_map(15,913
+void	reinit_sprites_1(32,1261
+void	reinit_sprites_2(59,2050
+void	ft_check_next_level(87,2851
+
+close_error.c,53
+void		ft_close(15,913
+void		ft_print_error(31,1314
+
 draw_floor1_fixed.c,27
 void			draw_floor1(15,913
 
@@ -80,14 +90,12 @@ SDL_Surface	*load_image(load_image47,1601
 Mix_Music	*load_music(load_music60,1827
 Mix_Chunk	*load_chunk(load_chunk69,1981
 
-main.c,243
-void		ft_close(15,913
-void		ft_print_error(31,1314
-t_wolf		*holder_init(holder_init38,1408
-t_sprites 		*ft_sort_sprites_init(ft_sort_sprites_init66,2084
-void 		ft_sort_sprites_put(78,2336
-void		start_game(103,3056
-int			main(128,3707
+main.c,185
+t_wolf		*holder_init(holder_init15,913
+t_sprites	*ft_sort_sprites_init(ft_sort_sprites_init43,1589
+void		ft_sort_sprites_put(54,1837
+void		start_game(79,2555
+int			main(104,3206
 
 mainloop.c,149
 void		mouse_move(23,1076
@@ -114,12 +122,11 @@ int		get_sprite_amount(42,1462
 void	get_sprite_coordinates_2(62,1712
 int		get_sprite_coordinates(69,1883
 
-raycasting.c,155
-void	ft_check_next_level(17,932
-void	ft_check_pickups(86,3210
-int		ft_raycasting_3(115,3848
-void	ft_raycasting_2(133,4165
-void	ft_raycasting(159,4811
+raycasting.c,118
+void	ft_check_pickups(16,931
+int		ft_raycasting_3(45,1421
+void	ft_raycasting_2(63,1720
+void	ft_raycasting(89,2366
 
 raycasting_2.c,73
 void	check_ray(15,913
@@ -129,19 +136,19 @@ void	check_hit(49,1780
 raycasting_loop_draw_walls.c,113
 void	draw_walls_2(16,931
 void	draw_walls(39,1807
-void	raycasting_loop_2(67,2822
-void	raycasting_loop(79,3246
+void	raycasting_loop_2(71,2926
+void	raycasting_loop(83,3350
 
 skybox.c,53
 void	draw_skybox_2(15,913
 void	draw_skybox(26,1172
 
-sorting__drawing_sprites.c,144
+sorting__drawing_sprites.c,143
 void	ft_swap_i(15,913
 void	ft_swap_f(24,992
 void	ft_sort_sprite1(33,1075
-void 	ft_sort_sprite(61,1506
-void	drawing_sorting_sprites(83,2072
+void	ft_sort_sprite(61,1506
+void	drawing_sorting_sprites(79,1955
 
 sprite.c,467
 #define SPRITE 14,912
@@ -236,7 +243,7 @@ weapon_extra.c,64
 void	init_shotgun_tex(15,913
 void	init_weapon_shotgun(39,2402
 
-includes/wolf3d.h,7871
+includes/wolf3d.h,7897
 # define WOLF3D_H14,909
 # define DOWN 22,1056
 # define UP 23,1080
@@ -319,200 +326,201 @@ includes/wolf3d.h,7871
 # define KOLA 100,4403
 # define POT 101,4440
 # define ARC 102,4476
-enum				e_adv104,4512
-	jumping,106,4528
-	flying,107,4538
-	crouch,108,4547
-	normal109,4556
-typedef int			t_intfix;112,4568
-typedef struct		s_tool114,4593
-	char			*buff;buff116,4618
-	char			*buff_height[buff_height117,4633
-	int				i;118,4659
-	int				a;119,4670
-	char			**splitted;splitted120,4681
-}					t_tool;121,4701
-typedef struct		s_mouse124,4717
-	int				x;126,4743
-	int				y;127,4754
-}					t_mouse;128,4765
-typedef struct		s_lines130,4781
-	int				x1;132,4807
-	int				y1;133,4819
-	int				x2;134,4831
-	int				y2;135,4843
-}					t_lines;136,4855
-typedef struct		s_hud138,4871
-	SDL_Texture		*hud[hud140,4895
-	int				hp;141,4919
-	int				ammo;142,4931
-	int				lives;143,4945
-	int				rockets;144,4960
-	int				shield;145,4977
-	int				jetpack;146,4993
-	int				level;147,5010
-}					t_hud;148,5025
-typedef struct		s_keys150,5039
-	int				right;152,5064
-	int				left;153,5079
-	int				up;154,5093
-	int				down;155,5105
-	int				w;156,5119
-	int				s;157,5130
-	int				a;158,5141
-	int				d;159,5152
-	int				shift;160,5163
-	int				space;161,5178
-	int				yrel;162,5193
-	int				xrel;163,5207
-	int				x;164,5221
-	int				y;165,5232
-	int				f;166,5243
-	int				lctrl;167,5254
-	int				enter;168,5269
-	int				t;169,5284
-}					t_keys;170,5295
-typedef struct		s_camera172,5310
-	SDL_Surface		*texture[texture174,5337
-	SDL_Texture		*skybox_tex[skybox_tex175,5365
-	TTF_Font		*font;font176,5395
-	Mix_Chunk		*dstelept;dstelept177,5413
-	float			ray_dir_x;178,5436
-	float			ray_dir_y;179,5456
-	float			wall_x_f;180,5476
-	float			wall_y_f;181,5495
-	float			side_dist_x;182,5514
-	float			side_dist_y;183,5536
-	float			perp_wall_dist;184,5558
-	float			delta_dist_x;185,5583
-	float			delta_dist_y;186,5606
-	float			dir_x;187,5629
-	float			dir_y;188,5645
-	float			plane_x;189,5661
-	float			camera_x;190,5679
-	float			camera_y;191,5698
-	float			plane_y;192,5717
-	float			time;193,5735
-	float			old_time;194,5750
-	float			move_speed;195,5769
-	float			rot_speed;196,5790
-	float			wall_x;197,5810
-	float			wall_xx;198,5827
-	float			wall_yy;199,5845
-	int				step_x;200,5863
-	int				step_y;201,5879
-	int				is_hit;202,5895
-	int				side;203,5911
-	int				map_x;204,5925
-	int				map_y;205,5940
-	int				draw_end;206,5955
-	int				draw_start;207,5973
-	int				line_height;208,5993
-	int				line_poly_height;209,6014
-	int				intensity;210,6040
-	int				floor;211,6059
-}					t_camera;212,6074
-typedef struct		s_sprite_tex214,6091
-	SDL_Surface		*arr_sprite[arr_sprite216,6122
-	int				amount;217,6155
-}					t_sprite_tex;218,6171
-typedef struct		s_sprite220,6192
-	SDL_Surface		*tex_sprite[tex_sprite222,6219
-	t_sprite_tex	*s_tex;s_tex223,6249
-	float			x;224,6271
-	float			y;225,6283
-	float			transform_y;226,6295
-	float			orig_x;227,6317
-	float			orig_y;228,6334
-	float			speed;229,6351
-	float			distance;230,6367
-	int				is_alive;231,6386
-	int				is_sprite:is_sprite232,6404
-	int				texture;233,6425
-	int				draw_start_x;234,6442
-	int				draw_start_y;235,6464
-	int				draw_end_x;236,6486
-	int				draw_end_y;237,6506
-	int				sprite_width;238,6526
-	int				sprite_found:sprite_found239,6548
-	int				end_frame;240,6572
-	int				shoots;241,6591
-}					t_sprite;242,6607
-typedef struct 		s_sorted244,6624
-	t_sprite		*all_sprites[all_sprites246,6652
-	int				*order;order247,6681
-	float			*dist;dist248,6697
-	int      		num;249,6713
-}					t_sprites;250,6730
-typedef struct		s_weapon252,6748
-	SDL_Texture		*texture_sshotgun[texture_sshotgun254,6775
-	int				num_frames;255,6812
-	int				frame;256,6832
-	int				frame_w;257,6847
-	int				frame_h;258,6864
-	int				tex_w;259,6881
-	int				tex_h;260,6896
-	SDL_Rect		rect;261,6911
-	int				pic;262,6928
-	Mix_Chunk		*pistol_shoot;pistol_shoot263,6941
-}					t_weapon;264,6968
-typedef struct		s_start266,6985
-	SDL_Texture		*start_screen;start_screen268,7011
-	int				play_select;269,7040
-}					t_start;270,7061
-typedef struct		s_wolf272,7077
-	float			player_x;274,7102
-	float			player_y;275,7121
-	int				height;276,7140
-	int				width;277,7156
-	int				skybox_num;278,7171
-	unsigned int	map_height;279,7191
-	unsigned int	map_width;280,7217
-	int				running:running281,7242
-	int				shooting:shooting282,7262
-	int				jumping:jumping283,7283
-	float			zbuffer[zbuffer284,7303
-	char			**map;map285,7327
-	int				**height_map;height_map286,7342
-	SDL_Window		*window;window287,7364
-	SDL_Surface		*image;image288,7386
-	SDL_Texture		*screen;screen289,7408
-	SDL_Texture		*texture_ak;texture_ak290,7431
-	SDL_Renderer	*renderer;renderer291,7458
-	SDL_Event		event;292,7483
-	t_keys			keys;293,7502
-	t_mouse			mouse;294,7518
-	t_camera		*camera;camera295,7536
-	t_weapon		*weapon[weapon296,7556
-	t_start			*start;start297,7579
-	t_sprite		**sprite;sprite298,7598
-	t_sprite_tex	**sprite_tex;sprite_tex299,7619
-	t_hud			*hud;hud300,7647
-	t_sprites		*sprites;sprites301,7662
-	unsigned int	fps;302,7684
-	unsigned int	frame_delay;303,7703
-	unsigned int	frame_start;304,7730
-	unsigned int	frame_time;305,7757
-	Mix_Music		*music;music306,7783
-	int				pause:pause307,7803
-	int				starting:starting308,7820
-	int				gun;309,7840
-	int				gun_1;310,7853
-	int				*shoots;shoots311,7868
-	int				frags;312,7885
-	int				updown;313,7900
-	int				extra_updown;314,7916
-	enum e_adv		advanced;315,7938
-	int				adv_frames;316,7961
-	int				start_point;317,7981
-	int				lifted;318,8002
-	int				retry_state;319,8018
-	unsigned int	shadows:shadows320,8039
-	int				current_height;321,8064
-	int				wall_height;322,8088
-	int				ceiling;323,8109
-	unsigned int	state:state324,8126
-	t_lines			line[line325,8149
-	int				hp;326,8169
-	int				energy;327,8181
-}					t_wolf;328,8197
+# define SORTED 103,4511
+enum				e_adv104,4556
+	jumping,106,4572
+	flying,107,4582
+	crouch,108,4591
+	normal109,4600
+typedef int			t_intfix;112,4612
+typedef struct		s_tool114,4637
+	char			*buff;buff116,4662
+	char			*buff_height[buff_height117,4677
+	int				i;118,4703
+	int				a;119,4714
+	char			**splitted;splitted120,4725
+}					t_tool;121,4745
+typedef struct		s_mouse124,4761
+	int				x;126,4787
+	int				y;127,4798
+}					t_mouse;128,4809
+typedef struct		s_lines130,4825
+	int				x1;132,4851
+	int				y1;133,4863
+	int				x2;134,4875
+	int				y2;135,4887
+}					t_lines;136,4899
+typedef struct		s_hud138,4915
+	SDL_Texture		*hud[hud140,4939
+	int				hp;141,4963
+	int				ammo;142,4975
+	int				lives;143,4989
+	int				rockets;144,5004
+	int				shield;145,5021
+	int				jetpack;146,5037
+	int				level;147,5054
+}					t_hud;148,5069
+typedef struct		s_keys150,5083
+	int				right;152,5108
+	int				left;153,5123
+	int				up;154,5137
+	int				down;155,5149
+	int				w;156,5163
+	int				s;157,5174
+	int				a;158,5185
+	int				d;159,5196
+	int				shift;160,5207
+	int				space;161,5222
+	int				yrel;162,5237
+	int				xrel;163,5251
+	int				x;164,5265
+	int				y;165,5276
+	int				f;166,5287
+	int				lctrl;167,5298
+	int				enter;168,5313
+	int				t;169,5328
+}					t_keys;170,5339
+typedef struct		s_camera172,5354
+	SDL_Surface		*texture[texture174,5381
+	SDL_Texture		*skybox_tex[skybox_tex175,5409
+	TTF_Font		*font;font176,5439
+	Mix_Chunk		*dstelept;dstelept177,5457
+	float			ray_dir_x;178,5480
+	float			ray_dir_y;179,5500
+	float			wall_x_f;180,5520
+	float			wall_y_f;181,5539
+	float			side_dist_x;182,5558
+	float			side_dist_y;183,5580
+	float			perp_wall_dist;184,5602
+	float			delta_dist_x;185,5627
+	float			delta_dist_y;186,5650
+	float			dir_x;187,5673
+	float			dir_y;188,5689
+	float			plane_x;189,5705
+	float			camera_x;190,5723
+	float			camera_y;191,5742
+	float			plane_y;192,5761
+	float			time;193,5779
+	float			old_time;194,5794
+	float			move_speed;195,5813
+	float			rot_speed;196,5834
+	float			wall_x;197,5854
+	float			wall_xx;198,5871
+	float			wall_yy;199,5889
+	int				step_x;200,5907
+	int				step_y;201,5923
+	int				is_hit;202,5939
+	int				side;203,5955
+	int				map_x;204,5969
+	int				map_y;205,5984
+	int				draw_end;206,5999
+	int				draw_start;207,6017
+	int				line_height;208,6037
+	int				line_poly_height;209,6058
+	int				intensity;210,6084
+	int				floor;211,6103
+}					t_camera;212,6118
+typedef struct		s_sprite_tex214,6135
+	SDL_Surface		*arr_sprite[arr_sprite216,6166
+	int				amount;217,6199
+}					t_sprite_tex;218,6215
+typedef struct		s_sprite220,6236
+	SDL_Surface		*tex_sprite[tex_sprite222,6263
+	t_sprite_tex	*s_tex;s_tex223,6293
+	float			x;224,6315
+	float			y;225,6327
+	float			transform_y;226,6339
+	float			orig_x;227,6361
+	float			orig_y;228,6378
+	float			speed;229,6395
+	float			distance;230,6411
+	int				is_alive;231,6430
+	int				is_sprite:is_sprite232,6448
+	int				texture;233,6469
+	int				draw_start_x;234,6486
+	int				draw_start_y;235,6508
+	int				draw_end_x;236,6530
+	int				draw_end_y;237,6550
+	int				sprite_width;238,6570
+	int				sprite_found:sprite_found239,6592
+	int				end_frame;240,6616
+	int				shoots;241,6635
+}					t_sprite;242,6651
+typedef struct 		s_sorted244,6668
+	t_sprite		*all_sprites[all_sprites246,6696
+	int				*order;order247,6725
+	float			*dist;dist248,6741
+	int      		num;249,6757
+}					t_sprites;250,6774
+typedef struct		s_weapon252,6792
+	SDL_Texture		*texture_sshotgun[texture_sshotgun254,6819
+	int				num_frames;255,6856
+	int				frame;256,6876
+	int				frame_w;257,6891
+	int				frame_h;258,6908
+	int				tex_w;259,6925
+	int				tex_h;260,6940
+	SDL_Rect		rect;261,6955
+	int				pic;262,6972
+	Mix_Chunk		*pistol_shoot;pistol_shoot263,6985
+}					t_weapon;264,7012
+typedef struct		s_start266,7029
+	SDL_Texture		*start_screen;start_screen268,7055
+	int				play_select;269,7084
+}					t_start;270,7105
+typedef struct		s_wolf272,7121
+	float			player_x;274,7146
+	float			player_y;275,7165
+	int				height;276,7184
+	int				width;277,7200
+	int				skybox_num;278,7215
+	unsigned int	map_height;279,7235
+	unsigned int	map_width;280,7261
+	int				running:running281,7286
+	int				shooting:shooting282,7306
+	int				jumping:jumping283,7327
+	float			zbuffer[zbuffer284,7347
+	char			**map;map285,7371
+	int				**height_map;height_map286,7386
+	SDL_Window		*window;window287,7408
+	SDL_Surface		*image;image288,7430
+	SDL_Texture		*screen;screen289,7452
+	SDL_Texture		*texture_ak;texture_ak290,7475
+	SDL_Renderer	*renderer;renderer291,7502
+	SDL_Event		event;292,7527
+	t_keys			keys;293,7546
+	t_mouse			mouse;294,7562
+	t_camera		*camera;camera295,7580
+	t_weapon		*weapon[weapon296,7600
+	t_start			*start;start297,7623
+	t_sprite		**sprite;sprite298,7642
+	t_sprite_tex	**sprite_tex;sprite_tex299,7663
+	t_hud			*hud;hud300,7691
+	t_sprites		*sprites;sprites301,7706
+	unsigned int	fps;302,7728
+	unsigned int	frame_delay;303,7747
+	unsigned int	frame_start;304,7774
+	unsigned int	frame_time;305,7801
+	Mix_Music		*music;music306,7827
+	int				pause:pause307,7847
+	int				starting:starting308,7864
+	int				gun;309,7884
+	int				gun_1;310,7897
+	int				*shoots;shoots311,7912
+	int				frags;312,7929
+	int				updown;313,7944
+	int				extra_updown;314,7960
+	enum e_adv		advanced;315,7982
+	int				adv_frames;316,8005
+	int				start_point;317,8025
+	int				lifted;318,8046
+	int				retry_state;319,8062
+	unsigned int	shadows:shadows320,8083
+	int				current_height;321,8108
+	int				wall_height;322,8132
+	int				ceiling;323,8153
+	unsigned int	state:state324,8170
+	t_lines			line[line325,8193
+	int				hp;326,8213
+	int				energy;327,8225
+}					t_wolf;328,8241

@@ -6,34 +6,11 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:24:47 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/23 23:38:06 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 12:38:23 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
-
-void		ft_close(t_wolf *holder)
-{
-	Mix_FreeChunk(holder->weapon[0]->pistol_shoot);
-	Mix_FreeChunk(holder->weapon[1]->pistol_shoot);
-	holder->weapon[0]->pistol_shoot = NULL;
-	holder->weapon[1]->pistol_shoot = NULL;
-	SDL_DestroyRenderer(holder->renderer);
-	SDL_DestroyWindow(holder->window);
-	holder->running = 0;
-	free(holder->start);
-	TTF_Quit();
-	SDL_Quit();
-	system("leaks doom-nukem");
-	exit(0);
-}
-
-void		ft_print_error(char *str)
-{
-	ft_putendl(str);
-	system("leaks doom-nukem");
-	exit(1);
-}
 
 t_wolf		*holder_init(t_wolf *holder)
 {
@@ -63,21 +40,20 @@ t_wolf		*holder_init(t_wolf *holder)
 	return (holder);
 }
 
-t_sprites 		*ft_sort_sprites_init(void)
+t_sprites	*ft_sort_sprites_init(void)
 {
-	t_sprites 	*s_sorted;
+	t_sprites	*s_sorted;
 
 	s_sorted = (t_sprites*)malloc(sizeof(t_sprites));
 	s_sorted->order = malloc(sizeof(int) * 25);
 	s_sorted->dist = malloc(sizeof(float) * 25);
 	s_sorted->num = 0;
-
 	return (s_sorted);
 }
 
-void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
+void		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
 {
-	int			a;
+	int		a;
 
 	a = -1;
 	while (++a < holder->sprite_tex[0]->amount && a < 3)
@@ -130,7 +106,8 @@ int			main(int argc, char **argv)
 	static t_wolf	holder[1];
 	char			*map_name;
 
-	if (argc != 2 || !argv[1] || ft_strlen(argv[1]) > 30) //|| system("tar -xzf package"))
+	if (argc != 2 || !argv[1] || ft_strlen(argv[1]) > 30 || \
+		system("tar -xzf package"))
 		ft_print_error("Usage: \
 		./doom-nukem <1-5 for level, or name of custom map>");
 	map_name = ft_strsub("./maps/", 0, 50);
