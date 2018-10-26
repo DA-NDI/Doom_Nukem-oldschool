@@ -22,7 +22,7 @@ void	init_normal_mode(t_wolf *holder)
 	holder->hud->rockets = 30;
 	holder->hud->ammo = 99;
 	holder->hud->jetpack = 9000;
-	holder->hud->level = 1;
+	holder->hud->level = (holder->hud->level == 1) ? 1 : holder->hud->level;
 	holder->hud->enemy_speed = 0.1;
 }
 
@@ -36,7 +36,7 @@ void	init_insane_mode(t_wolf *holder)
 	holder->hud->rockets = 5;
 	holder->hud->ammo = 25;
 	holder->hud->jetpack = 1000;
-	holder->hud->level = 1;
+	holder->hud->level = (holder->hud->level == 1) ? 1 : holder->hud->level;
 	holder->hud->enemy_speed = 0.5;
 }
 
@@ -50,7 +50,7 @@ void	init_brutal_mode(t_wolf *holder)
 	holder->hud->rockets = 1;
 	holder->hud->ammo = 5;
 	holder->hud->jetpack = 10;
-	holder->hud->level = 1;
+	holder->hud->level = (holder->hud->level == 1) ? 1 : holder->hud->level;
 	holder->hud->enemy_speed = 1;
 }
 

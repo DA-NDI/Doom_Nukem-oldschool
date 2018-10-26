@@ -35,14 +35,14 @@ void	ft_check_fly(t_wolf *holder)
 	if (holder->advanced == flying && holder->keys.f ==\
 	1 && holder->hud->jetpack > 0)
 	{
-		holder->lifted++;
+		holder->lifted += 3;
 		holder->hud->jetpack--;
 		holder->extra_updown = holder->lifted;
 	}
 	if (holder->advanced == flying && holder->keys.f == 0)
 	{
 		if ((holder->extra_updown - holder->start_point) > 0)
-			holder->extra_updown--;
+			holder->extra_updown -= 3;
 		else if ((holder->extra_updown - holder->start_point) < 0)
 			holder->extra_updown++;
 		if (holder->extra_updown == 0)
