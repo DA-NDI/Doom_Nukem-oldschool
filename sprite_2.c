@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 16:02:41 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/23 16:02:41 by azaporoz         ###   ########.fr       */
+/*   Updated: 2018/10/26 20:21:54 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,17 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 		direction[0] = holder->DIR_Y;
 		s->x = P_X + direction[1];
 		s->y = P_Y + direction[0];
-		fr_gun[1] = G;
+		fr_gun[1] = (G > 1 ) ? 1 : G;
 	}
 	else if (s->is_alive && !holder->pause)
 	{
 		s->x += direction[1];
 		s->y += direction[0];
-		s->tex_sprite[0] = s->s_tex->arr_sprite[fr_gun[1]][fr_gun[0]++];
+		printf("[G][%d]\n", G);
+//		s->tex_sprite[0] = s->s_tex->arr_sprite[0][0];
+		 s->tex_sprite[0] = s->s_tex->arr_sprite[fr_gun[1]][fr_gun[0]++];
 	}
-	fr_gun[0] = (fr_gun[0] == 3) ? 0 : fr_gun[0];
+	fr_gun[0] = (fr_gun[0] == 3 || fr_gun[0] == 2) ? 0 : fr_gun[0];
 	s->is_alive = ((int)s->y > (int)holder->map_height || (int)s->x > \
 	(int)holder->map_width || (int)s->y < 0 || (int)s->x < 0) ? 0 : s->is_alive;
 	s->is_sprite = (s->is_alive) ? 1 : 0;
