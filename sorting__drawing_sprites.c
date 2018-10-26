@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:32:00 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 12:41:04 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 17:23:55 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 void	drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, int num, \
 unsigned int buffer[holder->height][holder->width])
 {
-//	printf("holder->sprites->num == %d\n", holder->sprites->num);
-	
 	int			i;
 	static int	a = 0;
 

@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 21:19:48 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/26 17:54:18 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 17:11:01 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,12 @@ void		ft_check_weapons(t_wolf *holder, const Uint8 *keystate)
 	}
 }
 
-void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
+void		ft_check_enter_start(t_wolf *holder, const Uint8 *keystate)
 {
-	if (keystate[SDL_SCANCODE_Q])
-	{
-		if (Mix_PausedMusic() == 0)
-			Mix_PauseMusic();
-		else
-			Mix_ResumeMusic();
-	}
 	if (keystate[SDL_SCANCODE_RETURN] && holder->starting)
 	{
 		if (holder->start->play_select && holder->starting == 1)
-		{
 			holder->starting = 2;
-		}
 		else if (holder->start->play_select && holder->starting == 2)
 		{
 			if (holder->start->play_select == 2)
@@ -68,13 +59,22 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 			else
 				init_insane_mode(holder);
 			Mix_PlayMusic(holder->music, -1);
-//			reinit_sprites_1(holder, -1, &num);
-//			reinit_sprites_2(holder, -1, &num);
-//			ft_sort_sprites_put(holder, holder->sprites, 0);
 			holder->starting = 0;
 		}
 		else
 			ft_close(holder);
+	}
+}
+
+void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
+{
+	ft_check_enter_start(holder, keystate);
+	if (keystate[SDL_SCANCODE_Q])
+	{
+		if (Mix_PausedMusic() == 0)
+			Mix_PauseMusic();
+		else
+			Mix_ResumeMusic();
 	}
 	if (keystate[SDL_SCANCODE_G])
 		holder->shadows = !holder->shadows;

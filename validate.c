@@ -79,7 +79,7 @@ char	**ft_create_map(char *path, t_wolf *holder)
 {
 	int			fdiret[3];
 	char		*buff;
-	static char	*map[51];
+	static char	*map[52];
 
 	fdiret[1] = 0;
 	if ((fdiret[0] = open(path, O_RDONLY)) < 0)
@@ -93,9 +93,7 @@ char	**ft_create_map(char *path, t_wolf *holder)
 			free(buff);
 			ft_print_error("map is too big!");
 		}
-		map[fdiret[1]] = (char*)malloc(sizeof(char) * ft_strlen(buff) + 1);
-		map[fdiret[1]] = ft_strcpy(map[fdiret[1]], buff);
-		free(buff);
+		map[fdiret[1]] = buff;
 		fdiret[1]++;
 	}
 	tool(map, fdiret[1], fdiret[2], buff);

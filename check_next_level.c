@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 12:54:28 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 15:39:04 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 17:04:27 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	reinit_sprites_1(t_wolf *holder, int a, int num)
 	holder->sprite_tex[4]->amount = get_sprite_amount(holder, 'H');
 	while (++a < holder->sprite_tex[4]->amount)
 	{
-		printf("potion\n");
 		num = num + 1;
 		start_enemy(holder, a + 13, POT);
 		POT->is_sprite = get_sprite_coordinates(holder, 'H', a + 13);
@@ -44,7 +43,6 @@ void	reinit_sprites_1(t_wolf *holder, int a, int num)
 	holder->sprite_tex[5]->amount = get_sprite_amount(holder, 'S');
 	while (++a < holder->sprite_tex[5]->amount)
 	{
-		printf("pepsis\n");
 		num = num + 1;
 		start_enemy(holder, a + 16, PEPSI);
 		PEPSI->is_sprite = get_sprite_coordinates(holder, 'S', a + 16);
@@ -53,7 +51,6 @@ void	reinit_sprites_1(t_wolf *holder, int a, int num)
 	holder->sprite_tex[6]->amount = get_sprite_amount(holder, 'K');
 	while (++a < holder->sprite_tex[6]->amount)
 	{
-		printf("kola\n");
 		num = num + 1;
 		start_enemy(holder, a + 19, KOLA);
 		KOLA->is_sprite = get_sprite_coordinates(holder, 'K', a + 19);
@@ -65,7 +62,6 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	holder->sprite_tex[3]->amount = get_sprite_amount(holder, 'G');
 	while (++a < holder->sprite_tex[3]->amount)
 	{
-		printf("ammo\n");
 		num = num + 1;
 		start_enemy(holder, a + 10, AMO);
 		AMO->is_sprite = get_sprite_coordinates(holder, 'G', a + 10);
@@ -74,7 +70,6 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	holder->sprite_tex[0]->amount = get_sprite_amount(holder, 'A');
 	while (++a < holder->sprite_tex[0]->amount)
 	{
-		printf("arcade\n");
 		num = num + 1;
 		start_enemy(holder, a + 2, CAR);
 		CAR->is_sprite = get_sprite_coordinates(holder, 'A', a + 2);
@@ -84,7 +79,6 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	holder->sprite_tex[2]->amount = get_sprite_amount(holder, 'C');
 	while (++a < holder->sprite_tex[2]->amount)
 	{
-		printf("car\n");
 		num = num + 1;
 		start_enemy(holder, a + 7, ARC);
 		ARC->is_sprite = get_sprite_coordinates(holder, 'C', a + 7);
@@ -101,14 +95,12 @@ void	ft_check_next_level(t_wolf *holder)
 	a = -1;
 	if (holder->frags >= 1)
 	{
-		printf("RELOADED!\n");
 		holder->sprites->num = 0;
 		ft_free_create_map(holder);
 		holder->ceiling = 0;
 		holder->frags = 0;
 		reinit_sprites_1(holder, -1, num);
 		reinit_sprites_2(holder, -1, num);
-		printf("amount in next level before sort = %d\n", holder->sprite_tex[0]->amount);
 		ft_sort_sprites_put(holder, holder->sprites, 0);
 	}
 }
