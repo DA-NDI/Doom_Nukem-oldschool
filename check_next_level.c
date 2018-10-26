@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 12:54:28 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 17:04:27 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 20:25:18 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	ft_free_create_map(t_wolf *holder)
 		holder->map = ft_create_map("./maps/4", holder);
 	else if (holder->hud->level == 5)
 		holder->map = ft_create_map("./maps/5", holder);
+	else
+	{
+		draw_text(holder, "RAKAMKAFO!!! THE BEST OF THE BEST!!!"\
+			, holder->width / 2, holder->height / 2);
+		ft_close(holder);
+	}
 	ft_verify_map(holder->map, holder);
 	get_player_coordinates(holder, 'P');
 }
@@ -98,7 +104,7 @@ void	ft_check_next_level(t_wolf *holder)
 
 	num = 0;
 	a = -1;
-	if (holder->frags >= 5)
+	if (holder->frags >= 2)
 	{
 		init_mode(holder, holder->start->play_select);
 		holder->sprites->num = 0;

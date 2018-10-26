@@ -92,7 +92,7 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 		direction[0] = holder->DIR_Y;
 		s->x = P_X + direction[1];
 		s->y = P_Y + direction[0];
-		fr_gun[1] = G;
+		fr_gun[1] = (G > 1 ) ? 1 : G;
 	}
 	else if (s->is_alive && !holder->pause)
 	{

@@ -111,6 +111,7 @@ int spr_int[3], t_sprite *sprite)
 	int spr_int_w[4];
 	int w;
 
+if (!sprite->tex_sprite[0]->w)
 	w = sprite->tex_sprite[0]->w;
 	START_X--;
 	END_Y += holder->updown + holder->extra_updown;
