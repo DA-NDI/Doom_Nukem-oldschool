@@ -31,32 +31,6 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 	return (i);
 }
 
-void	ft_raycasting_2(t_wolf *holder,\
-unsigned int buffer[holder->height][holder->width], int num)
-{
-	int			a;
-	t_sprite	*sprites[20];
-
-	a = -1;
-	while (++a < holder->sprite_tex[0]->amount)
-		sprites[num++] = CAR;
-	a = -1;
-	while (++a < holder->sprite_tex[2]->amount)
-		sprites[num++] = ARC;
-	a = -1;
-	while (++a < holder->sprite_tex[6]->amount && a < 3)
-		sprites[num++] = KOLA;
-	a = -1;
-	while (++a < holder->sprite_tex[5]->amount && a < 3)
-		sprites[num++] = PEPSI;
-	a = -1;
-	while (++a < holder->sprite_tex[4]->amount && a < 3)
-		sprites[num++] = POT;
-	a = -1;
-	while (++a < holder->sprite_tex[3]->amount && a < 3)
-		sprites[num++] = AMO;
-}
-
 void	ft_raycasting(t_wolf *holder, int x)
 {
 	static unsigned int	buffer[768][1024];

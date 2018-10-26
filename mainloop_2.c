@@ -38,13 +38,32 @@ void		ft_check_pause(t_wolf *holder, const Uint8 *keystate)
 	}
 }
 
-void		ft_check_menu_2(t_wolf *holder, const Uint8 *keystate)
+void		ft_draw_menu_2(t_wolf *holder)
 {
-	if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 2)
+	if (holder->starting == 2)
 	{
 		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
+		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
+		HEIGHT / 2 + 50);
+		draw_text(holder, "	> Normal", WIDTH / 2 - 10, HEIGHT / 2);
+		draw_text(holder, "   Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
+		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
+		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
+		SDL_RenderPresent(holder->renderer);
+	}
+}
+
+void		ft_check_menu_2(t_wolf *holder, const Uint8 *keystate)
+{
+	if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 2 &&\
+	holder->start->play_select == 2)
+	{
+		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
+		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
+		HEIGHT / 2 + 50);
 		draw_text(holder, "	  Normal", WIDTH / 2 - 10, HEIGHT / 2);
 		draw_text(holder, " > Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
+		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
 		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
 		holder->start->play_select = 3;
 		SDL_RenderPresent(holder->renderer);
@@ -52,10 +71,26 @@ void		ft_check_menu_2(t_wolf *holder, const Uint8 *keystate)
 	else if (keystate[SDL_SCANCODE_UP] && holder->starting == 2)
 	{
 		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
+		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
+		HEIGHT / 2 + 50);
 		draw_text(holder, " > Normal", WIDTH / 2 - 10, HEIGHT / 2);
 		draw_text(holder, "	  Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
+		draw_text(holder, "   Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
 		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
 		holder->start->play_select = 2;
+		SDL_RenderPresent(holder->renderer);
+	}
+	else if (keystate[SDL_SCANCODE_DOWN] && holder->starting == 2 && \
+	holder->start->play_select == 3)
+	{
+		SDL_RenderCopy(holder->renderer, START_SCR, NULL, NULL);
+		draw_text(holder, "Choose Difficulty", WIDTH / 2, \
+		HEIGHT / 2 + 50);
+		draw_text(holder, "   Normal", WIDTH / 2 - 10, HEIGHT / 2);
+		draw_text(holder, "	  Insane", WIDTH / 2 - 10, HEIGHT / 2 + 15);
+		draw_text(holder, " > Brutal", WIDTH / 2 - 10, HEIGHT / 2 + 30);
+		draw_text(holder, "PRESS ENTER TO SELECT", WIDTH / 2, HEIGHT - 25);
+		holder->start->play_select = 4;
 		SDL_RenderPresent(holder->renderer);
 	}
 }

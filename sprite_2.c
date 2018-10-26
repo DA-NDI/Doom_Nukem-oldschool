@@ -25,7 +25,7 @@
 #define DIST_X (abs((int)X - (int)P_X))
 #define DIST_Y (abs((int)Y - (int)P_Y))
 #define MP_CELL MAP[(int)s->y][(int)s->x]
-#define SPEED holder->hud->enemy_speed
+#define SPEED sprite->speed
 
 void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
@@ -69,13 +69,13 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 	if ((sprite->x != P_X || sprite->y != P_Y) &&\
 	sprite->is_alive && !holder->pause && holder->starting == 0)
 	{
-		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + 0.1)] == '0')
+		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + SPEED)] == '0')
 			sprite->x += sprite->speed;
-		else if ((int)X > (int)P_X && MAP[(int)Y][(int)(X - 0.1)] == '0')
+		else if ((int)X > (int)P_X && MAP[(int)Y][(int)(X - SPEED)] == '0')
 			sprite->x -= sprite->speed;
-		else if ((int)Y > (int)P_Y && MAP[(int)(Y - 0.1)][(int)X] == '0')
+		else if ((int)Y > (int)P_Y && MAP[(int)(Y - SPEED)][(int)X] == '0')
 			sprite->y -= sprite->speed;
-		else if ((int)Y < (int)P_Y && MAP[(int)(Y + 0.1)][(int)X] == '0')
+		else if ((int)Y < (int)P_Y && MAP[(int)(Y + SPEED)][(int)X] == '0')
 			sprite->y += sprite->speed;
 	}
 	burning_boss(sprite);
@@ -101,7 +101,8 @@ void	ft_move_bullet(t_wolf *holder, t_sprite *s)
 		s->tex_sprite[0] = s->s_tex->arr_sprite[fr_gun[1]][fr_gun[0]++];
 	}
 	fr_gun[0] = (fr_gun[0] == 3) ? 0 : fr_gun[0];
-	s->y = ((int)s->y < 0) ? 0 : s->y;
+	s->is_alive = ((int)s->y > (int)holder->map_height || (int)s->x > \
+	(int)holder->map_width || (int)s->y < 0 || (int)s->x < 0) ? 0 : s->is_alive;
 	if (MP_CELL != '0' && s->is_alive && MP_CELL <= '9')
 	{
 		printf("global x = %f global y = %f\n", (HEIGHT * s->x) / 12, (WIDTH * s->y) / 9);

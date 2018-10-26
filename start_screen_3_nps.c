@@ -17,7 +17,6 @@ void	start_enemy(t_wolf *holder, int num, t_sprite *sprite)
 	holder->sprite[num] = sprite;
 	sprite->shoots = 0;
 	sprite->speed = 0.1 + holder->hud->enemy_speed;
-	printf("speed = %f\n", sprite->speed);
 	sprite->is_alive = 0;
 	sprite->sprite_found = 0;
 	sprite->is_sprite = 0;

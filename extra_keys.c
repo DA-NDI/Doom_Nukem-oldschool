@@ -51,13 +51,19 @@ void		ft_check_enter_start(t_wolf *holder, const Uint8 *keystate)
 	if (keystate[SDL_SCANCODE_RETURN] && holder->starting)
 	{
 		if (holder->start->play_select && holder->starting == 1)
+		{
 			holder->starting = 2;
+			holder->start->play_select = 2;
+			ft_draw_menu_2(holder);
+		}
 		else if (holder->start->play_select && holder->starting == 2)
 		{
 			if (holder->start->play_select == 2)
 				init_normal_mode(holder);
-			else
+			else if (holder->start->play_select == 3)
 				init_insane_mode(holder);
+			else
+				init_brutal_mode(holder);
 			Mix_PlayMusic(holder->music, -1);
 			holder->starting = 0;
 		}

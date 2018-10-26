@@ -39,3 +39,17 @@ void	init_insane_mode(t_wolf *holder)
 	holder->hud->level = 1;
 	holder->hud->enemy_speed = 0.5;
 }
+
+void	init_brutal_mode(t_wolf *holder)
+{
+	holder->camera->move_speed = 0.06;
+	holder->camera->rot_speed = -0.06;
+	holder->hud->lives = 1;
+	holder->hud->hp = 1;
+	holder->hud->shield = 0;
+	holder->hud->rockets = 1;
+	holder->hud->ammo = 5;
+	holder->hud->jetpack = 10;
+	holder->hud->level = 1;
+	holder->hud->enemy_speed = 1;
+}

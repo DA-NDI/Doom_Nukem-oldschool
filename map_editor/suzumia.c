@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:25:31 by azulbukh          #+#    #+#             */
-/*   Updated: 2018/10/26 15:41:10 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/26 17:31:04 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			chech_lines(t_global *global, int lines)
 
 	while (lines--)
 	{
-		if (!get_next_line(global->fd, &line))
+		if (get_next_line(global->fd, &line) <= 0)
 			exit(0);
 		cords = ft_strsplit(line, ' ');
 		if (words_len(cords) != 6)
@@ -64,7 +64,7 @@ void			edit_file(char *s, t_global *global)
 		exit(0);
 	if ((global->fd = open(s, O_RDONLY)) <= 0)
 		exit(0);
-	if (!(get_next_line(global->fd, &line)))
+	if (get_next_line(global->fd, &line) <= 0)
 		exit(0);
 	cords = ft_strsplit(line, ' ');
 	if (words_len(cords) != 2)

@@ -453,5 +453,8 @@ void    ft_check_next_level(t_wolf *holder);
 void    ft_check_pickups(t_wolf *holder);
 void    init_normal_mode(t_wolf *holder);
 void    init_insane_mode(t_wolf *holder);
+void    init_brutal_mode(t_wolf *holder);
+
+void		ft_draw_menu_2(t_wolf *holder);
 
 #endif
