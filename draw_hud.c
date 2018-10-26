@@ -38,6 +38,7 @@ void		ft_hud_init(t_wolf *holder)
 	hud->ammo = 25;
 	hud->jetpack = 1000;
 	hud->level = 1;
+	hud->enemy_speed = 0;
 }
 
 void		draw_hud_icons(t_wolf *holder)

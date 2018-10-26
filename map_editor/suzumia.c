@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:25:31 by azulbukh          #+#    #+#             */
-/*   Updated: 2018/10/23 20:54:34 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/26 15:41:10 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			create_file(char *s, t_global *global)
 
 	if (!*s)
 		exit(0);
-	w = ft_strjoin("./maps/", s);
+	w = ft_strjoin("../maps/", s);
 	global->fd = open(w, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	free(w);
 	if (!global->fd)

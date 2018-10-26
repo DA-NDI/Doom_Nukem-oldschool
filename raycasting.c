@@ -64,10 +64,10 @@ void	ft_raycasting(t_wolf *holder, int x)
 
 	while (holder->running)
 	{
+		ft_check_next_level(holder);
 		raycasting_loop(holder, holder->camera, -1, buffer);
 		drawing_sorting_sprites(holder, SORTED, holder->sprites->num, buffer);
 		i = ft_raycasting_3(holder, i);
-		ft_check_next_level(holder);
 		if (!holder->pause && !holder->starting && holder->running)
 		{
 			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);

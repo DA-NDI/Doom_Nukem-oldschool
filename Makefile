@@ -6,7 +6,7 @@
 #    By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/10/26 12:57:34 by avolgin          ###   ########.fr        #
+#    Updated: 2018/10/26 15:04:39 by avolgin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRC_WOLF =./init.c \
 	bullet_collision.c \
 	sorting__drawing_sprites.c \
 	close_error.c \
-	check_next_level.c
+	check_next_level.c \
+	init_mode.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 

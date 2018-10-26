@@ -25,6 +25,7 @@
 #define DIST_X (abs((int)X - (int)P_X))
 #define DIST_Y (abs((int)Y - (int)P_Y))
 #define MP_CELL MAP[(int)s->y][(int)s->x]
+#define SPEED holder->hud->enemy_speed
 
 void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
@@ -66,7 +67,7 @@ void	ft_move_boss(t_wolf *holder, t_sprite *sprite)
 		sprite->is_alive = (sprite->end_frame >= 8) ? 0 : 1;
 	}
 	if ((sprite->x != P_X || sprite->y != P_Y) &&\
-	sprite->is_alive && !holder->pause)
+	sprite->is_alive && !holder->pause && holder->starting == 0)
 	{
 		if ((int)X < (int)P_X && MAP[(int)Y][(int)(X + 0.1)] == '0')
 			sprite->x += sprite->speed;

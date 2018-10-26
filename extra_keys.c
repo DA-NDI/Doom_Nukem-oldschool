@@ -57,9 +57,20 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 	}
 	if (keystate[SDL_SCANCODE_RETURN] && holder->starting)
 	{
-		if (holder->start->play_select)
+		if (holder->start->play_select && holder->starting == 1)
 		{
+			holder->starting = 2;
+		}
+		else if (holder->start->play_select && holder->starting == 2)
+		{
+			if (holder->start->play_select == 2)
+				init_normal_mode(holder);
+			else
+				init_insane_mode(holder);
 			Mix_PlayMusic(holder->music, -1);
+//			reinit_sprites_1(holder, -1, &num);
+//			reinit_sprites_2(holder, -1, &num);
+//			ft_sort_sprites_put(holder, holder->sprites, 0);
 			holder->starting = 0;
 		}
 		else

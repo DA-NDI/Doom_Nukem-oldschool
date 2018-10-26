@@ -79,7 +79,7 @@ char	**ft_create_map(char *path, t_wolf *holder)
 {
 	int			fdiret[3];
 	char		*buff;
-	static char	*map[50];
+	static char	*map[51];
 
 	fdiret[1] = 0;
 	if ((fdiret[0] = open(path, O_RDONLY)) < 0)

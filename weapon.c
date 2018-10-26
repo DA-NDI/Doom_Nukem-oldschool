@@ -80,7 +80,7 @@ void	init_weapon_grenade(t_weapon *weapon, t_wolf *holder)
 	weapon->frame_w = weapon->tex_w;
 	weapon->frame_h = weapon->tex_h;
 	weapon->frame = 0;
-	weapon->num_frames = 104;
+	weapon->num_frames = 102;
 	weapon->pic = 26;
 	return ;
 }

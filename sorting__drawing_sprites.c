@@ -79,11 +79,13 @@ void	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 void	drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, int num, \
 unsigned int buffer[holder->height][holder->width])
 {
+//	printf("holder->sprites->num == %d\n", holder->sprites->num);
+	
 	int			i;
 	static int	a = 0;
 
 	i = -1;
-	if (a % 4 == 0)
+//	if (a % 4 == 0)
 		ft_sort_sprite(holder, sprites, -1, num);
 	a++;
 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);

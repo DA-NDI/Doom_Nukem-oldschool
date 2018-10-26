@@ -138,6 +138,7 @@ typedef struct		s_lines
 typedef struct		s_hud
 {
 	SDL_Texture		*hud[13];
+	float 			enemy_speed;
 	int				hp;
 	int				ammo;
 	int				lives;
@@ -305,7 +306,7 @@ typedef struct		s_wolf
 	unsigned int	frame_time;
 	Mix_Music		*music;
 	int				pause:1;
-	int				starting:1;
+	int				starting;
 	int				gun;
 	int				gun_1;
 	int				*shoots;
@@ -450,5 +451,7 @@ void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, \
 void 		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num);
 void    ft_check_next_level(t_wolf *holder);
 void    ft_check_pickups(t_wolf *holder);
+void    init_normal_mode(t_wolf *holder);
+void    init_insane_mode(t_wolf *holder);
 
 #endif
