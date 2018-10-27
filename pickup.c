@@ -60,12 +60,12 @@ void	ft_check_pickups(t_wolf *holder, int a)
 {
 	while (++a < holder->sprite_tex[2]->amount)
 	{
-		if (fabsf(ARC->x - P_X) < 1 && \
-			fabsf(ARC->y - P_Y) < 1 && \
-			ARC->is_sprite)
+		if (fabsf(CAR->x - P_X) < 1 && \
+			fabsf(CAR->y - P_Y) < 1 && \
+			CAR->is_sprite)
 		{
 			holder->energy += 10;
-			ARC->is_sprite = 0;
+			CAR->is_sprite = 0;
 			Mix_PlayChannel(-1, holder->camera->sound[8], 0);
 		}
 	}

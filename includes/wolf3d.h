@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 15:54:20 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 16:49:24 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@
 # define KOLA holder->sprite[a + 19]
 # define POT holder->sprite[a + 13]
 # define CAR holder->sprite[a + 7]
+# define STAR holder->sprite[22]
 # define SORTED holder->sprites->all_sprites
 
 enum				e_adv
@@ -464,4 +465,8 @@ void				init_weapon_demon(t_weapon *weapon, t_wolf *holder);
 void				init_weapon_grenade(t_weapon *weapon, t_wolf *holder);
 void				init_greande_tex(t_weapon *weapon, t_wolf *holder);
 void				init_weapon(t_weapon *weapon, t_wolf *holder);
+void				start_death_star(t_wolf *holder, int num);
+void				load_sprite_death_star(t_wolf *holder);
+void				reinit_death_star_sprite(t_wolf *holder);
+
 #endif

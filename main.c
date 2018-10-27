@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:24:47 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 14:08:25 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 16:58:42 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
 	a = -1;
 	while (++a < holder->sprite_tex[3]->amount && a < 3)
 		s_sorted->all_sprites[num++] = AMO;
+	a = -1;
+	while (++a < holder->sprite_tex[7]->amount && a < 1)
+		s_sorted->all_sprites[num++] = STAR;
 	s_sorted->num = num;
 }
 

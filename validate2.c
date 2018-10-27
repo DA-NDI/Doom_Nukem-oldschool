@@ -12,6 +12,8 @@
 
 #include <wolf3d.h>
 
+#define BGD map[i][j] != 'B' && map[i][j] != 'G' && map[i][j] != 'D'
+
 int		check_dimensions_and_symbols(char **map, int height, int width)
 {
 	int		i;
@@ -32,7 +34,7 @@ int		check_dimensions_and_symbols(char **map, int height, int width)
 	!= '4' && map[i][j] != '5' && map[i][j] != 'A' && map[i][j] != 'C' &&
 	map[i][j] != '7' && map[i][j] != '8' && map[i][j] != '9' && map[i][j] !=
 	'6' && map[i][j] != ':' && map[i][j] != ';' && map[i][j] != 'K' && map[i][j]
-	!= 'H' && map[i][j] != 'S' && map[i][j] != 'B' && map[i][j] != 'G')
+	!= 'H' && map[i][j] != 'S' && BGD)
 				return (1);
 		}
 		if (j != width && (map[i][0] != '\0' || map[i][j] != '\0'))

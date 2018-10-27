@@ -66,22 +66,13 @@ void	start_car_sprite(t_wolf *holder, int num)
 	car->tex_sprite[0] = holder->sprite_tex[2]->arr_sprite[0][0];
 }
 
-void	start_death_star(t_wolf *holder)
+void	start_death_star(t_wolf *holder, int num)
 {
-	t_sprite		*death;
-	t_sprite_tex	*sprite;
+	t_sprite	*star;
 
-	sprite = (t_sprite_tex*)malloc(sizeof(t_sprite_tex));
-	death = (t_sprite*)malloc(sizeof(t_sprite));
-	start_enemy(holder, 22, death);
-	death->s_tex = holder->sprite_tex[7];
-	death->is_sprite = get_sprite_coordinates(holder, 'D', 22);
-	death->tex_sprite[0] = holder->sprite_tex[7]->arr_sprite[0][0];
-	holder->sprite_tex[7] = sprite;
-	sprite->arr_sprite[0][0] = load_image("sprites/arcade.png");
-	sprite->arr_sprite[0][1] = load_image("sprites/arcade1.png");
-	sprite->arr_sprite[0][2] = load_image("sprites/arcade2.png");
-	sprite->arr_sprite[0][3] = load_image("sprites/arcade3.png");
-	sprite->amount = get_sprite_amount(holder, 'D');
-	start_arcade_sprite(holder, 22);
+	star = (t_sprite*)malloc(sizeof(t_sprite));
+	start_enemy(holder, num, star);
+	star->s_tex = holder->sprite_tex[7];
+	star->is_sprite = get_sprite_coordinates(holder, 'D', num);
+	star->tex_sprite[0] = holder->sprite_tex[7]->arr_sprite[0][0];
 }

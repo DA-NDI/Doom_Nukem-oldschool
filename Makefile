@@ -6,7 +6,7 @@
 #    By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/10/27 06:02:46 by avolgin          ###   ########.fr        #
+#    Updated: 2018/10/27 16:52:24 by avolgin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_WOLF =./init.c \
 	init_mode.c \
 	draw_menu.c \
 	init_weapons.c \
-	line_azap.c
+	line_azap.c \
+	load_star.c
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 
