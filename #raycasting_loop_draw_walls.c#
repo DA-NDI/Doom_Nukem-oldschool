@@ -86,7 +86,6 @@ unsigned int buffer[holder->height][holder->width])
 	holder->frame_start = SDL_GetTicks();
 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
 	holder->current_height = (holder->current_height > 300) ? 0 : 0;
-	static int i = -1;
 	while (++x < holder->width)
 	{
 		raycasting_loop_2(holder, camera, x);
@@ -103,8 +102,5 @@ unsigned int buffer[holder->height][holder->width])
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_floor(holder, camera, buffer, x);
 		draw_walls(holder, camera, buffer, x);
-		if (++i % 2 == 0)
-			i = 0;
-		x += i;
 	}
 }

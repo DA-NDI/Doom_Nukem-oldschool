@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 22:18:32 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 02:25:30 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -455,5 +455,8 @@ void				ft_check_pickups(t_wolf *holder);
 void				init_mode(t_wolf *holder, int n);
 void				ft_check_weapons(t_wolf *holder, const Uint8 *keystate);
 void				ft_draw_menu_2(t_wolf *holder);
-
+void				init_weapon_demon(t_weapon *weapon, t_wolf *holder);
+void				init_weapon_grenade(t_weapon *weapon, t_wolf *holder);
+void				init_greande_tex(t_weapon *weapon, t_wolf *holder);
+void				init_weapon(t_weapon *weapon, t_wolf *holder);
 #endif

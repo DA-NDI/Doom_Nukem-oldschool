@@ -35,9 +35,14 @@ void	ft_raycasting(t_wolf *holder, int x)
 {
 	static unsigned int	buffer[768][1024];
 	static int			i = 0;
+	static int a = 0;
+//	unsigned int **buffer;
+	int pitch;
 
 	while (holder->running)
 	{
+//		if (SDL_LockTexture(holder->screen, NULL, (void**)&buffer, &pitch))
+//		ft_print_error("locking failed\n");
 		ft_check_next_level(holder);
 		raycasting_loop(holder, holder->camera, -1, buffer);
 		drawing_sorting_sprites(holder, SORTED, holder->sprites->num, buffer);
@@ -51,10 +56,13 @@ void	ft_raycasting(t_wolf *holder, int x)
 			SDL_RenderClear(holder->renderer);
 			draw_skybox(holder, holder->camera);
 			SDL_RenderCopy(holder->renderer, holder->screen, NULL, NULL);
+
 			draw_weapon(holder->weapon, holder);
 			draw_fps(holder, holder->camera->font);
 			draw_hud(holder);
+			if (++a % 2 == 0)
 			SDL_RenderPresent(holder->renderer);
+		SDL_UnlockTexture(holder->screen);
 		}
 		ft_close_loop(holder, holder->camera);
 	}

@@ -100,7 +100,7 @@ void	ft_init_image(t_wolf *holder)
 	if (SDL_SetRenderDrawColor(holder->renderer, 0, 0, 0, 0))
 		ft_print_error("SDL_SetRenderDrawColor failed");
 	if (!(holder->screen = SDL_CreateTexture(holder->renderer,
-		ARGB, SDL_TEXTUREACCESS_TARGET, WIDTH, HEIGHT)))
+		ARGB, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT)))
 		ft_print_error("Screen texture not created!");
 	SDL_SetTextureBlendMode(holder->screen, SDL_BLENDMODE_BLEND);
 }
