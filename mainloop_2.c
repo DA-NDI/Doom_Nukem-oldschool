@@ -43,9 +43,15 @@ void		check_button(t_wolf *holder, t_camera *camera)
 	if ((CHECK_L_X_2 == ';' || CHECK_L_X_2 == ':') && holder->keys.t)
 	{
 		if (CHECK_L_X_2 == ':')
+		{
 			CHECK_L_X_2 = ';';
+			Mix_PlayChannel(-1, holder->camera->sound[6], 0);
+		}
 		else if (CHECK_L_X_2 == ';')
+		{
 			CHECK_L_X_2 = ':';
+			Mix_PlayChannel(-1, holder->camera->sound[5], 0);
+		}
 		holder->keys.t = 0;
 		holder->shadows = !holder->shadows;
 	}

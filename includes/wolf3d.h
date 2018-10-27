@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 05:13:42 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 14:31:55 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,16 @@ typedef struct		s_tool
 
 typedef struct		s_mouse
 {
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 }					t_mouse;
 
 typedef struct		s_lines
 {
-	int				x1;
-	int				y1;
-	int				x2;
-	int				y2;
+	float				x1;
+	float				y1;
+	float				x2;
+	float				y2;
 }					t_lines;
 
 typedef struct		s_hud
@@ -175,7 +175,7 @@ typedef struct		s_camera
 	SDL_Surface		*texture[24];
 	SDL_Texture		*skybox_tex[5];
 	TTF_Font		*font;
-	Mix_Chunk		*dstelept;
+	Mix_Chunk		*sound[9];
 	float			ray_dir_x;
 	float			ray_dir_y;
 	float			wall_x_f;
@@ -207,7 +207,7 @@ typedef struct		s_camera
 	int				draw_end;
 	int				draw_start;
 	int				line_height;
-	int				line_poly_height;
+	float			line_poly_height;
 	int				intensity;
 	int				floor;
 }					t_camera;
@@ -328,6 +328,8 @@ typedef struct		s_wolf
 	int				energy;
 	int				pitch;
 	int				tv_mode;
+	double			tmp;
+	int				transparent :1;
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -392,7 +394,7 @@ unsigned int		alter_color(unsigned int color, float coefficient);
 unsigned int		alter_color_fixed(unsigned int color, int coefficient);
 void				draw_lines(t_wolf *holder,\
 					unsigned int *buffer,\
-					int x);
+					unsigned int x, int i);
 int					get_sprite_amount(t_wolf *holder, char c);
 void				reload_sprites(t_wolf *holder);
 void				azaporoz_keys_down_2(t_wolf *holder, t_camera *camera,\
@@ -453,7 +455,7 @@ void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites,\
 void				ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, \
 					int num);
 void				ft_check_next_level(t_wolf *holder);
-void				ft_check_pickups(t_wolf *holder);
+void				ft_check_pickups(t_wolf *holder, int i);
 void				init_mode(t_wolf *holder, int n);
 void				ft_check_weapons(t_wolf *holder, const Uint8 *keystate);
 void				ft_draw_menu_2(t_wolf *holder);

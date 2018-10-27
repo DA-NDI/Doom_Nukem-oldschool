@@ -68,7 +68,7 @@ void		check_teleport(t_wolf *holder, t_camera *camera)
 		if (CHECK_UP_X == '2' && CHECK_UP_X_PLUS2 == '0')
 		{
 			P_X += DIR_X * MOV_SP + 2;
-			Mix_PlayChannel(-1, camera->dstelept, 0);
+			Mix_PlayChannel(-1, camera->sound[0], 0);
 		}
 	}
 	check_button(holder, camera);

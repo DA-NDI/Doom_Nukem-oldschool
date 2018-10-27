@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 21:04:44 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 13:21:43 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 14:31:33 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_check_pickups3(t_wolf *holder, int a)
 		{
 			holder->hud->hp += 10;
 			holder->sprite[a + 19]->is_sprite = 0;
+			Mix_PlayChannel(-1, holder->camera->sound[2], 0);
 		}
 	}
 }
@@ -36,6 +37,7 @@ void	ft_check_pickups2(t_wolf *holder, int a)
 		{
 			holder->hp++;
 			holder->sprite[a + 13]->is_sprite = 0;
+			Mix_PlayChannel(-1, holder->camera->sound[2], 0);
 		}
 	}
 	a = -1;
@@ -47,17 +49,15 @@ void	ft_check_pickups2(t_wolf *holder, int a)
 		{
 			holder->hud->hp += 10;
 			holder->sprite[a + 16]->is_sprite = 0;
+			Mix_PlayChannel(-1, holder->camera->sound[2], 0);
 		}
 	}
 	ft_check_pickups3(holder, -1);
 	ft_check_bullet_collision(holder, -1);
 }
 
-void	ft_check_pickups(t_wolf *holder)
+void	ft_check_pickups(t_wolf *holder, int a)
 {
-	int a;
-
-	a = -1;
 	while (++a < holder->sprite_tex[2]->amount)
 	{
 		if (fabsf(ARC->x - P_X) < 1 && \
@@ -66,6 +66,7 @@ void	ft_check_pickups(t_wolf *holder)
 		{
 			holder->energy += 10;
 			ARC->is_sprite = 0;
+			Mix_PlayChannel(-1, holder->camera->sound[8], 0);
 		}
 	}
 	a = -1;
@@ -77,6 +78,7 @@ void	ft_check_pickups(t_wolf *holder)
 		{
 			holder->hud->ammo += 5;
 			AMO->is_sprite = 0;
+			Mix_PlayChannel(-1, holder->camera->sound[7], 0);
 		}
 	}
 	ft_check_pickups2(holder, -1);

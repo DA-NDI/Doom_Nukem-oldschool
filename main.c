@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:24:47 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 12:38:23 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 14:08:25 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,19 @@ void		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
 void		start_game(t_wolf *holder)
 {
 	holder_init(holder);
-	holder->line[0].x1 = 100;
-	holder->line[0].y1 = 100;
-	holder->line[0].x2 = 500;
-	holder->line[0].y2 = 100;
-	holder->line[1].x1 = 500;
-	holder->line[1].y1 = 100;
-	holder->line[1].x2 = 300;
-	holder->line[1].y2 = 300;
-	holder->line[2].x1 = 300;
-	holder->line[2].y1 = 300;
-	holder->line[2].x2 = 100;
-	holder->line[2].y2 = 100;
+	holder->transparent = 0;
+	holder->line[0].x1 = 3;
+	holder->line[0].y1 = 2;
+	holder->line[0].x2 = 8;
+	holder->line[0].y2 = 2;
+	holder->line[1].x1 = 8;
+	holder->line[1].y1 = 2;
+	holder->line[1].x2 = 5;
+	holder->line[1].y2 = 5;
+	holder->line[2].x1 = 5;
+	holder->line[2].y1 = 5;
+	holder->line[2].x2 = 3;
+	holder->line[2].y2 = 2;
 	get_player_coordinates(holder, 'P');
 	ft_init_image(holder);
 	ft_hud_init(holder);
@@ -107,8 +108,8 @@ int			main(int argc, char **argv)
 	static t_wolf	holder[1];
 	char			*map_name;
 
-	if (argc != 2 || !argv[1] || ft_strlen(argv[1]) > 30 || \
-		system("tar -xzf package"))
+	if (argc != 2 || !argv[1] || ft_strlen(argv[1]) > 30 \
+	|| system("tar -xzf package"))
 		ft_print_error("Usage: \
 		./doom-nukem <1-5 for level, or name of custom map>");
 	map_name = ft_strsub("./maps/", 0, 50);

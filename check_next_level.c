@@ -96,6 +96,23 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	holder->sprites->num = num;
 }
 
+void	init_invisible(t_wolf *holder)
+{
+	holder->transparent = 1;
+	holder->line[0].x1 = 20;
+	holder->line[0].y1 = 18;
+	holder->line[0].x2 = 25;
+	holder->line[0].y2 = 10;
+	holder->line[1].x1 = 25;
+	holder->line[1].y1 = 10;
+	holder->line[1].x2 = 30;
+	holder->line[1].y2 = 18;
+	holder->line[2].x1 = 30;
+	holder->line[2].y1 = 18;
+	holder->line[2].x2 = 20;
+	holder->line[2].y2 = 18;
+}
+
 void	ft_check_next_level(t_wolf *holder)
 {
 	int		a;
@@ -103,8 +120,10 @@ void	ft_check_next_level(t_wolf *holder)
 
 	num = 0;
 	a = -1;
-	if (holder->frags >= 2)
+	if (holder->frags >= 5)
 	{
+		Mix_PlayChannel(-1, holder->camera->sound[4], 0);
+		init_invisible(holder);
 		init_mode(holder, holder->start->play_select);
 		holder->sprites->num = 0;
 		ft_free_create_map(holder, -1);

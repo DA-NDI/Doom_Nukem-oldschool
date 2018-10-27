@@ -57,6 +57,8 @@ void		ft_check_extra_keys(t_wolf *holder, const Uint8 *keystate)
 		holder->shadows = !holder->shadows;
 	if (keystate[SDL_SCANCODE_T])
 		holder->tv_mode = !holder->tv_mode;
+	if (keystate[SDL_SCANCODE_I] || holder->hud->level == 4)
+		holder->transparent = !holder->transparent;
 	ft_check_weapons(holder, keystate);
 	ft_check_skybox(holder, keystate);
 }

@@ -23,6 +23,7 @@ void	ft_check_jump(t_wolf *holder)
 			holder->extra_updown -= 8;
 		if (holder->adv_frames == 30)
 		{
+			Mix_PlayChannel(-1, holder->camera->sound[3], 0);
 			holder->adv_frames = 0;
 			holder->advanced = normal;
 			holder->extra_updown = 0;

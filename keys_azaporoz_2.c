@@ -35,6 +35,8 @@ void	azaporoz_keys_down_2(t_wolf *holder, t_camera *camera, int key)
 		holder->energy--;
 		MOV_SP = 0.18;
 	}
+	if (key == SDLK_z)
+		holder->keys.z = !holder->keys.z;
 }
 
 void	azaporoz_keys_up_2(t_wolf *holder, t_camera *camera, int key)

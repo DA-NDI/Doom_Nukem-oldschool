@@ -29,6 +29,7 @@
 
 void	restart_enemy(t_wolf *holder, t_sprite *sprite)
 {
+	Mix_PlayChannel(-1, holder->camera->sound[1], 0);
 	holder->frags++;
 	SHOOTS = 0;
 	sprite->is_sprite = 1;

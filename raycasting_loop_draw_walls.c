@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:12:54 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/27 05:10:02 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 13:55:55 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,9 @@ unsigned int *buffer, unsigned int x)
 	int tex[4];
 
 	if (MAP_CELL == '9' && holder->hud->level == 2)
-		holder->wall_height = -50;
+		holder->wall_height = 150;
 	if (MAP_CELL == '1' && CHECK_SIDE_0)
 		holder->wall_height = -100;
-	if (MAP_CELL == '3')
-		holder->wall_height = -100;
-	if (MAP_CELL == '4')
-		holder->wall_height = -140;
 	holder->wall_height = holder->wall_height / camera->perp_wall_dist;
 	camera->draw_end = HEIGHT / 2 + (LINE_H >> 1) + holder->updown + \
 	holder->extra_updown;
@@ -80,14 +76,19 @@ void	raycasting_loop_2(t_wolf *holder, t_camera *camera, int x)
 	camera->is_hit = 0;
 }
 
+void	raycasting_init(t_wolf *holder)
+{
+	holder->frame_start = SDL_GetTicks();
+	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
+	holder->current_height = (holder->current_height > 300) ? 0 : 0;
+}
+
 void	raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
 unsigned int *buffer)
 {
 	static int i = -1;
 
-	holder->frame_start = SDL_GetTicks();
-	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
-	holder->current_height = (holder->current_height > 300) ? 0 : 0;
+	raycasting_init(holder);
 	while (++x < holder->width)
 	{
 		raycasting_loop_2(holder, camera, x);
@@ -104,8 +105,9 @@ unsigned int *buffer)
 		holder->zbuffer[x] = camera->perp_wall_dist;
 		draw_floor(holder, camera, buffer, x);
 		draw_walls(holder, camera, buffer, x);
-		if (++i % 2 == 0)
-			i = 0;
+		if (holder->transparent)
+			draw_lines(holder, buffer, x, 0);
+		i = (++i % 2 == 0) ? 0 : i;
 		if (holder->tv_mode)
 			x += i;
 	}

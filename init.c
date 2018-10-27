@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:39:00 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/18 11:08:42 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 14:34:06 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_camera_init_2(t_camera *camera)
 	camera->texture[21] = load_image("./texture/wall_texture11_dmg.png");
 	camera->texture[22] = load_image("./texture/light_on_dmg.png");
 	camera->texture[23] = load_image("./texture/light_off_dmg.png");
+	camera->sound[8] = load_chunk("./resourses/speed.wav");
 }
 
 void	ft_camera_init(t_camera *camera, t_wolf *holder)
@@ -67,8 +68,14 @@ void	ft_camera_init(t_camera *camera, t_wolf *holder)
 	if (!(camera->font = TTF_OpenFont("./resourses/font.ttf", 20)))
 		ft_print_error("Unable to load font");
 	ft_camera_init_2(camera);
-	camera->dstelept = load_chunk("./resourses/dstelept.wav");
-	camera->intensity = 1;
+	camera->sound[0] = load_chunk("./resourses/dstelept.wav");
+	camera->sound[1] = load_chunk("./resourses/death.wav");
+	camera->sound[2] = load_chunk("./resourses/pickup.wav");
+	camera->sound[3] = load_chunk("./resourses/jump.wav");
+	camera->sound[4] = load_chunk("./resourses/levelup.wav");
+	camera->sound[5] = load_chunk("./resourses/light_on.wav");
+	camera->sound[6] = load_chunk("./resourses/light_off.wav");
+	camera->sound[7] = load_chunk("./resourses/weapon_pick.wav");
 	ft_skybox_init(camera, holder);
 }
 

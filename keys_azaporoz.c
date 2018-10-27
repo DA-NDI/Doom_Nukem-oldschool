@@ -71,6 +71,10 @@ void	azaporoz_action(t_wolf *holder, t_camera *camera)
 			P_X += DIR_X * MOV_SP;
 		if (CHECK_UP_Y == '0' || CHECK_UP_Y == 'P')
 			P_Y += DIR_Y * MOV_SP;
+		if (CHECK_UP_X == '2' && holder->keys.z)
+			CHECK_UP_X = '0';
+		if (CHECK_UP_Y == '2' && holder->keys.z)
+			CHECK_UP_Y = '0';
 	}
 	if (holder->keys.down || holder->keys.s)
 	{
