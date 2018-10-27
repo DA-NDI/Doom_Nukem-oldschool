@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 15:23:41 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 14:31:55 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ typedef struct		s_keys
 	int				lctrl;
 	int				enter;
 	int				t;
-	int				z;
 }					t_keys;
 
 typedef struct		s_camera

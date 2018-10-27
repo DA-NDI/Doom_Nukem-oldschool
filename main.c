@@ -34,8 +34,8 @@ t_wolf		*holder_init(t_wolf *holder)
 	holder->shadows = 0;
 	holder->state = 0;
 	holder->tv_mode = 0;
-	holder->sprite_tex = (t_sprite_tex**)malloc(sizeof(t_sprite_tex*) * 7);
-	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 22);
+	holder->sprite_tex = (t_sprite_tex**)malloc(sizeof(t_sprite_tex*) * 8);
+	holder->sprite = (t_sprite**)malloc(sizeof(t_sprite*) * 23);
 	holder->retry_state = 0;
 	holder->ceiling = 1;
 	return (holder);
@@ -57,10 +57,10 @@ void		ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, int num)
 	int		a;
 
 	a = -1;
-	while (++a < holder->sprite_tex[0]->amount && a < 3)
+	while (++a < holder->sprite_tex[2]->amount && a < 3)
 		s_sorted->all_sprites[num++] = CAR;
 	a = -1;
-	while (++a < holder->sprite_tex[2]->amount && a < 5)
+	while (++a < holder->sprite_tex[0]->amount && a < 5)
 		s_sorted->all_sprites[num++] = ARC;
 	a = -1;
 	while (++a < holder->sprite_tex[6]->amount && a < 3)

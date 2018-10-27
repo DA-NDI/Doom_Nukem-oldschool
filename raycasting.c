@@ -21,7 +21,7 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 	if ((++i % 16) == 0)
 	{
 		while (++a < holder->sprite_tex[0]->amount)
-			ft_move_boss(holder, CAR);
+			ft_move_boss(holder, ARC);
 	}
 	if ((i % 2) == 0)
 	{
