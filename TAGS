@@ -29,9 +29,9 @@ void			draw_floor1(15,913
 draw_floor_main.c,140
 void		draw_floor2_2(15,913
 void		draw_floor2(26,1254
-void		draw_floor1_2(55,2031
-void		draw_floor1_3(70,2547
-void		draw_floor1(81,2994
+void		draw_floor1_2(55,2015
+void		draw_floor1_3(70,2531
+void		draw_floor1(81,2978
 
 draw_hud.c,109
 void		ft_hud_init(15,913
@@ -60,8 +60,8 @@ extra_keys.c,161
 void		ft_check_skybox(15,913
 void		ft_check_enter_start(25,1150
 void		ft_check_extra_keys(46,1649
-void		ft_gun_fire_on(62,2019
-void		ft_check_click(77,2312
+void		ft_gun_fire_on(64,2088
+void		ft_check_click(79,2381
 
 fixed_point.c,90
 int		f_to_raw(13,892
@@ -111,10 +111,10 @@ Mix_Chunk	*load_chunk(load_chunk69,1981
 
 main.c,185
 t_wolf		*holder_init(holder_init15,913
-t_sprites	*ft_sort_sprites_init(ft_sort_sprites_init43,1589
-void		ft_sort_sprites_put(54,1837
-void		start_game(79,2555
-int			main(104,3206
+t_sprites	*ft_sort_sprites_init(ft_sort_sprites_init44,1611
+void		ft_sort_sprites_put(55,1859
+void		start_game(80,2577
+int			main(105,3228
 
 mainloop.c,149
 void		mouse_move(23,1076
@@ -153,9 +153,9 @@ void	check_hit(49,1780
 
 raycasting_loop_draw_walls.c,113
 void	draw_walls_2(16,931
-void	draw_walls(39,1807
-void	raycasting_loop_2(71,2926
-void	raycasting_loop(83,3350
+void	draw_walls(39,1785
+void	raycasting_loop_2(71,2874
+void	raycasting_loop(83,3298
 
 skybox.c,53
 void	draw_skybox_2(15,913
@@ -185,8 +185,8 @@ sprite.c,467
 void	ft_sprite_loop_3(36,1558
 void	ft_sprite_loop_2(56,2304
 void	ft_sprite_loop_loop(77,3081
-void	ft_sprite_loop(107,4015
-void	ft_draw_sprites(131,4663
+void	ft_sprite_loop(107,3993
+void	ft_draw_sprites(131,4611
 
 sprite_2.c,501
 #define SPRITE 14,912
@@ -261,7 +261,7 @@ weapon_extra.c,64
 void	init_shotgun_tex(15,913
 void	init_weapon_shotgun(39,2402
 
-includes/wolf3d.h,7914
+includes/wolf3d.h,7964
 # define WOLF3D_H14,909
 # define DOWN 22,1056
 # define UP 23,1080
@@ -542,4 +542,6 @@ typedef struct		s_wolf273,7138
 	t_lines			line[line326,8208
 	int				hp;327,8228
 	int				energy;328,8240
-}					t_wolf;329,8256
+	int				pitch;329,8256
+	int				tv_mode;330,8271
+}					t_wolf;331,8288

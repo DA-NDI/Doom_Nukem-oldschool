@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 22:01:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 13:22:26 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 05:08:03 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,31 @@ int		ft_raycasting_3(t_wolf *holder, int i)
 
 void	ft_raycasting(t_wolf *holder, int x)
 {
-	static unsigned int	buffer[768][1024];
-	static int			i = 0;
-	static int a = 0;
-//	unsigned int **buffer;
-	int pitch;
+	static int		i = 0;
+	unsigned int	*buffer;
 
 	while (holder->running)
 	{
-//		if (SDL_LockTexture(holder->screen, NULL, (void**)&buffer, &pitch))
-//		ft_print_error("locking failed\n");
+		if (SDL_LockTexture(holder->screen, 0, (void**)&buffer, &holder->pitch))
+			ft_print_error("locking failed\n");
+		x = -1;
+		while (++x < holder->height * holder->width)
+			buffer[x] = 0;
 		ft_check_next_level(holder);
 		raycasting_loop(holder, holder->camera, -1, buffer);
 		drawing_sorting_sprites(holder, SORTED, holder->sprites->num, buffer);
 		i = ft_raycasting_3(holder, i);
 		if (!holder->pause && !holder->starting && holder->running)
 		{
-			SDL_UpdateTexture(holder->screen, NULL, buffer[0], WIDTH << 2);
-			x = -1;
-			while (++x < holder->height)
-				ft_zero_fill(buffer[x], holder->width);
 			SDL_RenderClear(holder->renderer);
 			draw_skybox(holder, holder->camera);
 			SDL_RenderCopy(holder->renderer, holder->screen, NULL, NULL);
-
 			draw_weapon(holder->weapon, holder);
 			draw_fps(holder, holder->camera->font);
 			draw_hud(holder);
-			if (++a % 2 == 0)
 			SDL_RenderPresent(holder->renderer);
-		SDL_UnlockTexture(holder->screen);
 		}
+		SDL_UnlockTexture(holder->screen);
 		ft_close_loop(holder, holder->camera);
 	}
 }

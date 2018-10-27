@@ -77,7 +77,7 @@ void	ft_sort_sprite(t_wolf *holder, t_sprite **sprites, int i, int num)
 }
 
 void	drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites, int num, \
-unsigned int buffer[holder->height][holder->width])
+unsigned int *buffer)
 {
 	int			i;
 	static int	a = 0;

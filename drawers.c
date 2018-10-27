@@ -115,7 +115,7 @@ unsigned int	alter_color(unsigned int color, float coefficient)
 }
 
 void			draw_floor(t_wolf *holder, t_camera *camera, \
-unsigned int buffer[holder->height][holder->width], unsigned int x)
+unsigned int *buffer, unsigned int x)
 {
 	if (camera->side == 0 && camera->ray_dir_x > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:12:54 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/23 15:12:54 by azaporoz         ###   ########.fr       */
+/*   Updated: 2018/10/27 05:10:02 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 
 void	draw_walls_2(t_wolf *holder, t_camera *camera,\
-unsigned int buffer[holder->height][holder->width], int tex[4])
+unsigned int *buffer, int tex[4])
 {
 	unsigned int	color;
 
@@ -32,12 +32,12 @@ unsigned int buffer[holder->height][holder->width], int tex[4])
 		color >>= (CHECK_SIDE_0 && tex[0] == 6) ? 1 : 0;
 		color |= (CHECK_SIDE_3 && tex[0] == 6) ? 0xFF00F00F : 0;
 		color |= (CHECK_SIDE_2 && tex[0] == 6) ? 0xFFF00000 : 0;
-		buffer[camera->draw_start][tex[3]] = color;
+		buffer[camera->draw_start * 1024 + tex[3]] = color;
 	}
 }
 
 void	draw_walls(t_wolf *holder, t_camera *camera, \
-unsigned int buffer[holder->height][holder->width], unsigned int x)
+unsigned int *buffer, unsigned int x)
 {
 	int tex[4];
 
@@ -81,12 +81,13 @@ void	raycasting_loop_2(t_wolf *holder, t_camera *camera, int x)
 }
 
 void	raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
-unsigned int buffer[holder->height][holder->width])
+unsigned int *buffer)
 {
+	static int i = -1;
+
 	holder->frame_start = SDL_GetTicks();
 	holder->current_height = holder->height_map[(int)P_Y][(int)P_X];
 	holder->current_height = (holder->current_height > 300) ? 0 : 0;
-	static int i = -1;
 	while (++x < holder->width)
 	{
 		raycasting_loop_2(holder, camera, x);
@@ -105,6 +106,7 @@ unsigned int buffer[holder->height][holder->width])
 		draw_walls(holder, camera, buffer, x);
 		if (++i % 2 == 0)
 			i = 0;
-		x += i;
+		if (holder->tv_mode)
+			x += i;
 	}
 }

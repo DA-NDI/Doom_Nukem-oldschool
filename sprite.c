@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 11:39:29 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 20:07:23 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/27 05:12:54 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_sprite_loop_2(t_sprite *sprite, float angle)
 }
 
 void	ft_sprite_loop_loop(t_wolf *holder, t_sprite *sprite,\
-unsigned int buffer[holder->height][holder->width], int spr_int_w[4])
+unsigned int *buffer, int spr_int_w[4])
 {
 	int				tex_x;
 	int				tex_y;
@@ -99,13 +99,13 @@ unsigned int buffer[holder->height][holder->width], int spr_int_w[4])
 			if (holder->shadows && color != 0)
 				color = alter_color_fixed(color, coefficient);
 			if (color != 0)
-				buffer[i][START_X] = color;
+				buffer[i * 1024 + START_X] = color;
 		}
 	}
 }
 
 void	ft_sprite_loop(t_wolf *holder,\
-unsigned int buffer[holder->height][holder->width],\
+unsigned int *buffer,\
 int spr_int[3], t_sprite *sprite)
 {
 	int spr_int_w[4];
@@ -129,7 +129,7 @@ int spr_int[3], t_sprite *sprite)
 }
 
 void	ft_draw_sprites(t_wolf *holder, t_camera *camera,\
-unsigned int buffer[holder->height][holder->width], t_sprite *sprite)
+unsigned int *buffer, t_sprite *sprite)
 {
 	float	inv_det;
 	float	transform_x;

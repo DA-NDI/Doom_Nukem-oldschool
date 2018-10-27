@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 02:25:30 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 05:13:42 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,6 +326,8 @@ typedef struct		s_wolf
 	t_lines			line[3];
 	int				hp;
 	int				energy;
+	int				pitch;
+	int				tv_mode;
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -359,11 +361,11 @@ Mix_Chunk			*load_chunk(char *path);
 void				ft_check_extra_keys(t_wolf *holder, \
 					const Uint8 *keystate);
 void				draw_floor(t_wolf *holder, t_camera *camera, \
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					t_sprite *sprite);
 int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
@@ -389,7 +391,7 @@ void				ft_check_advanced_move(t_wolf *hold, const Uint8 *keystat);
 unsigned int		alter_color(unsigned int color, float coefficient);
 unsigned int		alter_color_fixed(unsigned int color, int coefficient);
 void				draw_lines(t_wolf *holder,\
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					int x);
 int					get_sprite_amount(t_wolf *holder, char c);
 void				reload_sprites(t_wolf *holder);
@@ -410,22 +412,22 @@ void				start_arcade_sprite(t_wolf *holder, int num);
 void				start_bullet_sprite(t_wolf *holder, int num);
 void				start_car_sprite(t_wolf *holder, int num);
 void				draw_floor1(t_wolf *holder,\
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					unsigned int x);
 void				draw_floor2(t_wolf *holder,\
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					unsigned int x);
 void				check_ray(t_camera *camera, t_wolf *holder);
 void				check_hit(t_camera *camera, t_wolf *holder);
 void				draw_walls_2(t_wolf *holder, t_camera *camera,\
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					int tex[4]);
 void				draw_walls(t_wolf *holder, t_camera *camera,\
-					unsigned int buffer[holder->height][holder->width],\
+					unsigned int *buffer,\
 					unsigned int x);
 void				raycasting_loop_2(t_wolf *holder, t_camera *camera, int x);
 void				raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
-					unsigned int buffer[holder->height][holder->width]);
+					unsigned int *buffer);
 void				ft_check_pause(t_wolf *holder, const Uint8 *keystate);
 void				ft_check_other(t_wolf *holder, const Uint8 *keystate);
 void				check_button(t_wolf *holder, t_camera *camera);
@@ -447,7 +449,7 @@ int					**ft_create_height_map(int fd);
 void				skip_first_line(int fd);
 void				ft_check_bullet_collision(t_wolf *holder, int a);
 void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites,\
-	int num, unsigned int buffer[holder->height][holder->width]);
+	int num, unsigned int *buffer);
 void				ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, \
 					int num);
 void				ft_check_next_level(t_wolf *holder);

@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 13:35:12 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/26 21:56:31 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 05:04:57 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		draw_floor2_2(t_wolf *holder, float current[3], int i)
 }
 
 void		draw_floor2(t_wolf *holder,\
-unsigned int buffer[holder->height][holder->width], unsigned int x)
+unsigned int *buf, unsigned int x)
 {
 	int		i;
 	float	current[3];
@@ -43,10 +43,10 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 		var = HEIGHT - i + (holder->updown + holder->extra_updown);
 		if (var < HEIGHT && var > 0)
 		{
-			buffer[var][x] = get_pixel(holder->camera->texture[7], \
-							FTX >> 1, FTY);
+			buf[var * 1024 + x] = get_pixel(holder->camera->texture[7], \
+						FTX >> 1, FTY);
 			if (holder->shadows)
-				buffer[var][x] = alter_color_fixed(buffer[var][x],\
+				buf[(var << 10) + x] = alter_color_fixed(buf[(var << 10) + x], \
 				(int)((float)current[0] * 256) / 10);
 		}
 	}
@@ -79,7 +79,7 @@ void		draw_floor1_3(t_wolf *holder, float current[3], float old_new[2])
 }
 
 void		draw_floor1(t_wolf *holder,\
-unsigned int buffer[holder->height][holder->width], unsigned int x)
+unsigned int *buf, unsigned int x)
 {
 	int		i;
 	float	current[3];
@@ -93,17 +93,10 @@ unsigned int buffer[holder->height][holder->width], unsigned int x)
 		if (current[1] <= 0 || current[2] < 0)
 			continue;
 		draw_floor1_3(holder, current, old_new);
-		if (old_new[0] != old_new[1])
-			holder->state = !holder->state;
-		if (!holder->state)
-			buffer[i][x] = get_pixel(holder->camera->texture[4], FTX >> 1, FTY);
-		else
-		{
-			holder->state = !holder->state;
-			buffer[i][x] = -1677721;
-		}
+		buf[(i << 10) + x] = \
+			get_pixel(holder->camera->texture[4], FTX >> 1, FTY);
 		if (holder->shadows)
-			buffer[i][x] = alter_color_fixed(buffer[i][x],\
+			buf[i * 1024 + x] = alter_color_fixed(buf[i * 1024 + x],\
 			(int)((float)current[0] * 256) / 10);
 	}
 }
