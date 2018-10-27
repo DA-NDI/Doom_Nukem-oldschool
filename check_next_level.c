@@ -81,7 +81,7 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	while (++a < holder->sprite_tex[0]->amount)
 	{
 		num = num + 1;
-		start_enemy(holder, a + 2, CAR);
+		start_enemy(holder, a + 2, ARC);
 		CAR->is_sprite = get_sprite_coordinates(holder, 'A', a + 2);
 		CAR->end_frame = 5;
 	}
@@ -90,7 +90,7 @@ void	reinit_sprites_2(t_wolf *holder, int a, int num)
 	while (++a < holder->sprite_tex[2]->amount)
 	{
 		num = num + 1;
-		start_enemy(holder, a + 7, ARC);
+		start_enemy(holder, a + 7, CAR);
 		ARC->is_sprite = get_sprite_coordinates(holder, 'C', a + 7);
 	}
 	holder->sprites->num = num;
