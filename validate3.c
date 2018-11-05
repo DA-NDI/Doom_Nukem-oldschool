@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 23:56:03 by azulbukh          #+#    #+#             */
-/*   Updated: 2018/10/23 23:56:16 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/27 23:27:27 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		**ft_create_height_map(int fd)
 	}
 	tool.buff_height[tool.i] = NULL;
 	tool.i = -1;
-	write(1, "1", 1);
 	while (tool.buff_height[++tool.i])
 	{
 		height_map[tool.i] = (int*)malloc(sizeof(int)

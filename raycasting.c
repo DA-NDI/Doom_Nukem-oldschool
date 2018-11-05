@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 22:01:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 14:05:43 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:47:39 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_raycasting(t_wolf *holder, int a)
 		a = -1;
 		while (++a < holder->height * holder->width)
 			buffer[a] = 0;
-		ft_check_next_level(holder);
 		raycasting_loop(holder, holder->camera, -1, buffer);
 		drawing_sorting_sprites(holder, SORTED, holder->sprites->num, buffer);
 		i = ft_raycasting_3(holder, i);
@@ -62,5 +61,6 @@ void	ft_raycasting(t_wolf *holder, int a)
 			update_screen(holder);
 		SDL_UnlockTexture(holder->screen);
 		ft_close_loop(holder, holder->camera);
+		ft_check_next_level(holder);
 	}
 }

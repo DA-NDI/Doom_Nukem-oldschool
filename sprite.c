@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 11:39:29 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 05:12:54 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:19:43 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ int spr_int[3], t_sprite *sprite)
 	END_Y += holder->updown + holder->extra_updown;
 	END_Y = (END_Y > 768) ? 768 : END_Y;
 	if (sprite->texture == 99)
+		ft_sprite_loop_2(sprite, roundf(atan2(sprite->y - P_Y, sprite->x - P_X)\
+		* (180 / 3.1415926)));
+	if (sprite->texture == 66)
 		ft_sprite_loop_2(sprite, roundf(atan2(sprite->y - P_Y, sprite->x - P_X)\
 		* (180 / 3.1415926)));
 	while (++START_X < END_X && (sprite->is_alive || IS_SPRITE))

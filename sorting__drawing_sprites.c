@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 21:32:00 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 14:32:17 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:48:18 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ unsigned int *buffer)
 	static int	a = 0;
 
 	i = -1;
-	if (a % 4 == 0)
-		ft_sort_sprite(holder, sprites, -1, num);
+	ft_sort_sprite(holder, sprites, -1, num);
 	a++;
 	ft_draw_sprites(holder, holder->camera, buffer, holder->sprite[0]);
 	while (++i < num)

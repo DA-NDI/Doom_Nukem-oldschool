@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:35:47 by azulbukh          #+#    #+#             */
-/*   Updated: 2018/10/27 16:14:47 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/27 23:45:08 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int				main(int ac, char **av)
 	}
 	TTF_Quit();
 	SDL_Quit();
-	system("tar -cf package ../maps ../resourses \
-			../sprites ../textures ../texture");
-	system("leaks map");
+	system("cd ../ && tar -cf package ./maps ./resourses \
+			./sprites ./textures ./texture");
 	return (0);
 }

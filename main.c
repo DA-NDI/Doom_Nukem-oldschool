@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:24:47 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/27 16:58:42 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:47:10 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			main(int argc, char **argv)
 	char			*map_name;
 
 	if (argc != 2 || !argv[1] || ft_strlen(argv[1]) > 30 \
-	|| system("tar -xzf package"))
+		|| system("tar -xzf package"))
 		ft_print_error("Usage: \
 		./doom-nukem <1-5 for level, or name of custom map>");
 	map_name = ft_strsub("./maps/", 0, 50);

@@ -6,7 +6,7 @@
 /*   By: azaporoz <azaporoz@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 12:46:18 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/10/23 12:46:19 by azaporoz         ###   ########.fr       */
+/*   Updated: 2018/10/27 21:37:42 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,23 @@ void	azaporoz_keys_down_2(t_wolf *holder, t_camera *camera, int key)
 		MOV_SP = 0.18;
 	}
 	if (key == SDLK_z)
-		holder->keys.z = !holder->keys.z;
+		holder->keys.z = 1;
+}
+
+void	azaporoz_keys_up_3(t_wolf *holder, int key)
+{
+	if (key == SDLK_o && holder->hud->hp <= 150 && holder->hp)
+	{
+		holder->hud->hp += 10;
+		holder->hp--;
+	}
+	if (key == SDLK_o && holder->hud->hp <= 150 && holder->hp)
+	{
+		holder->hud->hp += 10;
+		holder->hp--;
+	}
+	if (key == SDLK_z)
+		holder->keys.z = 1;
 }
 
 void	azaporoz_keys_up_2(t_wolf *holder, t_camera *camera, int key)
@@ -61,9 +77,5 @@ void	azaporoz_keys_up_2(t_wolf *holder, t_camera *camera, int key)
 		MOV_SP = 0.07;
 	if (key == SDLK_LCTRL)
 		holder->keys.lctrl = 0;
-	if (key == SDLK_o && holder->hud->hp <= 150 && holder->hp)
-	{
-		holder->hud->hp += 10;
-		holder->hp--;
-	}
+	azaporoz_keys_up_3(holder, key);
 }

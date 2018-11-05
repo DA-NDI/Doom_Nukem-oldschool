@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 11:49:44 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/28 20:47:47 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 21:38:11 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	azaporoz_keys_up(t_wolf *holder, t_camera *camera, int key)
 
 void	azaporoz_left_right(t_wolf *holder, t_camera *camera)
 {
+	CHECK_UP_X = (CHECK_UP_X == '3' && holder->keys.z) ? '0' : CHECK_UP_X;
+	if (CHECK_UP_Y == '3' && holder->keys.z)
+		CHECK_UP_Y = '0';
 	if (holder->keys.left || holder->keys.a)
 	{
 		if (CHECK_LEFT_X == '0' || CHECK_LEFT_X == 'P')
@@ -71,10 +74,6 @@ void	azaporoz_action(t_wolf *holder, t_camera *camera)
 			P_X += DIR_X * MOV_SP;
 		if (CHECK_UP_Y == '0' || CHECK_UP_Y == 'P')
 			P_Y += DIR_Y * MOV_SP;
-		if (CHECK_UP_X == '2' && holder->keys.z)
-			CHECK_UP_X = '0';
-		if (CHECK_UP_Y == '2' && holder->keys.z)
-			CHECK_UP_Y = '0';
 	}
 	if (holder->keys.down || holder->keys.s)
 	{

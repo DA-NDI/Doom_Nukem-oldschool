@@ -6,7 +6,7 @@
 #    By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/10/27 16:52:24 by avolgin          ###   ########.fr        #
+#    Updated: 2018/10/27 22:50:41 by avolgin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SRC_WOLF =./init.c \
 
 OBJECT_WOLF = $(SRC_WOLF:.c=.o)
 
-FLAGS = -Wall -Wextra
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDES_WOLF = -I ./includes/
 

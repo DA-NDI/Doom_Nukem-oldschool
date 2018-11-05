@@ -6,7 +6,7 @@
 /*   By: avolgin <avolgin@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 12:38:41 by avolgin           #+#    #+#             */
-/*   Updated: 2018/10/26 12:38:42 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 22:49:16 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void		ft_close(t_wolf *holder)
 	free(holder->start);
 	TTF_Quit();
 	SDL_Quit();
-	system("leaks doom-nukem");
 	exit(0);
 }
 
 void		ft_print_error(char *str)
 {
 	ft_putendl(str);
-	system("leaks doom-nukem");
 	exit(1);
 }

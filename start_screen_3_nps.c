@@ -73,6 +73,7 @@ void	start_death_star(t_wolf *holder, int num)
 	star = (t_sprite*)malloc(sizeof(t_sprite));
 	start_enemy(holder, num, star);
 	star->s_tex = holder->sprite_tex[7];
+	star->texture = 66;
 	star->is_sprite = get_sprite_coordinates(holder, 'D', num);
 	star->tex_sprite[0] = holder->sprite_tex[7]->arr_sprite[0][0];
 }
