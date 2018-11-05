@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:17:52 by avolgin           #+#    #+#             */
-/*   Updated: 2018/09/28 17:21:45 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/10/27 16:49:24 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 # define WALL_X_FL holder->camera->wall_x_f
 # define WALL_Y_FL holder->camera->wall_y_f
 # define PERP_DIST_WALL holder->camera->perp_wall_dist
-# define FLOOR_TEX_X (int)(current_floor_x * 64) % 64
-# define FLOOR_TEX_Y (int)(current_floor_y * 64) % 64
+# define FTX (int)(current[1] * 64) % 64
+# define FTY (int)(current[2] * 64) % 64
 # define CHECK_SIDE_0 (camera->side == 0 && camera->ray_dir_x > 0)
 # define CHECK_SIDE_1 (camera->side == 1 && camera->ray_dir_y < 0)
 # define CHECK_SIDE_2 (camera->side == 0 && camera->ray_dir_x < 0)
@@ -69,15 +69,16 @@
 # define FIXED_F(x) (((float)(x)) / 256)
 # define FIX_MULT(x, y) ((x)*(y) >> 8)
 # define FIX_DIV(x, y) (((x)<< 8) / (y))
-# define IS_SPRITE holder->sprite->is_sprite
-# define SHOOTS (*(holder->shoots))
-# define ARCADE_TEX holder->sprite->tex_sprite[0]
-# define IS_ARC holder->sprite->sprite_found
+# define IS_SPRITE sprite->is_sprite
+# define SHOOTS (sprite->shoots)
+# define CURR_TEX sprite->tex_sprite[0]
+# define IS_ARC sprite->sprite_found
 # define DR_START camera->draw_start
 # define MOUSE_Y (holder->height >> 1) - holder->keys.y
 # define CHECK_DOWN_X MAP[(int)(P_Y)][(int)(P_X - DIR_X * MOV_SP)]
 # define CHECK_LEFT_X MAP[(int)(P_Y)][(int)(P_X - DIR_Y * MOV_SP)]
 # define CHECK_RIGHT_X MAP[(int)(P_Y)][(int)(P_X + DIR_Y * MOV_SP)]
+# define CHECK_L_X_2 MAP[(int)(P_Y + DIR_Y)][(int)(P_X + DIR_X)]
 # define CHECK_LEFT_Y MAP[(int)(P_Y + DIR_X * MOV_SP)][(int)(P_X)]
 # define CHECK_RIGHT_Y MAP[(int)(P_Y - DIR_X * MOV_SP)][(int)(P_X)]
 # define CHECK_DOWN_Y MAP[(int)(P_Y - DIR_Y * MOV_SP)][(int)(P_X)]
@@ -90,6 +91,17 @@
 # define V_X_NORM(x, y) (x / V_LEN(x, y))
 # define V_Y_NORM(x, y) (y / V_LEN(x, y))
 # define MAXSPRITES 20
+# define BUTTON_LEFT (holder->event.button.button == SDL_BUTTON_LEFT)
+# define AMMO holder->hud->ammo
+# define POLY_H camera->line_poly_height
+# define ARC holder->sprite[a + 2]
+# define AMO holder->sprite[a + 10]
+# define PEPSI holder->sprite[a + 16]
+# define KOLA holder->sprite[a + 19]
+# define POT holder->sprite[a + 13]
+# define CAR holder->sprite[a + 7]
+# define STAR holder->sprite[22]
+# define SORTED holder->sprites->all_sprites
 
 enum				e_adv
 {
@@ -101,21 +113,40 @@ enum				e_adv
 
 typedef int			t_intfix;
 
+typedef struct		s_tool
+{
+	char			*buff;
+	char			*buff_height[51];
+	int				i;
+	int				a;
+	char			**splitted;
+}					t_tool;
+
 typedef struct		s_mouse
 {
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 }					t_mouse;
+
+typedef struct		s_lines
+{
+	float				x1;
+	float				y1;
+	float				x2;
+	float				y2;
+}					t_lines;
 
 typedef struct		s_hud
 {
-	SDL_Texture		*hud[11];
+	SDL_Texture		*hud[13];
+	float			enemy_speed;
 	int				hp;
 	int				ammo;
 	int				lives;
 	int				rockets;
 	int				shield;
-	int 			jetpack;
+	int				jetpack;
+	int				level;
 }					t_hud;
 
 typedef struct		s_keys
@@ -136,14 +167,17 @@ typedef struct		s_keys
 	int				y;
 	int				f;
 	int				lctrl;
+	int				enter;
+	int				t;
+	int				z;
 }					t_keys;
 
 typedef struct		s_camera
 {
-	SDL_Surface		*texture[12];
+	SDL_Surface		*texture[24];
 	SDL_Texture		*skybox_tex[5];
 	TTF_Font		*font;
-	Mix_Chunk		*dstelept;
+	Mix_Chunk		*sound[9];
 	float			ray_dir_x;
 	float			ray_dir_y;
 	float			wall_x_f;
@@ -164,6 +198,8 @@ typedef struct		s_camera
 	float			move_speed;
 	float			rot_speed;
 	float			wall_x;
+	float			wall_xx;
+	float			wall_yy;
 	int				step_x;
 	int				step_y;
 	int				is_hit;
@@ -173,19 +209,28 @@ typedef struct		s_camera
 	int				draw_end;
 	int				draw_start;
 	int				line_height;
-	int			intensity;
+	float			line_poly_height;
+	int				intensity;
+	int				floor;
 }					t_camera;
+
+typedef struct		s_sprite_tex
+{
+	SDL_Surface		*arr_sprite[2][9];
+	int				amount;
+}					t_sprite_tex;
 
 typedef struct		s_sprite
 {
-	SDL_Surface		*arr_sprite[2][9];
 	SDL_Surface		*tex_sprite[1];
+	t_sprite_tex	*s_tex;
 	float			x;
 	float			y;
 	float			transform_y;
 	float			orig_x;
 	float			orig_y;
 	float			speed;
+	float			distance;
 	int				is_alive;
 	int				is_sprite:1;
 	int				texture;
@@ -195,7 +240,17 @@ typedef struct		s_sprite
 	int				draw_end_y;
 	int				sprite_width;
 	int				sprite_found:1;
+	int				end_frame;
+	int				shoots;
 }					t_sprite;
+
+typedef struct		s_sorted
+{
+	t_sprite		*all_sprites[22];
+	int				*order;
+	float			*dist;
+	int				num;
+}					t_sprites;
 
 typedef struct		s_weapon
 {
@@ -231,7 +286,7 @@ typedef struct		s_wolf
 	int				jumping: 1;
 	float			zbuffer[1024];
 	char			**map;
-	int 			**height_map;
+	int				**height_map;
 	SDL_Window		*window;
 	SDL_Surface		*image;
 	SDL_Texture		*screen;
@@ -243,30 +298,40 @@ typedef struct		s_wolf
 	t_camera		*camera;
 	t_weapon		*weapon[4];
 	t_start			*start;
-	t_sprite		*sprite;
-	t_sprite		*bullet;
+	t_sprite		**sprite;
+	t_sprite_tex	**sprite_tex;
 	t_hud			*hud;
+	t_sprites		*sprites;
 	unsigned int	fps;
 	unsigned int	frame_delay;
 	unsigned int	frame_start;
 	unsigned int	frame_time;
 	Mix_Music		*music;
 	int				pause:1;
-	int				starting:1;
+	int				starting;
 	int				gun;
 	int				gun_1;
 	int				*shoots;
 	int				frags;
 	int				updown;
-	int 			extra_updown;
+	int				extra_updown;
 	enum e_adv		advanced;
 	int				adv_frames;
 	int				start_point;
 	int				lifted;
-	unsigned int 	shadows:1;
-	int 			current_height;
-	int 			wall_height;
-	unsigned int 	state:1;
+	int				retry_state;
+	unsigned int	shadows:1;
+	int				current_height;
+	int				wall_height;
+	int				ceiling;
+	unsigned int	state:1;
+	t_lines			line[3];
+	int				hp;
+	int				energy;
+	int				pitch;
+	int				tv_mode;
+	double			tmp;
+	int				transparent :1;
 }					t_wolf;
 
 void				ft_print_error(char *str);
@@ -275,9 +340,9 @@ void				ft_close_loop(t_wolf *holder, t_camera *camera);
 SDL_Surface			*ft_load_bmp(t_wolf *holder, char *path);
 SDL_Surface			*ft_load_png(t_wolf *holder, char *path);
 void				ft_close(t_wolf *holder);
-char				**ft_create_map(char **argv, t_wolf *holder);
+char				**ft_create_map(char *path, t_wolf *holder);
 void				ft_verify_map(char **map, t_wolf *holder);
-void				get_player_coordinates(t_wolf *holder);
+void				get_player_coordinates(t_wolf *holder, char c);
 void				ft_raycasting(t_wolf *holder, int x);
 void				ft_draw_line(int x, int y_start, int y_end, \
 								int color, t_wolf *holder);
@@ -300,30 +365,108 @@ Mix_Chunk			*load_chunk(char *path);
 void				ft_check_extra_keys(t_wolf *holder, \
 					const Uint8 *keystate);
 void				draw_floor(t_wolf *holder, t_camera *camera, \
-		unsigned int buffer[][holder->width], unsigned int x);
+					unsigned int *buffer,\
+					unsigned int x);
 unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
 void				ft_draw_sprites(t_wolf *holder, t_camera *camera, \
-	unsigned int buffer[][holder->width]);
-int					get_sprite_coordinates(t_wolf *holder, char c);
+					unsigned int *buffer,\
+					t_sprite *sprite);
+int					get_sprite_coordinates(t_wolf *holder, char c, int num);
 void				ft_move_boss(t_wolf *holder, t_sprite *sprite);
-void				ft_check_click(t_wolf *holder);
+void				ft_check_click(t_wolf *holder, t_sprite *sprite);
 void				start_game(t_wolf *holder);
 void				init_weapon_grenade(t_weapon *weapon, t_wolf *holder);
-void				restart_enemy(t_wolf *holder);
+void				restart_enemy(t_wolf *holder, t_sprite *sprite);
 void				init_weapon_demon(t_weapon *weapon, t_wolf *holder);
 void				init_weapon_shotgun(t_weapon *weapon, t_wolf *holder);
 void				draw_score(t_wolf *holder);
 void				mouse_move(t_wolf *holder, t_camera *camera, float old);
 void				azaporoz_keys_down(t_wolf *holder, t_camera *camera, \
-								int key);
+int key);
 void				azaporoz_keys_up(t_wolf *holder, t_camera *camera, \
-								int key);
+int key);
+void				ft_move_bullet(t_wolf *holder, t_sprite *sprite);
 void				azaporoz_action(t_wolf *holder, t_camera *camera);
 void				azaporoz_rotate(t_wolf *holder, t_camera *camera, \
-									float old);
+float old);
 void				draw_hud(t_wolf *holder);
 void				ft_hud_init(t_wolf *holder);
 void				ft_check_advanced_move(t_wolf *hold, const Uint8 *keystat);
-unsigned int alter_color(unsigned int color, float coefficient);
-unsigned int alter_color_fixed(unsigned int color, int coefficient);
+unsigned int		alter_color(unsigned int color, float coefficient);
+unsigned int		alter_color_fixed(unsigned int color, int coefficient);
+void				draw_lines(t_wolf *holder,\
+					unsigned int *buffer,\
+					unsigned int x, int i);
+int					get_sprite_amount(t_wolf *holder, char c);
+void				reload_sprites(t_wolf *holder);
+void				azaporoz_keys_down_2(t_wolf *holder, t_camera *camera,\
+					int key);
+void				azaporoz_keys_up_2(t_wolf *holder, t_camera *camera,\
+					int key);
+void				load_sprite_tex_arcade(t_wolf *holder);
+void				load_sprite_tex_bullet(t_wolf *holder);
+void				load_sprite_tex_car(t_wolf *holder);
+
+/*
+** azaporoz norminette:
+*/
+
+void				start_enemy(t_wolf *holder, int num, t_sprite *sprite);
+void				start_arcade_sprite(t_wolf *holder, int num);
+void				start_bullet_sprite(t_wolf *holder, int num);
+void				start_car_sprite(t_wolf *holder, int num);
+void				draw_floor1(t_wolf *holder,\
+					unsigned int *buffer,\
+					unsigned int x);
+void				draw_floor2(t_wolf *holder,\
+					unsigned int *buffer,\
+					unsigned int x);
+void				check_ray(t_camera *camera, t_wolf *holder);
+void				check_hit(t_camera *camera, t_wolf *holder);
+void				draw_walls_2(t_wolf *holder, t_camera *camera,\
+					unsigned int *buffer,\
+					int tex[4]);
+void				draw_walls(t_wolf *holder, t_camera *camera,\
+					unsigned int *buffer,\
+					unsigned int x);
+void				raycasting_loop_2(t_wolf *holder, t_camera *camera, int x);
+void				raycasting_loop(t_wolf *holder, t_camera *camera, int x,\
+					unsigned int *buffer);
+void				ft_check_pause(t_wolf *holder, const Uint8 *keystate);
+void				ft_check_other(t_wolf *holder, const Uint8 *keystate);
+void				check_button(t_wolf *holder, t_camera *camera);
+void				start_pickup_sprite(t_wolf *holder, int t, char c, int n);
+void				load_pickupers(t_wolf *holder);
+void				ft_check_pickups2(t_wolf *holder, int a);
+/*
+** azulbukh norminette:
+*/
+void				free_words(char **words);
+int					words_len(char **cords);
+void				tool(char *map[50], int i, int ret, char *buff);
+void				fill_map(t_tool *tool, int *height_map[50]);
+int					check_dimensions_and_symbols(char **map,
+					int height, int width);
+void				check_amount(char **map, int i, int j);
+int					check_boundaries(char **map, int height);
+int					**ft_create_height_map(int fd);
+void				skip_first_line(int fd);
+void				ft_check_bullet_collision(t_wolf *holder, int a);
+void				drawing_sorting_sprites(t_wolf *holder, t_sprite **sprites,\
+	int num, unsigned int *buffer);
+void				ft_sort_sprites_put(t_wolf *holder, t_sprites *s_sorted, \
+					int num);
+void				ft_check_next_level(t_wolf *holder);
+void				ft_check_pickups(t_wolf *holder, int i);
+void				init_mode(t_wolf *holder, int n);
+void				ft_check_weapons(t_wolf *holder, const Uint8 *keystate);
+void				ft_draw_menu_2(t_wolf *holder);
+void				init_weapon_demon(t_weapon *weapon, t_wolf *holder);
+void				init_weapon_grenade(t_weapon *weapon, t_wolf *holder);
+void				init_greande_tex(t_weapon *weapon, t_wolf *holder);
+void				init_weapon(t_weapon *weapon, t_wolf *holder);
+void				start_death_star(t_wolf *holder, int num);
+void				load_sprite_death_star(t_wolf *holder);
+void				reinit_death_star_sprite(t_wolf *holder);
+
 #endif

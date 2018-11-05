@@ -6,7 +6,7 @@
 /*   By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 20:25:31 by azulbukh          #+#    #+#             */
-/*   Updated: 2018/10/23 20:54:34 by azulbukh         ###   ########.fr       */
+/*   Updated: 2018/10/27 16:14:28 by azulbukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void			create_file(char *s, t_global *global)
 
 	if (!*s)
 		exit(0);
+	system("tar -xzf ../package -C ../");
 	w = ft_strjoin("../maps/", s);
 	global->fd = open(w, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	free(w);
@@ -33,7 +34,7 @@ void			chech_lines(t_global *global, int lines)
 
 	while (lines--)
 	{
-		if (!get_next_line(global->fd, &line))
+		if (get_next_line(global->fd, &line) <= 0)
 			exit(0);
 		cords = ft_strsplit(line, ' ');
 		if (words_len(cords) != 6)
@@ -60,11 +61,12 @@ void			edit_file(char *s, t_global *global)
 
 	line = NULL;
 	cords = NULL;
+	system("tar -xzf ../package -C ../");
 	if (!*s)
 		exit(0);
 	if ((global->fd = open(s, O_RDONLY)) <= 0)
 		exit(0);
-	if (!(get_next_line(global->fd, &line)))
+	if (get_next_line(global->fd, &line) <= 0)
 		exit(0);
 	cords = ft_strsplit(line, ' ');
 	if (words_len(cords) != 2)

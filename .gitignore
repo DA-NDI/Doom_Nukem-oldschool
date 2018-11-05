@@ -1,0 +1,6 @@
+*.o
+.DS_Store
+*.c~
+./doom-nukem
+./maps/map.txt
+./libft/*.*

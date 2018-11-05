@@ -6,7 +6,7 @@
 #    By: azulbukh <azulbukh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/20 23:25:10 by azulbukh          #+#    #+#              #
-#    Updated: 2018/10/23 20:50:52 by azulbukh         ###   ########.fr        #
+#    Updated: 2018/10/25 18:09:21 by avolgin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SDL = -I ./../src/SDL/SDL2_image.framework/Headers -I ./../src/SDL/SDL2_ttf.fram
 
 SDL2 = -I ./../src/SDL/SDL2.framework/Headers
 
-SDL1 = -rpath @loader_path/./../src/sdl -F ./../src/SDL -framework SDL2 -framework SDL2_image -framework SDL2_ttf
+SDL1 = -rpath @loader_path/../src/sdl -F ./../src/SDL -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 
 .PHONY: all clean fclean re
 
