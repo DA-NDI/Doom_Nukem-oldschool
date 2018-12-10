@@ -17,6 +17,9 @@ To run game, enter valid arguments, one of the valid levels
 
 1 - 5 or map, created with map editor
 
+Last level is labyrinth, its hard to escape,
+even for guy who created it
+
 For example to run level 1:
 ```bash
 ./doom_nukem 1
@@ -63,7 +66,6 @@ For example to create map 10x10 (another one option is 50x50) with filename raka
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/6.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/7.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8.png)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/10.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_1.gif)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_2.gif)
