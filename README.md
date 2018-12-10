@@ -27,11 +27,21 @@ Some useful keys:
 * `t` tv-mode (interlacing, thus fps increased * 2)
 * `left_click` shoot
 * `l_ctrl` sit
-* `f` fly_mode 
+* `f` fly_mode
+* `enter` interact with objects
+* `z` remove wall black on level 3
+
 ## Have fun!
 
-![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/screenshot_4.png)
-![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/screenshot_1.png)
-![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/screenshot_2.png)
-![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/screenshot_3.png)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/1.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/2.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/3.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/4.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/5.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/6.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/7.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/9.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/10.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.jpg)
 ![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/wolf1.gif)
