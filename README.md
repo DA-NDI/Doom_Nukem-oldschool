@@ -1,4 +1,3 @@
-# Doom_Nukem-oldschool
 
 # Doom_Nukem
 Educational group project at 42 school, UnitFactory, Kyiv. C, graphical library SDL2. Doom like game
@@ -34,14 +33,14 @@ Some useful keys:
 ## Have fun!
 
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/1.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/2.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/3.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/4.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/5.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/6.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/7.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/9.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/10.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.jpg)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/2)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/3)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/4)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/5)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/6)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/7)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/9)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/10)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11)
 ![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/wolf1.gif)
