@@ -39,4 +39,7 @@ Some useful keys:
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/10.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.png)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_1.gif)
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_2.gif)
+# WOLF3d gif:
 ![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/wolf1.gif)
