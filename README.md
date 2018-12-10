@@ -33,10 +33,7 @@ Some useful keys:
 ## Have fun!
 
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/1.jpg)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/2.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/3.png)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/4.png)
-![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/5.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/6.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/7.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/8.png)
