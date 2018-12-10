@@ -47,6 +47,7 @@ For example to create map 10x10 (another one option is 50x50) with filename raka
  cd ..
  ./doom_nukem rakamakafo
  ```
+![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/map_1.png)
 
 ## Have fun!
 
