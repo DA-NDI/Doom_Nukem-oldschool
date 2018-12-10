@@ -2,6 +2,12 @@
 # Doom_Nukem
 Educational group project at 42 school, UnitFactory, Kyiv. C, graphical library SDL2. Doom like game
 
+I was inspired by Kung_fury, some oldschool, doom, and duke nukem.
+
+Some images i used are under copyright, no commercial interest was involved
+
+You can shoot, jump, fly, crouch, sit, teleport, run, kill, die and so on
+
 To compile and run programm in terminal:
 ```bash
 make
@@ -29,6 +35,7 @@ Some useful keys:
 * `f` fly_mode
 * `enter` interact with objects
 * `z` remove wall black on level 3
+* `g` on/off shadows (or press enter on light trigger)
 
 To run map_editor:
 
@@ -60,5 +67,5 @@ For example to create map 10x10 (another one option is 50x50) with filename raka
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_1.gif)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_2.gif)
-# WOLF3d gif:
+## WOLF3d gif (older version of this game):
 ![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/wolf1.gif)
