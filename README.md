@@ -30,6 +30,24 @@ Some useful keys:
 * `enter` interact with objects
 * `z` remove wall black on level 3
 
+To run map_editor:
+
+```bash
+cd map_editor
+./map <grid_size> <-n for new map or -e for edit> <map name>
+```
+
+For example to create map 10x10 (another one option is 50x50) with filename rakamakafo:
+```bash
+./map 10 -n rakamakafo
+```
+ now you can go back to root folder and run your created map:
+ 
+ ```bash
+ cd ..
+ ./doom_nukem rakamakafo
+ ```
+
 ## Have fun!
 
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/1.jpg)
