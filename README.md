@@ -69,5 +69,5 @@ For example to create map 10x10 (another one option is 50x50) with filename raka
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/11.png)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_1.gif)
 ![alt text](https://github.com/DA-NDI/Doom_Nukem-oldschool/blob/master/screenshots/gif_2.gif)
-## WOLF3d gif (older version of this game):
+## WOLF3D gif (older version of this game), its repo is https://github.com/DA-NDI/Wolf3d:
 ![alt text](https://github.com/DA-NDI/Wolf3d/blob/master/wolf1.gif)
